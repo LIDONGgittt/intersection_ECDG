@@ -2,5 +2,5 @@
 
 Minimum Requirements:
 - c++ 11
-- Cmake 3.1
+- CMake 3.1
 

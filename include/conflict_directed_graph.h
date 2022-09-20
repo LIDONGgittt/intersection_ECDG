@@ -1,6 +1,8 @@
 #ifndef intersection_management_conflict_directed_graph_h
 #define intersection_management_conflict_directed_graph_h
 
+#include <cstdlib>
+#include <time.h>
 #include "graph_utility.h"
 
 namespace intersection_management {
@@ -25,10 +27,34 @@ namespace intersection_management {
                 return;
             }
             auto edge = std::shared_ptr<Edge>(new Edge(nodes_[from], nodes_[to], weight));
+            nodes_[from]->edges_.push_back(edge);
+            edges_.push_back(edge);
         }
 
-        void GenerateRandomGraph() {
-            return;
+        void GenerateRandomGraph(int total_nodes, bool use_time_seed = false) {
+            this->reset();
+            for (int id = 1; id <= total_nodes; id++) {
+                nodes_.push_back(std::shared_ptr<Node>(new Node(id)));
+            }
+            this->AddEdge(0,1);
+            this->AddEdge(0,2);
+            this->AddEdge(0,3);
+            this->AddEdge(0,4);
+            this->AddEdge(1,2);
+            this->AddEdge(1,3);
+            this->AddEdge(1,4);
+            this->AddEdge(2,5);
+            this->AddEdge(3,5);
+            this->AddEdge(4,5);
+        }
+
+        void PrintGraph() {
+            std::cout << "***********Begin of CDG details***********\n" \
+                << "Total nodes: " << count_node_ << std::endl;
+            for (int i = 0; i < nodes_.size(); i++) {
+                nodes_[i]->print();
+            }
+            std::cout << "***********End of CDG details*************\n";
         }
 
         void reset() {

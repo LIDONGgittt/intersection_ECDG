@@ -5,6 +5,7 @@ set(CMAKE_CXX_STANDARD 11)
 project(Intersection_CDG VERSION 0.1.0)
 find_package(Boost REQUIRED)
 include_directories(${Boost_INCLUDE_DIR})
+include_directories(${PROJECT_SOURCE_DIR}/include)
 
 file(GLOB SOURCES "src/*.cpp")
 

@@ -4,5 +4,7 @@
 using namespace intersection_management;
 int main() {
     ConflictDirectedGraph cdg = ConflictDirectedGraph();
-    cdg.reset();
+    // cdg.reset();
+    cdg.GenerateRandomGraph(5);
+    cdg.PrintGraph();
 }
