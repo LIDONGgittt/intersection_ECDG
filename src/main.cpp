@@ -5,6 +5,11 @@ using namespace intersection_management;
 int main() {
     ConflictDirectedGraph cdg = ConflictDirectedGraph();
     // cdg.reset();
-    cdg.GenerateRandomGraph(5);
+    unsigned int seed = 0;
+    do {
+        cdg.GenerateRandomGraph(5, seed++);
+    } while (!cdg.isFullyConnected());
+
     cdg.PrintGraph();
+    // std::cout << "The CDG fully connected status is: " << cdg.isFullyConnected() << std::endl;
 }

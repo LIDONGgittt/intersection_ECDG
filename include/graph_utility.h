@@ -3,7 +3,6 @@
 
 #include <vector>
 #include <memory>
-#include <iostream>
 
 namespace intersection_management {
     class Edge;
@@ -14,11 +13,18 @@ namespace intersection_management {
 
         Node(int id) : Node(id, 1.0, -1.0, -1.0, -1.0) {}
 
-        Node(int id, double nw, double d, double ewd, double enwd) : id_(id), node_weight_(nw), depth_(d), edge_weighted_depth_(ewd), edge_node_weighted_depth_(enwd) {
+        Node(int id, double nw, double d, double ewd, double enwd)
+            : id_(id), node_weight_(nw), depth_(d), edge_weighted_depth_(ewd), edge_node_weighted_depth_(enwd) {
             edges_.clear();
         }
 
-        void print();
+        void printDetail();
+        bool isSameAs(int id);
+        bool isSameAs(Node n);
+        bool isSameAs(std::shared_ptr<Node> p_n);
+        bool isConnectedTo(int id);
+        bool isConnectedTo(Node n);
+        bool isConnectedTo(std::shared_ptr<Node> p_n);
 
         int id_;
         double node_weight_;
@@ -35,7 +41,8 @@ namespace intersection_management {
             to_.reset();
             edge_weight_ = 1.0;
         }
-        Edge(std::shared_ptr<Node> from, std::shared_ptr<Node> to, double weight = 1.0) : from_(from), to_(to), edge_weight_(weight) {}
+        Edge(std::shared_ptr<Node> p_from, std::shared_ptr<Node> p_to, double weight = 1.0)
+            : from_(p_from), to_(p_to), edge_weight_(weight) {}
         std::weak_ptr<Node> from_;
         std::weak_ptr<Node> to_;
         double edge_weight_;
