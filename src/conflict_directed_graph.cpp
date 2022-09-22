@@ -8,20 +8,27 @@
 namespace intersection_management {
 
     ConflictDirectedGraph::ConflictDirectedGraph() {
+        reset(false);
+    }
+
+    void ConflictDirectedGraph::reset(bool verbose) {
         p_root_ = std::shared_ptr<Node>(new Node(0, 0.0, 0.0, 0.0, 0.0));
         nodes_.clear();
         nodes_.push_back(p_root_);
         edges_.clear();
-        count_node_ = 1;
+        num_nodes_ = 1;
+        if (verbose) {
+            std::cout << "The CDG is reset to a new root-only graph!\n";
+        }
     }
 
     void ConflictDirectedGraph::AddNode(double weight) {
-        auto node = std::shared_ptr<Node>(new Node(count_node_++, weight, -1, -1, -1));
+        auto node = std::shared_ptr<Node>(new Node(num_nodes_++, weight, -1, -1, -1));
         nodes_.push_back(node);
     }
 
     void ConflictDirectedGraph::AddEdge(int from, int to, double weight, bool bidirectional) {
-        if (from < 0 || from >= count_node_ || to < 0 || to >= count_node_)
+        if (from < 0 || from >= num_nodes_ || to < 0 || to >= num_nodes_)
         {
             return;
         }
@@ -35,12 +42,18 @@ namespace intersection_management {
         }
 
         if (to != 0) {
-            auto edge = std::shared_ptr<Edge>(new Edge(nodes_[from], nodes_[to], weight));
+            auto edge = std::shared_ptr<Edge>(new Edge(nodes_[from], nodes_[to], weight, bidirectional));
+            if (from == 0) {
+                edge->bidirectional_ = false;
+            }
             nodes_[from]->edges_.push_back(edge);
             edges_.push_back(edge);
         }
         if (bidirectional && from != 0) {
-            auto edge = std::shared_ptr<Edge>(new Edge(nodes_[to], nodes_[from], weight));
+            auto edge = std::shared_ptr<Edge>(new Edge(nodes_[to], nodes_[from], weight, bidirectional));
+            if (to == 0) {
+                edge->bidirectional_ = false;
+            }
             nodes_[to]->edges_.push_back(edge);
             edges_.push_back(edge);
         }
@@ -64,7 +77,7 @@ namespace intersection_management {
             AddNode(node_weight);
         }
 
-        int num_edges_to_add = (int)(count_node_ * count_node_ * (rand() % 100) * 0.01);
+        int num_edges_to_add = (int)(num_nodes_ * num_nodes_ * (rand() % 100) * 0.01);
         int from, to;
         double edge_weight;
         while (num_edges_to_add > 0) {
@@ -74,26 +87,32 @@ namespace intersection_management {
             }
             if (rand() % 2) { // add bidirectional edge
                 do {
-                    from = rand() % count_node_;
-                    to = rand() % count_node_;
+                    from = rand() % num_nodes_;
+                    to = rand() % num_nodes_;
                 } while (from == to);
                 AddEdge(from, to, edge_weight, true);
                 num_edges_to_add -= 2;
             }
             else { // add unidirectional edge
                 do {
-                    from = rand() % count_node_;
-                    to = rand() % count_node_;
+                    from = rand() % num_nodes_;
+                    to = rand() % num_nodes_;
                 } while (from >= to);
                 AddEdge(from, to, edge_weight, false);
                 num_edges_to_add--;
             }
         }
+
+        // link root to every other node so that every node could be scheduled
+        p_root_->edges_.clear();
+        for (int to = 1; to <= total_nodes; to++) {
+            AddEdge(0, to, 1.0, false);
+        }
     }
 
     bool ConflictDirectedGraph::isFullyConnected() {
         std::queue<int> visit_queue;
-        std::vector<bool> is_visited(count_node_, false);
+        std::vector<bool> is_visited(num_nodes_, false);
         visit_queue.push(0);
         is_visited[0] = true;
         int from, to;
@@ -108,7 +127,7 @@ namespace intersection_management {
                 }
             }
         }
-        for (int id = 0; id < count_node_; id++) {
+        for (int id = 0; id < num_nodes_; id++) {
             if (!is_visited[id]) {
                 return false;
             }
@@ -117,20 +136,11 @@ namespace intersection_management {
     }
 
     void ConflictDirectedGraph::PrintGraph() {
-        std::cout << "***********Begin of CDG details***********\n" \
-            << "Total nodes: " << count_node_ << std::endl;
-        for (int i = 0; i < nodes_.size(); i++) {
-            nodes_[i]->printDetail();
+        std::cout << "***********Begin of CDG details***********\n";
+        std::cout << "Total nodes: " << num_nodes_ << std::endl;
+        for (auto node : nodes_) {
+            node->printDetail();
         }
         std::cout << "***********End of CDG details*************\n";
-    }
-
-    void ConflictDirectedGraph::reset() {
-        p_root_ = std::shared_ptr<Node>(new Node(0, 0.0, 0.0, 0.0, 0.0));
-        nodes_.clear();
-        nodes_.push_back(p_root_);
-        edges_.clear();
-        count_node_ = 1;
-        std::cout << "The CDG is reset to a new root-only graph!\n";
     }
 }

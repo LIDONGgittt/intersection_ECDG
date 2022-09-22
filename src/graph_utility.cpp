@@ -34,4 +34,19 @@ namespace intersection_management {
     bool Node::isConnectedTo(std::shared_ptr<Node> p_n) {
         return isConnectedTo(p_n->id_);
     }
+
+    std::shared_ptr<Edge> Node::getEdgeTo(int id) {
+        for (auto p_edge : edges_) {
+            if (p_edge->to_.lock()->id_ == id) {
+                return p_edge;
+            }
+        }
+        return nullptr;
+    }
+    std::shared_ptr<Edge> Node::getEdgeTo(Node n) {
+        return getEdgeTo(n.id_);
+    }
+    std::shared_ptr<Edge> Node::getEdgeTo(std::shared_ptr<Node> p_n) {
+        return getEdgeTo(p_n->id_);
+    }
 }

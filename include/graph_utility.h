@@ -25,6 +25,9 @@ namespace intersection_management {
         bool isConnectedTo(int id);
         bool isConnectedTo(Node n);
         bool isConnectedTo(std::shared_ptr<Node> p_n);
+        std::shared_ptr<Edge> getEdgeTo(int id);
+        std::shared_ptr<Edge> getEdgeTo(Node n);
+        std::shared_ptr<Edge> getEdgeTo(std::shared_ptr<Node> p_n);
 
         int id_;
         double node_weight_;
@@ -40,12 +43,18 @@ namespace intersection_management {
             from_.reset();
             to_.reset();
             edge_weight_ = 1.0;
+            bidirectional_ = false;
         }
-        Edge(std::shared_ptr<Node> p_from, std::shared_ptr<Node> p_to, double weight = 1.0)
-            : from_(p_from), to_(p_to), edge_weight_(weight) {}
+        Edge(std::shared_ptr<Node> p_from, std::shared_ptr<Node> p_to, double weight = 1.0, bool bidirectional = false)
+            : from_(p_from), to_(p_to), edge_weight_(weight), bidirectional_(bidirectional) {}
+
+        inline bool isBidirectional() {
+            return bidirectional_;
+        }
         std::weak_ptr<Node> from_;
         std::weak_ptr<Node> to_;
         double edge_weight_;
+        bool bidirectional_;
     };
 }
 #endif

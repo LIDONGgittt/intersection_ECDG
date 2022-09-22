@@ -8,6 +8,8 @@ namespace intersection_management {
     public:
         ConflictDirectedGraph();
 
+        void reset(bool verbose = true);
+
         void AddNode(double weight = 1.0);
 
         void AddEdge(int from, int to, double weight = 1.0, bool bidirectional = false);
@@ -23,12 +25,10 @@ namespace intersection_management {
 
         void PrintGraph();
 
-        void reset();
-
         std::shared_ptr<Node> p_root_;
         std::vector<std::shared_ptr<Node>> nodes_;
         std::vector<std::shared_ptr<Edge>> edges_;
-        int count_node_;
+        int num_nodes_;
     };
 }
 #endif
