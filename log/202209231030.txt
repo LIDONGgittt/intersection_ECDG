@@ -1,0 +1,1024 @@
+BFST failed ratio:  959499 / 10590000
+Updated result: 
+BFST generate better results ratio:  3385755 / 10600000
+BFST failed ratio:  961151 / 10600000
+Updated result: 
+BFST generate better results ratio:  3387187 / 10610000
+BFST failed ratio:  961612 / 10610000
+Updated result: 
+BFST generate better results ratio:  3388798 / 10620000
+BFST failed ratio:  962375 / 10620000
+Updated result: 
+BFST generate better results ratio:  3392920 / 10630000
+BFST failed ratio:  964762 / 10630000
+Updated result: 
+BFST generate better results ratio:  3393185 / 10640000
+BFST failed ratio:  966070 / 10640000
+Updated result: 
+BFST generate better results ratio:  3393185 / 10650000
+BFST failed ratio:  966070 / 10650000
+Updated result: 
+BFST generate better results ratio:  3393968 / 10660000
+BFST failed ratio:  966635 / 10660000
+Updated result: 
+BFST generate better results ratio:  3398696 / 10670000
+BFST failed ratio:  968583 / 10670000
+Updated result: 
+BFST generate better results ratio:  3406045 / 10680000
+BFST failed ratio:  969017 / 10680000
+Updated result: 
+BFST generate better results ratio:  3411529 / 10690000
+BFST failed ratio:  970130 / 10690000
+Updated result: 
+BFST generate better results ratio:  3417741 / 10700000
+BFST failed ratio:  971630 / 10700000
+Updated result: 
+BFST generate better results ratio:  3421339 / 10710000
+BFST failed ratio:  973027 / 10710000
+Updated result: 
+BFST generate better results ratio:  3423079 / 10720000
+BFST failed ratio:  976247 / 10720000
+Updated result: 
+BFST generate better results ratio:  3427275 / 10730000
+BFST failed ratio:  976936 / 10730000
+Updated result: 
+BFST generate better results ratio:  3432651 / 10740000
+BFST failed ratio:  977024 / 10740000
+Updated result: 
+BFST generate better results ratio:  3435954 / 10750000
+BFST failed ratio:  979133 / 10750000
+Updated result: 
+BFST generate better results ratio:  3436702 / 10760000
+BFST failed ratio:  979677 / 10760000
+Updated result: 
+BFST generate better results ratio:  3436702 / 10770000
+BFST failed ratio:  979677 / 10770000
+Updated result: 
+BFST generate better results ratio:  3436702 / 10780000
+BFST failed ratio:  979677 / 10780000
+Updated result: 
+BFST generate better results ratio:  3438220 / 10790000
+BFST failed ratio:  979979 / 10790000
+Updated result: 
+BFST generate better results ratio:  3445294 / 10800000
+BFST failed ratio:  980304 / 10800000
+Updated result: 
+BFST generate better results ratio:  3448150 / 10810000
+BFST failed ratio:  980600 / 10810000
+Updated result: 
+BFST generate better results ratio:  3456088 / 10820000
+BFST failed ratio:  980916 / 10820000
+Updated result: 
+BFST generate better results ratio:  3461499 / 10830000
+BFST failed ratio:  983029 / 10830000
+Updated result: 
+BFST generate better results ratio:  3467435 / 10840000
+BFST failed ratio:  984281 / 10840000
+Updated result: 
+BFST generate better results ratio:  3467921 / 10850000
+BFST failed ratio:  984497 / 10850000
+Updated result: 
+BFST generate better results ratio:  3467921 / 10860000
+BFST failed ratio:  984497 / 10860000
+Updated result: 
+BFST generate better results ratio:  3469106 / 10870000
+BFST failed ratio:  985003 / 10870000
+Updated result: 
+BFST generate better results ratio:  3472480 / 10880000
+BFST failed ratio:  986044 / 10880000
+Updated result: 
+BFST generate better results ratio:  3478684 / 10890000
+BFST failed ratio:  987535 / 10890000
+Updated result: 
+BFST generate better results ratio:  3487693 / 10900000
+BFST failed ratio:  988016 / 10900000
+Updated result: 
+BFST generate better results ratio:  3489508 / 10910000
+BFST failed ratio:  989179 / 10910000
+Updated result: 
+BFST generate better results ratio:  3492162 / 10920000
+BFST failed ratio:  990045 / 10920000
+Updated result: 
+BFST generate better results ratio:  3496056 / 10930000
+BFST failed ratio:  991634 / 10930000
+Updated result: 
+BFST generate better results ratio:  3499346 / 10940000
+BFST failed ratio:  993953 / 10940000
+Updated result: 
+BFST generate better results ratio:  3504720 / 10950000
+BFST failed ratio:  994780 / 10950000
+Updated result: 
+BFST generate better results ratio:  3509335 / 10960000
+BFST failed ratio:  996254 / 10960000
+Updated result: 
+BFST generate better results ratio:  3514740 / 10970000
+BFST failed ratio:  997148 / 10970000
+Updated result: 
+BFST generate better results ratio:  3514902 / 10980000
+BFST failed ratio:  997252 / 10980000
+Updated result: 
+BFST generate better results ratio:  3517575 / 10990000
+BFST failed ratio:  997789 / 10990000
+Updated result: 
+BFST generate better results ratio:  3519974 / 11000000
+BFST failed ratio:  998815 / 11000000
+Updated result: 
+BFST generate better results ratio:  3523126 / 11010000
+BFST failed ratio:  999640 / 11010000
+Updated result: 
+BFST generate better results ratio:  3525962 / 11020000
+BFST failed ratio:  1000138 / 11020000
+Updated result: 
+BFST generate better results ratio:  3529600 / 11030000
+BFST failed ratio:  1001115 / 11030000
+Updated result: 
+BFST generate better results ratio:  3531989 / 11040000
+BFST failed ratio:  1002017 / 11040000
+Updated result: 
+BFST generate better results ratio:  3536458 / 11050000
+BFST failed ratio:  1003114 / 11050000
+Updated result: 
+BFST generate better results ratio:  3544450 / 11060000
+BFST failed ratio:  1003586 / 11060000
+Updated result: 
+BFST generate better results ratio:  3545443 / 11070000
+BFST failed ratio:  1006292 / 11070000
+Updated result: 
+BFST generate better results ratio:  3547089 / 11080000
+BFST failed ratio:  1006766 / 11080000
+Updated result: 
+BFST generate better results ratio:  3547246 / 11090000
+BFST failed ratio:  1006811 / 11090000
+Updated result: 
+BFST generate better results ratio:  3549371 / 11100000
+BFST failed ratio:  1006829 / 11100000
+Updated result: 
+BFST generate better results ratio:  3557560 / 11110000
+BFST failed ratio:  1007508 / 11110000
+Updated result: 
+BFST generate better results ratio:  3564685 / 11120000
+BFST failed ratio:  1008310 / 11120000
+Updated result: 
+BFST generate better results ratio:  3568921 / 11130000
+BFST failed ratio:  1008941 / 11130000
+Updated result: 
+BFST generate better results ratio:  3568921 / 11140000
+BFST failed ratio:  1008941 / 11140000
+Updated result: 
+BFST generate better results ratio:  3569161 / 11150000
+BFST failed ratio:  1008962 / 11150000
+Updated result: 
+BFST generate better results ratio:  3570175 / 11160000
+BFST failed ratio:  1009309 / 11160000
+Updated result: 
+BFST generate better results ratio:  3570244 / 11170000
+BFST failed ratio:  1009312 / 11170000
+Updated result: 
+BFST generate better results ratio:  3573841 / 11180000
+BFST failed ratio:  1010459 / 11180000
+Updated result: 
+BFST generate better results ratio:  3577781 / 11190000
+BFST failed ratio:  1011018 / 11190000
+Updated result: 
+BFST generate better results ratio:  3579211 / 11200000
+BFST failed ratio:  1018720 / 11200000
+Updated result: 
+BFST generate better results ratio:  3581451 / 11210000
+BFST failed ratio:  1021216 / 11210000
+Updated result: 
+BFST generate better results ratio:  3586527 / 11220000
+BFST failed ratio:  1022429 / 11220000
+Updated result: 
+BFST generate better results ratio:  3588464 / 11230000
+BFST failed ratio:  1024511 / 11230000
+Updated result: 
+BFST generate better results ratio:  3590915 / 11240000
+BFST failed ratio:  1027663 / 11240000
+Updated result: 
+BFST generate better results ratio:  3591295 / 11250000
+BFST failed ratio:  1027820 / 11250000
+Updated result: 
+BFST generate better results ratio:  3591295 / 11260000
+BFST failed ratio:  1027820 / 11260000
+Updated result: 
+BFST generate better results ratio:  3593344 / 11270000
+BFST failed ratio:  1029207 / 11270000
+Updated result: 
+BFST generate better results ratio:  3596405 / 11280000
+BFST failed ratio:  1029852 / 11280000
+Updated result: 
+BFST generate better results ratio:  3600657 / 11290000
+BFST failed ratio:  1030198 / 11290000
+Updated result: 
+BFST generate better results ratio:  3603685 / 11300000
+BFST failed ratio:  1033013 / 11300000
+Updated result: 
+BFST generate better results ratio:  3608271 / 11310000
+BFST failed ratio:  1036211 / 11310000
+Updated result: 
+BFST generate better results ratio:  3608706 / 11320000
+BFST failed ratio:  1038581 / 11320000
+Updated result: 
+BFST generate better results ratio:  3611770 / 11330000
+BFST failed ratio:  1038776 / 11330000
+Updated result: 
+BFST generate better results ratio:  3615195 / 11340000
+BFST failed ratio:  1039206 / 11340000
+Updated result: 
+BFST generate better results ratio:  3617844 / 11350000
+BFST failed ratio:  1039817 / 11350000
+Updated result: 
+BFST generate better results ratio:  3623626 / 11360000
+BFST failed ratio:  1040900 / 11360000
+Updated result: 
+BFST generate better results ratio:  3628000 / 11370000
+BFST failed ratio:  1042794 / 11370000
+Updated result: 
+BFST generate better results ratio:  3629627 / 11380000
+BFST failed ratio:  1043717 / 11380000
+Updated result: 
+BFST generate better results ratio:  3634907 / 11390000
+BFST failed ratio:  1044908 / 11390000
+Updated result: 
+BFST generate better results ratio:  3637085 / 11400000
+BFST failed ratio:  1045565 / 11400000
+Updated result: 
+BFST generate better results ratio:  3637138 / 11410000
+BFST failed ratio:  1045569 / 11410000
+Updated result: 
+BFST generate better results ratio:  3637745 / 11420000
+BFST failed ratio:  1049272 / 11420000
+Updated result: 
+BFST generate better results ratio:  3638633 / 11430000
+BFST failed ratio:  1049517 / 11430000
+Updated result: 
+BFST generate better results ratio:  3638633 / 11440000
+BFST failed ratio:  1049517 / 11440000
+Updated result: 
+BFST generate better results ratio:  3641241 / 11450000
+BFST failed ratio:  1050013 / 11450000
+Updated result: 
+BFST generate better results ratio:  3643934 / 11460000
+BFST failed ratio:  1050815 / 11460000
+Updated result: 
+BFST generate better results ratio:  3648933 / 11470000
+BFST failed ratio:  1051087 / 11470000
+Updated result: 
+BFST generate better results ratio:  3653864 / 11480000
+BFST failed ratio:  1051555 / 11480000
+Updated result: 
+BFST generate better results ratio:  3653864 / 11490000
+BFST failed ratio:  1051555 / 11490000
+Updated result: 
+BFST generate better results ratio:  3653864 / 11500000
+BFST failed ratio:  1051555 / 11500000
+Updated result: 
+BFST generate better results ratio:  3656940 / 11510000
+BFST failed ratio:  1052092 / 11510000
+Updated result: 
+BFST generate better results ratio:  3662158 / 11520000
+BFST failed ratio:  1053091 / 11520000
+Updated result: 
+BFST generate better results ratio:  3667436 / 11530000
+BFST failed ratio:  1054307 / 11530000
+Updated result: 
+BFST generate better results ratio:  3672851 / 11540000
+BFST failed ratio:  1054739 / 11540000
+Updated result: 
+BFST generate better results ratio:  3677990 / 11550000
+BFST failed ratio:  1055303 / 11550000
+Updated result: 
+BFST generate better results ratio:  3684993 / 11560000
+BFST failed ratio:  1055756 / 11560000
+Updated result: 
+BFST generate better results ratio:  3691840 / 11570000
+BFST failed ratio:  1056640 / 11570000
+Updated result: 
+BFST generate better results ratio:  3695913 / 11580000
+BFST failed ratio:  1057799 / 11580000
+Updated result: 
+BFST generate better results ratio:  3702963 / 11590000
+BFST failed ratio:  1058712 / 11590000
+Updated result: 
+BFST generate better results ratio:  3710337 / 11600000
+BFST failed ratio:  1058795 / 11600000
+Updated result: 
+BFST generate better results ratio:  3710337 / 11610000
+BFST failed ratio:  1058795 / 11610000
+Updated result: 
+BFST generate better results ratio:  3710337 / 11620000
+BFST failed ratio:  1058795 / 11620000
+Updated result: 
+BFST generate better results ratio:  3712323 / 11630000
+BFST failed ratio:  1063988 / 11630000
+Updated result: 
+BFST generate better results ratio:  3716459 / 11640000
+BFST failed ratio:  1066772 / 11640000
+Updated result: 
+BFST generate better results ratio:  3718517 / 11650000
+BFST failed ratio:  1067167 / 11650000
+Updated result: 
+BFST generate better results ratio:  3720670 / 11660000
+BFST failed ratio:  1069751 / 11660000
+Updated result: 
+BFST generate better results ratio:  3721916 / 11670000
+BFST failed ratio:  1069995 / 11670000
+Updated result: 
+BFST generate better results ratio:  3721916 / 11680000
+BFST failed ratio:  1069995 / 11680000
+Updated result: 
+BFST generate better results ratio:  3723293 / 11690000
+BFST failed ratio:  1070720 / 11690000
+Updated result: 
+BFST generate better results ratio:  3727198 / 11700000
+BFST failed ratio:  1072256 / 11700000
+Updated result: 
+BFST generate better results ratio:  3727747 / 11710000
+BFST failed ratio:  1072405 / 11710000
+Updated result: 
+BFST generate better results ratio:  3733185 / 11720000
+BFST failed ratio:  1074246 / 11720000
+Updated result: 
+BFST generate better results ratio:  3738335 / 11730000
+BFST failed ratio:  1075160 / 11730000
+Updated result: 
+BFST generate better results ratio:  3746105 / 11740000
+BFST failed ratio:  1075841 / 11740000
+Updated result: 
+BFST generate better results ratio:  3752300 / 11750000
+BFST failed ratio:  1077718 / 11750000
+Updated result: 
+BFST generate better results ratio:  3757108 / 11760000
+BFST failed ratio:  1079120 / 11760000
+Updated result: 
+BFST generate better results ratio:  3757762 / 11770000
+BFST failed ratio:  1079289 / 11770000
+Updated result: 
+BFST generate better results ratio:  3760487 / 11780000
+BFST failed ratio:  1080927 / 11780000
+Updated result: 
+BFST generate better results ratio:  3760538 / 11790000
+BFST failed ratio:  1080928 / 11790000
+Updated result: 
+BFST generate better results ratio:  3764041 / 11800000
+BFST failed ratio:  1083763 / 11800000
+Updated result: 
+BFST generate better results ratio:  3769722 / 11810000
+BFST failed ratio:  1086419 / 11810000
+Updated result: 
+BFST generate better results ratio:  3773485 / 11820000
+BFST failed ratio:  1087156 / 11820000
+Updated result: 
+BFST generate better results ratio:  3773829 / 11830000
+BFST failed ratio:  1087181 / 11830000
+Updated result: 
+BFST generate better results ratio:  3780063 / 11840000
+BFST failed ratio:  1088538 / 11840000
+Updated result: 
+BFST generate better results ratio:  3785310 / 11850000
+BFST failed ratio:  1090200 / 11850000
+Updated result: 
+BFST generate better results ratio:  3788802 / 11860000
+BFST failed ratio:  1090658 / 11860000
+Updated result: 
+BFST generate better results ratio:  3788802 / 11870000
+BFST failed ratio:  1090658 / 11870000
+Updated result: 
+BFST generate better results ratio:  3789487 / 11880000
+BFST failed ratio:  1090725 / 11880000
+Updated result: 
+BFST generate better results ratio:  3791390 / 11890000
+BFST failed ratio:  1091107 / 11890000
+Updated result: 
+BFST generate better results ratio:  3794658 / 11900000
+BFST failed ratio:  1092543 / 11900000
+Updated result: 
+BFST generate better results ratio:  3795710 / 11910000
+BFST failed ratio:  1092760 / 11910000
+Updated result: 
+BFST generate better results ratio:  3799709 / 11920000
+BFST failed ratio:  1093728 / 11920000
+Updated result: 
+BFST generate better results ratio:  3802461 / 11930000
+BFST failed ratio:  1094195 / 11930000
+Updated result: 
+BFST generate better results ratio:  3804917 / 11940000
+BFST failed ratio:  1094222 / 11940000
+Updated result: 
+BFST generate better results ratio:  3812857 / 11950000
+BFST failed ratio:  1094817 / 11950000
+Updated result: 
+BFST generate better results ratio:  3818684 / 11960000
+BFST failed ratio:  1096017 / 11960000
+Updated result: 
+BFST generate better results ratio:  3820538 / 11970000
+BFST failed ratio:  1097144 / 11970000
+Updated result: 
+BFST generate better results ratio:  3825525 / 11980000
+BFST failed ratio:  1098509 / 11980000
+Updated result: 
+BFST generate better results ratio:  3830141 / 11990000
+BFST failed ratio:  1099098 / 11990000
+Updated result: 
+BFST generate better results ratio:  3830141 / 12000000
+BFST failed ratio:  1099098 / 12000000
+Updated result: 
+BFST generate better results ratio:  3833096 / 12010000
+BFST failed ratio:  1099494 / 12010000
+Updated result: 
+BFST generate better results ratio:  3836137 / 12020000
+BFST failed ratio:  1100093 / 12020000
+Updated result: 
+BFST generate better results ratio:  3843015 / 12030000
+BFST failed ratio:  1100983 / 12030000
+Updated result: 
+BFST generate better results ratio:  3848288 / 12040000
+BFST failed ratio:  1102046 / 12040000
+Updated result: 
+BFST generate better results ratio:  3853415 / 12050000
+BFST failed ratio:  1102792 / 12050000
+Updated result: 
+BFST generate better results ratio:  3859769 / 12060000
+BFST failed ratio:  1103153 / 12060000
+Updated result: 
+BFST generate better results ratio:  3869164 / 12070000
+BFST failed ratio:  1103210 / 12070000
+Updated result: 
+BFST generate better results ratio:  3877363 / 12080000
+BFST failed ratio:  1103410 / 12080000
+Updated result: 
+BFST generate better results ratio:  3885715 / 12090000
+BFST failed ratio:  1104539 / 12090000
+Updated result: 
+BFST generate better results ratio:  3887750 / 12100000
+BFST failed ratio:  1104899 / 12100000
+Updated result: 
+BFST generate better results ratio:  3893988 / 12110000
+BFST failed ratio:  1105474 / 12110000
+Updated result: 
+BFST generate better results ratio:  3895946 / 12120000
+BFST failed ratio:  1106647 / 12120000
+Updated result: 
+BFST generate better results ratio:  3898338 / 12130000
+BFST failed ratio:  1107336 / 12130000
+Updated result: 
+BFST generate better results ratio:  3904154 / 12140000
+BFST failed ratio:  1108467 / 12140000
+Updated result: 
+BFST generate better results ratio:  3906511 / 12150000
+BFST failed ratio:  1108995 / 12150000
+Updated result: 
+BFST generate better results ratio:  3908547 / 12160000
+BFST failed ratio:  1109986 / 12160000
+Updated result: 
+BFST generate better results ratio:  3909064 / 12170000
+BFST failed ratio:  1110181 / 12170000
+Updated result: 
+BFST generate better results ratio:  3909064 / 12180000
+BFST failed ratio:  1110181 / 12180000
+Updated result: 
+BFST generate better results ratio:  3911990 / 12190000
+BFST failed ratio:  1110944 / 12190000
+Updated result: 
+BFST generate better results ratio:  3915379 / 12200000
+BFST failed ratio:  1112566 / 12200000
+Updated result: 
+BFST generate better results ratio:  3915379 / 12210000
+BFST failed ratio:  1112566 / 12210000
+Updated result: 
+BFST generate better results ratio:  3916136 / 12220000
+BFST failed ratio:  1113110 / 12220000
+Updated result: 
+BFST generate better results ratio:  3916136 / 12230000
+BFST failed ratio:  1113110 / 12230000
+Updated result: 
+BFST generate better results ratio:  3920304 / 12240000
+BFST failed ratio:  1113766 / 12240000
+Updated result: 
+BFST generate better results ratio:  3923633 / 12250000
+BFST failed ratio:  1117377 / 12250000
+Updated result: 
+BFST generate better results ratio:  3925460 / 12260000
+BFST failed ratio:  1118085 / 12260000
+Updated result: 
+BFST generate better results ratio:  3931716 / 12270000
+BFST failed ratio:  1119089 / 12270000
+Updated result: 
+BFST generate better results ratio:  3932186 / 12280000
+BFST failed ratio:  1119263 / 12280000
+Updated result: 
+BFST generate better results ratio:  3932194 / 12290000
+BFST failed ratio:  1119340 / 12290000
+Updated result: 
+BFST generate better results ratio:  3932938 / 12300000
+BFST failed ratio:  1120759 / 12300000
+Updated result: 
+BFST generate better results ratio:  3933882 / 12310000
+BFST failed ratio:  1121030 / 12310000
+Updated result: 
+BFST generate better results ratio:  3936666 / 12320000
+BFST failed ratio:  1123417 / 12320000
+Updated result: 
+BFST generate better results ratio:  3943425 / 12330000
+BFST failed ratio:  1124540 / 12330000
+Updated result: 
+BFST generate better results ratio:  3946346 / 12340000
+BFST failed ratio:  1124716 / 12340000
+Updated result: 
+BFST generate better results ratio:  3946346 / 12350000
+BFST failed ratio:  1124716 / 12350000
+Updated result: 
+BFST generate better results ratio:  3947551 / 12360000
+BFST failed ratio:  1125088 / 12360000
+Updated result: 
+BFST generate better results ratio:  3947551 / 12370000
+BFST failed ratio:  1125088 / 12370000
+Updated result: 
+BFST generate better results ratio:  3947551 / 12380000
+BFST failed ratio:  1125088 / 12380000
+Updated result: 
+BFST generate better results ratio:  3950999 / 12390000
+BFST failed ratio:  1125720 / 12390000
+Updated result: 
+BFST generate better results ratio:  3960999 / 12400000
+BFST failed ratio:  1125720 / 12400000
+Updated result: 
+BFST generate better results ratio:  3969445 / 12410000
+BFST failed ratio:  1126394 / 12410000
+Updated result: 
+BFST generate better results ratio:  3973445 / 12420000
+BFST failed ratio:  1130922 / 12420000
+Updated result: 
+BFST generate better results ratio:  3976761 / 12430000
+BFST failed ratio:  1131085 / 12430000
+Updated result: 
+BFST generate better results ratio:  3977208 / 12440000
+BFST failed ratio:  1131720 / 12440000
+Updated result: 
+BFST generate better results ratio:  3977208 / 12450000
+BFST failed ratio:  1131720 / 12450000
+Updated result: 
+BFST generate better results ratio:  3977208 / 12460000
+BFST failed ratio:  1131720 / 12460000
+Updated result: 
+BFST generate better results ratio:  3981424 / 12470000
+BFST failed ratio:  1132217 / 12470000
+Updated result: 
+BFST generate better results ratio:  3983312 / 12480000
+BFST failed ratio:  1132661 / 12480000
+Updated result: 
+BFST generate better results ratio:  3985400 / 12490000
+BFST failed ratio:  1133192 / 12490000
+Updated result: 
+BFST generate better results ratio:  3991202 / 12500000
+BFST failed ratio:  1134036 / 12500000
+Updated result: 
+BFST generate better results ratio:  3997690 / 12510000
+BFST failed ratio:  1134885 / 12510000
+Updated result: 
+BFST generate better results ratio:  4001391 / 12520000
+BFST failed ratio:  1137183 / 12520000
+Updated result: 
+BFST generate better results ratio:  4002775 / 12530000
+BFST failed ratio:  1137832 / 12530000
+Updated result: 
+BFST generate better results ratio:  4002775 / 12540000
+BFST failed ratio:  1137832 / 12540000
+Updated result: 
+BFST generate better results ratio:  4004005 / 12550000
+BFST failed ratio:  1138171 / 12550000
+Updated result: 
+BFST generate better results ratio:  4004005 / 12560000
+BFST failed ratio:  1138171 / 12560000
+Updated result: 
+BFST generate better results ratio:  4004005 / 12570000
+BFST failed ratio:  1138171 / 12570000
+Updated result: 
+BFST generate better results ratio:  4004005 / 12580000
+BFST failed ratio:  1138171 / 12580000
+Updated result: 
+BFST generate better results ratio:  4004005 / 12590000
+BFST failed ratio:  1138171 / 12590000
+Updated result: 
+BFST generate better results ratio:  4004005 / 12600000
+BFST failed ratio:  1138171 / 12600000
+Updated result: 
+BFST generate better results ratio:  4007648 / 12610000
+BFST failed ratio:  1138327 / 12610000
+Updated result: 
+BFST generate better results ratio:  4017648 / 12620000
+BFST failed ratio:  1138327 / 12620000
+Updated result: 
+BFST generate better results ratio:  4026762 / 12630000
+BFST failed ratio:  1138777 / 12630000
+Updated result: 
+BFST generate better results ratio:  4028931 / 12640000
+BFST failed ratio:  1139325 / 12640000
+Updated result: 
+BFST generate better results ratio:  4035905 / 12650000
+BFST failed ratio:  1140095 / 12650000
+Updated result: 
+BFST generate better results ratio:  4039443 / 12660000
+BFST failed ratio:  1140689 / 12660000
+Updated result: 
+BFST generate better results ratio:  4039443 / 12670000
+BFST failed ratio:  1140689 / 12670000
+Updated result: 
+BFST generate better results ratio:  4040268 / 12680000
+BFST failed ratio:  1141333 / 12680000
+Updated result: 
+BFST generate better results ratio:  4044567 / 12690000
+BFST failed ratio:  1143172 / 12690000
+Updated result: 
+BFST generate better results ratio:  4049523 / 12700000
+BFST failed ratio:  1143558 / 12700000
+Updated result: 
+BFST generate better results ratio:  4054555 / 12710000
+BFST failed ratio:  1144284 / 12710000
+Updated result: 
+BFST generate better results ratio:  4055892 / 12720000
+BFST failed ratio:  1144745 / 12720000
+Updated result: 
+BFST generate better results ratio:  4055892 / 12730000
+BFST failed ratio:  1144745 / 12730000
+Updated result: 
+BFST generate better results ratio:  4059816 / 12740000
+BFST failed ratio:  1145305 / 12740000
+Updated result: 
+BFST generate better results ratio:  4059816 / 12750000
+BFST failed ratio:  1145305 / 12750000
+Updated result: 
+BFST generate better results ratio:  4060023 / 12760000
+BFST failed ratio:  1145328 / 12760000
+Updated result: 
+BFST generate better results ratio:  4064480 / 12770000
+BFST failed ratio:  1146024 / 12770000
+Updated result: 
+BFST generate better results ratio:  4069238 / 12780000
+BFST failed ratio:  1147379 / 12780000
+Updated result: 
+BFST generate better results ratio:  4069238 / 12790000
+BFST failed ratio:  1147379 / 12790000
+Updated result: 
+BFST generate better results ratio:  4070050 / 12800000
+BFST failed ratio:  1148061 / 12800000
+Updated result: 
+BFST generate better results ratio:  4072866 / 12810000
+BFST failed ratio:  1148343 / 12810000
+Updated result: 
+BFST generate better results ratio:  4077120 / 12820000
+BFST failed ratio:  1149350 / 12820000
+Updated result: 
+BFST generate better results ratio:  4077120 / 12830000
+BFST failed ratio:  1149350 / 12830000
+Updated result: 
+BFST generate better results ratio:  4077120 / 12840000
+BFST failed ratio:  1149350 / 12840000
+Updated result: 
+BFST generate better results ratio:  4078268 / 12850000
+BFST failed ratio:  1149483 / 12850000
+Updated result: 
+BFST generate better results ratio:  4083174 / 12860000
+BFST failed ratio:  1150165 / 12860000
+Updated result: 
+BFST generate better results ratio:  4088126 / 12870000
+BFST failed ratio:  1152313 / 12870000
+Updated result: 
+BFST generate better results ratio:  4094316 / 12880000
+BFST failed ratio:  1153270 / 12880000
+Updated result: 
+BFST generate better results ratio:  4099264 / 12890000
+BFST failed ratio:  1153379 / 12890000
+Updated result: 
+BFST generate better results ratio:  4102713 / 12900000
+BFST failed ratio:  1153524 / 12900000
+Updated result: 
+BFST generate better results ratio:  4105421 / 12910000
+BFST failed ratio:  1156738 / 12910000
+Updated result: 
+BFST generate better results ratio:  4109871 / 12920000
+BFST failed ratio:  1158394 / 12920000
+Updated result: 
+BFST generate better results ratio:  4113578 / 12930000
+BFST failed ratio:  1159223 / 12930000
+Updated result: 
+BFST generate better results ratio:  4113824 / 12940000
+BFST failed ratio:  1159278 / 12940000
+Updated result: 
+BFST generate better results ratio:  4117063 / 12950000
+BFST failed ratio:  1160030 / 12950000
+Updated result: 
+BFST generate better results ratio:  4118082 / 12960000
+BFST failed ratio:  1160127 / 12960000
+Updated result: 
+BFST generate better results ratio:  4122483 / 12970000
+BFST failed ratio:  1161168 / 12970000
+Updated result: 
+BFST generate better results ratio:  4122483 / 12980000
+BFST failed ratio:  1161168 / 12980000
+Updated result: 
+BFST generate better results ratio:  4123258 / 12990000
+BFST failed ratio:  1161540 / 12990000
+Updated result: 
+BFST generate better results ratio:  4123784 / 13000000
+BFST failed ratio:  1165417 / 13000000
+Updated result: 
+BFST generate better results ratio:  4129333 / 13010000
+BFST failed ratio:  1166132 / 13010000
+Updated result: 
+BFST generate better results ratio:  4135153 / 13020000
+BFST failed ratio:  1167303 / 13020000
+Updated result: 
+BFST generate better results ratio:  4140664 / 13030000
+BFST failed ratio:  1167520 / 13030000
+Updated result: 
+BFST generate better results ratio:  4143234 / 13040000
+BFST failed ratio:  1168095 / 13040000
+Updated result: 
+BFST generate better results ratio:  4147835 / 13050000
+BFST failed ratio:  1168480 / 13050000
+Updated result: 
+BFST generate better results ratio:  4151929 / 13060000
+BFST failed ratio:  1169382 / 13060000
+Updated result: 
+BFST generate better results ratio:  4159285 / 13070000
+BFST failed ratio:  1170598 / 13070000
+Updated result: 
+BFST generate better results ratio:  4167106 / 13080000
+BFST failed ratio:  1170705 / 13080000
+Updated result: 
+BFST generate better results ratio:  4168289 / 13090000
+BFST failed ratio:  1170709 / 13090000
+Updated result: 
+BFST generate better results ratio:  4168702 / 13100000
+BFST failed ratio:  1170866 / 13100000
+Updated result: 
+BFST generate better results ratio:  4173043 / 13110000
+BFST failed ratio:  1172383 / 13110000
+Updated result: 
+BFST generate better results ratio:  4173043 / 13120000
+BFST failed ratio:  1172383 / 13120000
+Updated result: 
+BFST generate better results ratio:  4175786 / 13130000
+BFST failed ratio:  1173011 / 13130000
+Updated result: 
+BFST generate better results ratio:  4179551 / 13140000
+BFST failed ratio:  1175009 / 13140000
+Updated result: 
+BFST generate better results ratio:  4179853 / 13150000
+BFST failed ratio:  1175191 / 13150000
+Updated result: 
+BFST generate better results ratio:  4180875 / 13160000
+BFST failed ratio:  1175310 / 13160000
+Updated result: 
+BFST generate better results ratio:  4185083 / 13170000
+BFST failed ratio:  1176332 / 13170000
+Updated result: 
+BFST generate better results ratio:  4188977 / 13180000
+BFST failed ratio:  1178196 / 13180000
+Updated result: 
+BFST generate better results ratio:  4190912 / 13190000
+BFST failed ratio:  1178937 / 13190000
+Updated result: 
+BFST generate better results ratio:  4193772 / 13200000
+BFST failed ratio:  1180220 / 13200000
+Updated result: 
+BFST generate better results ratio:  4194481 / 13210000
+BFST failed ratio:  1180653 / 13210000
+Updated result: 
+BFST generate better results ratio:  4203052 / 13220000
+BFST failed ratio:  1180916 / 13220000
+Updated result: 
+BFST generate better results ratio:  4211095 / 13230000
+BFST failed ratio:  1181746 / 13230000
+Updated result: 
+BFST generate better results ratio:  4214118 / 13240000
+BFST failed ratio:  1182204 / 13240000
+Updated result: 
+BFST generate better results ratio:  4214118 / 13250000
+BFST failed ratio:  1182204 / 13250000
+Updated result: 
+BFST generate better results ratio:  4218947 / 13260000
+BFST failed ratio:  1183784 / 13260000
+Updated result: 
+BFST generate better results ratio:  4224764 / 13270000
+BFST failed ratio:  1184130 / 13270000
+Updated result: 
+BFST generate better results ratio:  4224782 / 13280000
+BFST failed ratio:  1184131 / 13280000
+Updated result: 
+BFST generate better results ratio:  4225093 / 13290000
+BFST failed ratio:  1184200 / 13290000
+Updated result: 
+BFST generate better results ratio:  4225093 / 13300000
+BFST failed ratio:  1184200 / 13300000
+Updated result: 
+BFST generate better results ratio:  4225093 / 13310000
+BFST failed ratio:  1184200 / 13310000
+Updated result: 
+BFST generate better results ratio:  4228927 / 13320000
+BFST failed ratio:  1185863 / 13320000
+Updated result: 
+BFST generate better results ratio:  4231176 / 13330000
+BFST failed ratio:  1192536 / 13330000
+Updated result: 
+BFST generate better results ratio:  4232072 / 13340000
+BFST failed ratio:  1192730 / 13340000
+Updated result: 
+BFST generate better results ratio:  4232072 / 13350000
+BFST failed ratio:  1192730 / 13350000
+Updated result: 
+BFST generate better results ratio:  4235141 / 13360000
+BFST failed ratio:  1193645 / 13360000
+Updated result: 
+BFST generate better results ratio:  4235141 / 13370000
+BFST failed ratio:  1193645 / 13370000
+Updated result: 
+BFST generate better results ratio:  4235780 / 13380000
+BFST failed ratio:  1193780 / 13380000
+Updated result: 
+BFST generate better results ratio:  4239924 / 13390000
+BFST failed ratio:  1194856 / 13390000
+Updated result: 
+BFST generate better results ratio:  4239924 / 13400000
+BFST failed ratio:  1194856 / 13400000
+Updated result: 
+BFST generate better results ratio:  4240531 / 13410000
+BFST failed ratio:  1195039 / 13410000
+Updated result: 
+BFST generate better results ratio:  4244031 / 13420000
+BFST failed ratio:  1195039 / 13420000
+Updated result: 
+BFST generate better results ratio:  4249812 / 13430000
+BFST failed ratio:  1195489 / 13430000
+Updated result: 
+BFST generate better results ratio:  4252789 / 13440000
+BFST failed ratio:  1195613 / 13440000
+Updated result: 
+BFST generate better results ratio:  4256895 / 13450000
+BFST failed ratio:  1195995 / 13450000
+Updated result: 
+BFST generate better results ratio:  4263084 / 13460000
+BFST failed ratio:  1197771 / 13460000
+Updated result: 
+BFST generate better results ratio:  4263787 / 13470000
+BFST failed ratio:  1197874 / 13470000
+Updated result: 
+BFST generate better results ratio:  4265500 / 13480000
+BFST failed ratio:  1198379 / 13480000
+Updated result: 
+BFST generate better results ratio:  4267816 / 13490000
+BFST failed ratio:  1198983 / 13490000
+Updated result: 
+BFST generate better results ratio:  4275487 / 13500000
+BFST failed ratio:  1199605 / 13500000
+Updated result: 
+BFST generate better results ratio:  4281100 / 13510000
+BFST failed ratio:  1201596 / 13510000
+Updated result: 
+BFST generate better results ratio:  4283150 / 13520000
+BFST failed ratio:  1201632 / 13520000
+Updated result: 
+BFST generate better results ratio:  4285837 / 13530000
+BFST failed ratio:  1202822 / 13530000
+Updated result: 
+BFST generate better results ratio:  4289351 / 13540000
+BFST failed ratio:  1203801 / 13540000
+Updated result: 
+BFST generate better results ratio:  4289351 / 13550000
+BFST failed ratio:  1203801 / 13550000
+Updated result: 
+BFST generate better results ratio:  4289352 / 13560000
+BFST failed ratio:  1203801 / 13560000
+Updated result: 
+BFST generate better results ratio:  4289352 / 13570000
+BFST failed ratio:  1203801 / 13570000
+Updated result: 
+BFST generate better results ratio:  4289352 / 13580000
+BFST failed ratio:  1203801 / 13580000
+Updated result: 
+BFST generate better results ratio:  4291992 / 13590000
+BFST failed ratio:  1206388 / 13590000
+Updated result: 
+BFST generate better results ratio:  4298708 / 13600000
+BFST failed ratio:  1207020 / 13600000
+Updated result: 
+BFST generate better results ratio:  4301112 / 13610000
+BFST failed ratio:  1207219 / 13610000
+Updated result: 
+BFST generate better results ratio:  4307820 / 13620000
+BFST failed ratio:  1207389 / 13620000
+Updated result: 
+BFST generate better results ratio:  4307820 / 13630000
+BFST failed ratio:  1207389 / 13630000
+Updated result: 
+BFST generate better results ratio:  4307979 / 13640000
+BFST failed ratio:  1207400 / 13640000
+Updated result: 
+BFST generate better results ratio:  4315973 / 13650000
+BFST failed ratio:  1207712 / 13650000
+Updated result: 
+BFST generate better results ratio:  4319375 / 13660000
+BFST failed ratio:  1208757 / 13660000
+Updated result: 
+BFST generate better results ratio:  4319375 / 13670000
+BFST failed ratio:  1208757 / 13670000
+Updated result: 
+BFST generate better results ratio:  4319951 / 13680000
+BFST failed ratio:  1209044 / 13680000
+Updated result: 
+BFST generate better results ratio:  4323252 / 13690000
+BFST failed ratio:  1209434 / 13690000
+Updated result: 
+BFST generate better results ratio:  4325595 / 13700000
+BFST failed ratio:  1209738 / 13700000
+Updated result: 
+BFST generate better results ratio:  4326764 / 13710000
+BFST failed ratio:  1209951 / 13710000
+Updated result: 
+BFST generate better results ratio:  4326764 / 13720000
+BFST failed ratio:  1209951 / 13720000
+Updated result: 
+BFST generate better results ratio:  4329225 / 13730000
+BFST failed ratio:  1210858 / 13730000
+Updated result: 
+BFST generate better results ratio:  4336822 / 13740000
+BFST failed ratio:  1211812 / 13740000
+Updated result: 
+BFST generate better results ratio:  4339605 / 13750000
+BFST failed ratio:  1212675 / 13750000
+Updated result: 
+BFST generate better results ratio:  4339605 / 13760000
+BFST failed ratio:  1212675 / 13760000
+Updated result: 
+BFST generate better results ratio:  4341760 / 13770000
+BFST failed ratio:  1213637 / 13770000
+Updated result: 
+BFST generate better results ratio:  4343802 / 13780000
+BFST failed ratio:  1214206 / 13780000
+Updated result: 
+BFST generate better results ratio:  4348545 / 13790000
+BFST failed ratio:  1214399 / 13790000
+Updated result: 
+BFST generate better results ratio:  4350532 / 13800000
+BFST failed ratio:  1217753 / 13800000
+Updated result: 
+BFST generate better results ratio:  4356622 / 13810000
+BFST failed ratio:  1218924 / 13810000
+Updated result: 
+BFST generate better results ratio:  4361772 / 13820000
+BFST failed ratio:  1219652 / 13820000
+Updated result: 
+BFST generate better results ratio:  4369142 / 13830000
+BFST failed ratio:  1219985 / 13830000
+Updated result: 
+BFST generate better results ratio:  4369490 / 13840000
+BFST failed ratio:  1220214 / 13840000
+Updated result: 
+BFST generate better results ratio:  4375386 / 13850000
+BFST failed ratio:  1221416 / 13850000
+Updated result: 
+BFST generate better results ratio:  4383113 / 13860000
+BFST failed ratio:  1222216 / 13860000
+Updated result: 
+BFST generate better results ratio:  4390763 / 13870000
+BFST failed ratio:  1222598 / 13870000
+Updated result: 
+BFST generate better results ratio:  4396669 / 13880000
+BFST failed ratio:  1223320 / 13880000
+Updated result: 
+BFST generate better results ratio:  4398117 / 13890000
+BFST failed ratio:  1224020 / 13890000
+Updated result: 
+BFST generate better results ratio:  4399064 / 13900000
+BFST failed ratio:  1224166 / 13900000
+Updated result: 
+BFST generate better results ratio:  4402585 / 13910000
+BFST failed ratio:  1225840 / 13910000
+Updated result: 
+BFST generate better results ratio:  4404249 / 13920000
+BFST failed ratio:  1227690 / 13920000
+Updated result: 
+BFST generate better results ratio:  4405738 / 13930000
+BFST failed ratio:  1228115 / 13930000
+Updated result: 
+BFST generate better results ratio:  4405834 / 13940000
+BFST failed ratio:  1228115 / 13940000
+Updated result: 
+BFST generate better results ratio:  4406113 / 13950000
+BFST failed ratio:  1228257 / 13950000
+Updated result: 
+BFST generate better results ratio:  4411144 / 13960000
+BFST failed ratio:  1231274 / 13960000
+Updated result: 
+BFST generate better results ratio:  4416444 / 13970000
+BFST failed ratio:  1232674 / 13970000
+Updated result: 
+BFST generate better results ratio:  4419467 / 13980000
+BFST failed ratio:  1234077 / 13980000
+Updated result: 
+BFST generate better results ratio:  4421845 / 13990000
+BFST failed ratio:  1234234 / 13990000
+Updated result: 
+BFST generate better results ratio:  4427419 / 14000000
+BFST failed ratio:  1234981 / 14000000

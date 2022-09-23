@@ -1,6 +1,9 @@
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
+#include <fstream>
+#include <string>
+#include <chrono>
 #include "scheduler.h"
 
 using namespace intersection_management;
@@ -61,18 +64,22 @@ void test2() {
     int failed_count = 0;
     int better_count = 0;
     bool verbose_mode = false;
+    double depth_sum_dfst = 0.0;
+    double depth_sum_bfst = 0.0;
 
     while (true) {
         total_test++;
         seed = std::time(NULL);
         do {
-            cdg.GenerateRandomGraph(std::rand() % max_node + 1, seed);
+            cdg.GenerateRandomGraph(std::rand() % max_node + 5, seed);
         } while (!cdg.isFullyConnected());
 
         // std::cout << "The CDG fully connected status is: " << cdg.isFullyConnected() << std::endl;
         auto modified_dfst = scheduler_dfs.ScheduleWithModifiedDfst(cdg);
         auto bfst = scheduler_bfs.ScheduleWithBfstWeightedEdgeOnly(cdg);
 
+        depth_sum_dfst += modified_dfst.edge_weighted_depth_;
+        depth_sum_bfst += bfst.edge_weighted_depth_;
         if (modified_dfst.edge_weighted_depth_ > bfst.edge_weighted_depth_) {
             better_count++;
         }
@@ -89,9 +96,11 @@ void test2() {
         }
 
         if (total_test % 10000 == 0) {
-            std::cout << "Updated result: \n";
-            std::cout << "BFST generate better results ratio:  " << better_count << " / " << total_test << "\n";
-            std::cout << "BFST failed ratio:  " << failed_count << " / " << total_test << "\n";
+            std::cout << "------ Updated result: ------ \n";
+            std::cout << "BFST generate better results ratio:  " << better_count << " / " << total_test;
+            std::cout << ". BFST failed ratio:  " << failed_count << " / " << total_test << "\n";
+            std::cout << "BFST average depth is: " << depth_sum_bfst / total_test;
+            std::cout << ". DFST average depth is: " << depth_sum_dfst / total_test << "\n";
         }
     }
 }
