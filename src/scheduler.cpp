@@ -5,7 +5,7 @@ namespace intersection_management {
     Scheduler::Scheduler() {}
 
     ConflictSpanningTree Scheduler::ScheduleWithModifiedDfst(const ConflictDirectedGraph &cdg) {
-        result_tree_.reset();
+        result_tree_.reset(false);
         result_tree_.AddNodesFromGraph(cdg);
         std::vector<bool> added_to_tree(cdg.num_nodes_, false);
         added_to_tree[0] = true;
@@ -66,7 +66,7 @@ namespace intersection_management {
         return result_tree_;
     }
     ConflictSpanningTree Scheduler::ScheduleWithBfstWeightedEdgeOnly(const ConflictDirectedGraph &cdg) {
-        result_tree_.reset();
+        result_tree_.reset(false);
         result_tree_.AddNodesFromGraph(cdg);
         std::vector<Candidate> ready_list;
         std::vector<std::vector<std::shared_ptr<Node>>> unidirectional_parent_table;
@@ -102,18 +102,17 @@ namespace intersection_management {
                     if (chosen_candidate.possible_depth_ + cdg.nodes_[chosen_candidate.id_]->getEdgeTo(iter->id_)->edge_weight_ > \
                         iter->possible_depth_) {
                         iter = ready_list.erase(iter);
+                        continue;
                     }
                 }
-                else {
-                    iter++;
-                }
+                iter++;
             }
 
             for (int to = 1; to < result_tree_.num_nodes_; to++) {
                 if (added_to_tree[to] || isInList(to, ready_list)) {
                     continue;
                 }
-                if (isClearWithPredecessor(unidirectional_parent_table[to], added_to_tree)) {
+                if (StillHasPredecessor(unidirectional_parent_table[to], added_to_tree)) {
                     continue;
                 }
                 if (cdg.nodes_[chosen_candidate.id_]->isConnectedTo(to)) {
@@ -123,7 +122,12 @@ namespace intersection_management {
                 }
             }
             std::sort(ready_list.begin(), ready_list.end(),
-                [](const Candidate &a, const Candidate &b) {return a.possible_depth_ < b.possible_depth_;});
+                [](const Candidate &a, const Candidate &b) {
+                    if (a.possible_depth_ == b.possible_depth_) {
+                        return a.id_ < b.id_;
+                    }
+                    return a.possible_depth_ < b.possible_depth_;
+                });
         }
 
         return result_tree_;
@@ -138,13 +142,13 @@ namespace intersection_management {
         return false;
     }
 
-    bool Scheduler::isClearWithPredecessor(std::vector<std::shared_ptr<Node>> &pre, std::vector<bool> &added_to_tree) {
+    bool Scheduler::StillHasPredecessor(std::vector<std::shared_ptr<Node>> &pre, std::vector<bool> &added_to_tree) {
         for (auto node : pre) {
             if (added_to_tree[node->id_] == false) {
-                return false;
+                return true;
             }
         }
-        return true;
+        return false;
     }
 
     ConflictSpanningTree Scheduler::ScheduleWithBfstMultiWeight(const ConflictDirectedGraph &cdg) {

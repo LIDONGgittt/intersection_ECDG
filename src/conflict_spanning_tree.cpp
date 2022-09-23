@@ -15,9 +15,9 @@ namespace intersection_management {
         nodes_.clear();
         edges_.clear();
         num_nodes_ = 0;
-        depth_ = 0.0;
-        edge_weighted_depth_ = 0;
-        edge_node_weighted_depth_ = 0;
+        depth_ = -1;
+        edge_weighted_depth_ = -1;
+        edge_node_weighted_depth_ = -1;
         if (verbose) {
             std::cout << "The Tree is reset to empty!\n";
         }

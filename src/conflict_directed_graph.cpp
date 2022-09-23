@@ -1,6 +1,4 @@
 #include "conflict_directed_graph.h"
-#include <cstdlib>
-#include <time.h>
 #include <iostream>
 #include <cmath>
 #include <queue>
@@ -67,7 +65,7 @@ namespace intersection_management {
         bool int_weight_only) {
 
         srand(seed);
-        this->reset();
+        this->reset(false);
         double node_weight;
         for (int id = 1; id <= total_nodes; id++) {
             node_weight = ((double)rand()) / RAND_MAX * max_node_weight + 1.0;

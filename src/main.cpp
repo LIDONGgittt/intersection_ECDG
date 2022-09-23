@@ -1,28 +1,101 @@
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
 #include "scheduler.h"
 
 using namespace intersection_management;
-int main() {
+
+void test1() {
     ConflictDirectedGraph cdg = ConflictDirectedGraph();
 
     Scheduler scheduler_dfs = Scheduler();
     Scheduler scheduler_bfs = Scheduler();
     // cdg.reset();
     unsigned int seed = 0;
-    for (int repeat = 0; repeat < 10; repeat++) {
+    int max_node = 100;
+    int total_test = 1000;
+    int failed_count = 0;
+    int better_count = 0;
+    bool verbose_mode = false;
+
+    for (int repeat = 0; repeat < total_test; repeat++) {
+        seed = std::time(NULL);
         do {
-            cdg.GenerateRandomGraph(5, seed++);
+            cdg.GenerateRandomGraph(std::rand() % max_node + 1, seed);
         } while (!cdg.isFullyConnected());
 
-        std::cout << "# # # # # # # # # # # # # #  New Loop  # # # # # # # # # # # # # #\n";
-        // cdg.PrintGraph();
         // std::cout << "The CDG fully connected status is: " << cdg.isFullyConnected() << std::endl;
         auto modified_dfst = scheduler_dfs.ScheduleWithModifiedDfst(cdg);
-        std::cout << "Modified DFST:\n";
-        modified_dfst.PrintTree(false);
         auto bfst = scheduler_bfs.ScheduleWithBfstWeightedEdgeOnly(cdg);
-        std::cout << "BFST:\n";
-        bfst.PrintTree(false);
+
+        if (modified_dfst.edge_weighted_depth_ > bfst.edge_weighted_depth_) {
+            better_count++;
+        }
+        else if (modified_dfst.edge_weighted_depth_ < bfst.edge_weighted_depth_) {
+            failed_count++;
+            if (verbose_mode) {
+                std::cout << "# # # # # # # # # # # # # #  New Loop with seed: " << seed << " # # # # # # # # # # # # # #\n";
+                cdg.PrintGraph();
+                std::cout << "Modified DFST:\n";
+                modified_dfst.PrintTree(true);
+                std::cout << "BFST:\n";
+                bfst.PrintTree(true);
+            }
+        }
     }
 
+    std::cout << "BFST generate better results ratio:  " << better_count << " / " << total_test << "\n";
+    std::cout << "BFST failed ratio:  " << failed_count << " / " << total_test << "\n";
+}
+
+
+void test2() {
+    ConflictDirectedGraph cdg = ConflictDirectedGraph();
+
+    Scheduler scheduler_dfs = Scheduler();
+    Scheduler scheduler_bfs = Scheduler();
+    // cdg.reset();
+    unsigned int seed = 0;
+    int max_node = 100;
+    int total_test = 1000;
+    int failed_count = 0;
+    int better_count = 0;
+    bool verbose_mode = false;
+
+    while (true) {
+        total_test++;
+        seed = std::time(NULL);
+        do {
+            cdg.GenerateRandomGraph(std::rand() % max_node + 1, seed);
+        } while (!cdg.isFullyConnected());
+
+        // std::cout << "The CDG fully connected status is: " << cdg.isFullyConnected() << std::endl;
+        auto modified_dfst = scheduler_dfs.ScheduleWithModifiedDfst(cdg);
+        auto bfst = scheduler_bfs.ScheduleWithBfstWeightedEdgeOnly(cdg);
+
+        if (modified_dfst.edge_weighted_depth_ > bfst.edge_weighted_depth_) {
+            better_count++;
+        }
+        else if (modified_dfst.edge_weighted_depth_ < bfst.edge_weighted_depth_) {
+            failed_count++;
+            if (verbose_mode) {
+                std::cout << "# # # # # # # # # # # # # #  New Loop with seed: " << seed << " # # # # # # # # # # # # # #\n";
+                cdg.PrintGraph();
+                std::cout << "Modified DFST:\n";
+                modified_dfst.PrintTree(true);
+                std::cout << "BFST:\n";
+                bfst.PrintTree(true);
+            }
+        }
+
+        if (total_test % 10000 == 0) {
+            std::cout << "Updated result: \n";
+            std::cout << "BFST generate better results ratio:  " << better_count << " / " << total_test << "\n";
+            std::cout << "BFST failed ratio:  " << failed_count << " / " << total_test << "\n";
+        }
+    }
+}
+
+int main() {
+    test2();
 }

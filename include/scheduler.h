@@ -24,7 +24,7 @@ namespace intersection_management {
         ConflictSpanningTree ScheduleWithBfstWeightedEdgeOnly(const ConflictDirectedGraph &cdg);
         ConflictSpanningTree ScheduleWithBfstMultiWeight(const ConflictDirectedGraph &cdg);
         bool isInList(int id, std::vector<Candidate> &ready_list);
-        bool isClearWithPredecessor(std::vector<std::shared_ptr<Node>> &pre, std::vector<bool> &added_to_tree);
+        bool StillHasPredecessor(std::vector<std::shared_ptr<Node>> &pre, std::vector<bool> &added_to_tree);
 
         ConflictSpanningTree result_tree_;
 
