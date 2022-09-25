@@ -13,23 +13,27 @@ void test1() {
 
     Scheduler scheduler_dfs = Scheduler();
     Scheduler scheduler_bfs = Scheduler();
+    Scheduler scheduler_mdbfs = Scheduler();
+
     // cdg.reset();
     unsigned int seed = 0;
     int max_node = 100;
     int total_test = 1000;
     int failed_count = 0;
     int better_count = 0;
-    bool verbose_mode = false;
+    bool verbose_mode = true;
 
     for (int repeat = 0; repeat < total_test; repeat++) {
         seed = std::time(NULL);
         do {
-            cdg.GenerateRandomGraph(std::rand() % max_node + 1, seed);
+            // cdg.GenerateRandomGraph(std::rand() % max_node + 1, seed);
+            cdg.GenerateRandomGraph(5, repeat);
         } while (!cdg.isFullyConnected());
 
         // std::cout << "The CDG fully connected status is: " << cdg.isFullyConnected() << std::endl;
         auto modified_dfst = scheduler_dfs.ScheduleWithModifiedDfst(cdg);
         auto bfst = scheduler_bfs.ScheduleWithBfstWeightedEdgeOnly(cdg);
+        auto mdbfst = scheduler_mdbfs.ScheduleWithBfstMultiWeight(cdg);
 
         if (modified_dfst.edge_weighted_depth_ > bfst.edge_weighted_depth_) {
             better_count++;
@@ -43,6 +47,8 @@ void test1() {
                 modified_dfst.PrintTree(true);
                 std::cout << "BFST:\n";
                 bfst.PrintTree(true);
+                std::cout << "MDBFST:\n";
+                mdbfst.PrintTree(true);
             }
         }
     }
@@ -106,5 +112,5 @@ void test2() {
 }
 
 int main() {
-    test2();
+    test1();
 }

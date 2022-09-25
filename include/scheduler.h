@@ -8,13 +8,14 @@ namespace intersection_management {
 
     class Candidate {
     public:
-        Candidate(int id, double depth, int parent, double edge_weight) :
-            id_(id), possible_depth_(depth), id_possible_parent_(parent), edge_weight_(edge_weight) {}
+        Candidate(int id, double depth, int parent, double edge_weight, double node_weight = -1.0) :
+            id_(id), possible_depth_(depth), id_possible_parent_(parent), edge_weight_(edge_weight), node_weight_(node_weight) {}
 
         int id_;
         double possible_depth_;
         int id_possible_parent_;
         double edge_weight_;
+        double node_weight_;
     };
 
     class Scheduler {

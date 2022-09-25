@@ -1010,3 +1010,303 @@ BFST average depth is: 15.5755. DFST average depth is: 16.1404
 ------ Updated result: ------ 
 BFST generate better results ratio:  986066 / 3100000. BFST failed ratio:  312164 / 3100000
 BFST average depth is: 15.5824. DFST average depth is: 16.1475
+------ Updated result: ------ 
+BFST generate better results ratio:  990357 / 3110000. BFST failed ratio:  313290 / 3110000
+BFST average depth is: 15.6153. DFST average depth is: 16.1816
+------ Updated result: ------ 
+BFST generate better results ratio:  990357 / 3120000. BFST failed ratio:  313290 / 3120000
+BFST average depth is: 15.5844. DFST average depth is: 16.149
+------ Updated result: ------ 
+BFST generate better results ratio:  992283 / 3130000. BFST failed ratio:  316500 / 3130000
+BFST average depth is: 15.5927. DFST average depth is: 16.156
+------ Updated result: ------ 
+BFST generate better results ratio:  992438 / 3140000. BFST failed ratio:  324912 / 3140000
+BFST average depth is: 15.5731. DFST average depth is: 16.1322
+------ Updated result: ------ 
+BFST generate better results ratio:  998317 / 3150000. BFST failed ratio:  326905 / 3150000
+BFST average depth is: 15.5855. DFST average depth is: 16.1449
+------ Updated result: ------ 
+BFST generate better results ratio:  1002030 / 3160000. BFST failed ratio:  327730 / 3160000
+BFST average depth is: 15.6064. DFST average depth is: 16.1671
+------ Updated result: ------ 
+BFST generate better results ratio:  1003539 / 3170000. BFST failed ratio:  328105 / 3170000
+BFST average depth is: 15.5927. DFST average depth is: 16.153
+------ Updated result: ------ 
+BFST generate better results ratio:  1004972 / 3180000. BFST failed ratio:  328446 / 3180000
+BFST average depth is: 15.5848. DFST average depth is: 16.1443
+------ Updated result: ------ 
+BFST generate better results ratio:  1004972 / 3190000. BFST failed ratio:  328446 / 3190000
+BFST average depth is: 15.5516. DFST average depth is: 16.1094
+------ Updated result: ------ 
+BFST generate better results ratio:  1008058 / 3200000. BFST failed ratio:  328813 / 3200000
+BFST average depth is: 15.5532. DFST average depth is: 16.1127
+------ Updated result: ------ 
+BFST generate better results ratio:  1012283 / 3210000. BFST failed ratio:  331530 / 3210000
+BFST average depth is: 15.5891. DFST average depth is: 16.1493
+------ Updated result: ------ 
+BFST generate better results ratio:  1014174 / 3220000. BFST failed ratio:  333082 / 3220000
+BFST average depth is: 15.5806. DFST average depth is: 16.1405
+------ Updated result: ------ 
+BFST generate better results ratio:  1014431 / 3230000. BFST failed ratio:  333150 / 3230000
+BFST average depth is: 15.5479. DFST average depth is: 16.1062
+------ Updated result: ------ 
+BFST generate better results ratio:  1015633 / 3240000. BFST failed ratio:  333206 / 3240000
+BFST average depth is: 15.5224. DFST average depth is: 16.0796
+------ Updated result: ------ 
+BFST generate better results ratio:  1015824 / 3250000. BFST failed ratio:  333252 / 3250000
+BFST average depth is: 15.4871. DFST average depth is: 16.0427
+------ Updated result: ------ 
+BFST generate better results ratio:  1020247 / 3260000. BFST failed ratio:  334576 / 3260000
+BFST average depth is: 15.5003. DFST average depth is: 16.0567
+------ Updated result: ------ 
+BFST generate better results ratio:  1021949 / 3270000. BFST failed ratio:  338027 / 3270000
+BFST average depth is: 15.5092. DFST average depth is: 16.0642
+------ Updated result: ------ 
+BFST generate better results ratio:  1023471 / 3280000. BFST failed ratio:  345397 / 3280000
+BFST average depth is: 15.4997. DFST average depth is: 16.0516
+------ Updated result: ------ 
+BFST generate better results ratio:  1026331 / 3290000. BFST failed ratio:  346237 / 3290000
+BFST average depth is: 15.4973. DFST average depth is: 16.0493
+------ Updated result: ------ 
+BFST generate better results ratio:  1026727 / 3300000. BFST failed ratio:  346298 / 3300000
+BFST average depth is: 15.4705. DFST average depth is: 16.0211
+------ Updated result: ------
+BFST generate better results ratio:  1031323 / 3310000. BFST failed ratio:  347426 / 3310000
+BFST average depth is: 15.5083. DFST average depth is: 16.0604
+------ Updated result: ------ 
+BFST generate better results ratio:  1034874 / 3320000. BFST failed ratio:  348855 / 3320000
+BFST average depth is: 15.5337. DFST average depth is: 16.086
+------ Updated result: ------ 
+BFST generate better results ratio:  1039440 / 3330000. BFST failed ratio:  349434 / 3330000
+BFST average depth is: 15.5562. DFST average depth is: 16.1097
+------ Updated result: ------ 
+BFST generate better results ratio:  1043893 / 3340000. BFST failed ratio:  350570 / 3340000
+BFST average depth is: 15.5862. DFST average depth is: 16.1409
+------ Updated result: ------ 
+BFST generate better results ratio:  1045785 / 3350000. BFST failed ratio:  351030 / 3350000
+BFST average depth is: 15.5938. DFST average depth is: 16.148
+------ Updated result: ------ 
+BFST generate better results ratio:  1046396 / 3360000. BFST failed ratio:  351111 / 3360000
+BFST average depth is: 15.5644. DFST average depth is: 16.1173
+------ Updated result: ------ 
+BFST generate better results ratio:  1046396 / 3370000. BFST failed ratio:  351111 / 3370000
+BFST average depth is: 15.5271. DFST average depth is: 16.0784
+------ Updated result: ------ 
+BFST generate better results ratio:  1051055 / 3380000. BFST failed ratio:  352553 / 3380000
+BFST average depth is: 15.5588. DFST average depth is: 16.111
+------ Updated result: ------ 
+BFST generate better results ratio:  1054385 / 3390000. BFST failed ratio:  353419 / 3390000
+BFST average depth is: 15.5741. DFST average depth is: 16.1267
+------ Updated result: ------ 
+BFST generate better results ratio:  1055333 / 3400000. BFST failed ratio:  354380 / 3400000
+BFST average depth is: 15.5644. DFST average depth is: 16.1158
+------ Updated result: ------ 
+BFST generate better results ratio:  1057203 / 3410000. BFST failed ratio:  355001 / 3410000
+BFST average depth is: 15.5635. DFST average depth is: 16.1145
+------ Updated result: ------ 
+BFST generate better results ratio:  1061259 / 3420000. BFST failed ratio:  355338 / 3420000
+BFST average depth is: 15.5687. DFST average depth is: 16.1197
+------ Updated result: ------ 
+BFST generate better results ratio:  1071259 / 3430000. BFST failed ratio:  355338 / 3430000
+BFST average depth is: 15.535. DFST average depth is: 16.0873
+------ Updated result: ------ 
+BFST generate better results ratio:  1081259 / 3440000. BFST failed ratio:  355338 / 3440000
+BFST average depth is: 15.5014. DFST average depth is: 16.055
+------ Updated result: ------ 
+BFST generate better results ratio:  1082397 / 3450000. BFST failed ratio:  357313 / 3450000
+BFST average depth is: 15.4976. DFST average depth is: 16.0496
+------ Updated result: ------ 
+BFST generate better results ratio:  1085445 / 3460000. BFST failed ratio:  359536 / 3460000
+BFST average depth is: 15.5123. DFST average depth is: 16.0646
+------ Updated result: ------ 
+BFST generate better results ratio:  1088233 / 3470000. BFST failed ratio:  362587 / 3470000
+BFST average depth is: 15.527. DFST average depth is: 16.0786
+------ Updated result: ------ 
+BFST generate better results ratio:  1089598 / 3480000. BFST failed ratio:  363767 / 3480000
+BFST average depth is: 15.5224. DFST average depth is: 16.0732
+------ Updated result: ------ 
+BFST generate better results ratio:  1095544 / 3490000. BFST failed ratio:  364921 / 3490000
+BFST average depth is: 15.5587. DFST average depth is: 16.1112
+------ Updated result: ------ 
+BFST generate better results ratio:  1098274 / 3500000. BFST failed ratio:  366222 / 3500000
+BFST average depth is: 15.5695. DFST average depth is: 16.1221
+------ Updated result: ------ 
+BFST generate better results ratio:  1099451 / 3510000. BFST failed ratio:  366623 / 3510000
+BFST average depth is: 15.5578. DFST average depth is: 16.1096
+------ Updated result: ------ 
+BFST generate better results ratio:  1102852 / 3520000. BFST failed ratio:  368747 / 3520000
+BFST average depth is: 15.5758. DFST average depth is: 16.1277
+------ Updated result: ------ 
+BFST generate better results ratio:  1104907 / 3530000. BFST failed ratio:  369077 / 3530000
+BFST average depth is: 15.5683. DFST average depth is: 16.1198
+------ Updated result: ------ 
+BFST generate better results ratio:  1104907 / 3540000. BFST failed ratio:  369077 / 3540000
+BFST average depth is: 15.5328. DFST average depth is: 16.0827
+------ Updated result: ------ 
+BFST generate better results ratio:  1106676 / 3550000. BFST failed ratio:  369881 / 3550000
+BFST average depth is: 15.5136. DFST average depth is: 16.0631
+------ Updated result: ------ 
+BFST generate better results ratio:  1114332 / 3560000. BFST failed ratio:  370683 / 3560000
+BFST average depth is: 15.5194. DFST average depth is: 16.0721
+------ Updated result: ------ 
+BFST generate better results ratio:  1120138 / 3570000. BFST failed ratio:  371599 / 3570000
+BFST average depth is: 15.5497. DFST average depth is: 16.1044
+------ Updated result: ------ 
+BFST generate better results ratio:  1123798 / 3580000. BFST failed ratio:  372090 / 3580000
+BFST average depth is: 15.5595. DFST average depth is: 16.1147
+------ Updated result: ------ 
+BFST generate better results ratio:  1124300 / 3590000. BFST failed ratio:  372163 / 3590000
+BFST average depth is: 15.5402. DFST average depth is: 16.0941
+------ Updated result: ------ 
+BFST generate better results ratio:  1126325 / 3600000. BFST failed ratio:  372456 / 3600000
+BFST average depth is: 15.5391. DFST average depth is: 16.0928
+------ Updated result: ------ 
+BFST generate better results ratio:  1132322 / 3610000. BFST failed ratio:  373038 / 3610000
+BFST average depth is: 15.5549. DFST average depth is: 16.1099
+------ Updated result: ------ 
+BFST generate better results ratio:  1135150 / 3620000. BFST failed ratio:  373958 / 3620000
+BFST average depth is: 15.5682. DFST average depth is: 16.1237
+------ Updated result: ------ 
+BFST generate better results ratio:  1137303 / 3630000. BFST failed ratio:  376232 / 3630000
+BFST average depth is: 15.5828. DFST average depth is: 16.1377
+------ Updated result: ------ 
+BFST generate better results ratio:  1139577 / 3640000. BFST failed ratio:  376892 / 3640000
+BFST average depth is: 15.5885. DFST average depth is: 16.1433
+------ Updated result: ------ 
+BFST generate better results ratio:  1144040 / 3650000. BFST failed ratio:  378031 / 3650000
+BFST average depth is: 15.6156. DFST average depth is: 16.1713
+------ Updated result: ------ 
+BFST generate better results ratio:  1147860 / 3660000. BFST failed ratio:  378692 / 3660000
+BFST average depth is: 15.6258. DFST average depth is: 16.182
+------ Updated result: ------ 
+BFST generate better results ratio:  1150345 / 3670000. BFST failed ratio:  379131 / 3670000
+BFST average depth is: 15.6346. DFST average depth is: 16.1907
+------ Updated result: ------ 
+BFST generate better results ratio:  1153127 / 3680000. BFST failed ratio:  379780 / 3680000
+BFST average depth is: 15.6535. DFST average depth is: 16.2101
+------ Updated result: ------ 
+BFST generate better results ratio:  1157856 / 3690000. BFST failed ratio:  380338 / 3690000
+BFST average depth is: 15.6699. DFST average depth is: 16.2283
+------ Updated result: ------ 
+BFST generate better results ratio:  1160417 / 3700000. BFST failed ratio:  381542 / 3700000
+BFST average depth is: 15.6797. DFST average depth is: 16.2371
+------ Updated result: ------ 
+BFST generate better results ratio:  1167467 / 3710000. BFST failed ratio:  382453 / 3710000
+BFST average depth is: 15.6911. DFST average depth is: 16.25
+------ Updated result: ------ 
+BFST generate better results ratio:  1169462 / 3720000. BFST failed ratio:  383171 / 3720000
+BFST average depth is: 15.698. DFST average depth is: 16.2563
+------ Updated result: ------ 
+BFST generate better results ratio:  1172376 / 3730000. BFST failed ratio:  383694 / 3730000
+BFST average depth is: 15.6949. DFST average depth is: 16.2535
+------ Updated result: ------ 
+BFST generate better results ratio:  1174538 / 3740000. BFST failed ratio:  384264 / 3740000
+BFST average depth is: 15.689. DFST average depth is: 16.2473
+------ Updated result: ------ 
+BFST generate better results ratio:  1174578 / 3750000. BFST failed ratio:  385647 / 3750000
+BFST average depth is: 15.6606. DFST average depth is: 16.217
+------ Updated result: ------ 
+BFST generate better results ratio:  1175980 / 3760000. BFST failed ratio:  387974 / 3760000
+BFST average depth is: 15.6573. DFST average depth is: 16.2127
+------ Updated result: ------ 
+BFST generate better results ratio:  1178845 / 3770000. BFST failed ratio:  388543 / 3770000
+BFST average depth is: 15.664. DFST average depth is: 16.2197
+------ Updated result: ------ 
+BFST generate better results ratio:  1180727 / 3780000. BFST failed ratio:  389251 / 3780000
+BFST average depth is: 15.6528. DFST average depth is: 16.2084
+------ Updated result: ------ 
+BFST generate better results ratio:  1184256 / 3790000. BFST failed ratio:  390194 / 3790000
+BFST average depth is: 15.6767. DFST average depth is: 16.2334
+------ Updated result: ------ 
+BFST generate better results ratio:  1186398 / 3800000. BFST failed ratio:  390508 / 3800000
+BFST average depth is: 15.6842. DFST average depth is: 16.2406
+------ Updated result: ------ 
+BFST generate better results ratio:  1186612 / 3810000. BFST failed ratio:  390598 / 3810000
+BFST average depth is: 15.6709. DFST average depth is: 16.2259
+------ Updated result: ------ 
+BFST generate better results ratio:  1189275 / 3820000. BFST failed ratio:  393988 / 3820000
+BFST average depth is: 15.6888. DFST average depth is: 16.2431
+------ Updated result: ------ 
+BFST generate better results ratio:  1191700 / 3830000. BFST failed ratio:  395890 / 3830000
+BFST average depth is: 15.6993. DFST average depth is: 16.2533
+------ Updated result: ------ 
+BFST generate better results ratio:  1193586 / 3840000. BFST failed ratio:  396159 / 3840000
+BFST average depth is: 15.6896. DFST average depth is: 16.2431
+------ Updated result: ------ 
+BFST generate better results ratio:  1193586 / 3850000. BFST failed ratio:  396159 / 3850000
+BFST average depth is: 15.6592. DFST average depth is: 16.2113
+------ Updated result: ------ 
+BFST generate better results ratio:  1194402 / 3860000. BFST failed ratio:  397609 / 3860000
+BFST average depth is: 15.6415. DFST average depth is: 16.1922
+------ Updated result: ------ 
+BFST generate better results ratio:  1198173 / 3870000. BFST failed ratio:  399414 / 3870000
+BFST average depth is: 15.6608. DFST average depth is: 16.212
+------ Updated result: ------ 
+BFST generate better results ratio:  1203536 / 3880000. BFST failed ratio:  399964 / 3880000
+BFST average depth is: 15.6718. DFST average depth is: 16.2244
+------ Updated result: ------ 
+BFST generate better results ratio:  1206332 / 3890000. BFST failed ratio:  402097 / 3890000
+BFST average depth is: 15.6687. DFST average depth is: 16.221
+------ Updated result: ------ 
+BFST generate better results ratio:  1206332 / 3900000. BFST failed ratio:  412097 / 3900000
+BFST average depth is: 15.6465. DFST average depth is: 16.1948
+------ Updated result: ------ 
+BFST generate better results ratio:  1210956 / 3910000. BFST failed ratio:  414643 / 3910000
+BFST average depth is: 15.6637. DFST average depth is: 16.2127
+------ Updated result: ------ 
+BFST generate better results ratio:  1211109 / 3920000. BFST failed ratio:  414705 / 3920000
+BFST average depth is: 15.6385. DFST average depth is: 16.1862
+------ Updated result: ------ 
+BFST generate better results ratio:  1211109 / 3930000. BFST failed ratio:  414705 / 3930000
+BFST average depth is: 15.6114. DFST average depth is: 16.1577
+------ Updated result: ------ 
+BFST generate better results ratio:  1211437 / 3940000. BFST failed ratio:  414759 / 3940000
+BFST average depth is: 15.5877. DFST average depth is: 16.1328
+------ Updated result: ------ 
+BFST generate better results ratio:  1218272 / 3950000. BFST failed ratio:  415497 / 3950000
+BFST average depth is: 15.5989. DFST average depth is: 16.1465
+------ Updated result: ------ 
+BFST generate better results ratio:  1221365 / 3960000. BFST failed ratio:  417247 / 3960000
+BFST average depth is: 15.6043. DFST average depth is: 16.1527
+------ Updated result: ------ 
+BFST generate better results ratio:  1223421 / 3970000. BFST failed ratio:  417701 / 3970000
+BFST average depth is: 15.601. DFST average depth is: 16.1489
+------ Updated result: ------ 
+BFST generate better results ratio:  1227015 / 3980000. BFST failed ratio:  418003 / 3980000
+BFST average depth is: 15.5998. DFST average depth is: 16.1477
+------ Updated result: ------ 
+BFST generate better results ratio:  1234102 / 3990000. BFST failed ratio:  418832 / 3990000
+BFST average depth is: 15.6087. DFST average depth is: 16.1578
+------ Updated result: ------ 
+BFST generate better results ratio:  1236537 / 4000000. BFST failed ratio:  420353 / 4000000
+BFST average depth is: 15.6176. DFST average depth is: 16.1664
+------ Updated result: ------ 
+BFST generate better results ratio:  1239524 / 4010000. BFST failed ratio:  421162 / 4010000
+BFST average depth is: 15.6316. DFST average depth is: 16.1808
+------ Updated result: ------ 
+BFST generate better results ratio:  1243471 / 4020000. BFST failed ratio:  421258 / 4020000
+BFST average depth is: 15.6183. DFST average depth is: 16.1682
+------ Updated result: ------ 
+BFST generate better results ratio:  1251825 / 4030000. BFST failed ratio:  421261 / 4030000
+BFST average depth is: 15.5949. DFST average depth is: 16.1456
+------ Updated result: ------ 
+BFST generate better results ratio:  1259821 / 4040000. BFST failed ratio:  421656 / 4040000
+BFST average depth is: 15.594. DFST average depth is: 16.1463
+------ Updated result: ------ 
+BFST generate better results ratio:  1263187 / 4050000. BFST failed ratio:  422031 / 4050000
+BFST average depth is: 15.5884. DFST average depth is: 16.1405
+------ Updated result: ------ 
+BFST generate better results ratio:  1265410 / 4060000. BFST failed ratio:  424335 / 4060000
+BFST average depth is: 15.5961. DFST average depth is: 16.1478
+------ Updated result: ------ 
+BFST generate better results ratio:  1266100 / 4070000. BFST failed ratio:  432995 / 4070000
+BFST average depth is: 15.5834. DFST average depth is: 16.1317
+------ Updated result: ------ 
+BFST generate better results ratio:  1270032 / 4080000. BFST failed ratio:  436968 / 4080000
+BFST average depth is: 15.601. DFST average depth is: 16.1493
+------ Updated result: ------ 
+BFST generate better results ratio:  1274295 / 4090000. BFST failed ratio:  437604 / 4090000
+BFST average depth is: 15.6103. DFST average depth is: 16.1593
+------ Updated result: ------ 
+BFST generate better results ratio:  1280066 / 4100000. BFST failed ratio:  440534 / 4100000
+BFST average depth is: 15.6272. DFST average depth is: 16.1772
