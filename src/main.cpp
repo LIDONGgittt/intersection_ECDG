@@ -19,7 +19,7 @@ void test1() {
     unsigned int seed = 0;
     int max_node = 100;
     int total_test = 1000;
-    int failed_count = 0;
+    int failure_count = 0;
     int better_count = 0;
     bool verbose_mode = true;
 
@@ -39,7 +39,7 @@ void test1() {
             better_count++;
         }
         else if (modified_dfst.edge_weighted_depth_ < bfst.edge_weighted_depth_) {
-            failed_count++;
+            failure_count++;
             if (verbose_mode) {
                 std::cout << "# # # # # # # # # # # # # #  New Loop with seed: " << seed << " # # # # # # # # # # # # # #\n";
                 cdg.PrintGraph();
@@ -54,7 +54,7 @@ void test1() {
     }
 
     std::cout << "BFST generate better results ratio:  " << better_count << " / " << total_test << "\n";
-    std::cout << "BFST failed ratio:  " << failed_count << " / " << total_test << "\n";
+    std::cout << "BFST failed ratio:  " << failure_count << " / " << total_test << "\n";
 }
 
 
@@ -66,8 +66,8 @@ void test2() {
     // cdg.reset();
     unsigned int seed = 0;
     int max_node = 100;
-    int total_test = 1000;
-    int failed_count = 0;
+    int total_test = 0;
+    int failure_count = 0;
     int better_count = 0;
     bool verbose_mode = false;
     double depth_sum_dfst = 0.0;
@@ -90,7 +90,7 @@ void test2() {
             better_count++;
         }
         else if (modified_dfst.edge_weighted_depth_ < bfst.edge_weighted_depth_) {
-            failed_count++;
+            failure_count++;
             if (verbose_mode) {
                 std::cout << "# # # # # # # # # # # # # #  New Loop with seed: " << seed << " # # # # # # # # # # # # # #\n";
                 cdg.PrintGraph();
@@ -104,7 +104,7 @@ void test2() {
         if (total_test % 10000 == 0) {
             std::cout << "------ Updated result: ------ \n";
             std::cout << "BFST generate better results ratio:  " << better_count << " / " << total_test;
-            std::cout << ". BFST failed ratio:  " << failed_count << " / " << total_test << "\n";
+            std::cout << ". BFST failure ratio:  " << failure_count << " / " << total_test << "\n";
             std::cout << "BFST average depth is: " << depth_sum_bfst / total_test;
             std::cout << ". DFST average depth is: " << depth_sum_dfst / total_test << "\n";
         }

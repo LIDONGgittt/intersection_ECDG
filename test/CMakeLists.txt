@@ -1,5 +1,4 @@
 ## setup tests
-enable_testing()
 include(GoogleTest)
 file(GLOB test_files "*_test.cpp")
 message("#### Test files are: " ${test_files})

@@ -157,7 +157,8 @@ namespace intersection_management {
         std::vector<Candidate> ready_list;
         std::vector<std::vector<std::shared_ptr<Node>>> unidirectional_parent_table;
         std::vector<bool> added_to_tree(cdg.num_nodes_, false);
-        Candidate initial_root(0, 0, -1, -1, -1);
+        // root depth is set to -1 to offset the edge_weight from root to every other node
+        Candidate initial_root(0, -1, -1, -1, -1);
         ready_list.push_back(initial_root);
 
         for (int id = 0; id < result_tree_.num_nodes_; id++) {
@@ -185,8 +186,12 @@ namespace intersection_management {
             auto iter = ready_list.begin();
             while (iter != ready_list.end()) {
                 if (cdg.nodes_[chosen_candidate.id_]->isConnectedTo(iter->id_)) {
-                    if (chosen_candidate.possible_depth_ + cdg.nodes_[chosen_candidate.id_]->getEdgeTo(iter->id_)->edge_weight_ + \
-                        cdg.nodes_[iter->id_]->node_weight_ > iter->possible_depth_) {
+                    double edge_weight = cdg.nodes_[chosen_candidate.id_]->getEdgeTo(iter->id_)->edge_weight_;
+                    // non-conflict edges don't delay time windows
+                    if (edge_weight <= 1.0) {
+                        edge_weight = 0.0;
+                    }
+                    if (chosen_candidate.possible_depth_ + edge_weight + cdg.nodes_[iter->id_]->node_weight_ > iter->possible_depth_) {
                         iter = ready_list.erase(iter);
                         continue;
                     }
@@ -203,6 +208,10 @@ namespace intersection_management {
                 }
                 if (cdg.nodes_[chosen_candidate.id_]->isConnectedTo(to)) {
                     double edge_weight = cdg.nodes_[chosen_candidate.id_]->getEdgeTo(to)->edge_weight_;
+                    // non-conflict edges don't delay time windows
+                    if (edge_weight <= 1.0) {
+                        edge_weight = 0.0;
+                    }
                     double node_weight = cdg.nodes_[to]->node_weight_;
                     Candidate new_candidate(to, chosen_candidate.possible_depth_ + edge_weight + node_weight, chosen_candidate.id_, edge_weight);
                     ready_list.push_back(new_candidate);

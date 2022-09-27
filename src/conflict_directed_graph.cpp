@@ -60,15 +60,17 @@ namespace intersection_management {
     void ConflictDirectedGraph::GenerateRandomGraph(
         int total_nodes,
         unsigned int seed,
-        double max_node_weight,
-        double max_edge_weight,
+        double node_weight_range,
+        double edge_weight_range,
+        double node_weight_offset,
+        double edge_weight_offset,
         bool int_weight_only) {
 
-        srand(seed);
+        // srand(seed);
         this->reset(false);
         double node_weight;
         for (int id = 1; id <= total_nodes; id++) {
-            node_weight = ((double)rand()) / RAND_MAX * max_node_weight + 1.0;
+            node_weight = ((double)rand()) / RAND_MAX * node_weight_range + node_weight_offset;
             if (int_weight_only) {
                 node_weight = std::floor(node_weight);
             }
@@ -79,7 +81,7 @@ namespace intersection_management {
         int from, to;
         double edge_weight;
         while (num_edges_to_add > 0) {
-            edge_weight = ((double)rand()) / RAND_MAX * max_edge_weight + 1.0;
+            edge_weight = ((double)rand()) / RAND_MAX * edge_weight_range + edge_weight_offset;
             if (int_weight_only) {
                 edge_weight = std::floor(edge_weight);
             }

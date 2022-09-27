@@ -31,6 +31,6 @@ set(LIB_SOURCES ${SOURCES})
 set(PROJECT_LIB_NAME ${PROJECT_NAME}_lib)
 add_library(${PROJECT_LIB_NAME} STATIC ${LIB_SOURCES} ${HEADERS})
 
-
 ## setup tests
+enable_testing()
 add_subdirectory(test)
