@@ -43,6 +43,24 @@ namespace intersection_management {
                 }
             }
 
+            // if only connected by bidirectional edges, initiate possible depth with the smallest one
+            if (id_possible_parent == -1) {
+                int min_depth_parent_id;
+                int min_depth;
+                id_possible_parent = bidirectional_parent.front()->id_;
+                edge_from_possible_parent = cdg.nodes_[id_possible_parent]->getEdgeTo(id);
+                possible_depth = bidirectional_parent.front()->edge_weighted_depth_ + edge_from_possible_parent->edge_weight_;
+                for (auto parent : bidirectional_parent) {
+                    auto edge = cdg.nodes_[parent->id_]->getEdgeTo(id);
+                    if (parent->edge_weighted_depth_ + edge->edge_weight_ < possible_depth) {
+                        id_possible_parent = parent->id_;
+                        possible_depth = parent->edge_weighted_depth_ + edge->edge_weight_;
+                        edge_from_possible_parent = edge;
+                    }
+                }
+            }
+
+            // update conflicts with other bidirectional edges
             bool flag;
             do {
                 flag = false;
@@ -158,7 +176,7 @@ namespace intersection_management {
         std::vector<std::vector<std::shared_ptr<Node>>> unidirectional_parent_table;
         std::vector<bool> added_to_tree(cdg.num_nodes_, false);
         // root depth is set to -1 to offset the edge_weight from root to every other node
-        Candidate initial_root(0, -1, -1, -1, -1);
+        Candidate initial_root(0, 0, -1, -1, -1);
         ready_list.push_back(initial_root);
 
         for (int id = 0; id < result_tree_.num_nodes_; id++) {

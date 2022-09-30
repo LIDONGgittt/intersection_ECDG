@@ -1,0 +1,1020 @@
+Both BFS generate better results ratio:  470296 / 860000. Both failure ratio:  54 / 860000.
+DFST average depth is: 36.6226.
+BFST average depth is: 35.2213.
+MWBFST average depth is: 112.454.
+------ Updated result: ------ 
+BFST generate better results ratio:  476416 / 870000. BFST failure ratio:  128288 / 870000.
+MWBFST generate better results ratio:  858223 / 870000. MWBFST failure ratio:  1190 / 870000.
+One or more generate better result ratio:  858927 / 870000.
+Both BFS generate better results ratio:  475712 / 870000. Both failure ratio:  54 / 870000.
+DFST average depth is: 36.6231.
+BFST average depth is: 35.2217.
+MWBFST average depth is: 112.456.
+------ Updated result: ------ 
+BFST generate better results ratio:  481861 / 880000. BFST failure ratio:  129761 / 880000.
+MWBFST generate better results ratio:  868079 / 880000. MWBFST failure ratio:  1206 / 880000.
+One or more generate better result ratio:  868790 / 880000.
+Both BFS generate better results ratio:  481150 / 880000. Both failure ratio:  56 / 880000.
+DFST average depth is: 36.629.
+BFST average depth is: 35.2278.
+MWBFST average depth is: 112.474.
+------ Updated result: ------ 
+BFST generate better results ratio:  487412 / 890000. BFST failure ratio:  131227 / 890000.
+MWBFST generate better results ratio:  877945 / 890000. MWBFST failure ratio:  1220 / 890000.
+One or more generate better result ratio:  878668 / 890000.
+Both BFS generate better results ratio:  486689 / 890000. Both failure ratio:  57 / 890000.
+DFST average depth is: 36.6295.
+BFST average depth is: 35.2282.
+MWBFST average depth is: 112.472.
+------ Updated result: ------ 
+BFST generate better results ratio:  492874 / 900000. BFST failure ratio:  132760 / 900000.
+MWBFST generate better results ratio:  887810 / 900000. MWBFST failure ratio:  1231 / 900000.
+One or more generate better result ratio:  888539 / 900000.
+Both BFS generate better results ratio:  492145 / 900000. Both failure ratio:  57 / 900000.
+DFST average depth is: 36.6286.
+BFST average depth is: 35.2277.
+MWBFST average depth is: 112.47.
+------ Updated result: ------ 
+BFST generate better results ratio:  498417 / 910000. BFST failure ratio:  134241 / 910000.
+MWBFST generate better results ratio:  897672 / 910000. MWBFST failure ratio:  1243 / 910000.
+One or more generate better result ratio:  898413 / 910000.
+Both BFS generate better results ratio:  497676 / 910000. Both failure ratio:  58 / 910000.
+DFST average depth is: 36.6323.
+BFST average depth is: 35.2309.
+MWBFST average depth is: 112.48.
+------ Updated result: ------ 
+BFST generate better results ratio:  503874 / 920000. BFST failure ratio:  135682 / 920000.
+MWBFST generate better results ratio:  907515 / 920000. MWBFST failure ratio:  1264 / 920000.
+One or more generate better result ratio:  908265 / 920000.
+Both BFS generate better results ratio:  503124 / 920000. Both failure ratio:  59 / 920000.
+DFST average depth is: 36.633.
+BFST average depth is: 35.2315.
+MWBFST average depth is: 112.482.
+------ Updated result: ------ 
+BFST generate better results ratio:  509448 / 930000. BFST failure ratio:  137142 / 930000.
+MWBFST generate better results ratio:  917401 / 930000. MWBFST failure ratio:  1271 / 930000.
+One or more generate better result ratio:  918155 / 930000.
+Both BFS generate better results ratio:  508694 / 930000. Both failure ratio:  60 / 930000.
+DFST average depth is: 36.6363.
+BFST average depth is: 35.2345.
+MWBFST average depth is: 112.492.
+------ Updated result: ------ 
+BFST generate better results ratio:  514990 / 940000. BFST failure ratio:  138567 / 940000.
+MWBFST generate better results ratio:  927275 / 940000. MWBFST failure ratio:  1281 / 940000.
+One or more generate better result ratio:  928037 / 940000.
+Both BFS generate better results ratio:  514228 / 940000. Both failure ratio:  60 / 940000.
+DFST average depth is: 36.6366.
+BFST average depth is: 35.2347.
+MWBFST average depth is: 112.493.
+------ Updated result: ------ 
+BFST generate better results ratio:  520462 / 950000. BFST failure ratio:  140059 / 950000.
+MWBFST generate better results ratio:  937127 / 950000. MWBFST failure ratio:  1297 / 950000.
+One or more generate better result ratio:  937894 / 950000.
+Both BFS generate better results ratio:  519695 / 950000. Both failure ratio:  62 / 950000.
+DFST average depth is: 36.6341.
+BFST average depth is: 35.232.
+MWBFST average depth is: 112.484.
+------ Updated result: ------ 
+BFST generate better results ratio:  525977 / 960000. BFST failure ratio:  141555 / 960000.
+MWBFST generate better results ratio:  947003 / 960000. MWBFST failure ratio:  1309 / 960000.
+One or more generate better result ratio:  947776 / 960000.
+Both BFS generate better results ratio:  525204 / 960000. Both failure ratio:  62 / 960000.
+DFST average depth is: 36.6362.
+BFST average depth is: 35.234.
+MWBFST average depth is: 112.491.
+------ Updated result: ------ 
+BFST generate better results ratio:  531371 / 970000. BFST failure ratio:  143095 / 970000.
+MWBFST generate better results ratio:  956879 / 970000. MWBFST failure ratio:  1321 / 970000.
+One or more generate better result ratio:  957659 / 970000.
+Both BFS generate better results ratio:  530591 / 970000. Both failure ratio:  62 / 970000.
+DFST average depth is: 36.6394.
+BFST average depth is: 35.2375.
+MWBFST average depth is: 112.503.
+------ Updated result: ------ 
+BFST generate better results ratio:  536813 / 980000. BFST failure ratio:  144586 / 980000.
+MWBFST generate better results ratio:  966723 / 980000. MWBFST failure ratio:  1332 / 980000.
+One or more generate better result ratio:  967510 / 980000.
+Both BFS generate better results ratio:  536026 / 980000. Both failure ratio:  63 / 980000.
+DFST average depth is: 36.639.
+BFST average depth is: 35.2373.
+MWBFST average depth is: 112.501.
+------ Updated result: ------ 
+BFST generate better results ratio:  542362 / 990000. BFST failure ratio:  146050 / 990000.
+MWBFST generate better results ratio:  976570 / 990000. MWBFST failure ratio:  1348 / 990000.
+One or more generate better result ratio:  977368 / 990000.
+Both BFS generate better results ratio:  541564 / 990000. Both failure ratio:  63 / 990000.
+DFST average depth is: 36.6395.
+BFST average depth is: 35.2377.
+MWBFST average depth is: 112.502.
+------ Updated result: ------ 
+BFST generate better results ratio:  547886 / 1000000. BFST failure ratio:  147527 / 1000000.
+MWBFST generate better results ratio:  986441 / 1000000. MWBFST failure ratio:  1359 / 1000000.
+One or more generate better result ratio:  987248 / 1000000.
+Both BFS generate better results ratio:  547079 / 1000000. Both failure ratio:  63 / 1000000.
+DFST average depth is: 36.6427.
+BFST average depth is: 35.2406.
+MWBFST average depth is: 112.512.
+------ Updated result: ------ 
+BFST generate better results ratio:  553295 / 1010000. BFST failure ratio:  149025 / 1010000.
+MWBFST generate better results ratio:  996311 / 1010000. MWBFST failure ratio:  1372 / 1010000.
+One or more generate better result ratio:  997125 / 1010000.
+Both BFS generate better results ratio:  552481 / 1010000. Both failure ratio:  63 / 1010000.
+DFST average depth is: 36.6422.
+BFST average depth is: 35.2405.
+MWBFST average depth is: 112.511.
+------ Updated result: ------ 
+BFST generate better results ratio:  558718 / 1020000. BFST failure ratio:  150540 / 1020000.
+MWBFST generate better results ratio:  1006160 / 1020000. MWBFST failure ratio:  1385 / 1020000.
+One or more generate better result ratio:  1006981 / 1020000.
+Both BFS generate better results ratio:  557897 / 1020000. Both failure ratio:  64 / 1020000.
+DFST average depth is: 36.6445.
+BFST average depth is: 35.2429.
+MWBFST average depth is: 112.519.
+------ Updated result: ------ 
+BFST generate better results ratio:  564206 / 1030000. BFST failure ratio:  152042 / 1030000.
+MWBFST generate better results ratio:  1016037 / 1030000. MWBFST failure ratio:  1401 / 1030000.
+One or more generate better result ratio:  1016864 / 1030000.
+Both BFS generate better results ratio:  563379 / 1030000. Both failure ratio:  64 / 1030000.
+DFST average depth is: 36.6443.
+BFST average depth is: 35.2425.
+MWBFST average depth is: 112.518.
+------ Updated result: ------ 
+BFST generate better results ratio:  569685 / 1040000. BFST failure ratio:  153486 / 1040000.
+MWBFST generate better results ratio:  1025905 / 1040000. MWBFST failure ratio:  1411 / 1040000.
+One or more generate better result ratio:  1026737 / 1040000.
+Both BFS generate better results ratio:  568853 / 1040000. Both failure ratio:  64 / 1040000.
+DFST average depth is: 36.6406.
+BFST average depth is: 35.239.
+MWBFST average depth is: 112.507.
+------ Updated result: ------ 
+BFST generate better results ratio:  575186 / 1050000. BFST failure ratio:  154987 / 1050000.
+MWBFST generate better results ratio:  1035768 / 1050000. MWBFST failure ratio:  1423 / 1050000.
+One or more generate better result ratio:  1036607 / 1050000.
+Both BFS generate better results ratio:  574347 / 1050000. Both failure ratio:  64 / 1050000.
+DFST average depth is: 36.6383.
+BFST average depth is: 35.2369.
+MWBFST average depth is: 112.499.
+------ Updated result: ------ 
+BFST generate better results ratio:  580716 / 1060000. BFST failure ratio:  156433 / 1060000.
+MWBFST generate better results ratio:  1045655 / 1060000. MWBFST failure ratio:  1436 / 1060000.
+One or more generate better result ratio:  1046505 / 1060000.
+Both BFS generate better results ratio:  579866 / 1060000. Both failure ratio:  64 / 1060000.
+DFST average depth is: 36.6416.
+BFST average depth is: 35.2397.
+MWBFST average depth is: 112.51.
+------ Updated result: ------ 
+BFST generate better results ratio:  586053 / 1070000. BFST failure ratio:  157930 / 1070000.
+MWBFST generate better results ratio:  1055510 / 1070000. MWBFST failure ratio:  1449 / 1070000.
+One or more generate better result ratio:  1056368 / 1070000.
+Both BFS generate better results ratio:  585195 / 1070000. Both failure ratio:  64 / 1070000.
+DFST average depth is: 36.6368.
+BFST average depth is: 35.2354.
+MWBFST average depth is: 112.497.
+------ Updated result: ------ 
+BFST generate better results ratio:  591508 / 1080000. BFST failure ratio:  159407 / 1080000.
+MWBFST generate better results ratio:  1065357 / 1080000. MWBFST failure ratio:  1460 / 1080000.
+One or more generate better result ratio:  1066225 / 1080000.
+Both BFS generate better results ratio:  590640 / 1080000. Both failure ratio:  64 / 1080000.
+DFST average depth is: 36.6359.
+BFST average depth is: 35.2345.
+MWBFST average depth is: 112.492.
+------ Updated result: ------ 
+BFST generate better results ratio:  597043 / 1090000. BFST failure ratio:  160820 / 1090000.
+MWBFST generate better results ratio:  1075219 / 1090000. MWBFST failure ratio:  1469 / 1090000.
+One or more generate better result ratio:  1076101 / 1090000.
+Both BFS generate better results ratio:  596161 / 1090000. Both failure ratio:  64 / 1090000.
+DFST average depth is: 36.6344.
+BFST average depth is: 35.2327.
+MWBFST average depth is: 112.487.
+------ Updated result: ------ 
+BFST generate better results ratio:  602579 / 1100000. BFST failure ratio:  162242 / 1100000.
+MWBFST generate better results ratio:  1085076 / 1100000. MWBFST failure ratio:  1486 / 1100000.
+One or more generate better result ratio:  1085969 / 1100000.
+Both BFS generate better results ratio:  601686 / 1100000. Both failure ratio:  66 / 1100000.
+DFST average depth is: 36.6344.
+BFST average depth is: 35.2326.
+MWBFST average depth is: 112.489.
+------ Updated result: ------ 
+BFST generate better results ratio:  608136 / 1110000. BFST failure ratio:  163690 / 1110000.
+MWBFST generate better results ratio:  1094938 / 1110000. MWBFST failure ratio:  1501 / 1110000.
+One or more generate better result ratio:  1095841 / 1110000.
+Both BFS generate better results ratio:  607233 / 1110000. Both failure ratio:  66 / 1110000.
+DFST average depth is: 36.6357.
+BFST average depth is: 35.2337.
+MWBFST average depth is: 112.492.
+------ Updated result: ------ 
+BFST generate better results ratio:  613677 / 1120000. BFST failure ratio:  165205 / 1120000.
+MWBFST generate better results ratio:  1104822 / 1120000. MWBFST failure ratio:  1514 / 1120000.
+One or more generate better result ratio:  1105736 / 1120000.
+Both BFS generate better results ratio:  612763 / 1120000. Both failure ratio:  68 / 1120000.
+DFST average depth is: 36.6385.
+BFST average depth is: 35.2363.
+MWBFST average depth is: 112.5.
+------ Updated result: ------ 
+BFST generate better results ratio:  619105 / 1130000. BFST failure ratio:  166716 / 1130000.
+MWBFST generate better results ratio:  1114689 / 1130000. MWBFST failure ratio:  1527 / 1130000.
+One or more generate better result ratio:  1115611 / 1130000.
+Both BFS generate better results ratio:  618183 / 1130000. Both failure ratio:  69 / 1130000.
+DFST average depth is: 36.6357.
+BFST average depth is: 35.2339.
+MWBFST average depth is: 112.493.
+------ Updated result: ------ 
+BFST generate better results ratio:  624652 / 1140000. BFST failure ratio:  168195 / 1140000.
+MWBFST generate better results ratio:  1124552 / 1140000. MWBFST failure ratio:  1540 / 1140000.
+One or more generate better result ratio:  1125483 / 1140000.
+Both BFS generate better results ratio:  623721 / 1140000. Both failure ratio:  70 / 1140000.
+DFST average depth is: 36.637.
+BFST average depth is: 35.235.
+MWBFST average depth is: 112.498.
+------ Updated result: ------ 
+BFST generate better results ratio:  630106 / 1150000. BFST failure ratio:  169722 / 1150000.
+MWBFST generate better results ratio:  1134416 / 1150000. MWBFST failure ratio:  1558 / 1150000.
+One or more generate better result ratio:  1135353 / 1150000.
+Both BFS generate better results ratio:  629169 / 1150000. Both failure ratio:  70 / 1150000.
+DFST average depth is: 36.6364.
+BFST average depth is: 35.2346.
+MWBFST average depth is: 112.496.
+------ Updated result: ------ 
+BFST generate better results ratio:  635587 / 1160000. BFST failure ratio:  171184 / 1160000.
+MWBFST generate better results ratio:  1144248 / 1160000. MWBFST failure ratio:  1580 / 1160000.
+One or more generate better result ratio:  1145199 / 1160000.
+Both BFS generate better results ratio:  634636 / 1160000. Both failure ratio:  70 / 1160000.
+DFST average depth is: 36.6364.
+BFST average depth is: 35.2347.
+MWBFST average depth is: 112.495.
+------ Updated result: ------ 
+BFST generate better results ratio:  641010 / 1170000. BFST failure ratio:  172714 / 1170000.
+MWBFST generate better results ratio:  1154100 / 1170000. MWBFST failure ratio:  1592 / 1170000.
+One or more generate better result ratio:  1155059 / 1170000.
+Both BFS generate better results ratio:  640051 / 1170000. Both failure ratio:  70 / 1170000.
+DFST average depth is: 36.6381.
+BFST average depth is: 35.2365.
+MWBFST average depth is: 112.5.
+------ Updated result: ------ 
+BFST generate better results ratio:  646503 / 1180000. BFST failure ratio:  174172 / 1180000.
+MWBFST generate better results ratio:  1163984 / 1180000. MWBFST failure ratio:  1608 / 1180000.
+One or more generate better result ratio:  1164950 / 1180000.
+Both BFS generate better results ratio:  645537 / 1180000. Both failure ratio:  70 / 1180000.
+DFST average depth is: 36.6402.
+BFST average depth is: 35.2383.
+MWBFST average depth is: 112.507.
+------ Updated result: ------ 
+BFST generate better results ratio:  651914 / 1190000. BFST failure ratio:  175635 / 1190000.
+MWBFST generate better results ratio:  1173846 / 1190000. MWBFST failure ratio:  1618 / 1190000.
+One or more generate better result ratio:  1174821 / 1190000.
+Both BFS generate better results ratio:  650939 / 1190000. Both failure ratio:  70 / 1190000.
+DFST average depth is: 36.6366.
+BFST average depth is: 35.2348.
+MWBFST average depth is: 112.495.
+------ Updated result: ------ 
+BFST generate better results ratio:  657369 / 1200000. BFST failure ratio:  177085 / 1200000.
+MWBFST generate better results ratio:  1183720 / 1200000. MWBFST failure ratio:  1627 / 1200000.
+One or more generate better result ratio:  1184703 / 1200000.
+Both BFS generate better results ratio:  656386 / 1200000. Both failure ratio:  71 / 1200000.
+DFST average depth is: 36.6383.
+BFST average depth is: 35.2367.
+MWBFST average depth is: 112.5.
+------ Updated result: ------ 
+BFST generate better results ratio:  662907 / 1210000. BFST failure ratio:  178540 / 1210000.
+MWBFST generate better results ratio:  1193578 / 1210000. MWBFST failure ratio:  1646 / 1210000.
+One or more generate better result ratio:  1194571 / 1210000.
+Both BFS generate better results ratio:  661914 / 1210000. Both failure ratio:  71 / 1210000.
+DFST average depth is: 36.6363.
+BFST average depth is: 35.2343.
+MWBFST average depth is: 112.492.
+------ Updated result: ------ 
+BFST generate better results ratio:  668417 / 1220000. BFST failure ratio:  180045 / 1220000.
+MWBFST generate better results ratio:  1203455 / 1220000. MWBFST failure ratio:  1659 / 1220000.
+One or more generate better result ratio:  1204455 / 1220000.
+Both BFS generate better results ratio:  667417 / 1220000. Both failure ratio:  72 / 1220000.
+DFST average depth is: 36.6356.
+BFST average depth is: 35.2335.
+MWBFST average depth is: 112.49.
+------ Updated result: ------ 
+BFST generate better results ratio:  673893 / 1230000. BFST failure ratio:  181546 / 1230000.
+MWBFST generate better results ratio:  1213326 / 1230000. MWBFST failure ratio:  1672 / 1230000.
+One or more generate better result ratio:  1214332 / 1230000.
+Both BFS generate better results ratio:  672887 / 1230000. Both failure ratio:  73 / 1230000.
+DFST average depth is: 36.6377.
+BFST average depth is: 35.2358.
+MWBFST average depth is: 112.496.
+------ Updated result: ------ 
+BFST generate better results ratio:  679357 / 1240000. BFST failure ratio:  183018 / 1240000.
+MWBFST generate better results ratio:  1223187 / 1240000. MWBFST failure ratio:  1684 / 1240000.
+One or more generate better result ratio:  1224200 / 1240000.
+Both BFS generate better results ratio:  678344 / 1240000. Both failure ratio:  74 / 1240000.
+DFST average depth is: 36.6375.
+BFST average depth is: 35.2359.
+MWBFST average depth is: 112.495.
+------ Updated result: ------ 
+BFST generate better results ratio:  684802 / 1250000. BFST failure ratio:  184517 / 1250000.
+MWBFST generate better results ratio:  1233068 / 1250000. MWBFST failure ratio:  1690 / 1250000.
+One or more generate better result ratio:  1234086 / 1250000.
+Both BFS generate better results ratio:  683784 / 1250000. Both failure ratio:  75 / 1250000.
+DFST average depth is: 36.635.
+BFST average depth is: 35.2336.
+MWBFST average depth is: 112.487.
+------ Updated result: ------ 
+BFST generate better results ratio:  690227 / 1260000. BFST failure ratio:  185996 / 1260000.
+MWBFST generate better results ratio:  1242924 / 1260000. MWBFST failure ratio:  1699 / 1260000.
+One or more generate better result ratio:  1243952 / 1260000.
+Both BFS generate better results ratio:  689199 / 1260000. Both failure ratio:  76 / 1260000.
+DFST average depth is: 36.6325.
+BFST average depth is: 35.2311.
+MWBFST average depth is: 112.478.
+------ Updated result: ------ 
+BFST generate better results ratio:  695556 / 1270000. BFST failure ratio:  187545 / 1270000.
+MWBFST generate better results ratio:  1252763 / 1270000. MWBFST failure ratio:  1714 / 1270000.
+One or more generate better result ratio:  1253801 / 1270000.
+Both BFS generate better results ratio:  694518 / 1270000. Both failure ratio:  76 / 1270000.
+DFST average depth is: 36.6302.
+BFST average depth is: 35.2292.
+MWBFST average depth is: 112.472.
+------ Updated result: ------ 
+BFST generate better results ratio:  701049 / 1280000. BFST failure ratio:  189035 / 1280000.
+MWBFST generate better results ratio:  1262613 / 1280000. MWBFST failure ratio:  1731 / 1280000.
+One or more generate better result ratio:  1263656 / 1280000.
+Both BFS generate better results ratio:  700006 / 1280000. Both failure ratio:  77 / 1280000.
+DFST average depth is: 36.6315.
+BFST average depth is: 35.2307.
+MWBFST average depth is: 112.476.
+------ Updated result: ------ 
+BFST generate better results ratio:  706555 / 1290000. BFST failure ratio:  190433 / 1290000.
+MWBFST generate better results ratio:  1272484 / 1290000. MWBFST failure ratio:  1742 / 1290000.
+One or more generate better result ratio:  1273531 / 1290000.
+Both BFS generate better results ratio:  705508 / 1290000. Both failure ratio:  77 / 1290000.
+DFST average depth is: 36.6288.
+BFST average depth is: 35.2278.
+MWBFST average depth is: 112.467.
+------ Updated result: ------ 
+BFST generate better results ratio:  712103 / 1300000. BFST failure ratio:  191841 / 1300000.
+MWBFST generate better results ratio:  1282351 / 1300000. MWBFST failure ratio:  1755 / 1300000.
+One or more generate better result ratio:  1283404 / 1300000.
+Both BFS generate better results ratio:  711050 / 1300000. Both failure ratio:  78 / 1300000.
+DFST average depth is: 36.6287.
+BFST average depth is: 35.2274.
+MWBFST average depth is: 112.465.
+------ Updated result: ------ 
+BFST generate better results ratio:  717604 / 1310000. BFST failure ratio:  193314 / 1310000.
+MWBFST generate better results ratio:  1292220 / 1310000. MWBFST failure ratio:  1767 / 1310000.
+One or more generate better result ratio:  1293278 / 1310000.
+Both BFS generate better results ratio:  716546 / 1310000. Both failure ratio:  79 / 1310000.
+DFST average depth is: 36.6311.
+BFST average depth is: 35.2298.
+MWBFST average depth is: 112.474.
+------ Updated result: ------ 
+BFST generate better results ratio:  723039 / 1320000. BFST failure ratio:  194796 / 1320000.
+MWBFST generate better results ratio:  1302092 / 1320000. MWBFST failure ratio:  1786 / 1320000.
+One or more generate better result ratio:  1303160 / 1320000.
+Both BFS generate better results ratio:  721971 / 1320000. Both failure ratio:  83 / 1320000.
+DFST average depth is: 36.6333.
+BFST average depth is: 35.2321.
+MWBFST average depth is: 112.481.
+------ Updated result: ------ 
+BFST generate better results ratio:  728540 / 1330000. BFST failure ratio:  196246 / 1330000.
+MWBFST generate better results ratio:  1311972 / 1330000. MWBFST failure ratio:  1799 / 1330000.
+One or more generate better result ratio:  1313048 / 1330000.
+Both BFS generate better results ratio:  727464 / 1330000. Both failure ratio:  84 / 1330000.
+DFST average depth is: 36.6342.
+BFST average depth is: 35.2328.
+MWBFST average depth is: 112.483.
+------ Updated result: ------ 
+BFST generate better results ratio:  733904 / 1340000. BFST failure ratio:  197735 / 1340000.
+MWBFST generate better results ratio:  1321830 / 1340000. MWBFST failure ratio:  1810 / 1340000.
+One or more generate better result ratio:  1322911 / 1340000.
+Both BFS generate better results ratio:  732823 / 1340000. Both failure ratio:  84 / 1340000.
+DFST average depth is: 36.6316.
+BFST average depth is: 35.2303.
+MWBFST average depth is: 112.475.
+------ Updated result: ------ 
+BFST generate better results ratio:  739393 / 1350000. BFST failure ratio:  199187 / 1350000.
+MWBFST generate better results ratio:  1331696 / 1350000. MWBFST failure ratio:  1822 / 1350000.
+One or more generate better result ratio:  1332784 / 1350000.
+Both BFS generate better results ratio:  738305 / 1350000. Both failure ratio:  85 / 1350000.
+DFST average depth is: 36.6315.
+BFST average depth is: 35.2303.
+MWBFST average depth is: 112.475.
+------ Updated result: ------ 
+BFST generate better results ratio:  744867 / 1360000. BFST failure ratio:  200721 / 1360000.
+MWBFST generate better results ratio:  1341562 / 1360000. MWBFST failure ratio:  1830 / 1360000.
+One or more generate better result ratio:  1342660 / 1360000.
+Both BFS generate better results ratio:  743769 / 1360000. Both failure ratio:  85 / 1360000.
+DFST average depth is: 36.6314.
+BFST average depth is: 35.23.
+MWBFST average depth is: 112.475.
+------ Updated result: ------ 
+BFST generate better results ratio:  750318 / 1370000. BFST failure ratio:  202175 / 1370000.
+MWBFST generate better results ratio:  1351429 / 1370000. MWBFST failure ratio:  1836 / 1370000.
+One or more generate better result ratio:  1352533 / 1370000.
+Both BFS generate better results ratio:  749214 / 1370000. Both failure ratio:  85 / 1370000.
+DFST average depth is: 36.6275.
+BFST average depth is: 35.2261.
+MWBFST average depth is: 112.463.
+------ Updated result: ------ 
+BFST generate better results ratio:  755841 / 1380000. BFST failure ratio:  203632 / 1380000.
+MWBFST generate better results ratio:  1361284 / 1380000. MWBFST failure ratio:  1854 / 1380000.
+One or more generate better result ratio:  1362399 / 1380000.
+Both BFS generate better results ratio:  754726 / 1380000. Both failure ratio:  85 / 1380000.
+DFST average depth is: 36.6283.
+BFST average depth is: 35.2269.
+MWBFST average depth is: 112.467.
+------ Updated result: ------ 
+BFST generate better results ratio:  761357 / 1390000. BFST failure ratio:  205065 / 1390000.
+MWBFST generate better results ratio:  1371141 / 1390000. MWBFST failure ratio:  1867 / 1390000.
+One or more generate better result ratio:  1372266 / 1390000.
+Both BFS generate better results ratio:  760232 / 1390000. Both failure ratio:  85 / 1390000.
+DFST average depth is: 36.627.
+BFST average depth is: 35.2253.
+MWBFST average depth is: 112.463.
+------ Updated result: ------ 
+BFST generate better results ratio:  766858 / 1400000. BFST failure ratio:  206550 / 1400000.
+MWBFST generate better results ratio:  1380989 / 1400000. MWBFST failure ratio:  1880 / 1400000.
+One or more generate better result ratio:  1382127 / 1400000.
+Both BFS generate better results ratio:  765720 / 1400000. Both failure ratio:  87 / 1400000.
+DFST average depth is: 36.6291.
+BFST average depth is: 35.2277.
+MWBFST average depth is: 112.47.
+------ Updated result: ------ 
+BFST generate better results ratio:  772380 / 1410000. BFST failure ratio:  208074 / 1410000.
+MWBFST generate better results ratio:  1390850 / 1410000. MWBFST failure ratio:  1897 / 1410000.
+One or more generate better result ratio:  1391996 / 1410000.
+Both BFS generate better results ratio:  771234 / 1410000. Both failure ratio:  89 / 1410000.
+DFST average depth is: 36.6276.
+BFST average depth is: 35.226.
+MWBFST average depth is: 112.466.
+------ Updated result: ------ 
+BFST generate better results ratio:  777832 / 1420000. BFST failure ratio:  209585 / 1420000.
+MWBFST generate better results ratio:  1400701 / 1420000. MWBFST failure ratio:  1919 / 1420000.
+One or more generate better result ratio:  1401863 / 1420000.
+Both BFS generate better results ratio:  776670 / 1420000. Both failure ratio:  90 / 1420000.
+DFST average depth is: 36.6234.
+BFST average depth is: 35.2222.
+MWBFST average depth is: 112.454.
+------ Updated result: ------ 
+BFST generate better results ratio:  783269 / 1430000. BFST failure ratio:  211134 / 1430000.
+MWBFST generate better results ratio:  1410580 / 1430000. MWBFST failure ratio:  1931 / 1430000.
+One or more generate better result ratio:  1411748 / 1430000.
+Both BFS generate better results ratio:  782101 / 1430000. Both failure ratio:  92 / 1430000.
+DFST average depth is: 36.6242.
+BFST average depth is: 35.223.
+MWBFST average depth is: 112.456.
+------ Updated result: ------ 
+BFST generate better results ratio:  788764 / 1440000. BFST failure ratio:  212544 / 1440000.
+MWBFST generate better results ratio:  1420444 / 1440000. MWBFST failure ratio:  1947 / 1440000.
+One or more generate better result ratio:  1421627 / 1440000.
+Both BFS generate better results ratio:  787581 / 1440000. Both failure ratio:  92 / 1440000.
+DFST average depth is: 36.6273.
+BFST average depth is: 35.2259.
+MWBFST average depth is: 112.465.
+------ Updated result: ------ 
+BFST generate better results ratio:  794262 / 1450000. BFST failure ratio:  213984 / 1450000.
+MWBFST generate better results ratio:  1430316 / 1450000. MWBFST failure ratio:  1960 / 1450000.
+One or more generate better result ratio:  1431503 / 1450000.
+Both BFS generate better results ratio:  793075 / 1450000. Both failure ratio:  92 / 1450000.
+DFST average depth is: 36.6296.
+BFST average depth is: 35.228.
+MWBFST average depth is: 112.472.
+------ Updated result: ------ 
+BFST generate better results ratio:  799639 / 1460000. BFST failure ratio:  215510 / 1460000.
+MWBFST generate better results ratio:  1440201 / 1460000. MWBFST failure ratio:  1971 / 1460000.
+One or more generate better result ratio:  1441389 / 1460000.
+Both BFS generate better results ratio:  798451 / 1460000. Both failure ratio:  92 / 1460000.
+DFST average depth is: 36.6262.
+BFST average depth is: 35.225.
+MWBFST average depth is: 112.462.
+------ Updated result: ------ 
+BFST generate better results ratio:  805033 / 1470000. BFST failure ratio:  217033 / 1470000.
+MWBFST generate better results ratio:  1450041 / 1470000. MWBFST failure ratio:  1983 / 1470000.
+One or more generate better result ratio:  1451234 / 1470000.
+Both BFS generate better results ratio:  803840 / 1470000. Both failure ratio:  93 / 1470000.
+DFST average depth is: 36.623.
+BFST average depth is: 35.2221.
+MWBFST average depth is: 112.453.
+------ Updated result: ------ 
+BFST generate better results ratio:  810564 / 1480000. BFST failure ratio:  218552 / 1480000.
+MWBFST generate better results ratio:  1459891 / 1480000. MWBFST failure ratio:  2003 / 1480000.
+One or more generate better result ratio:  1461098 / 1480000.
+Both BFS generate better results ratio:  809357 / 1480000. Both failure ratio:  93 / 1480000.
+DFST average depth is: 36.6224.
+BFST average depth is: 35.2214.
+MWBFST average depth is: 112.45.
+------ Updated result: ------ 
+BFST generate better results ratio:  816020 / 1490000. BFST failure ratio:  220033 / 1490000.
+MWBFST generate better results ratio:  1469754 / 1490000. MWBFST failure ratio:  2015 / 1490000.
+One or more generate better result ratio:  1470972 / 1490000.
+Both BFS generate better results ratio:  814802 / 1490000. Both failure ratio:  96 / 1490000.
+DFST average depth is: 36.6245.
+BFST average depth is: 35.2235.
+MWBFST average depth is: 112.457.
+------ Updated result: ------ 
+BFST generate better results ratio:  821523 / 1500000. BFST failure ratio:  221539 / 1500000.
+MWBFST generate better results ratio:  1479629 / 1500000. MWBFST failure ratio:  2031 / 1500000.
+One or more generate better result ratio:  1480861 / 1500000.
+Both BFS generate better results ratio:  820291 / 1500000. Both failure ratio:  97 / 1500000.
+DFST average depth is: 36.6256.
+BFST average depth is: 35.2245.
+MWBFST average depth is: 112.461.
+------ Updated result: ------ 
+BFST generate better results ratio:  827062 / 1510000. BFST failure ratio:  222973 / 1510000.
+MWBFST generate better results ratio:  1489504 / 1510000. MWBFST failure ratio:  2041 / 1510000.
+One or more generate better result ratio:  1490742 / 1510000.
+Both BFS generate better results ratio:  825824 / 1510000. Both failure ratio:  97 / 1510000.
+DFST average depth is: 36.6254.
+BFST average depth is: 35.2244.
+MWBFST average depth is: 112.461.
+------ Updated result: ------ 
+BFST generate better results ratio:  832550 / 1520000. BFST failure ratio:  224510 / 1520000.
+MWBFST generate better results ratio:  1499374 / 1520000. MWBFST failure ratio:  2055 / 1520000.
+One or more generate better result ratio:  1500623 / 1520000.
+Both BFS generate better results ratio:  831301 / 1520000. Both failure ratio:  99 / 1520000.
+DFST average depth is: 36.6275.
+BFST average depth is: 35.2267.
+MWBFST average depth is: 112.468.
+------ Updated result: ------ 
+BFST generate better results ratio:  837995 / 1530000. BFST failure ratio:  226079 / 1530000.
+MWBFST generate better results ratio:  1509238 / 1530000. MWBFST failure ratio:  2072 / 1530000.
+One or more generate better result ratio:  1510499 / 1530000.
+Both BFS generate better results ratio:  836734 / 1530000. Both failure ratio:  100 / 1530000.
+DFST average depth is: 36.6275.
+BFST average depth is: 35.2268.
+MWBFST average depth is: 112.469.
+------ Updated result: ------ 
+BFST generate better results ratio:  843509 / 1540000. BFST failure ratio:  227548 / 1540000.
+MWBFST generate better results ratio:  1519105 / 1540000. MWBFST failure ratio:  2091 / 1540000.
+One or more generate better result ratio:  1520378 / 1540000.
+Both BFS generate better results ratio:  842236 / 1540000. Both failure ratio:  101 / 1540000.
+DFST average depth is: 36.6297.
+BFST average depth is: 35.229.
+MWBFST average depth is: 112.475.
+------ Updated result: ------ 
+BFST generate better results ratio:  849048 / 1550000. BFST failure ratio:  228998 / 1550000.
+MWBFST generate better results ratio:  1528965 / 1550000. MWBFST failure ratio:  2101 / 1550000.
+One or more generate better result ratio:  1530242 / 1550000.
+Both BFS generate better results ratio:  847771 / 1550000. Both failure ratio:  101 / 1550000.
+DFST average depth is: 36.6304.
+BFST average depth is: 35.2295.
+MWBFST average depth is: 112.477.
+------ Updated result: ------ 
+BFST generate better results ratio:  854626 / 1560000. BFST failure ratio:  230433 / 1560000.
+MWBFST generate better results ratio:  1538830 / 1560000. MWBFST failure ratio:  2112 / 1560000.
+One or more generate better result ratio:  1540112 / 1560000.
+Both BFS generate better results ratio:  853344 / 1560000. Both failure ratio:  102 / 1560000.
+DFST average depth is: 36.6309.
+BFST average depth is: 35.2298.
+MWBFST average depth is: 112.478.
+------ Updated result: ------ 
+BFST generate better results ratio:  860135 / 1570000. BFST failure ratio:  231902 / 1570000.
+MWBFST generate better results ratio:  1548687 / 1570000. MWBFST failure ratio:  2129 / 1570000.
+One or more generate better result ratio:  1549983 / 1570000.
+Both BFS generate better results ratio:  858839 / 1570000. Both failure ratio:  102 / 1570000.
+DFST average depth is: 36.6327.
+BFST average depth is: 35.2315.
+MWBFST average depth is: 112.484.
+------ Updated result: ------ 
+BFST generate better results ratio:  865634 / 1580000. BFST failure ratio:  233348 / 1580000.
+MWBFST generate better results ratio:  1558550 / 1580000. MWBFST failure ratio:  2141 / 1580000.
+One or more generate better result ratio:  1559853 / 1580000.
+Both BFS generate better results ratio:  864331 / 1580000. Both failure ratio:  103 / 1580000.
+DFST average depth is: 36.6327.
+BFST average depth is: 35.2316.
+MWBFST average depth is: 112.484.
+------ Updated result: ------ 
+BFST generate better results ratio:  871112 / 1590000. BFST failure ratio:  234775 / 1590000.
+MWBFST generate better results ratio:  1568418 / 1590000. MWBFST failure ratio:  2150 / 1590000.
+One or more generate better result ratio:  1569726 / 1590000.
+Both BFS generate better results ratio:  869804 / 1590000. Both failure ratio:  103 / 1590000.
+DFST average depth is: 36.6324.
+BFST average depth is: 35.2311.
+MWBFST average depth is: 112.483.
+------ Updated result: ------ 
+BFST generate better results ratio:  876587 / 1600000. BFST failure ratio:  236245 / 1600000.
+MWBFST generate better results ratio:  1578277 / 1600000. MWBFST failure ratio:  2159 / 1600000.
+One or more generate better result ratio:  1579592 / 1600000.
+Both BFS generate better results ratio:  875272 / 1600000. Both failure ratio:  103 / 1600000.
+DFST average depth is: 36.6307.
+BFST average depth is: 35.2296.
+MWBFST average depth is: 112.478.
+------ Updated result: ------ 
+BFST generate better results ratio:  882070 / 1610000. BFST failure ratio:  237717 / 1610000.
+MWBFST generate better results ratio:  1588141 / 1610000. MWBFST failure ratio:  2172 / 1610000.
+One or more generate better result ratio:  1589461 / 1610000.
+Both BFS generate better results ratio:  880750 / 1610000. Both failure ratio:  103 / 1610000.
+DFST average depth is: 36.6319.
+BFST average depth is: 35.2307.
+MWBFST average depth is: 112.482.
+------ Updated result: ------ 
+BFST generate better results ratio:  887570 / 1620000. BFST failure ratio:  239175 / 1620000.
+MWBFST generate better results ratio:  1597991 / 1620000. MWBFST failure ratio:  2185 / 1620000.
+One or more generate better result ratio:  1599321 / 1620000.
+Both BFS generate better results ratio:  886240 / 1620000. Both failure ratio:  104 / 1620000.
+DFST average depth is: 36.6316.
+BFST average depth is: 35.2304.
+MWBFST average depth is: 112.482.
+------ Updated result: ------ 
+BFST generate better results ratio:  893015 / 1630000. BFST failure ratio:  240642 / 1630000.
+MWBFST generate better results ratio:  1607851 / 1630000. MWBFST failure ratio:  2197 / 1630000.
+One or more generate better result ratio:  1609189 / 1630000.
+Both BFS generate better results ratio:  891677 / 1630000. Both failure ratio:  104 / 1630000.
+DFST average depth is: 36.6295.
+BFST average depth is: 35.2285.
+MWBFST average depth is: 112.476.
+------ Updated result: ------ 
+BFST generate better results ratio:  898573 / 1640000. BFST failure ratio:  242126 / 1640000.
+MWBFST generate better results ratio:  1617704 / 1640000. MWBFST failure ratio:  2217 / 1640000.
+One or more generate better result ratio:  1619055 / 1640000.
+Both BFS generate better results ratio:  897222 / 1640000. Both failure ratio:  105 / 1640000.
+DFST average depth is: 36.6303.
+BFST average depth is: 35.2292.
+MWBFST average depth is: 112.477.
+------ Updated result: ------ 
+BFST generate better results ratio:  904080 / 1650000. BFST failure ratio:  243616 / 1650000.
+MWBFST generate better results ratio:  1627558 / 1650000. MWBFST failure ratio:  2234 / 1650000.
+One or more generate better result ratio:  1628918 / 1650000.
+Both BFS generate better results ratio:  902720 / 1650000. Both failure ratio:  106 / 1650000.
+DFST average depth is: 36.6286.
+BFST average depth is: 35.2276.
+MWBFST average depth is: 112.472.
+------ Updated result: ------ 
+BFST generate better results ratio:  909498 / 1660000. BFST failure ratio:  245076 / 1660000.
+MWBFST generate better results ratio:  1637427 / 1660000. MWBFST failure ratio:  2244 / 1660000.
+One or more generate better result ratio:  1638793 / 1660000.
+Both BFS generate better results ratio:  908132 / 1660000. Both failure ratio:  107 / 1660000.
+DFST average depth is: 36.6279.
+BFST average depth is: 35.2271.
+MWBFST average depth is: 112.47.
+------ Updated result: ------ 
+BFST generate better results ratio:  914995 / 1670000. BFST failure ratio:  246594 / 1670000.
+MWBFST generate better results ratio:  1647298 / 1670000. MWBFST failure ratio:  2261 / 1670000.
+One or more generate better result ratio:  1648669 / 1670000.
+Both BFS generate better results ratio:  913624 / 1670000. Both failure ratio:  109 / 1670000.
+DFST average depth is: 36.6284.
+BFST average depth is: 35.2275.
+MWBFST average depth is: 112.472.
+------ Updated result: ------ 
+BFST generate better results ratio:  920469 / 1680000. BFST failure ratio:  248078 / 1680000.
+MWBFST generate better results ratio:  1657174 / 1680000. MWBFST failure ratio:  2281 / 1680000.
+One or more generate better result ratio:  1658562 / 1680000.
+Both BFS generate better results ratio:  919081 / 1680000. Both failure ratio:  110 / 1680000.
+DFST average depth is: 36.628.
+BFST average depth is: 35.2273.
+MWBFST average depth is: 112.47.
+------ Updated result: ------ 
+BFST generate better results ratio:  925908 / 1690000. BFST failure ratio:  249605 / 1690000.
+MWBFST generate better results ratio:  1667052 / 1690000. MWBFST failure ratio:  2289 / 1690000.
+One or more generate better result ratio:  1668445 / 1690000.
+Both BFS generate better results ratio:  924515 / 1690000. Both failure ratio:  110 / 1690000.
+DFST average depth is: 36.6277.
+BFST average depth is: 35.2271.
+MWBFST average depth is: 112.47.
+------ Updated result: ------ 
+BFST generate better results ratio:  931426 / 1700000. BFST failure ratio:  251059 / 1700000.
+MWBFST generate better results ratio:  1676902 / 1700000. MWBFST failure ratio:  2303 / 1700000.
+One or more generate better result ratio:  1678305 / 1700000.
+Both BFS generate better results ratio:  930023 / 1700000. Both failure ratio:  111 / 1700000.
+DFST average depth is: 36.6288.
+BFST average depth is: 35.2281.
+MWBFST average depth is: 112.474.
+------ Updated result: ------ 
+BFST generate better results ratio:  936908 / 1710000. BFST failure ratio:  252550 / 1710000.
+MWBFST generate better results ratio:  1686783 / 1710000. MWBFST failure ratio:  2319 / 1710000.
+One or more generate better result ratio:  1688194 / 1710000.
+Both BFS generate better results ratio:  935497 / 1710000. Both failure ratio:  111 / 1710000.
+DFST average depth is: 36.6272.
+BFST average depth is: 35.2266.
+MWBFST average depth is: 112.469.
+------ Updated result: ------ 
+BFST generate better results ratio:  942415 / 1720000. BFST failure ratio:  254003 / 1720000.
+MWBFST generate better results ratio:  1696663 / 1720000. MWBFST failure ratio:  2336 / 1720000.
+One or more generate better result ratio:  1698085 / 1720000.
+Both BFS generate better results ratio:  940993 / 1720000. Both failure ratio:  111 / 1720000.
+DFST average depth is: 36.6271.
+BFST average depth is: 35.2265.
+MWBFST average depth is: 112.469.
+------ Updated result: ------ 
+BFST generate better results ratio:  947886 / 1730000. BFST failure ratio:  255459 / 1730000.
+MWBFST generate better results ratio:  1706538 / 1730000. MWBFST failure ratio:  2350 / 1730000.
+One or more generate better result ratio:  1707968 / 1730000.
+Both BFS generate better results ratio:  946456 / 1730000. Both failure ratio:  113 / 1730000.
+DFST average depth is: 36.6247.
+BFST average depth is: 35.224.
+MWBFST average depth is: 112.461.
+------ Updated result: ------ 
+BFST generate better results ratio:  953384 / 1740000. BFST failure ratio:  256968 / 1740000.
+MWBFST generate better results ratio:  1716409 / 1740000. MWBFST failure ratio:  2362 / 1740000.
+One or more generate better result ratio:  1717844 / 1740000.
+Both BFS generate better results ratio:  951949 / 1740000. Both failure ratio:  115 / 1740000.
+DFST average depth is: 36.6237.
+BFST average depth is: 35.2231.
+MWBFST average depth is: 112.457.
+------ Updated result: ------ 
+BFST generate better results ratio:  958825 / 1750000. BFST failure ratio:  258438 / 1750000.
+MWBFST generate better results ratio:  1726263 / 1750000. MWBFST failure ratio:  2378 / 1750000.
+One or more generate better result ratio:  1727705 / 1750000.
+Both BFS generate better results ratio:  957383 / 1750000. Both failure ratio:  115 / 1750000.
+DFST average depth is: 36.6212.
+BFST average depth is: 35.2209.
+MWBFST average depth is: 112.451.
+------ Updated result: ------ 
+BFST generate better results ratio:  964299 / 1760000. BFST failure ratio:  259939 / 1760000.
+MWBFST generate better results ratio:  1736131 / 1760000. MWBFST failure ratio:  2392 / 1760000.
+One or more generate better result ratio:  1737581 / 1760000.
+Both BFS generate better results ratio:  962849 / 1760000. Both failure ratio:  117 / 1760000.
+DFST average depth is: 36.6229.
+BFST average depth is: 35.2225.
+MWBFST average depth is: 112.456.
+------ Updated result: ------ 
+BFST generate better results ratio:  969771 / 1770000. BFST failure ratio:  261393 / 1770000.
+MWBFST generate better results ratio:  1745965 / 1770000. MWBFST failure ratio:  2409 / 1770000.
+One or more generate better result ratio:  1747424 / 1770000.
+Both BFS generate better results ratio:  968312 / 1770000. Both failure ratio:  118 / 1770000.
+DFST average depth is: 36.6235.
+BFST average depth is: 35.2233.
+MWBFST average depth is: 112.459.
+------ Updated result: ------ 
+BFST generate better results ratio:  975230 / 1780000. BFST failure ratio:  262925 / 1780000.
+MWBFST generate better results ratio:  1755817 / 1780000. MWBFST failure ratio:  2423 / 1780000.
+One or more generate better result ratio:  1757286 / 1780000.
+Both BFS generate better results ratio:  973761 / 1780000. Both failure ratio:  119 / 1780000.
+DFST average depth is: 36.6217.
+BFST average depth is: 35.2215.
+MWBFST average depth is: 112.454.
+------ Updated result: ------ 
+BFST generate better results ratio:  980687 / 1790000. BFST failure ratio:  264339 / 1790000.
+MWBFST generate better results ratio:  1765668 / 1790000. MWBFST failure ratio:  2439 / 1790000.
+One or more generate better result ratio:  1767148 / 1790000.
+Both BFS generate better results ratio:  979207 / 1790000. Both failure ratio:  120 / 1790000.
+DFST average depth is: 36.6222.
+BFST average depth is: 35.2219.
+MWBFST average depth is: 112.455.
+------ Updated result: ------ 
+BFST generate better results ratio:  986188 / 1800000. BFST failure ratio:  265819 / 1800000.
+MWBFST generate better results ratio:  1775544 / 1800000. MWBFST failure ratio:  2448 / 1800000.
+One or more generate better result ratio:  1777030 / 1800000.
+Both BFS generate better results ratio:  984702 / 1800000. Both failure ratio:  120 / 1800000.
+DFST average depth is: 36.6238.
+BFST average depth is: 35.2235.
+MWBFST average depth is: 112.46.
+------ Updated result: ------ 
+BFST generate better results ratio:  991533 / 1810000. BFST failure ratio:  267375 / 1810000.
+MWBFST generate better results ratio:  1785412 / 1810000. MWBFST failure ratio:  2466 / 1810000.
+One or more generate better result ratio:  1786910 / 1810000.
+Both BFS generate better results ratio:  990035 / 1810000. Both failure ratio:  120 / 1810000.
+DFST average depth is: 36.6232.
+BFST average depth is: 35.2233.
+MWBFST average depth is: 112.458.
+------ Updated result: ------ 
+BFST generate better results ratio:  997046 / 1820000. BFST failure ratio:  268825 / 1820000.
+MWBFST generate better results ratio:  1795285 / 1820000. MWBFST failure ratio:  2484 / 1820000.
+One or more generate better result ratio:  1796793 / 1820000.
+Both BFS generate better results ratio:  995538 / 1820000. Both failure ratio:  121 / 1820000.
+DFST average depth is: 36.6242.
+BFST average depth is: 35.2242.
+MWBFST average depth is: 112.461.
+------ Updated result: ------ 
+BFST generate better results ratio:  1002441 / 1830000. BFST failure ratio:  270394 / 1830000.
+MWBFST generate better results ratio:  1805146 / 1830000. MWBFST failure ratio:  2493 / 1830000.
+One or more generate better result ratio:  1806662 / 1830000.
+Both BFS generate better results ratio:  1000925 / 1830000. Both failure ratio:  121 / 1830000.
+DFST average depth is: 36.6234.
+BFST average depth is: 35.2237.
+MWBFST average depth is: 112.459.
+------ Updated result: ------ 
+BFST generate better results ratio:  1007865 / 1840000. BFST failure ratio:  271865 / 1840000.
+MWBFST generate better results ratio:  1815018 / 1840000. MWBFST failure ratio:  2510 / 1840000.
+One or more generate better result ratio:  1816543 / 1840000.
+Both BFS generate better results ratio:  1006340 / 1840000. Both failure ratio:  122 / 1840000.
+DFST average depth is: 36.6241.
+BFST average depth is: 35.2241.
+MWBFST average depth is: 112.46.
+------ Updated result: ------ 
+BFST generate better results ratio:  1013417 / 1850000. BFST failure ratio:  273283 / 1850000.
+MWBFST generate better results ratio:  1824871 / 1850000. MWBFST failure ratio:  2522 / 1850000.
+One or more generate better result ratio:  1826405 / 1850000.
+Both BFS generate better results ratio:  1011883 / 1850000. Both failure ratio:  122 / 1850000.
+DFST average depth is: 36.6251.
+BFST average depth is: 35.225.
+MWBFST average depth is: 112.463.
+------ Updated result: ------ 
+BFST generate better results ratio:  1018779 / 1860000. BFST failure ratio:  274759 / 1860000.
+MWBFST generate better results ratio:  1834732 / 1860000. MWBFST failure ratio:  2536 / 1860000.
+One or more generate better result ratio:  1836276 / 1860000.
+Both BFS generate better results ratio:  1017235 / 1860000. Both failure ratio:  124 / 1860000.
+DFST average depth is: 36.6211.
+BFST average depth is: 35.2213.
+MWBFST average depth is: 112.451.
+------ Updated result: ------ 
+BFST generate better results ratio:  1024290 / 1870000. BFST failure ratio:  276223 / 1870000.
+MWBFST generate better results ratio:  1844606 / 1870000. MWBFST failure ratio:  2546 / 1870000.
+One or more generate better result ratio:  1846155 / 1870000.
+Both BFS generate better results ratio:  1022741 / 1870000. Both failure ratio:  124 / 1870000.
+DFST average depth is: 36.6234.
+BFST average depth is: 35.2235.
+MWBFST average depth is: 112.458.
+------ Updated result: ------ 
+BFST generate better results ratio:  1029736 / 1880000. BFST failure ratio:  277737 / 1880000.
+MWBFST generate better results ratio:  1854477 / 1880000. MWBFST failure ratio:  2555 / 1880000.
+One or more generate better result ratio:  1856033 / 1880000.
+Both BFS generate better results ratio:  1028180 / 1880000. Both failure ratio:  124 / 1880000.
+DFST average depth is: 36.6249.
+BFST average depth is: 35.225.
+MWBFST average depth is: 112.464.
+------ Updated result: ------ 
+BFST generate better results ratio:  1035257 / 1890000. BFST failure ratio:  279227 / 1890000.
+MWBFST generate better results ratio:  1864345 / 1890000. MWBFST failure ratio:  2571 / 1890000.
+One or more generate better result ratio:  1865910 / 1890000.
+Both BFS generate better results ratio:  1033692 / 1890000. Both failure ratio:  124 / 1890000.
+DFST average depth is: 36.6273.
+BFST average depth is: 35.2272.
+MWBFST average depth is: 112.471.
+------ Updated result: ------ 
+BFST generate better results ratio:  1040764 / 1900000. BFST failure ratio:  280651 / 1900000.
+MWBFST generate better results ratio:  1874213 / 1900000. MWBFST failure ratio:  2584 / 1900000.
+One or more generate better result ratio:  1875787 / 1900000.
+Both BFS generate better results ratio:  1039190 / 1900000. Both failure ratio:  126 / 1900000.
+DFST average depth is: 36.6263.
+BFST average depth is: 35.2262.
+MWBFST average depth is: 112.467.
+------ Updated result: ------ 
+BFST generate better results ratio:  1046301 / 1910000. BFST failure ratio:  282166 / 1910000.
+MWBFST generate better results ratio:  1884081 / 1910000. MWBFST failure ratio:  2596 / 1910000.
+One or more generate better result ratio:  1885664 / 1910000.
+Both BFS generate better results ratio:  1044718 / 1910000. Both failure ratio:  127 / 1910000.
+DFST average depth is: 36.6292.
+BFST average depth is: 35.2291.
+MWBFST average depth is: 112.475.
+------ Updated result: ------ 
+BFST generate better results ratio:  1051723 / 1920000. BFST failure ratio:  283672 / 1920000.
+MWBFST generate better results ratio:  1893934 / 1920000. MWBFST failure ratio:  2611 / 1920000.
+One or more generate better result ratio:  1895531 / 1920000.
+Both BFS generate better results ratio:  1050126 / 1920000. Both failure ratio:  127 / 1920000.
+DFST average depth is: 36.6292.
+BFST average depth is: 35.2291.
+MWBFST average depth is: 112.475.
+------ Updated result: ------ 
+BFST generate better results ratio:  1057173 / 1930000. BFST failure ratio:  285108 / 1930000.
+MWBFST generate better results ratio:  1903794 / 1930000. MWBFST failure ratio:  2619 / 1930000.
+One or more generate better result ratio:  1905398 / 1930000.
+Both BFS generate better results ratio:  1055569 / 1930000. Both failure ratio:  127 / 1930000.
+DFST average depth is: 36.6264.
+BFST average depth is: 35.2266.
+MWBFST average depth is: 112.468.
+------ Updated result: ------ 
+BFST generate better results ratio:  1062649 / 1940000. BFST failure ratio:  286600 / 1940000.
+MWBFST generate better results ratio:  1913648 / 1940000. MWBFST failure ratio:  2630 / 1940000.
+One or more generate better result ratio:  1915257 / 1940000.
+Both BFS generate better results ratio:  1061040 / 1940000. Both failure ratio:  127 / 1940000.
+DFST average depth is: 36.6259.
+BFST average depth is: 35.2262.
+MWBFST average depth is: 112.467.
+------ Updated result: ------ 
+BFST generate better results ratio:  1068164 / 1950000. BFST failure ratio:  288024 / 1950000.
+MWBFST generate better results ratio:  1923505 / 1950000. MWBFST failure ratio:  2646 / 1950000.
+One or more generate better result ratio:  1925123 / 1950000.
+Both BFS generate better results ratio:  1066546 / 1950000. Both failure ratio:  128 / 1950000.
+DFST average depth is: 36.6283.
+BFST average depth is: 35.2286.
+MWBFST average depth is: 112.474.
+------ Updated result: ------ 
+BFST generate better results ratio:  1073683 / 1960000. BFST failure ratio:  289466 / 1960000.
+MWBFST generate better results ratio:  1933373 / 1960000. MWBFST failure ratio:  2662 / 1960000.
+One or more generate better result ratio:  1934997 / 1960000.
+Both BFS generate better results ratio:  1072059 / 1960000. Both failure ratio:  130 / 1960000.
+DFST average depth is: 36.6272.
+BFST average depth is: 35.2274.
+MWBFST average depth is: 112.471.
+------ Updated result: ------ 
+BFST generate better results ratio:  1079119 / 1970000. BFST failure ratio:  290897 / 1970000.
+MWBFST generate better results ratio:  1943215 / 1970000. MWBFST failure ratio:  2678 / 1970000.
+One or more generate better result ratio:  1944845 / 1970000.
+Both BFS generate better results ratio:  1077489 / 1970000. Both failure ratio:  130 / 1970000.
+DFST average depth is: 36.6262.
+BFST average depth is: 35.2264.
+MWBFST average depth is: 112.468.
+------ Updated result: ------ 
+BFST generate better results ratio:  1084710 / 1980000. BFST failure ratio:  292304 / 1980000.
+MWBFST generate better results ratio:  1953072 / 1980000. MWBFST failure ratio:  2690 / 1980000.
+One or more generate better result ratio:  1954712 / 1980000.
+Both BFS generate better results ratio:  1083070 / 1980000. Both failure ratio:  130 / 1980000.
+DFST average depth is: 36.6247.
+BFST average depth is: 35.2249.
+MWBFST average depth is: 112.463.
+------ Updated result: ------ 
+BFST generate better results ratio:  1090260 / 1990000. BFST failure ratio:  293771 / 1990000.
+MWBFST generate better results ratio:  1962958 / 1990000. MWBFST failure ratio:  2704 / 1990000.
+One or more generate better result ratio:  1964605 / 1990000.
+Both BFS generate better results ratio:  1088613 / 1990000. Both failure ratio:  132 / 1990000.
+DFST average depth is: 36.6247.
+BFST average depth is: 35.2248.
+MWBFST average depth is: 112.462.
+------ Updated result: ------ 
+BFST generate better results ratio:  1095733 / 2000000. BFST failure ratio:  295213 / 2000000.
+MWBFST generate better results ratio:  1972804 / 2000000. MWBFST failure ratio:  2723 / 2000000.
+One or more generate better result ratio:  1974458 / 2000000.
+Both BFS generate better results ratio:  1094079 / 2000000. Both failure ratio:  135 / 2000000.
+DFST average depth is: 36.6232.
+BFST average depth is: 35.2232.
+MWBFST average depth is: 112.457.
+------ Updated result: ------ 
+BFST generate better results ratio:  1101268 / 2010000. BFST failure ratio:  296686 / 2010000.
+MWBFST generate better results ratio:  1982660 / 2010000. MWBFST failure ratio:  2740 / 2010000.
+One or more generate better result ratio:  1984324 / 2010000.
+Both BFS generate better results ratio:  1099604 / 2010000. Both failure ratio:  136 / 2010000.
+DFST average depth is: 36.624.
+BFST average depth is: 35.224.
+MWBFST average depth is: 112.46.
+------ Updated result: ------ 
+BFST generate better results ratio:  1106776 / 2020000. BFST failure ratio:  298164 / 2020000.
+MWBFST generate better results ratio:  1992525 / 2020000. MWBFST failure ratio:  2753 / 2020000.
+One or more generate better result ratio:  1994199 / 2020000.
+Both BFS generate better results ratio:  1105102 / 2020000. Both failure ratio:  136 / 2020000.
+DFST average depth is: 36.6231.
+BFST average depth is: 35.2231.
+MWBFST average depth is: 112.456.
+------ Updated result: ------ 
+BFST generate better results ratio:  1112192 / 2030000. BFST failure ratio:  299592 / 2030000.
+MWBFST generate better results ratio:  2002389 / 2030000. MWBFST failure ratio:  2770 / 2030000.
+One or more generate better result ratio:  2004066 / 2030000.
+Both BFS generate better results ratio:  1110515 / 2030000. Both failure ratio:  137 / 2030000.
+DFST average depth is: 36.6225.
+BFST average depth is: 35.2226.
+MWBFST average depth is: 112.454.
+------ Updated result: ------ 
+BFST generate better results ratio:  1117683 / 2040000. BFST failure ratio:  301093 / 2040000.
+MWBFST generate better results ratio:  2012244 / 2040000. MWBFST failure ratio:  2788 / 2040000.
+One or more generate better result ratio:  2013932 / 2040000.
+Both BFS generate better results ratio:  1115995 / 2040000. Both failure ratio:  138 / 2040000.
+DFST average depth is: 36.6239.
+BFST average depth is: 35.2239.
+MWBFST average depth is: 112.458.
+------ Updated result: ------ 
+BFST generate better results ratio:  1123127 / 2050000. BFST failure ratio:  302623 / 2050000.
+MWBFST generate better results ratio:  2022098 / 2050000. MWBFST failure ratio:  2806 / 2050000.
+One or more generate better result ratio:  2023796 / 2050000.
+Both BFS generate better results ratio:  1121429 / 2050000. Both failure ratio:  140 / 2050000.
+DFST average depth is: 36.6235.
+BFST average depth is: 35.2237.
+MWBFST average depth is: 112.457.
+------ Updated result: ------ 
+BFST generate better results ratio:  1128632 / 2060000. BFST failure ratio:  304076 / 2060000.
+MWBFST generate better results ratio:  2031965 / 2060000. MWBFST failure ratio:  2816 / 2060000.
+One or more generate better result ratio:  2033668 / 2060000.
+Both BFS generate better results ratio:  1126929 / 2060000. Both failure ratio:  140 / 2060000.
+DFST average depth is: 36.6244.
+BFST average depth is: 35.2246.
+MWBFST average depth is: 112.46.
+------ Updated result: ------ 
+BFST generate better results ratio:  1134105 / 2070000. BFST failure ratio:  305534 / 2070000.
+MWBFST generate better results ratio:  2041813 / 2070000. MWBFST failure ratio:  2830 / 2070000.
+One or more generate better result ratio:  2043533 / 2070000.
+Both BFS generate better results ratio:  1132385 / 2070000. Both failure ratio:  141 / 2070000.
+DFST average depth is: 36.6244.
+BFST average depth is: 35.2247.
+MWBFST average depth is: 112.46.
+------ Updated result: ------ 
+BFST generate better results ratio:  1139660 / 2080000. BFST failure ratio:  307034 / 2080000.
+MWBFST generate better results ratio:  2051683 / 2080000. MWBFST failure ratio:  2844 / 2080000.
+One or more generate better result ratio:  2053407 / 2080000.
+Both BFS generate better results ratio:  1137936 / 2080000. Both failure ratio:  143 / 2080000.
+DFST average depth is: 36.6267.
+BFST average depth is: 35.2269.
+MWBFST average depth is: 112.467.
+------ Updated result: ------ 
+BFST generate better results ratio:  1145151 / 2090000. BFST failure ratio:  308568 / 2090000.
+MWBFST generate better results ratio:  2061557 / 2090000. MWBFST failure ratio:  2859 / 2090000.
+One or more generate better result ratio:  2063289 / 2090000.
+Both BFS generate better results ratio:  1143419 / 2090000. Both failure ratio:  146 / 2090000.
+DFST average depth is: 36.6281.
+BFST average depth is: 35.2284.
+MWBFST average depth is: 112.472.
+------ Updated result: ------ 
+BFST generate better results ratio:  1150629 / 2100000. BFST failure ratio:  310005 / 2100000.
+MWBFST generate better results ratio:  2071423 / 2100000. MWBFST failure ratio:  2870 / 2100000.
+One or more generate better result ratio:  2073164 / 2100000.
+Both BFS generate better results ratio:  1148888 / 2100000. Both failure ratio:  146 / 2100000.
+DFST average depth is: 36.6277.
+BFST average depth is: 35.228.
+MWBFST average depth is: 112.471.
+------ Updated result: ------ 
+BFST generate better results ratio:  1156126 / 2110000. BFST failure ratio:  311482 / 2110000.
+MWBFST generate better results ratio:  2081296 / 2110000. MWBFST failure ratio:  2880 / 2110000.
+One or more generate better result ratio:  2083041 / 2110000.
+Both BFS generate better results ratio:  1154381 / 2110000. Both failure ratio:  149 / 2110000.
+DFST average depth is: 36.6264.
+BFST average depth is: 35.2267.
+MWBFST average depth is: 112.467.
+------ Updated result: ------ 
+BFST generate better results ratio:  1161555 / 2120000. BFST failure ratio:  313006 / 2120000.
+MWBFST generate better results ratio:  2091146 / 2120000. MWBFST failure ratio:  2898 / 2120000.
+One or more generate better result ratio:  2092900 / 2120000.
+Both BFS generate better results ratio:  1159801 / 2120000. Both failure ratio:  150 / 2120000.
+DFST average depth is: 36.6254.
+BFST average depth is: 35.2259.
+MWBFST average depth is: 112.465.
+------ Updated result: ------ 
+BFST generate better results ratio:  1166989 / 2130000. BFST failure ratio:  314497 / 2130000.
+MWBFST generate better results ratio:  2100986 / 2130000. MWBFST failure ratio:  2917 / 2130000.
+One or more generate better result ratio:  2102750 / 2130000.
+Both BFS generate better results ratio:  1165225 / 2130000. Both failure ratio:  152 / 2130000.
+DFST average depth is: 36.6234.
+BFST average depth is: 35.2241.
+MWBFST average depth is: 112.459.
