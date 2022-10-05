@@ -3,7 +3,7 @@
 
 using namespace intersection_management;
 
-TEST(SchedulerTest, CompareMethods_v1) {
+TEST(SchedulerTest, CompareMethods_v2) {
     ConflictDirectedGraph cdg = ConflictDirectedGraph();
 
     Scheduler scheduler_dfs = Scheduler();
@@ -13,7 +13,7 @@ TEST(SchedulerTest, CompareMethods_v1) {
 
     // cdg generater parameters
     unsigned int seed = 0;
-    int max_node = 1;
+    int max_node = 6;
     double max_node_weight = 5.0;
     double min_node_weight = 2.0;
     // verbose flag
@@ -147,7 +147,7 @@ TEST(SchedulerTest, CompareMethods_v1) {
             either_better_count++;
         }
 
-        if (total_test % 100000 == 0) {
+        if (total_test % 50 == 0) {
             std::cout << "------ Updated result: ------ \n";
             std::cout << "BFST generate better results ratio:  " << bfs_better_count << " / " << total_test;
             std::cout << ". BFST failure ratio:  " << bfs_failure_count << " / " << total_test << ".\n";
