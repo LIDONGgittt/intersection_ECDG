@@ -45,7 +45,7 @@ TEST(SchedulerTest, CompareMethods_v1) {
     while (true) {
         total_test++;
         // srand(343);
-        srand(total_test);
+        // srand(total_test);
         do {
             cdg.GenerateRandomGraph(std::rand() % max_node + 5, seed, max_node_weight - min_node_weight + 1.0, 2.0, min_node_weight, 1.0, true);
             // cdg.GenerateRandomGraph(5, seed, max_node_weight - min_node_weight + 1.0, 2.0, min_node_weight, 1.0, true);
@@ -103,7 +103,9 @@ TEST(SchedulerTest, CompareMethods_v1) {
             }
         }
 
-        if (mdbfst.edge_node_weighted_depth_ < global_optimal) {
+        if (mdbfst.edge_node_weighted_depth_ < global_optimal ||
+            (max_node_weight) * (modified_dfst.edge_weighted_depth_) < global_optimal ||
+            (max_node_weight) * (bfst.edge_weighted_depth_) < global_optimal) {
             mwbfs_bettter_than_optimal_count++;
             std::cout << "# # # # # # # # # # # # # #  New Loop with seed: " << total_test << " # # # # # # # # # # # # # #\n";
             std::cout << "Max node nums: " << max_node << ", Max node weight: " << max_node_weight << ", Min node weight: " << min_node_weight << "\n";
@@ -139,6 +141,10 @@ TEST(SchedulerTest, CompareMethods_v1) {
             scheduler_bruteforce.printOrder(best_order);
             std::cout << "The optimal schedule is : \n";
             scheduler_bruteforce.printDepthVector(depth_vector);
+        }
+
+        if (either_better_flag) {
+            either_better_count++;
         }
 
         if (total_test % 10000 == 0) {

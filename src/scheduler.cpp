@@ -102,7 +102,6 @@ void Scheduler::GenerateUniparentTable(const ConflictDirectedGraph &cdg) {
     }
 }
 
-
 void Scheduler::GenerateBineighborTable(const ConflictDirectedGraph &cdg) {
     bidirectional_neighbor_table_.clear();
     for (int id = 0; id < cdg.num_nodes_; id++) {
@@ -129,6 +128,7 @@ ConflictSpanningTree Scheduler::ScheduleWithBfstWeightedEdgeOnly(const ConflictD
     ready_list.push_back(initial_root);
 
     GenerateUniparentTable(cdg);
+    GenerateBineighborTable(cdg);
     unidirectional_parent_table = this->unidirectional_parent_table_;
 
     while (!ready_list.empty()) {
@@ -162,6 +162,33 @@ ConflictSpanningTree Scheduler::ScheduleWithBfstWeightedEdgeOnly(const ConflictD
             if (cdg.nodes_[chosen_candidate.id_]->isConnectedTo(to)) {
                 double edge_weight = cdg.nodes_[chosen_candidate.id_]->getEdgeTo(to)->edge_weight_;
                 Candidate new_candidate(to, chosen_candidate.possible_depth_ + edge_weight, chosen_candidate.id_, edge_weight);
+                
+                // update new_candidate and solve conflict with already scheduled nodes
+                for (auto parent : unidirectional_parent_table[to]) {
+                    edge_weight = parent->getEdgeTo(to)->edge_weight_;
+                    if (result_tree_.nodes_[parent->id_]->edge_weighted_depth_ + edge_weight > new_candidate.possible_depth_) {
+                        new_candidate.possible_depth_ = result_tree_.nodes_[parent->id_]->edge_weighted_depth_ + edge_weight;
+                        new_candidate.id_possible_parent_ = parent->id_;
+                        new_candidate.edge_weight_ = edge_weight;
+                    }
+                }
+                bool flag;
+                do {
+                    flag = false;
+                    for (auto neighbor : this->bidirectional_neighbor_table_[to]) {
+                        if (!added_to_tree[neighbor->id_]) {
+                            continue;
+                        }
+                        edge_weight = neighbor->getEdgeTo(to)->edge_weight_;
+                        if (new_candidate.possible_depth_ > result_tree_.nodes_[neighbor->id_]->edge_weighted_depth_ - edge_weight &&
+                            new_candidate.possible_depth_ < result_tree_.nodes_[neighbor->id_]->edge_weighted_depth_ + edge_weight) {
+                            flag = true;
+                            new_candidate.possible_depth_ = result_tree_.nodes_[neighbor->id_]->edge_weighted_depth_ + edge_weight;
+                            new_candidate.id_possible_parent_ = neighbor->id_;
+                            new_candidate.edge_weight_ = edge_weight;
+                        }
+                    }
+                } while (flag);
                 ready_list.push_back(new_candidate);
             }
         }
@@ -249,7 +276,7 @@ ConflictSpanningTree Scheduler::ScheduleWithBfstMultiWeight(const ConflictDirect
                 }
                 double node_weight = cdg.nodes_[to]->node_weight_;
                 Candidate new_candidate(to, chosen_candidate.possible_depth_ + edge_weight + node_weight, chosen_candidate.id_, edge_weight, node_weight);
-                
+
                 // update new_candidate and solve conflict with already scheduled nodes
                 for (auto parent : unidirectional_parent_table[to]) {
                     edge_weight = parent->getEdgeTo(to)->edge_weight_;
