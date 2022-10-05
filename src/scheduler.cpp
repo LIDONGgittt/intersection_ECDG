@@ -206,6 +206,7 @@ ConflictSpanningTree Scheduler::ScheduleWithBfstMultiWeight(const ConflictDirect
     ready_list.push_back(initial_root);
 
     GenerateUniparentTable(cdg);
+    GenerateBineighborTable(cdg);
     unidirectional_parent_table = this->unidirectional_parent_table_;
 
     while (!ready_list.empty()) {
@@ -247,7 +248,40 @@ ConflictSpanningTree Scheduler::ScheduleWithBfstMultiWeight(const ConflictDirect
                     edge_weight = 0.0;
                 }
                 double node_weight = cdg.nodes_[to]->node_weight_;
-                Candidate new_candidate(to, chosen_candidate.possible_depth_ + edge_weight + node_weight, chosen_candidate.id_, edge_weight);
+                Candidate new_candidate(to, chosen_candidate.possible_depth_ + edge_weight + node_weight, chosen_candidate.id_, edge_weight, node_weight);
+                
+                // update new_candidate and solve conflict with already scheduled nodes
+                for (auto parent : unidirectional_parent_table[to]) {
+                    edge_weight = parent->getEdgeTo(to)->edge_weight_;
+                    if (edge_weight <= 1.0) {
+                        edge_weight = 0.0;
+                    }
+                    if (result_tree_.nodes_[parent->id_]->edge_node_weighted_depth_ + edge_weight + new_candidate.node_weight_ > new_candidate.possible_depth_) {
+                        new_candidate.possible_depth_ = result_tree_.nodes_[parent->id_]->edge_node_weighted_depth_ + edge_weight + new_candidate.node_weight_;
+                        new_candidate.id_possible_parent_ = parent->id_;
+                        new_candidate.edge_weight_ = edge_weight;
+                    }
+                }
+                bool flag;
+                do {
+                    flag = false;
+                    for (auto neighbor : this->bidirectional_neighbor_table_[to]) {
+                        if (!added_to_tree[neighbor->id_]) {
+                            continue;
+                        }
+                        edge_weight = neighbor->getEdgeTo(to)->edge_weight_;
+                        if (edge_weight <= 1.0) {
+                            edge_weight = 0.0;
+                        }
+                        if (new_candidate.possible_depth_ > result_tree_.nodes_[neighbor->id_]->edge_node_weighted_depth_ - neighbor->node_weight_ - edge_weight &&
+                            new_candidate.possible_depth_ - new_candidate.node_weight_ < result_tree_.nodes_[neighbor->id_]->edge_node_weighted_depth_ + edge_weight) {
+                            flag = true;
+                            new_candidate.possible_depth_ = result_tree_.nodes_[neighbor->id_]->edge_node_weighted_depth_ + edge_weight + new_candidate.node_weight_;
+                            new_candidate.id_possible_parent_ = neighbor->id_;
+                            new_candidate.edge_weight_ = edge_weight;
+                        }
+                    }
+                } while (flag);
                 ready_list.push_back(new_candidate);
             }
         }
@@ -300,13 +334,12 @@ std::vector<double> Scheduler::GetDepthVectorFromOrder(const std::vector<int> &v
                 if (edge_weight <= 1.0) {
                     edge_weight = 0.0;
                 }
-                if (possible_end_time > depth_of_the_order[neighbor->id_]- neighbor->node_weight_ - edge_weight &&
+                if (possible_end_time > depth_of_the_order[neighbor->id_] - neighbor->node_weight_ - edge_weight &&
                     possible_start_time < depth_of_the_order[neighbor->id_] + edge_weight) {
                     flag = true;
                     possible_start_time = depth_of_the_order[neighbor->id_] + edge_weight;
                     possible_end_time = possible_start_time + cur_node_weight;
                 }
-
             }
         } while (flag);
         depth_of_the_order[cur_id] = possible_end_time;
@@ -318,7 +351,7 @@ std::vector<double> Scheduler::GetDepthVectorFromOrder(const std::vector<int> &v
 void Scheduler::printDepthVector(std::vector<double> &depth_vector) {
     int tmp_cnt = 0;
     for (int i = 0; i < depth_vector.size(); i++) {
-        std::cout << "Node " << i << ": " << depth_vector[i] << ",";
+        std::cout << "Node " << i << ": " << depth_vector[i] << ", ";
         if (++tmp_cnt % 6 == 0)
             std::cout << std::endl;
     }
@@ -326,7 +359,7 @@ void Scheduler::printDepthVector(std::vector<double> &depth_vector) {
 }
 void Scheduler::printOrder(std::vector<int> &order) {
     int tmp_cnt = 0;
-    for (auto id: order) {
+    for (auto id : order) {
         std::cout << "Node " << id << " -> ";
         if (++tmp_cnt % 10 == 0)
             std::cout << std::endl;

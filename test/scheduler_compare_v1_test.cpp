@@ -44,6 +44,8 @@ TEST(SchedulerTest, CompareMethods_v1) {
     srand(seed);
     while (true) {
         total_test++;
+        // srand(343);
+        srand(total_test);
         do {
             cdg.GenerateRandomGraph(std::rand() % max_node + 5, seed, max_node_weight - min_node_weight + 1.0, 2.0, min_node_weight, 1.0, true);
             // cdg.GenerateRandomGraph(5, seed, max_node_weight - min_node_weight + 1.0, 2.0, min_node_weight, 1.0, true);
@@ -103,6 +105,21 @@ TEST(SchedulerTest, CompareMethods_v1) {
 
         if (mdbfst.edge_node_weighted_depth_ < global_optimal) {
             mwbfs_bettter_than_optimal_count++;
+            std::cout << "# # # # # # # # # # # # # #  New Loop with seed: " << total_test << " # # # # # # # # # # # # # #\n";
+            std::cout << "Max node nums: " << max_node << ", Max node weight: " << max_node_weight << ", Min node weight: " << min_node_weight << "\n";
+            cdg.PrintGraph();
+            std::cout << "Modified DFST:\n";
+            modified_dfst.PrintTree(true);
+            std::cout << "BFST:\n";
+            bfst.PrintTree(true);
+            std::cout << "MDBFST:\n";
+            mdbfst.PrintTree(true);
+            std::cout << "Global optimal evacuation time is: " << global_optimal << "\n";
+            std::cout << "The optimal order is : \n";
+            scheduler_bruteforce.printOrder(best_order);
+            std::cout << "The optimal schedule is : \n";
+            scheduler_bruteforce.printDepthVector(depth_vector);
+            break;
         }
         else if (mdbfst.edge_node_weighted_depth_ == global_optimal) {
             mwbfs_get_optimal_count++;
