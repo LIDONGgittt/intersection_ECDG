@@ -284,8 +284,8 @@ std::vector<double> Scheduler::GetDepthVectorFromOrder(const std::vector<int> &v
             if (edge_weight <= 1.0) {
                 edge_weight = 0.0;
             }
-            if (parent->edge_node_weighted_depth_ + edge_weight > possible_start_time) {
-                possible_start_time = parent->edge_node_weighted_depth_ + edge_weight;
+            if (depth_of_the_order[parent->id_] + edge_weight > possible_start_time) {
+                possible_start_time = depth_of_the_order[parent->id_] + edge_weight;
             }
         }
         possible_end_time = possible_start_time + cur_node_weight;
@@ -300,10 +300,10 @@ std::vector<double> Scheduler::GetDepthVectorFromOrder(const std::vector<int> &v
                 if (edge_weight <= 1.0) {
                     edge_weight = 0.0;
                 }
-                if (possible_end_time > neighbor->edge_node_weighted_depth_ - neighbor->node_weight_ - edge_weight &&
-                    possible_start_time < neighbor->edge_node_weighted_depth_ + edge_weight) {
+                if (possible_end_time > depth_of_the_order[neighbor->id_]- neighbor->node_weight_ - edge_weight &&
+                    possible_start_time < depth_of_the_order[neighbor->id_] + edge_weight) {
                     flag = true;
-                    possible_start_time = neighbor->edge_node_weighted_depth_ + edge_weight;
+                    possible_start_time = depth_of_the_order[neighbor->id_] + edge_weight;
                     possible_end_time = possible_start_time + cur_node_weight;
                 }
 
