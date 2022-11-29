@@ -61,14 +61,12 @@ void ConflictDirectedGraph::AddEdge(int from, int to, double weight, bool bidire
 
 void ConflictDirectedGraph::GenerateRandomGraph(
     int total_nodes,
-    unsigned int seed,
     double node_weight_range,
     double edge_weight_range,
     double node_weight_offset,
     double edge_weight_offset,
     bool int_weight_only) {
 
-    // srand(seed);
     this->reset(false);
     double node_weight;
     for (int id = 1; id <= total_nodes; id++) {

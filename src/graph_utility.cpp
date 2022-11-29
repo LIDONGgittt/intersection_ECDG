@@ -15,10 +15,10 @@ void Node::printDetail() {
 bool Node::isSameAs(int id) {
     return id_ == id;
 }
-bool Node::isSameAs(Node n) {
+bool Node::isSameAs(Node &n) {
     return id_ == n.id_;
 }
-bool Node::isSameAs(std::shared_ptr<Node> p_n) {
+bool Node::isSameAs(std::shared_ptr<Node> &p_n) {
     return id_ == p_n->id_;
 }
 bool Node::isConnectedTo(int id) {
@@ -29,10 +29,10 @@ bool Node::isConnectedTo(int id) {
     }
     return false;
 }
-bool Node::isConnectedTo(Node n) {
+bool Node::isConnectedTo(Node &n) {
     return isConnectedTo(n.id_);
 }
-bool Node::isConnectedTo(std::shared_ptr<Node> p_n) {
+bool Node::isConnectedTo(std::shared_ptr<Node> &p_n) {
     return isConnectedTo(p_n->id_);
 }
 
@@ -44,10 +44,10 @@ std::shared_ptr<Edge> Node::getEdgeTo(int id) {
     }
     return nullptr;
 }
-std::shared_ptr<Edge> Node::getEdgeTo(Node n) {
+std::shared_ptr<Edge> Node::getEdgeTo(Node &n) {
     return getEdgeTo(n.id_);
 }
-std::shared_ptr<Edge> Node::getEdgeTo(std::shared_ptr<Node> p_n) {
+std::shared_ptr<Edge> Node::getEdgeTo(std::shared_ptr<Node> &p_n) {
     return getEdgeTo(p_n->id_);
 }
 } // namespace intersection_management

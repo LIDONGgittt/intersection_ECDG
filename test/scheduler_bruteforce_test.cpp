@@ -41,8 +41,8 @@ TEST(SchedulerTest, BruteForceBasic) {
     while (total_test < 1) {
         total_test++;
         do {
-            cdg.GenerateRandomGraph(std::rand() % max_node + 5, seed, max_node_weight - min_node_weight + 1.0, 2.0, min_node_weight, 1.0, true);
-            // cdg.GenerateRandomGraph(5, seed, max_node_weight - min_node_weight + 1.0, 2.0, min_node_weight, 1.0, true);
+            cdg.GenerateRandomGraph(std::rand() % max_node + 5, max_node_weight - min_node_weight + 1.0, 2.0, min_node_weight, 1.0, true);
+            // cdg.GenerateRandomGraph(5, max_node_weight - min_node_weight + 1.0, 2.0, min_node_weight, 1.0, true);
         } while (!cdg.isFullyConnected());
 
         // std::cout << "The CDG fully connected status is: " << cdg.isFullyConnected() << std::endl;

@@ -46,9 +46,9 @@ void test1() {
         // srand(28745);
         // srand(100);
         do {
-            // cdg.GenerateRandomGraph(std::rand() % max_node + 1, seed);
-            // cdg.GenerateRandomGraph(5, seed, 4.0, 2.0, 2.0, 1.0, true);
-            cdg.GenerateRandomGraph(std::rand() % max_node + 5, seed, max_node_weight - min_node_weight + 1.0, 2.0, min_node_weight, 1.0, true);
+            // cdg.GenerateRandomGraph(std::rand() % max_node + 1);
+            // cdg.GenerateRandomGraph(5, 4.0, 2.0, 2.0, 1.0, true);
+            cdg.GenerateRandomGraph(std::rand() % max_node + 5, max_node_weight - min_node_weight + 1.0, 2.0, min_node_weight, 1.0, true);
         } while (!cdg.isFullyConnected());
         // cdg.PrintGraph();
         // std::cout << "The CDG fully connected status is: " << cdg.isFullyConnected() << std::endl;
@@ -156,7 +156,7 @@ void test2() {
         total_test++;
         seed = std::time(NULL);
         do {
-            cdg.GenerateRandomGraph(std::rand() % max_node + 5, seed);
+            cdg.GenerateRandomGraph(std::rand() % max_node + 5);
         } while (!cdg.isFullyConnected());
 
         // std::cout << "The CDG fully connected status is: " << cdg.isFullyConnected() << std::endl;

@@ -20,14 +20,14 @@ public:
 
     void printDetail();
     bool isSameAs(int id);
-    bool isSameAs(Node n);
-    bool isSameAs(std::shared_ptr<Node> p_n);
+    bool isSameAs(Node &n);
+    bool isSameAs(std::shared_ptr<Node> &p_n);
     bool isConnectedTo(int id);
-    bool isConnectedTo(Node n);
-    bool isConnectedTo(std::shared_ptr<Node> p_n);
+    bool isConnectedTo(Node &n);
+    bool isConnectedTo(std::shared_ptr<Node> &p_n);
     std::shared_ptr<Edge> getEdgeTo(int id);
-    std::shared_ptr<Edge> getEdgeTo(Node n);
-    std::shared_ptr<Edge> getEdgeTo(std::shared_ptr<Node> p_n);
+    std::shared_ptr<Edge> getEdgeTo(Node &n);
+    std::shared_ptr<Edge> getEdgeTo(std::shared_ptr<Node> &p_n);
 
     int id_;
     double node_weight_;

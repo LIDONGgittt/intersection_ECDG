@@ -15,7 +15,6 @@ public:
     void AddEdge(int from, int to, double weight = 1.0, bool bidirectional = false);
 
     void GenerateRandomGraph(int total_nodes,
-                             unsigned int seed = 0,
                              double node_weight_range = 5.0,
                              double edge_weight_range = 2.0,
                              double node_weight_offset = 1.0,

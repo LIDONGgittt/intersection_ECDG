@@ -21,8 +21,8 @@ TEST(SchedulerTest, MultipleScheduler_v1) {
     for (int repeat = 0; repeat < total_test; repeat++) {
         seed = std::time(NULL);
         do {
-            // cdg.GenerateRandomGraph(std::rand() % max_node + 1, seed);
-            cdg.GenerateRandomGraph(5, repeat);
+            // cdg.GenerateRandomGraph(std::rand() % max_node + 1);
+            cdg.GenerateRandomGraph(5);
         } while (!cdg.isFullyConnected());
 
         // std::cout << "The CDG fully connected status is: " << cdg.isFullyConnected() << std::endl;
