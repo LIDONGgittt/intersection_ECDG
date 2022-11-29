@@ -93,7 +93,7 @@ void ConflictDirectedGraph::GenerateRandomGraph(
             AddEdge(from, to, edge_weight, true);
             num_edges_to_add -= 2;
         }
-        else { // add unidirectional edge
+        else { // add unidirectional edge, from.id < to.id is ensured
             do {
                 from = rand() % num_nodes_;
                 to = rand() % num_nodes_;

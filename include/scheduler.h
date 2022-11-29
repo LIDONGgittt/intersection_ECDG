@@ -3,6 +3,8 @@
 
 #include "conflict_directed_graph.h"
 #include "conflict_spanning_tree.h"
+#include <iostream>
+#include <algorithm>
 
 namespace intersection_management {
 
@@ -26,21 +28,62 @@ public:
     ConflictSpanningTree ScheduleWithBfstMultiWeight(const ConflictDirectedGraph &cdg);
     std::vector<int> ScheduleBruteForceSearch(const ConflictDirectedGraph &cdg);
 
+    void PrepareForTreeSchedule(const ConflictDirectedGraph &cdg);
     void GenerateUniparentTable(const ConflictDirectedGraph &cdg);
     void GenerateBineighborTable(const ConflictDirectedGraph &cdg);
-    bool isInList(int id, std::vector<Candidate> &ready_list);
-    bool StillHasPredecessor(std::vector<std::shared_ptr<Node>> &pre, std::vector<bool> &added_to_tree);
 
-    std::vector<double> GetDepthVectorFromOrder(const std::vector<int> &vehicle_order,
-                                                const ConflictDirectedGraph &cdg);
-    void printDepthVector(std::vector<double> &depth_vector);
-    void printOrder(std::vector<int> &order);
+    void SearchOrderPermutationRecursively(std::vector<int> &vehicle_order, int num_nodes,
+                                           std::vector<bool> &is_in_order_list,
+                                           double &minimum_evacuation_time, std::vector<int> &best_order,
+                                           const ConflictDirectedGraph &cdg);
     double GetEvacuationTimeFromOrder(const std::vector<int> &vehicle_order,
                                       const ConflictDirectedGraph &cdg);
-    void SearchRecursively(std::vector<int> &vehicle_order, int num_nodes,
-                           std::vector<bool> &is_in_order_list,
-                           double &minimum_evacuation_time, std::vector<int> &best_order,
-                           const ConflictDirectedGraph &cdg);
+    std::vector<double> GetDepthVectorFromOrder(const std::vector<int> &vehicle_order,
+                                                const ConflictDirectedGraph &cdg);
+    
+    static inline void SortReadyListAscendingly(std::vector<Candidate> &ready_list) {
+        std::sort(ready_list.begin(), ready_list.end(),
+                  [](const Candidate &a, const Candidate &b) {
+                      if (a.possible_depth_ == b.possible_depth_) {
+                          return a.id_ < b.id_;
+                      }
+                      return a.possible_depth_ < b.possible_depth_;
+                  });
+    }
+    static inline bool isInList(int id, std::vector<Candidate> &ready_list) {
+        for (auto &item : ready_list) {
+            if (id == item.id_) {
+                return true;
+            }
+        }
+        return false;
+    }
+    static inline bool StillHasUnscheduledPredecessor(std::vector<std::shared_ptr<Node>> &pre, std::vector<bool> &added_to_tree) {
+        for (auto node : pre) {
+            if (added_to_tree[node->id_] == false) {
+                return true;
+            }
+        }
+        return false;
+    }
+    static void printDepthVector(std::vector<double> &depth_vector) {
+        int tmp_cnt = 0;
+        for (int i = 0; i < depth_vector.size(); i++) {
+            std::cout << "Node " << i << ": " << depth_vector[i] << ", ";
+            if (++tmp_cnt % 6 == 0)
+                std::cout << std::endl;
+        }
+        std::cout << std::endl;
+    }
+    static void printOrder(std::vector<int> &order) {
+        int tmp_cnt = 0;
+        for (auto id : order) {
+            std::cout << "Node " << id << " -> ";
+            if (++tmp_cnt % 10 == 0)
+                std::cout << std::endl;
+        }
+        std::cout << std::endl;
+    }
 
     ConflictSpanningTree result_tree_;
     std::vector<std::vector<std::shared_ptr<Node>>> unidirectional_parent_table_;
