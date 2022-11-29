@@ -19,7 +19,7 @@ public:
 
     void AddEdge(std::shared_ptr<Edge> edge);
 
-    void AddEdge(int from, int to, double weight = 1.0, bool bidirectional = false);
+    void AddEdge(int from, int to, double weight = 1.0);
 
     void UpdateDepth(int id, double depth);
     void UpdateEdgeWeightedDepth(int id, double depth);

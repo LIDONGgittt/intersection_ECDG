@@ -44,10 +44,10 @@ void ConflictSpanningTree::AddNode(double weight) {
 }
 
 void ConflictSpanningTree::AddEdge(std::shared_ptr<Edge> edge) {
-    AddEdge(edge->from_.lock()->id_, edge->to_.lock()->id_, edge->edge_weight_, edge->isBidirectional());
+    AddEdge(edge->from_.lock()->id_, edge->to_.lock()->id_, edge->edge_weight_);
 }
 
-void ConflictSpanningTree::AddEdge(int from, int to, double weight, bool bidirectional) {
+void ConflictSpanningTree::AddEdge(int from, int to, double weight) {
     if (from < 0 || from >= num_nodes_ || to < 0 || to >= num_nodes_)
     {
         return;
@@ -55,26 +55,10 @@ void ConflictSpanningTree::AddEdge(int from, int to, double weight, bool bidirec
     if (nodes_[from]->isConnectedTo(to)) {
         return;
     }
-    if (bidirectional) {
-        if (nodes_[to]->isConnectedTo(from)) {
-            return;
-        }
-    }
 
     if (to != 0) {
-        auto edge = std::shared_ptr<Edge>(new Edge(nodes_[from], nodes_[to], weight, bidirectional));
-        if (from == 0) {
-            edge->bidirectional_ = false;
-        }
+        auto edge = std::shared_ptr<Edge>(new Edge(nodes_[from], nodes_[to], weight, false));
         nodes_[from]->edges_.push_back(edge);
-        edges_.push_back(edge);
-    }
-    if (bidirectional && from != 0) {
-        auto edge = std::shared_ptr<Edge>(new Edge(nodes_[to], nodes_[from], weight, bidirectional));
-        if (to == 0) {
-            edge->bidirectional_ = false;
-        }
-        nodes_[to]->edges_.push_back(edge);
         edges_.push_back(edge);
     }
 }
