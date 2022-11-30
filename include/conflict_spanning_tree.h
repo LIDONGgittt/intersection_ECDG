@@ -5,6 +5,12 @@
 #include "conflict_directed_graph.h"
 
 namespace intersection_management {
+enum DepthType {
+    RegularDepth,
+    EdgeWeightedDepth,
+    EdgeNodeWeightedDepth
+};
+
 class ConflictSpanningTree {
 public:
     ConflictSpanningTree();
@@ -26,6 +32,7 @@ public:
     void UpdateEdgeNodeWeightedDepth(int id, double depth);
 
     void PrintTree(bool verbose = true);
+    double CalculateFairnessIndex();
 
     std::shared_ptr<Node> p_root_;
     std::vector<std::shared_ptr<Node>> nodes_;

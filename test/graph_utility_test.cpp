@@ -5,7 +5,7 @@
 using namespace intersection_management;
 using namespace ::testing;
 
-class GraphUtility : public Test {
+class TestGraphUtility : public Test {
 public:
     Node initial_node_;
     std::shared_ptr<Node> p_node_a_;
@@ -21,30 +21,30 @@ public:
     }
 };
 
-TEST_F(GraphUtility, InitialNodeIdIsNegativeOne) {
+TEST_F(TestGraphUtility, InitialNodeIdIsNegativeOne) {
     EXPECT_THAT(initial_node_.id_, Eq(-1));
 }
-TEST_F(GraphUtility, CanCheckSameNodeWithId) {
+TEST_F(TestGraphUtility, CanCheckSameNodeWithId) {
     EXPECT_THAT(p_node_a_->isSameAs(p_node_a_copy_->id_), IsTrue());
 }
-TEST_F(GraphUtility, CanCheckSameNodeWithRef) {
+TEST_F(TestGraphUtility, CanCheckSameNodeWithRef) {
     EXPECT_THAT(p_node_a_->isSameAs(*p_node_a_copy_), IsTrue());
 }
-TEST_F(GraphUtility, CanCheckSameNodeWithSharedPrt) {
+TEST_F(TestGraphUtility, CanCheckSameNodeWithSharedPrt) {
     EXPECT_THAT(p_node_a_->isSameAs(p_node_a_copy_), IsTrue());
 }
-TEST_F(GraphUtility, CanCheckConnectionWithId) {
+TEST_F(TestGraphUtility, CanCheckConnectionWithId) {
     EXPECT_THAT(p_node_a_->isConnectedTo(p_node_b_->id_), IsTrue());
 }
-TEST_F(GraphUtility, CanCheckConnectionWithRef) {
+TEST_F(TestGraphUtility, CanCheckConnectionWithRef) {
     EXPECT_THAT(p_node_a_->isConnectedTo(*p_node_b_), IsTrue());
 }
-TEST_F(GraphUtility, CanCheckConnectionWithSharedPtr) {
+TEST_F(TestGraphUtility, CanCheckConnectionWithSharedPtr) {
     EXPECT_THAT(p_node_a_->isConnectedTo(p_node_b_), IsTrue());
 }
-TEST_F(GraphUtility, ReturnNullWhenGettingNonexistEdge) {
+TEST_F(TestGraphUtility, ReturnNullWhenGettingNonexistEdge) {
     EXPECT_THAT(p_node_a_->getEdgeTo(2), IsNull());
 }
-TEST_F(GraphUtility, CanReturnCorrectEdgeOfNodes) {
+TEST_F(TestGraphUtility, CanReturnCorrectEdgeOfNodes) {
     EXPECT_THAT(p_node_a_->getEdgeTo(1)->to_.lock()->id_, Eq(p_node_b_->id_));
 }
