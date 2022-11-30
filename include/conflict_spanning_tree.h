@@ -6,9 +6,13 @@
 
 namespace intersection_management {
 enum DepthType {
-    RegularDepth,
-    EdgeWeightedDepth,
-    EdgeNodeWeightedDepth
+    Type_RegularDepth,
+    Type_EdgeWeightedDepth,
+    Type_EdgeNodeWeightedDepth
+};
+enum FairnessType {
+    Type_OrderStandardError,
+    Type_JainIndex
 };
 
 class ConflictSpanningTree {
@@ -30,7 +34,8 @@ public:
     void UpdateDepth(int id, double depth, DepthType depth_type);
 
     void PrintTree(bool verbose = true);
-    double CalculateFairnessIndex();
+    double CalculateFairnessIndex(DepthType depth_type = Type_RegularDepth,
+                                  FairnessType fairness_type = Type_OrderStandardError);
 
     std::shared_ptr<Node> p_root_;
     std::vector<std::shared_ptr<Node>> nodes_;

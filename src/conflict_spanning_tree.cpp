@@ -5,6 +5,7 @@
 #include <iostream>
 #include <cmath>
 #include <queue>
+#include <algorithm>
 
 namespace intersection_management {
 ConflictSpanningTree::ConflictSpanningTree() {
@@ -66,19 +67,19 @@ void ConflictSpanningTree::AddEdge(int from, int to, double weight) {
 void ConflictSpanningTree::UpdateDepth(int id, double depth, DepthType depth_type) {
     switch (depth_type)
     {
-    case RegularDepth:
+    case Type_RegularDepth:
         nodes_[id]->depth_ = depth;
         if (depth > depth_) {
             depth_ = depth;
         }
         break;
-    case EdgeWeightedDepth:
+    case Type_EdgeWeightedDepth:
         nodes_[id]->edge_weighted_depth_ = depth;
         if (depth > edge_weighted_depth_) {
             edge_weighted_depth_ = depth;
         }
         break;
-    case EdgeNodeWeightedDepth:
+    case Type_EdgeNodeWeightedDepth:
         nodes_[id]->edge_node_weighted_depth_ = depth;
         if (depth > edge_node_weighted_depth_) {
             edge_node_weighted_depth_ = depth;
@@ -99,5 +100,63 @@ void ConflictSpanningTree::PrintTree(bool verbose) {
     std::cout << "\n@@Tree Edge-Weighted Depth: " << edge_weighted_depth_;
     std::cout << "\n@@Tree Edge-Node-Weighted Depth: " << edge_node_weighted_depth_;
     std::cout << "\n***********End of Tree details*************\n";
+}
+
+double ConflictSpanningTree::CalculateFairnessIndex(DepthType depth_type, FairnessType fairness_type) {
+    std::vector<std::pair<int, double>> id_order_vec;
+    for (auto i = 1u; i < nodes_.size(); i++) {
+        auto &node = nodes_[i];
+        double depth;
+        switch (depth_type)
+        {
+        case Type_RegularDepth:
+            depth = node->depth_;
+            break;
+        case Type_EdgeWeightedDepth:
+            depth = node->edge_weighted_depth_;
+            break;
+        case Type_EdgeNodeWeightedDepth:
+            depth = node->edge_node_weighted_depth_;
+            break;
+        }
+        id_order_vec.push_back(std::pair<int, double>{node->id_, depth});
+    }
+    sort(id_order_vec.begin(), id_order_vec.end(),
+         [](const std::pair<int, double> &p1, const std::pair<int, double> &p2) { return p1.second < p2.second; });
+    std::vector<double> order_diff_vec;
+    for (auto i = 0u; i < id_order_vec.size(); i++) {
+        order_diff_vec.push_back(id_order_vec[i].first - (int)(i + 1));
+    }
+
+    double fairness_index = 0;
+    switch (fairness_type)
+    {
+    case Type_OrderStandardError:
+        fairness_index = 0;
+        for (auto &diff : order_diff_vec)
+            fairness_index += std::pow(diff, 2);
+        fairness_index = fairness_index / order_diff_vec.size();
+        break;
+    case Type_JainIndex: {
+        double minimum_diff = MAXFLOAT;
+        for (auto &diff : order_diff_vec)
+            if (minimum_diff > diff)
+                minimum_diff = diff;
+        double numerator = 0;
+        double denominator = 0;
+        for (auto &diff : order_diff_vec) {
+            numerator += diff - minimum_diff;
+            denominator += std::pow(diff - minimum_diff, 2);
+        }
+        numerator = std::pow(numerator, 2);
+        denominator *= order_diff_vec.size();
+        fairness_index = numerator / denominator;
+        break;
+    }
+    default:
+        fairness_index = -1;
+        break;
+    }
+    return fairness_index;
 }
 } // namespace intersection_management
