@@ -131,7 +131,7 @@ double ConflictSpanningTree::CalculateFairnessIndex(DepthType depth_type, Fairne
     double fairness_index = 0;
     switch (fairness_type)
     {
-    case Type_OrderStandardError:
+    case Type_OrderStandardDeviation:
         fairness_index = 0;
         for (auto &diff : order_diff_vec)
             fairness_index += std::pow(diff, 2);
@@ -142,15 +142,20 @@ double ConflictSpanningTree::CalculateFairnessIndex(DepthType depth_type, Fairne
         for (auto &diff : order_diff_vec)
             if (minimum_diff > diff)
                 minimum_diff = diff;
-        double numerator = 0;
-        double denominator = 0;
-        for (auto &diff : order_diff_vec) {
-            numerator += diff - minimum_diff;
-            denominator += std::pow(diff - minimum_diff, 2);
+        if (minimum_diff < 0) {
+            double numerator = 0;
+            double denominator = 0;
+            for (auto &diff : order_diff_vec) {
+                numerator += diff - minimum_diff;
+                denominator += std::pow(diff - minimum_diff, 2);
+            }
+            numerator = std::pow(numerator, 2);
+            denominator *= order_diff_vec.size();
+            fairness_index = numerator / denominator;
         }
-        numerator = std::pow(numerator, 2);
-        denominator *= order_diff_vec.size();
-        fairness_index = numerator / denominator;
+        else {
+            fairness_index = 1.0;
+        }
         break;
     }
     default:

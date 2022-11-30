@@ -11,7 +11,7 @@ enum DepthType {
     Type_EdgeNodeWeightedDepth
 };
 enum FairnessType {
-    Type_OrderStandardError,
+    Type_OrderStandardDeviation,
     Type_JainIndex
 };
 
@@ -35,7 +35,7 @@ public:
 
     void PrintTree(bool verbose = true);
     double CalculateFairnessIndex(DepthType depth_type = Type_RegularDepth,
-                                  FairnessType fairness_type = Type_OrderStandardError);
+                                  FairnessType fairness_type = Type_OrderStandardDeviation);
 
     std::shared_ptr<Node> p_root_;
     std::vector<std::shared_ptr<Node>> nodes_;

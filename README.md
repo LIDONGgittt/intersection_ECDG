@@ -2,6 +2,6 @@
 
 Requirements:
 
-- c++ 11
+- C++ 14
 - CMake 3.14
 - GoogleTest

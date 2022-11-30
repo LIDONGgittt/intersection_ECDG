@@ -18,16 +18,16 @@ TEST(SchedulerTest, CompareMethods_v1) {
     double min_node_weight = 2.0;
     // verbose flag
     bool verbose_mode_for_bfs = false;
-    bool verbose_mode_for_mwbfs = false;
+    bool verbose_mode_for_mdbfs = false;
     bool verbose_mode_for_both_failure = false;
     // statistic variables
     int total_test = 0;
     int bfs_failure_count = 0;
     int bfs_better_count = 0;
-    int mdbfs_better_count = 0;
     int mdbfs_failure_count = 0;
-    bool mwbfs_failure_flag = false;
-    bool mwbfs_better_flag = false;
+    int mdbfs_better_count = 0;
+    bool mdbfs_failure_flag = false;
+    bool mdbfs_better_flag = false;
     bool either_better_flag = false;
     int both_failure_count = 0;
     int both_better_count = 0;
@@ -36,8 +36,30 @@ TEST(SchedulerTest, CompareMethods_v1) {
     double depth_sum_bfst = 0.0;
     double depth_sum_mdbfs = 0.0;
     double depth_sum_optimal = 0.0;
-    int mwbfs_get_optimal_count = 0;
-    int mwbfs_bettter_than_optimal_count = 0;
+    int mdbfs_get_optimal_count = 0;
+    int mdbfs_bettter_than_optimal_count = 0;
+    // statistic variables with fairness conflicts
+    int bfs_failure_count_fairness = 0;
+    int bfs_better_count_fairness = 0;
+    int mdbfs_failure_count_fairness = 0;
+    int mdbfs_better_count_fairness = 0;
+    bool mdbfs_failure_flag_fairness = false;
+    bool mdbfs_better_flag_fairness = false;
+    bool either_better_flag_fairness = false;
+    int both_failure_count_fairness = 0;
+    int both_better_count_fairness = 0;
+    int either_better_count_fairness = 0;
+    double depth_sum_dfst_fairness = 0.0;
+    double depth_sum_bfst_fairness = 0.0;
+    double depth_sum_mdbfs_fairness = 0.0;
+    double depth_sum_optimal_fairness = 0.0;
+    int mdbfs_get_optimal_count_fairness = 0;
+    int mdbfs_bettter_than_optimal_count_fairness = 0;
+
+    std::vector<double> fairness_vec_ordersd(4, 0);
+    std::vector<double> fairness_vec_jain(4, 0);
+    std::vector<double> fairness_vec_ordersd_with_fairness_conflict(4, 0);
+    std::vector<double> fairness_vec_jain_with_fairness_conflict(4, 0);
 
     seed = std::time(NULL);
     // seed = 0;
@@ -59,110 +81,239 @@ TEST(SchedulerTest, CompareMethods_v1) {
         auto depth_vector = scheduler_bruteforce.GetDepthVectorFromOrder(best_order, cdg);
         double global_optimal = scheduler_bruteforce.GetEvacuationTimeFromOrder(best_order, cdg);
 
+        // add fairness conflicts
+        cdg.AddFairnessConflicts();
+        auto modified_dfst_fairness = scheduler_dfs.ScheduleWithModifiedDfst(cdg);
+        auto bfst_fairness = scheduler_bfs.ScheduleWithBfstWeightedEdgeOnly(cdg);
+        auto mdbfst_fairness = scheduler_mdbfs.ScheduleWithBfstMultiWeight(cdg);
+        auto best_order_fairness = scheduler_bruteforce.ScheduleBruteForceSearch(cdg);
+        auto depth_vector_fairness = scheduler_bruteforce.GetDepthVectorFromOrder(best_order_fairness, cdg);
+        double global_optimal_fairness = scheduler_bruteforce.GetEvacuationTimeFromOrder(best_order_fairness, cdg);
+
         depth_sum_dfst += modified_dfst.edge_weighted_depth_;
         depth_sum_bfst += bfst.edge_weighted_depth_;
         depth_sum_mdbfs += mdbfst.edge_node_weighted_depth_;
         depth_sum_optimal += global_optimal;
+        depth_sum_dfst_fairness += modified_dfst_fairness.edge_weighted_depth_;
+        depth_sum_bfst_fairness += bfst_fairness.edge_weighted_depth_;
+        depth_sum_mdbfs_fairness += mdbfst_fairness.edge_node_weighted_depth_;
+        depth_sum_optimal_fairness += global_optimal_fairness;
 
-        mwbfs_better_flag = false;
-        mwbfs_failure_flag = false;
-        either_better_flag = false;
-        if (mdbfst.edge_node_weighted_depth_ < (max_node_weight) * (modified_dfst.edge_weighted_depth_) && mdbfst.edge_node_weighted_depth_ < (max_node_weight) * (bfst.edge_weighted_depth_)) {
-            mdbfs_better_count++;
-            mwbfs_better_flag = true;
-            either_better_flag = true;
-        }
-        else if (mdbfst.edge_node_weighted_depth_ > (max_node_weight) * (modified_dfst.edge_weighted_depth_) || mdbfst.edge_node_weighted_depth_ > (max_node_weight) * (bfst.edge_weighted_depth_)) {
-            mdbfs_failure_count++;
-            mwbfs_failure_flag = true;
-            if (verbose_mode_for_mwbfs) {
-                std::cout << "# # # # # # # # # # # # # #  Serious sample with seed: " << seed << " # # # # # # # # # # # # # #\n";
-                std::cout << "!!!!!!   Multi depth MWBFS is not the best one   !!!!!!\n";
-            }
-        }
+        fairness_vec_ordersd[0] += modified_dfst.CalculateFairnessIndex(Type_EdgeWeightedDepth, Type_OrderStandardDeviation);
+        fairness_vec_ordersd[1] += bfst.CalculateFairnessIndex(Type_EdgeWeightedDepth, Type_OrderStandardDeviation);
+        fairness_vec_ordersd[2] += mdbfst.CalculateFairnessIndex(Type_EdgeNodeWeightedDepth, Type_OrderStandardDeviation);
+        fairness_vec_jain[0] += modified_dfst.CalculateFairnessIndex(Type_EdgeWeightedDepth, Type_JainIndex);
+        fairness_vec_jain[1] += bfst.CalculateFairnessIndex(Type_EdgeWeightedDepth, Type_JainIndex);
+        fairness_vec_jain[2] += mdbfst.CalculateFairnessIndex(Type_EdgeNodeWeightedDepth, Type_JainIndex);
 
-        if (modified_dfst.edge_weighted_depth_ > bfst.edge_weighted_depth_) {
-            bfs_better_count++;
-            either_better_flag = true;
-            if (mwbfs_better_flag) {
-                both_better_count++;
+        fairness_vec_ordersd_with_fairness_conflict[0] += modified_dfst_fairness.CalculateFairnessIndex(Type_EdgeWeightedDepth, Type_OrderStandardDeviation);
+        fairness_vec_ordersd_with_fairness_conflict[1] += bfst_fairness.CalculateFairnessIndex(Type_EdgeWeightedDepth, Type_OrderStandardDeviation);
+        fairness_vec_ordersd_with_fairness_conflict[2] += mdbfst_fairness.CalculateFairnessIndex(Type_EdgeNodeWeightedDepth, Type_OrderStandardDeviation);
+        fairness_vec_jain_with_fairness_conflict[0] += modified_dfst_fairness.CalculateFairnessIndex(Type_EdgeWeightedDepth, Type_JainIndex);
+        fairness_vec_jain_with_fairness_conflict[1] += bfst_fairness.CalculateFairnessIndex(Type_EdgeWeightedDepth, Type_JainIndex);
+        fairness_vec_jain_with_fairness_conflict[2] += mdbfst_fairness.CalculateFairnessIndex(Type_EdgeNodeWeightedDepth, Type_JainIndex);
+
+        { // statistic for normal cdg
+            mdbfs_better_flag = false;
+            mdbfs_failure_flag = false;
+            either_better_flag = false;
+            if (mdbfst.edge_node_weighted_depth_ < (max_node_weight) * (modified_dfst.edge_weighted_depth_) && mdbfst.edge_node_weighted_depth_ < (max_node_weight) * (bfst.edge_weighted_depth_)) {
+                mdbfs_better_count++;
+                mdbfs_better_flag = true;
+                either_better_flag = true;
             }
-        }
-        else if (modified_dfst.edge_weighted_depth_ < bfst.edge_weighted_depth_) {
-            bfs_failure_count++;
-            if (mwbfs_failure_flag) {
-                both_failure_count++;
-                if (verbose_mode_for_both_failure) {
+            else if (mdbfst.edge_node_weighted_depth_ > (max_node_weight) * (modified_dfst.edge_weighted_depth_) || mdbfst.edge_node_weighted_depth_ > (max_node_weight) * (bfst.edge_weighted_depth_)) {
+                mdbfs_failure_count++;
+                mdbfs_failure_flag = true;
+                if (verbose_mode_for_mdbfs) {
                     std::cout << "# # # # # # # # # # # # # #  Serious sample with seed: " << seed << " # # # # # # # # # # # # # #\n";
-                    std::cout << "!!!!!!   Both BFS and MWBFS methods fail to win DFS   !!!!!!\n";
+                    std::cout << "!!!!!!   Multi depth MDBFS is not the best one   !!!!!!\n";
                 }
             }
-            if (verbose_mode_for_bfs) {
-                std::cout << "# # # # # # # # # # # # # #  New Loop with seed: " << seed << " # # # # # # # # # # # # # #\n";
-                std::cout << "!!!!!!   BFS lost to DFS   !!!!!!\n";
+            if (modified_dfst.edge_weighted_depth_ > bfst.edge_weighted_depth_) {
+                bfs_better_count++;
+                either_better_flag = true;
+                if (mdbfs_better_flag) {
+                    both_better_count++;
+                }
             }
-        }
+            else if (modified_dfst.edge_weighted_depth_ < bfst.edge_weighted_depth_) {
+                bfs_failure_count++;
+                if (mdbfs_failure_flag) {
+                    both_failure_count++;
+                    if (verbose_mode_for_both_failure) {
+                        std::cout << "# # # # # # # # # # # # # #  Serious sample with seed: " << seed << " # # # # # # # # # # # # # #\n";
+                        std::cout << "!!!!!!   Both BFS and MDBFS methods fail to win DFS   !!!!!!\n";
+                    }
+                }
+                if (verbose_mode_for_bfs) {
+                    std::cout << "# # # # # # # # # # # # # #  New Loop with seed: " << seed << " # # # # # # # # # # # # # #\n";
+                    std::cout << "!!!!!!   BFS lost to DFS   !!!!!!\n";
+                }
+            }
+            if (mdbfst.edge_node_weighted_depth_ < global_optimal ||
+                (max_node_weight) * (modified_dfst.edge_weighted_depth_) < global_optimal ||
+                (max_node_weight) * (bfst.edge_weighted_depth_) < global_optimal) {
+                mdbfs_bettter_than_optimal_count++;
+                std::cout << "# # # # # # # # # # # # # #  New Loop with seed: " << total_test << " # # # # # # # # # # # # # #\n";
+                std::cout << "Max node nums: " << max_node << ", Max node weight: " << max_node_weight << ", Min node weight: " << min_node_weight << "\n";
+                cdg.PrintGraph();
+                std::cout << "Modified DFST:\n";
+                modified_dfst.PrintTree(true);
+                std::cout << "BFST:\n";
+                bfst.PrintTree(true);
+                std::cout << "MDBFST:\n";
+                mdbfst.PrintTree(true);
+                std::cout << "Global optimal evacuation time is: " << global_optimal << "\n";
+                std::cout << "The optimal order is : \n";
+                Scheduler::printOrder(best_order);
+                std::cout << "The optimal schedule is : \n";
+                Scheduler::printDepthVector(depth_vector);
+                break;
+            }
+            else if (mdbfst.edge_node_weighted_depth_ == global_optimal) {
+                mdbfs_get_optimal_count++;
+            }
+            if (verbose_mode_for_bfs || verbose_mode_for_both_failure || verbose_mode_for_mdbfs) {
+                std::cout << "Max node nums: " << max_node << ", Max node weight: " << max_node_weight << ", Min node weight: " << min_node_weight << "\n";
+                cdg.PrintGraph();
+                std::cout << "Modified DFST:\n";
+                modified_dfst.PrintTree(true);
+                std::cout << "BFST:\n";
+                bfst.PrintTree(true);
+                std::cout << "MDBFST:\n";
+                mdbfst.PrintTree(true);
+                std::cout << "Global optimal evacuation time is: " << global_optimal << "\n";
+                std::cout << "The optimal order is : \n";
+                Scheduler::printOrder(best_order);
+                std::cout << "The optimal schedule is : \n";
+                Scheduler::printDepthVector(depth_vector);
+            }
+            if (either_better_flag) {
+                either_better_count++;
+            }
+        } // end of statistic for normal cdg
 
-        if (mdbfst.edge_node_weighted_depth_ < global_optimal ||
-            (max_node_weight) * (modified_dfst.edge_weighted_depth_) < global_optimal ||
-            (max_node_weight) * (bfst.edge_weighted_depth_) < global_optimal) {
-            mwbfs_bettter_than_optimal_count++;
-            std::cout << "# # # # # # # # # # # # # #  New Loop with seed: " << total_test << " # # # # # # # # # # # # # #\n";
-            std::cout << "Max node nums: " << max_node << ", Max node weight: " << max_node_weight << ", Min node weight: " << min_node_weight << "\n";
-            cdg.PrintGraph();
-            std::cout << "Modified DFST:\n";
-            modified_dfst.PrintTree(true);
-            std::cout << "BFST:\n";
-            bfst.PrintTree(true);
-            std::cout << "MDBFST:\n";
-            mdbfst.PrintTree(true);
-            std::cout << "Global optimal evacuation time is: " << global_optimal << "\n";
-            std::cout << "The optimal order is : \n";
-            scheduler_bruteforce.printOrder(best_order);
-            std::cout << "The optimal schedule is : \n";
-            scheduler_bruteforce.printDepthVector(depth_vector);
-            break;
-        }
-        else if (mdbfst.edge_node_weighted_depth_ == global_optimal) {
-            mwbfs_get_optimal_count++;
-        }
+        { // statistic for fairness cdg
+            mdbfs_better_flag_fairness = false;
+            mdbfs_failure_flag_fairness = false;
+            either_better_flag_fairness = false;
+            if (mdbfst_fairness.edge_node_weighted_depth_ < (max_node_weight) * (modified_dfst_fairness.edge_weighted_depth_) && mdbfst_fairness.edge_node_weighted_depth_ < (max_node_weight) * (bfst_fairness.edge_weighted_depth_)) {
+                mdbfs_better_count_fairness++;
+                mdbfs_better_flag_fairness = true;
+                either_better_flag_fairness = true;
+            }
+            else if (mdbfst_fairness.edge_node_weighted_depth_ > (max_node_weight) * (modified_dfst_fairness.edge_weighted_depth_) || mdbfst_fairness.edge_node_weighted_depth_ > (max_node_weight) * (bfst_fairness.edge_weighted_depth_)) {
+                mdbfs_failure_count_fairness++;
+                mdbfs_failure_flag = true;
+                if (verbose_mode_for_mdbfs) {
+                    std::cout << "# # # # # # # # # # # # # #  Serious sample with seed: " << seed << " # # # # # # # # # # # # # #\n";
+                    std::cout << "!!!!!!   Multi depth MDBFS is not the best one   !!!!!!\n";
+                }
+            }
+            if (modified_dfst_fairness.edge_weighted_depth_ > bfst_fairness.edge_weighted_depth_) {
+                bfs_better_count_fairness++;
+                either_better_flag_fairness = true;
+                if (mdbfs_better_flag_fairness) {
+                    both_better_count_fairness++;
+                }
+            }
+            else if (modified_dfst_fairness.edge_weighted_depth_ < bfst_fairness.edge_weighted_depth_) {
+                bfs_failure_count_fairness++;
+                if (mdbfs_failure_flag_fairness) {
+                    both_failure_count_fairness++;
+                    if (verbose_mode_for_both_failure) {
+                        std::cout << "# # # # # # # # # # # # # #  Serious sample with seed: " << seed << " # # # # # # # # # # # # # #\n";
+                        std::cout << "!!!!!!   Both BFS and MDBFS methods fail to win DFS   !!!!!!\n";
+                    }
+                }
+                if (verbose_mode_for_bfs) {
+                    std::cout << "# # # # # # # # # # # # # #  New Loop with seed: " << seed << " # # # # # # # # # # # # # #\n";
+                    std::cout << "!!!!!!   BFS lost to DFS   !!!!!!\n";
+                }
+            }
+            if (mdbfst_fairness.edge_node_weighted_depth_ < global_optimal_fairness ||
+                (max_node_weight) * (modified_dfst_fairness.edge_weighted_depth_) < global_optimal_fairness ||
+                (max_node_weight) * (bfst_fairness.edge_weighted_depth_) < global_optimal_fairness) {
+                mdbfs_bettter_than_optimal_count_fairness++;
+                std::cout << "# # # # # # # # # # # # # #  New Loop with seed: " << total_test << " # # # # # # # # # # # # # #\n";
+                std::cout << "Max node nums: " << max_node << ", Max node weight: " << max_node_weight << ", Min node weight: " << min_node_weight << "\n";
+                cdg.PrintGraph();
+                std::cout << "Modified DFST:\n";
+                modified_dfst_fairness.PrintTree(true);
+                std::cout << "BFST:\n";
+                bfst_fairness.PrintTree(true);
+                std::cout << "MDBFST:\n";
+                mdbfst_fairness.PrintTree(true);
+                std::cout << "Global optimal evacuation time is: " << global_optimal_fairness << "\n";
+                std::cout << "The optimal order is : \n";
+                Scheduler::printOrder(best_order_fairness);
+                std::cout << "The optimal schedule is : \n";
+                Scheduler::printDepthVector(depth_vector_fairness);
+                break;
+            }
+            else if (mdbfst_fairness.edge_node_weighted_depth_ == global_optimal_fairness) {
+                mdbfs_get_optimal_count_fairness++;
+            }
+            if (verbose_mode_for_bfs || verbose_mode_for_both_failure || verbose_mode_for_mdbfs) {
+                std::cout << "Max node nums: " << max_node << ", Max node weight: " << max_node_weight << ", Min node weight: " << min_node_weight << "\n";
+                cdg.PrintGraph();
+                std::cout << "Modified DFST:\n";
+                modified_dfst_fairness.PrintTree(true);
+                std::cout << "BFST:\n";
+                bfst_fairness.PrintTree(true);
+                std::cout << "MDBFST:\n";
+                mdbfst_fairness.PrintTree(true);
+                std::cout << "Global optimal evacuation time is: " << global_optimal_fairness << "\n";
+                std::cout << "The optimal order is : \n";
+                Scheduler::printOrder(best_order);
+                std::cout << "The optimal schedule is : \n";
+                Scheduler::printDepthVector(depth_vector);
+            }
+            if (either_better_flag_fairness) {
+                either_better_count_fairness++;
+            }
+        } // end of statistic for fairness cdg
 
-        if (verbose_mode_for_bfs || verbose_mode_for_both_failure || verbose_mode_for_mwbfs) {
-            std::cout << "Max node nums: " << max_node << ", Max node weight: " << max_node_weight << ", Min node weight: " << min_node_weight << "\n";
-            cdg.PrintGraph();
-            std::cout << "Modified DFST:\n";
-            modified_dfst.PrintTree(true);
-            std::cout << "BFST:\n";
-            bfst.PrintTree(true);
-            std::cout << "MDBFST:\n";
-            mdbfst.PrintTree(true);
-            std::cout << "Global optimal evacuation time is: " << global_optimal << "\n";
-            std::cout << "The optimal order is : \n";
-            scheduler_bruteforce.printOrder(best_order);
-            std::cout << "The optimal schedule is : \n";
-            scheduler_bruteforce.printDepthVector(depth_vector);
-        }
+        if (total_test % 1000 == 0) {
+            std::cout << "\n\n##################### Updated result: ##################### \n";
+            std::cout << "Total tests: " << total_test << ", Max node nums: " << max_node + 5 - 1;
+            std::cout << ", Max node weight: " << max_node_weight << ", Min node weight: " << min_node_weight << "\n";
 
-        if (either_better_flag) {
-            either_better_count++;
-        }
-
-        if (total_test % 100000 == 0) {
-            std::cout << "------ Updated result: ------ \n";
-            std::cout << "BFST generate better results ratio:  " << bfs_better_count << " / " << total_test;
-            std::cout << ". BFST failure ratio:  " << bfs_failure_count << " / " << total_test << ".\n";
-            std::cout << "MWBFST generate better results ratio:  " << mdbfs_better_count << " / " << total_test;
-            std::cout << ". MWBFST failure ratio:  " << mdbfs_failure_count << " / " << total_test << ".\n";
-            std::cout << "One or more generate better result ratio:  " << either_better_count << " / " << total_test << ".\n";
-            std::cout << "Both BFS generate better results ratio:  " << both_better_count << " / " << total_test;
-            std::cout << ". Both failure ratio:  " << both_failure_count << " / " << total_test << ".\n";
-            std::cout << "MWBFST same as optimal ratio:  " << mwbfs_get_optimal_count << " / " << total_test;
-            std::cout << ". MWBFST better than optimal ratio:  " << mwbfs_bettter_than_optimal_count << " / " << total_test << ".\n";
+            std::cout << "BFST generate better results ratio:  " << (double)bfs_better_count / total_test << " (" << bfs_better_count << " / " << total_test << ")\n";
+            std::cout << "BFST failure ratio:  " << (double)bfs_failure_count / total_test << " (" << bfs_failure_count << " / " << total_test << ")\n";
+            std::cout << "MDBFST generate better results ratio:  " << (double)mdbfs_better_count / total_test << " (" << mdbfs_better_count << " / " << total_test << ")\n";
+            std::cout << "MDBFST failure ratio:  " << (double)mdbfs_failure_count / total_test << " (" << mdbfs_failure_count << " / " << total_test << ")\n";
+            std::cout << "One or more generate better result ratio:  " << (double)either_better_count / total_test << " (" << either_better_count << " / " << total_test << ")\n";
+            std::cout << "Both BFS generate better results ratio:  " << (double)both_better_count / total_test << " (" << both_better_count << " / " << total_test << ")\n";
+            std::cout << "Both failure ratio:  " << (double)both_failure_count / total_test << " (" << both_failure_count << " / " << total_test << ")\n";
+            std::cout << "MDBFST same as optimal ratio:  " << (double)mdbfs_get_optimal_count / total_test << " (" << mdbfs_get_optimal_count << " / " << total_test << ")\n";
+            std::cout << "MDBFST better than optimal ratio:  " << (double)mdbfs_bettter_than_optimal_count / total_test << " (" << mdbfs_bettter_than_optimal_count << " / " << total_test << ")\n";
 
             std::cout << "DFST average depth is: " << depth_sum_dfst / total_test;
-            std::cout << ".\nBFST average depth is: " << depth_sum_bfst / total_test;
-            std::cout << ".\nMWBFST average depth is: " << depth_sum_mdbfs / total_test;
-            std::cout << ".\nOptimal average depth is: " << depth_sum_optimal / total_test << ".\n";
+            std::cout << "\nBFST average depth is: " << depth_sum_bfst / total_test;
+            std::cout << "\nMDBFST average depth is: " << depth_sum_mdbfs / total_test;
+            std::cout << "\nOptimal average depth is: " << depth_sum_optimal / total_test << "\n";
+            std::cout << "Average Fairness Index (Order Standard Deviation): " << fairness_vec_ordersd[0] / total_test << ", " << fairness_vec_ordersd[1] / total_test << ", " << fairness_vec_ordersd[2] / total_test << "\n";
+            std::cout << "Average Fairness Index (Jain's index): " << fairness_vec_jain[0] / total_test << ", " << fairness_vec_jain[1] / total_test << ", " << fairness_vec_jain[2] / total_test << "\n";
+
+            std::cout << "------------ After adding fairness conflicts: ------------ \n";
+            std::cout << "BFST generate better results ratio:  " << (double)bfs_better_count_fairness / total_test << " (" << bfs_better_count_fairness << " / " << total_test << ")\n";
+            std::cout << "BFST failure ratio:  " << (double)bfs_failure_count_fairness / total_test << " (" << bfs_failure_count_fairness << " / " << total_test << ")\n";
+            std::cout << "MDBFST generate better results ratio:  " << (double)mdbfs_better_count_fairness / total_test << " (" << mdbfs_better_count_fairness << " / " << total_test << ")\n";
+            std::cout << "MDBFST failure ratio:  " << (double)mdbfs_failure_count_fairness / total_test << " (" << mdbfs_failure_count_fairness << " / " << total_test << ")\n";
+            std::cout << "One or more generate better result ratio:  " << (double)either_better_count_fairness / total_test << " (" << either_better_count_fairness << " / " << total_test << ")\n";
+            std::cout << "Both BFS generate better results ratio:  " << (double)both_better_count_fairness / total_test << " (" << both_better_count_fairness << " / " << total_test << ")\n";
+            std::cout << "Both failure ratio:  " << (double)both_failure_count_fairness / total_test << " (" << both_failure_count_fairness << " / " << total_test << ")\n";
+            std::cout << "MDBFST same as optimal ratio:  " << (double)mdbfs_get_optimal_count_fairness / total_test << " (" << mdbfs_get_optimal_count_fairness << " / " << total_test << ")\n";
+            std::cout << "MDBFST better than optimal ratio:  " << (double)mdbfs_bettter_than_optimal_count_fairness / total_test << " (" << mdbfs_bettter_than_optimal_count_fairness << " / " << total_test << ")\n";
+
+            std::cout << "DFST average depth is: " << depth_sum_dfst_fairness / total_test;
+            std::cout << "\nBFST average depth is: " << depth_sum_bfst_fairness / total_test;
+            std::cout << "\nMDBFST average depth is: " << depth_sum_mdbfs_fairness / total_test;
+            std::cout << "\nOptimal average depth is: " << depth_sum_optimal_fairness / total_test << "\n";
+            std::cout << "Average Fairness Index (Order Standard Deviation): " << fairness_vec_ordersd_with_fairness_conflict[0] / total_test << ", " << fairness_vec_ordersd_with_fairness_conflict[1] / total_test << ", " << fairness_vec_ordersd_with_fairness_conflict[2] / total_test << "\n";
+            std::cout << "Average Fairness Index (Jain's index): " << fairness_vec_jain_with_fairness_conflict[0] / total_test << ", " << fairness_vec_jain_with_fairness_conflict[1] / total_test << ", " << fairness_vec_jain_with_fairness_conflict[2] / total_test << "\n";
         }
 
     }

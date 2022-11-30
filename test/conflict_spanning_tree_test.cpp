@@ -32,7 +32,7 @@ TEST_F(TestConflictSpanningTree, UpdateCorrectDepth) {
     EXPECT_THAT(cst_.edge_weighted_depth_, Eq(10));
 }
 TEST_F(TestConflictSpanningTree, CalculateOrderStandardErrorFairnessIndex) {
-    EXPECT_THAT(cst_.CalculateFairnessIndex(Type_EdgeWeightedDepth, Type_OrderStandardError), Eq(8.0/3.0));
+    EXPECT_THAT(cst_.CalculateFairnessIndex(Type_EdgeWeightedDepth, Type_OrderStandardDeviation), Eq(8.0/3.0));
 }
 TEST_F(TestConflictSpanningTree, CalculateJainFairnessIndex) {
     EXPECT_THAT(cst_.CalculateFairnessIndex(Type_EdgeWeightedDepth, Type_JainIndex), Eq(0.6));
