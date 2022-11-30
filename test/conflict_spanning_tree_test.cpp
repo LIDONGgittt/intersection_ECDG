@@ -22,3 +22,8 @@ public:
 TEST_F(TestConflictSpanningTree, RecordTreeNodeNumbers) {
     EXPECT_THAT(cst_.num_nodes_, Eq(4));
 }
+TEST_F(TestConflictSpanningTree, UpdateCorrectDepth) {
+    cst_.UpdateDepth(1, 10, EdgeWeightedDepth);
+    EXPECT_THAT(cst_.nodes_[1]->edge_weighted_depth_, Eq(10));
+    EXPECT_THAT(cst_.edge_weighted_depth_, Eq(10));
+}

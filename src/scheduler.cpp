@@ -78,7 +78,7 @@ ConflictSpanningTree Scheduler::ScheduleWithModifiedDfst(const ConflictDirectedG
 
         added_to_tree[id] = true;
         result_tree_.AddEdge(id_possible_parent, id, edge_from_possible_parent->edge_weight_);
-        result_tree_.UpdateEdgeWeightedDepth(id, possible_depth);
+        result_tree_.UpdateDepth(id, possible_depth, EdgeWeightedDepth);
     }
 
     return result_tree_;
@@ -95,7 +95,7 @@ ConflictSpanningTree Scheduler::ScheduleWithBfstWeightedEdgeOnly(const ConflictD
     while (!ready_list.empty()) {
         Candidate chosen_candidate = ready_list[0];
         added_to_tree[chosen_candidate.id_] = true;
-        result_tree_.UpdateEdgeWeightedDepth(chosen_candidate.id_, chosen_candidate.possible_depth_);
+        result_tree_.UpdateDepth(chosen_candidate.id_, chosen_candidate.possible_depth_, EdgeWeightedDepth);
         if (chosen_candidate.id_ > 0) {
             result_tree_.AddEdge(chosen_candidate.id_possible_parent_, chosen_candidate.id_, chosen_candidate.edge_weight_);
         }
@@ -170,7 +170,7 @@ ConflictSpanningTree Scheduler::ScheduleWithBfstMultiWeight(const ConflictDirect
     while (!ready_list.empty()) {
         Candidate chosen_candidate = ready_list[0];
         added_to_tree[chosen_candidate.id_] = true;
-        result_tree_.UpdateEdgeNodeWeightedDepth(chosen_candidate.id_, chosen_candidate.possible_depth_);
+        result_tree_.UpdateDepth(chosen_candidate.id_, chosen_candidate.possible_depth_, EdgeNodeWeightedDepth);
         if (chosen_candidate.id_ > 0) {
             result_tree_.AddEdge(chosen_candidate.id_possible_parent_, chosen_candidate.id_, chosen_candidate.edge_weight_);
         }

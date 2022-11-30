@@ -27,9 +27,7 @@ public:
 
     void AddEdge(int from, int to, double weight = 1.0);
 
-    void UpdateDepth(int id, double depth);
-    void UpdateEdgeWeightedDepth(int id, double depth);
-    void UpdateEdgeNodeWeightedDepth(int id, double depth);
+    void UpdateDepth(int id, double depth, DepthType depth_type);
 
     void PrintTree(bool verbose = true);
     double CalculateFairnessIndex();

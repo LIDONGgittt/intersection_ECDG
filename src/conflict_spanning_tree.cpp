@@ -63,22 +63,27 @@ void ConflictSpanningTree::AddEdge(int from, int to, double weight) {
     }
 }
 
-void ConflictSpanningTree::UpdateDepth(int id, double depth) {
-    nodes_[id]->depth_ = depth;
-    if (depth > depth_) {
-        depth_ = depth;
-    }
-}
-void ConflictSpanningTree::UpdateEdgeWeightedDepth(int id, double depth) {
-    nodes_[id]->edge_weighted_depth_ = depth;
-    if (depth > edge_weighted_depth_) {
-        edge_weighted_depth_ = depth;
-    }
-}
-void ConflictSpanningTree::UpdateEdgeNodeWeightedDepth(int id, double depth) {
-    nodes_[id]->edge_node_weighted_depth_ = depth;
-    if (depth > edge_node_weighted_depth_) {
-        edge_node_weighted_depth_ = depth;
+void ConflictSpanningTree::UpdateDepth(int id, double depth, DepthType depth_type) {
+    switch (depth_type)
+    {
+    case RegularDepth:
+        nodes_[id]->depth_ = depth;
+        if (depth > depth_) {
+            depth_ = depth;
+        }
+        break;
+    case EdgeWeightedDepth:
+        nodes_[id]->edge_weighted_depth_ = depth;
+        if (depth > edge_weighted_depth_) {
+            edge_weighted_depth_ = depth;
+        }
+        break;
+    case EdgeNodeWeightedDepth:
+        nodes_[id]->edge_node_weighted_depth_ = depth;
+        if (depth > edge_node_weighted_depth_) {
+            edge_node_weighted_depth_ = depth;
+        }
+        break;
     }
 }
 
