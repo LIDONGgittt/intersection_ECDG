@@ -110,6 +110,20 @@ void ConflictDirectedGraph::GenerateRandomGraph(
     }
 }
 
+void ConflictDirectedGraph::AddFairnessConflicts() {
+    int fairness_order_diff_threshold = 50;
+    double fairness_order_diff_rate = 0.5;
+    if (num_nodes_ * fairness_order_diff_rate < fairness_order_diff_threshold) {
+        fairness_order_diff_threshold = std::floor(num_nodes_ * fairness_order_diff_rate);
+    }
+
+    for (int from = 0; from < num_nodes_; from++) {
+        for (int to = from + fairness_order_diff_threshold; to < num_nodes_; to++) {
+            AddEdge(from, to, 1, false);
+        }
+    }
+}
+
 bool ConflictDirectedGraph::isFullyConnected() {
     std::queue<int> visit_queue;
     std::vector<bool> is_visited(num_nodes_, false);

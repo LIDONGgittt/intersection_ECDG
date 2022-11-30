@@ -20,6 +20,8 @@ public:
                              double node_weight_offset = 1.0,
                              double edge_weight_offset = 1.0,
                              bool int_weight_only = true);
+    
+    void AddFairnessConflicts();
 
     bool isFullyConnected();
 
