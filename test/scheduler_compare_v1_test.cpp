@@ -275,7 +275,7 @@ TEST(SchedulerTest, CompareMethods_v1) {
             }
         } // end of statistic for fairness cdg
 
-        if (total_test % 1000 == 0) {
+        if (total_test % 50000 == 0) {
             std::cout << "\n\n##################### Updated result: ##################### \n";
             std::cout << "Total tests: " << total_test << ", Max node nums: " << max_node + 5 - 1;
             std::cout << ", Max node weight: " << max_node_weight << ", Min node weight: " << min_node_weight << "\n";
