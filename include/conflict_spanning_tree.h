@@ -1,7 +1,7 @@
 #ifndef INTERSECTION_MANAGEMENT_CONFLICT_SPANNING_TREE_H_
 #define INTERSECTION_MANAGEMENT_CONFLICT_SPANNING_TREE_H_
 
-#include "graph_utility.h"
+#include "intersection_utility.h"
 #include "conflict_directed_graph.h"
 
 namespace intersection_management {

@@ -1,7 +1,7 @@
 #ifndef INTERSECTION_MANAGEMENT_CONFLICT_DIRECTED_GRAPH_H_
 #define INTERSECTION_MANAGEMENT_CONFLICT_DIRECTED_GRAPH_H_
 
-#include "graph_utility.h"
+#include "intersection_utility.h"
 
 namespace intersection_management {
 class ConflictDirectedGraph {
