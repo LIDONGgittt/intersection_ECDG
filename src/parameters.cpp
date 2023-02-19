@@ -12,4 +12,4 @@ void Parameters::readParameters() {
 }
 
 Parameters param;
-}
+} // namespace intersection_management

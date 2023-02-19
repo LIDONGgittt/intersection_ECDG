@@ -14,7 +14,7 @@ public:
     }
 
     void readParameters();
-};
+}; // class Parameters
 
-}
+} // namespace intersection_management
 #endif // #define INTERSECTION_MANAGEMENT_PARAMETERS_H_
