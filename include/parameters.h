@@ -6,14 +6,14 @@
 namespace intersection_management {
 class Parameters {
 public:
-    int number_directions;
-    std::vector<int> number_lanes_in;
-    std::vector<int> number_lanes_out;
+    int num_directions;
+    std::vector<int> num_lanes_in;
+    std::vector<int> num_lanes_out;
     Parameters() {
-        readParameters();
+        readParametersFromYaml();
     }
 
-    void readParameters();
+    void readParametersFromYaml();
 }; // class Parameters
 
 } // namespace intersection_management
