@@ -36,7 +36,7 @@ void ConflictSpanningTree::AddNodesFromGraph(const ConflictDirectedGraph &graph)
 }
 
 void ConflictSpanningTree::AddNode(std::shared_ptr<Node> node) {
-    AddNode(node->node_weight_);
+    AddNode(node->estimate_travel_time_);
 }
 
 void ConflictSpanningTree::AddNode(double weight) {

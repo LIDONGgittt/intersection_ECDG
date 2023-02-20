@@ -5,7 +5,7 @@
 namespace intersection_management {
 
 void Node::printDetail() {
-    std::cout << "Node " << id_ << " has weight: " << node_weight_;
+    std::cout << "Node " << id_ << " has weight: " << estimate_travel_time_;
     std::cout << ". Connects to: ";
     for (auto p_edge : edges_) {
         std::cout << "--" << p_edge->edge_weight_ << "--> " << p_edge->to_.lock()->id_ << ",  ";

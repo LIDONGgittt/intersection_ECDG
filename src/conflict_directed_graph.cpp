@@ -61,20 +61,20 @@ void ConflictDirectedGraph::AddEdge(int from, int to, double weight, bool bidire
 
 void ConflictDirectedGraph::GenerateRandomGraph(
     int total_nodes,
-    double node_weight_range,
+    double estimate_travel_time_range,
     double edge_weight_range,
-    double node_weight_offset,
+    double estimate_travel_time_offset,
     double edge_weight_offset,
     bool int_weight_only) {
 
     this->reset(false);
-    double node_weight;
+    double estimate_travel_time;
     for (int id = 1; id <= total_nodes; id++) {
-        node_weight = ((double)rand()) / RAND_MAX * node_weight_range + node_weight_offset;
+        estimate_travel_time = ((double)rand()) / RAND_MAX * estimate_travel_time_range + estimate_travel_time_offset;
         if (int_weight_only) {
-            node_weight = std::floor(node_weight);
+            estimate_travel_time = std::floor(estimate_travel_time);
         }
-        AddNode(node_weight);
+        AddNode(estimate_travel_time);
     }
 
     int num_edges_to_add = (int)(num_nodes_ * num_nodes_ * (rand() % 100) * 0.01);

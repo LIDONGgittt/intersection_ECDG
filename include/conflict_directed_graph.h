@@ -15,9 +15,9 @@ public:
     void AddEdge(int from, int to, double weight = 1.0, bool bidirectional = false);
 
     void GenerateRandomGraph(int total_nodes,
-                             double node_weight_range = 5.0,
+                             double estimate_travel_time_range = 5.0,
                              double edge_weight_range = 2.0,
-                             double node_weight_offset = 1.0,
+                             double estimate_travel_time_offset = 1.0,
                              double edge_weight_offset = 1.0,
                              bool int_weight_only = true);
     

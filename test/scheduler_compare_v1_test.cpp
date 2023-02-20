@@ -14,8 +14,8 @@ TEST(SchedulerTest, CompareMethods_v1) {
     // cdg generater parameters
     unsigned int seed = 0;
     int max_node = 1;
-    double max_node_weight = 5.0;
-    double min_node_weight = 2.0;
+    double max_estimate_travel_time = 5.0;
+    double min_estimate_travel_time = 2.0;
     // verbose flag
     bool verbose_mode_for_bfs = false;
     bool verbose_mode_for_mdbfs = false;
@@ -69,8 +69,8 @@ TEST(SchedulerTest, CompareMethods_v1) {
         // srand(343);
         // srand(total_test);
         do {
-            cdg.GenerateRandomGraph(std::rand() % max_node + 5, max_node_weight - min_node_weight + 1.0, 2.0, min_node_weight, 1.0, true);
-            // cdg.GenerateRandomGraph(5, max_node_weight - min_node_weight + 1.0, 2.0, min_node_weight, 1.0, true);
+            cdg.GenerateRandomGraph(std::rand() % max_node + 5, max_estimate_travel_time - min_estimate_travel_time + 1.0, 2.0, min_estimate_travel_time, 1.0, true);
+            // cdg.GenerateRandomGraph(5, max_estimate_travel_time - min_estimate_travel_time + 1.0, 2.0, min_estimate_travel_time, 1.0, true);
         } while (!cdg.isFullyConnected());
 
         // std::cout << "The CDG fully connected status is: " << cdg.isFullyConnected() << std::endl;
@@ -117,12 +117,12 @@ TEST(SchedulerTest, CompareMethods_v1) {
             mdbfs_better_flag = false;
             mdbfs_failure_flag = false;
             either_better_flag = false;
-            if (mdbfst.edge_node_weighted_depth_ < (max_node_weight) * (modified_dfst.edge_weighted_depth_) && mdbfst.edge_node_weighted_depth_ < (max_node_weight) * (bfst.edge_weighted_depth_)) {
+            if (mdbfst.edge_node_weighted_depth_ < (max_estimate_travel_time) * (modified_dfst.edge_weighted_depth_) && mdbfst.edge_node_weighted_depth_ < (max_estimate_travel_time) * (bfst.edge_weighted_depth_)) {
                 mdbfs_better_count++;
                 mdbfs_better_flag = true;
                 either_better_flag = true;
             }
-            else if (mdbfst.edge_node_weighted_depth_ > (max_node_weight) * (modified_dfst.edge_weighted_depth_) || mdbfst.edge_node_weighted_depth_ > (max_node_weight) * (bfst.edge_weighted_depth_)) {
+            else if (mdbfst.edge_node_weighted_depth_ > (max_estimate_travel_time) * (modified_dfst.edge_weighted_depth_) || mdbfst.edge_node_weighted_depth_ > (max_estimate_travel_time) * (bfst.edge_weighted_depth_)) {
                 mdbfs_failure_count++;
                 mdbfs_failure_flag = true;
                 if (verbose_mode_for_mdbfs) {
@@ -152,11 +152,11 @@ TEST(SchedulerTest, CompareMethods_v1) {
                 }
             }
             if (mdbfst.edge_node_weighted_depth_ < global_optimal ||
-                (max_node_weight) * (modified_dfst.edge_weighted_depth_) < global_optimal ||
-                (max_node_weight) * (bfst.edge_weighted_depth_) < global_optimal) {
+                (max_estimate_travel_time) * (modified_dfst.edge_weighted_depth_) < global_optimal ||
+                (max_estimate_travel_time) * (bfst.edge_weighted_depth_) < global_optimal) {
                 mdbfs_bettter_than_optimal_count++;
                 std::cout << "# # # # # # # # # # # # # #  New Loop with seed: " << total_test << " # # # # # # # # # # # # # #\n";
-                std::cout << "Max node nums: " << max_node << ", Max node weight: " << max_node_weight << ", Min node weight: " << min_node_weight << "\n";
+                std::cout << "Max node nums: " << max_node << ", Max estimate travel time: " << max_estimate_travel_time << ", Min estimate travel time: " << min_estimate_travel_time << "\n";
                 cdg.PrintGraph();
                 std::cout << "Modified DFST:\n";
                 modified_dfst.PrintTree(true);
@@ -175,7 +175,7 @@ TEST(SchedulerTest, CompareMethods_v1) {
                 mdbfs_get_optimal_count++;
             }
             if (verbose_mode_for_bfs || verbose_mode_for_both_failure || verbose_mode_for_mdbfs) {
-                std::cout << "Max node nums: " << max_node << ", Max node weight: " << max_node_weight << ", Min node weight: " << min_node_weight << "\n";
+                std::cout << "Max node nums: " << max_node << ", Max estimate travel time: " << max_estimate_travel_time << ", Min estimate travel time: " << min_estimate_travel_time << "\n";
                 cdg.PrintGraph();
                 std::cout << "Modified DFST:\n";
                 modified_dfst.PrintTree(true);
@@ -198,12 +198,12 @@ TEST(SchedulerTest, CompareMethods_v1) {
             mdbfs_better_flag_fairness = false;
             mdbfs_failure_flag_fairness = false;
             either_better_flag_fairness = false;
-            if (mdbfst_fairness.edge_node_weighted_depth_ < (max_node_weight) * (modified_dfst_fairness.edge_weighted_depth_) && mdbfst_fairness.edge_node_weighted_depth_ < (max_node_weight) * (bfst_fairness.edge_weighted_depth_)) {
+            if (mdbfst_fairness.edge_node_weighted_depth_ < (max_estimate_travel_time) * (modified_dfst_fairness.edge_weighted_depth_) && mdbfst_fairness.edge_node_weighted_depth_ < (max_estimate_travel_time) * (bfst_fairness.edge_weighted_depth_)) {
                 mdbfs_better_count_fairness++;
                 mdbfs_better_flag_fairness = true;
                 either_better_flag_fairness = true;
             }
-            else if (mdbfst_fairness.edge_node_weighted_depth_ > (max_node_weight) * (modified_dfst_fairness.edge_weighted_depth_) || mdbfst_fairness.edge_node_weighted_depth_ > (max_node_weight) * (bfst_fairness.edge_weighted_depth_)) {
+            else if (mdbfst_fairness.edge_node_weighted_depth_ > (max_estimate_travel_time) * (modified_dfst_fairness.edge_weighted_depth_) || mdbfst_fairness.edge_node_weighted_depth_ > (max_estimate_travel_time) * (bfst_fairness.edge_weighted_depth_)) {
                 mdbfs_failure_count_fairness++;
                 mdbfs_failure_flag = true;
                 if (verbose_mode_for_mdbfs) {
@@ -233,11 +233,11 @@ TEST(SchedulerTest, CompareMethods_v1) {
                 }
             }
             if (mdbfst_fairness.edge_node_weighted_depth_ < global_optimal_fairness ||
-                (max_node_weight) * (modified_dfst_fairness.edge_weighted_depth_) < global_optimal_fairness ||
-                (max_node_weight) * (bfst_fairness.edge_weighted_depth_) < global_optimal_fairness) {
+                (max_estimate_travel_time) * (modified_dfst_fairness.edge_weighted_depth_) < global_optimal_fairness ||
+                (max_estimate_travel_time) * (bfst_fairness.edge_weighted_depth_) < global_optimal_fairness) {
                 mdbfs_bettter_than_optimal_count_fairness++;
                 std::cout << "# # # # # # # # # # # # # #  New Loop with seed: " << total_test << " # # # # # # # # # # # # # #\n";
-                std::cout << "Max node nums: " << max_node << ", Max node weight: " << max_node_weight << ", Min node weight: " << min_node_weight << "\n";
+                std::cout << "Max node nums: " << max_node << ", Max estimate travel time: " << max_estimate_travel_time << ", Min estimate travel time: " << min_estimate_travel_time << "\n";
                 cdg.PrintGraph();
                 std::cout << "Modified DFST:\n";
                 modified_dfst_fairness.PrintTree(true);
@@ -256,7 +256,7 @@ TEST(SchedulerTest, CompareMethods_v1) {
                 mdbfs_get_optimal_count_fairness++;
             }
             if (verbose_mode_for_bfs || verbose_mode_for_both_failure || verbose_mode_for_mdbfs) {
-                std::cout << "Max node nums: " << max_node << ", Max node weight: " << max_node_weight << ", Min node weight: " << min_node_weight << "\n";
+                std::cout << "Max node nums: " << max_node << ", Max estimate travel time: " << max_estimate_travel_time << ", Min estimate travel time: " << min_estimate_travel_time << "\n";
                 cdg.PrintGraph();
                 std::cout << "Modified DFST:\n";
                 modified_dfst_fairness.PrintTree(true);
@@ -278,7 +278,7 @@ TEST(SchedulerTest, CompareMethods_v1) {
         if (total_test % 50000 == 0) {
             std::cout << "\n\n##################### Updated result: ##################### \n";
             std::cout << "Total tests: " << total_test << ", Max node nums: " << max_node + 5 - 1;
-            std::cout << ", Max node weight: " << max_node_weight << ", Min node weight: " << min_node_weight << "\n";
+            std::cout << ", Max estimate travel time: " << max_estimate_travel_time << ", Min estimate travel time: " << min_estimate_travel_time << "\n";
 
             std::cout << "BFST generate better results ratio:  " << (double)bfs_better_count / total_test << " (" << bfs_better_count << " / " << total_test << ")\n";
             std::cout << "BFST failure ratio:  " << (double)bfs_failure_count / total_test << " (" << bfs_failure_count << " / " << total_test << ")\n";

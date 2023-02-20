@@ -34,8 +34,8 @@ void test1() {
     double depth_sum_dfst = 0.0;
     double depth_sum_bfst = 0.0;
     double depth_sum_mdbfs = 0.0;
-    double max_node_weight = 5.0;
-    double min_node_weight = 2.0;
+    double max_estimate_travel_time = 5.0;
+    double min_estimate_travel_time = 2.0;
 
     int total_test = 100000;
 
@@ -48,7 +48,7 @@ void test1() {
         do {
             // cdg.GenerateRandomGraph(std::rand() % max_node + 1);
             // cdg.GenerateRandomGraph(5, 4.0, 2.0, 2.0, 1.0, true);
-            cdg.GenerateRandomGraph(std::rand() % max_node + 5, max_node_weight - min_node_weight + 1.0, 2.0, min_node_weight, 1.0, true);
+            cdg.GenerateRandomGraph(std::rand() % max_node + 5, max_estimate_travel_time - min_estimate_travel_time + 1.0, 2.0, min_estimate_travel_time, 1.0, true);
         } while (!cdg.isFullyConnected());
         // cdg.PrintGraph();
         // std::cout << "The CDG fully connected status is: " << cdg.isFullyConnected() << std::endl;
@@ -62,12 +62,12 @@ void test1() {
         mwbfs_better_flag = false;
         mwbfs_failure_flag = false;
         either_better_flag = false;
-        if (mdbfst.edge_node_weighted_depth_ < (max_node_weight)*modified_dfst.edge_weighted_depth_ && mdbfst.edge_node_weighted_depth_ < (max_node_weight)*bfst.edge_weighted_depth_) {
+        if (mdbfst.edge_node_weighted_depth_ < (max_estimate_travel_time)*modified_dfst.edge_weighted_depth_ && mdbfst.edge_node_weighted_depth_ < (max_estimate_travel_time)*bfst.edge_weighted_depth_) {
             mdbfs_better_count++;
             mwbfs_better_flag = true;
             either_better_flag = true;
         }
-        else if (mdbfst.edge_node_weighted_depth_ > (max_node_weight) *modified_dfst.edge_weighted_depth_ || mdbfst.edge_node_weighted_depth_ > (max_node_weight) *bfst.edge_weighted_depth_) {
+        else if (mdbfst.edge_node_weighted_depth_ > (max_estimate_travel_time) *modified_dfst.edge_weighted_depth_ || mdbfst.edge_node_weighted_depth_ > (max_estimate_travel_time) *bfst.edge_weighted_depth_) {
             mdbfs_failure_count++;
             mwbfs_failure_flag = true;
             if (verbose_mode_for_mwbfs) {
@@ -96,7 +96,7 @@ void test1() {
                 both_failure_count++;
                 std::cout << "# # # # # # # # # # # # # #  Serious sample with seed: " << seed << " # # # # # # # # # # # # # #\n";
                 std::cout << "!!!!!!   Both bfs methods fail to win dfs   !!!!!!\n";
-                std::cout << "Max node nums: " << max_node << ", Max node weight: " << max_node_weight << ", Min node weight: " << min_node_weight << "\n";
+                std::cout << "Max node nums: " << max_node << ", Max estimate travel time: " << max_estimate_travel_time << ", Min estimate travel time: " << min_estimate_travel_time << "\n";
                 cdg.PrintGraph();
                 std::cout << "Modified DFST:\n";
                 modified_dfst.PrintTree(true);

@@ -184,7 +184,7 @@ ConflictSpanningTree Scheduler::ScheduleWithBfstMultiWeight(const ConflictDirect
                 if (edge_weight <= 1.0) {
                     edge_weight = 0.0;
                 }
-                if (chosen_candidate.possible_depth_ + edge_weight + cdg.nodes_[iter_ready_candidate->id_]->node_weight_ > iter_ready_candidate->possible_depth_) {
+                if (chosen_candidate.possible_depth_ + edge_weight + cdg.nodes_[iter_ready_candidate->id_]->estimate_travel_time_ > iter_ready_candidate->possible_depth_) {
                     iter_ready_candidate = ready_list.erase(iter_ready_candidate);
                     continue;
                 }
@@ -204,8 +204,8 @@ ConflictSpanningTree Scheduler::ScheduleWithBfstMultiWeight(const ConflictDirect
             if (edge_weight <= 1.0) {
                 edge_weight = 0.0;
             }
-            double node_weight = cdg.nodes_[to]->node_weight_;
-            Candidate new_candidate(to, chosen_candidate.possible_depth_ + edge_weight + node_weight, chosen_candidate.id_, edge_weight, node_weight);
+            double estimate_travel_time = cdg.nodes_[to]->estimate_travel_time_;
+            Candidate new_candidate(to, chosen_candidate.possible_depth_ + edge_weight + estimate_travel_time, chosen_candidate.id_, edge_weight, estimate_travel_time);
 
             // update new_candidate and solve conflict with already scheduled nodes
             for (auto parent : unidirectional_parent_table_[to]) {
@@ -213,8 +213,8 @@ ConflictSpanningTree Scheduler::ScheduleWithBfstMultiWeight(const ConflictDirect
                 if (edge_weight <= 1.0) {
                     edge_weight = 0.0;
                 }
-                if (result_tree_.nodes_[parent->id_]->edge_node_weighted_depth_ + edge_weight + new_candidate.node_weight_ > new_candidate.possible_depth_) {
-                    new_candidate.possible_depth_ = result_tree_.nodes_[parent->id_]->edge_node_weighted_depth_ + edge_weight + new_candidate.node_weight_;
+                if (result_tree_.nodes_[parent->id_]->edge_node_weighted_depth_ + edge_weight + new_candidate.estimate_travel_time_ > new_candidate.possible_depth_) {
+                    new_candidate.possible_depth_ = result_tree_.nodes_[parent->id_]->edge_node_weighted_depth_ + edge_weight + new_candidate.estimate_travel_time_;
                     new_candidate.id_possible_parent_ = parent->id_;
                     new_candidate.edge_weight_ = edge_weight;
                 }
@@ -230,10 +230,10 @@ ConflictSpanningTree Scheduler::ScheduleWithBfstMultiWeight(const ConflictDirect
                     if (edge_weight <= 1.0) {
                         edge_weight = 0.0;
                     }
-                    if (new_candidate.possible_depth_ > result_tree_.nodes_[neighbor->id_]->edge_node_weighted_depth_ - neighbor->node_weight_ - edge_weight &&
-                        new_candidate.possible_depth_ - new_candidate.node_weight_ < result_tree_.nodes_[neighbor->id_]->edge_node_weighted_depth_ + edge_weight) {
+                    if (new_candidate.possible_depth_ > result_tree_.nodes_[neighbor->id_]->edge_node_weighted_depth_ - neighbor->estimate_travel_time_ - edge_weight &&
+                        new_candidate.possible_depth_ - new_candidate.estimate_travel_time_ < result_tree_.nodes_[neighbor->id_]->edge_node_weighted_depth_ + edge_weight) {
                         flag_still_conflict_with_bidire_scheduled_neighbor = true;
-                        new_candidate.possible_depth_ = result_tree_.nodes_[neighbor->id_]->edge_node_weighted_depth_ + edge_weight + new_candidate.node_weight_;
+                        new_candidate.possible_depth_ = result_tree_.nodes_[neighbor->id_]->edge_node_weighted_depth_ + edge_weight + new_candidate.estimate_travel_time_;
                         new_candidate.id_possible_parent_ = neighbor->id_;
                         new_candidate.edge_weight_ = edge_weight;
                     }
@@ -351,13 +351,13 @@ std::vector<double> Scheduler::GetDepthVectorFromOrder(const std::vector<int> &v
                                                        const ConflictDirectedGraph &cdg) {
     std::vector<bool> vehicle_scheduled(vehicle_order.size(), false);
     std::vector<double> depth_of_the_order(vehicle_order.size(), -1.0);
-    double cur_node_weight;
+    double cur_estimate_travel_time;
     double edge_weight;
     double possible_start_time;
     double possible_end_time;
 
     for (int cur_id : vehicle_order) {
-        cur_node_weight = cdg.nodes_[cur_id]->node_weight_;
+        cur_estimate_travel_time = cdg.nodes_[cur_id]->estimate_travel_time_;
         possible_start_time = 0;
         for (auto parent : unidirectional_parent_table_[cur_id]) {
             if (!vehicle_scheduled[parent->id_]) {
@@ -372,7 +372,7 @@ std::vector<double> Scheduler::GetDepthVectorFromOrder(const std::vector<int> &v
                 possible_start_time = depth_of_the_order[parent->id_] + edge_weight;
             }
         }
-        possible_end_time = possible_start_time + cur_node_weight;
+        possible_end_time = possible_start_time + cur_estimate_travel_time;
         bool flag;
         do {
             flag = false;
@@ -384,11 +384,11 @@ std::vector<double> Scheduler::GetDepthVectorFromOrder(const std::vector<int> &v
                 if (edge_weight <= 1.0) {
                     edge_weight = 0.0;
                 }
-                if (possible_end_time > depth_of_the_order[neighbor->id_] - neighbor->node_weight_ - edge_weight &&
+                if (possible_end_time > depth_of_the_order[neighbor->id_] - neighbor->estimate_travel_time_ - edge_weight &&
                     possible_start_time < depth_of_the_order[neighbor->id_] + edge_weight) {
                     flag = true;
                     possible_start_time = depth_of_the_order[neighbor->id_] + edge_weight;
-                    possible_end_time = possible_start_time + cur_node_weight;
+                    possible_end_time = possible_start_time + cur_estimate_travel_time;
                 }
             }
         } while (flag);

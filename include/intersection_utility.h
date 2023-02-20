@@ -29,7 +29,7 @@ public:
     Node(int id): Node(id, 1.0, -1.0, -1.0, -1.0) {}
 
     Node(int id, double nw, double d, double ewd, double enwd)
-        : id_(id), node_weight_(nw), depth_(d), edge_weighted_depth_(ewd), edge_node_weighted_depth_(enwd) {
+        : id_(id), estimate_travel_time_(nw), depth_(d), edge_weighted_depth_(ewd), edge_node_weighted_depth_(enwd) {
         edges_.clear();
     }
 
@@ -45,7 +45,7 @@ public:
     std::shared_ptr<Edge> getEdgeTo(std::shared_ptr<Node> &p_n);
 
     int id_;
-    double node_weight_;
+    double estimate_travel_time_;
     double depth_;
     double edge_weighted_depth_;
     double edge_node_weighted_depth_;
