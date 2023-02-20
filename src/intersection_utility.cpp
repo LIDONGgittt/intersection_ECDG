@@ -51,4 +51,13 @@ std::shared_ptr<Edge> Node::getEdgeTo(Node &n) {
 std::shared_ptr<Edge> Node::getEdgeTo(std::shared_ptr<Node> &p_n) {
     return getEdgeTo(p_n->id_);
 }
+
+int CriticalResource::getDirectionID() {
+    return direction_id_;
+}
+int CriticalResource::getNumResources() {
+    return num_resources_;
+}
+
+
 } // namespace intersection_management

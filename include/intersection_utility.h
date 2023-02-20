@@ -57,5 +57,14 @@ public:
     double edge_weight_;
     bool bidirectional_;
 };
+
+class CriticalResource {
+public:
+    CriticalResource(int direction_id, int num_resources): direction_id_(direction_id), num_resources_(num_resources) {}
+    int direction_id_;
+    int num_resources_;
+    int getDirectionID();
+    int getNumResources();
+};
 } // namespace intersection_management
 #endif // INTERSECTION_MANAGEMENT_INTERSECTION_UTILITY_H_

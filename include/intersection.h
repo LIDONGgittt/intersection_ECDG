@@ -6,19 +6,22 @@
 #include <memory>
 
 namespace intersection_management {
-class Node;
-class Edge;
-class CriticalResource;
 
 class Intersection {
 public:
     Intersection() {
         reset();
-        initializeFromParam();
+        InitializeFromParam();
     }
 
-    void initializeFromParam();
+    void InitializeFromParam();
     void reset();
+    void AddNode(std::shared_ptr<Node> node);
+    int getNumNodes();
+    void AddEdge(std::shared_ptr<Edge> edge);
+    int getNumEdges();
+    void AddCriticalResourceFromGeometric();
+    int getNumCriticalResource();
 
     int num_directions_;
     std::vector<int> num_lanes_in_;
