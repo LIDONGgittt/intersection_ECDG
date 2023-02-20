@@ -49,3 +49,29 @@ TEST_F(TestNodeOfIntersectionUtility, ReturnNullWhenGettingNonexistEdge) {
 TEST_F(TestNodeOfIntersectionUtility, CanReturnCorrectEdgeOfNodes) {
     EXPECT_THAT(p_node_a_->getEdgeTo(1)->to_.lock()->id_, Eq(p_node_b_->id_));
 }
+
+class TestIntersectinUtilytyOfNewAttributes: public Test {
+public:
+    Node node_;
+    Edge edge_;
+    void SetUp() override {
+
+    }
+};
+
+TEST_F(TestIntersectinUtilytyOfNewAttributes, HasNewVehicleAttributes) {
+    EXPECT_NO_THROW(node_.time_window_);
+    EXPECT_NO_THROW(node_.estimate_arrival_time_);
+    EXPECT_NO_THROW(node_.in_bound_lane_id_);
+    EXPECT_NO_THROW(node_.out_bound_lane_id_);
+    EXPECT_NO_THROW(node_.in_bound_direction_id_);
+    EXPECT_NO_THROW(node_.out_bound_direction_id_);
+    EXPECT_NO_THROW(node_.critican_resource_);
+}
+
+TEST_F(TestIntersectinUtilytyOfNewAttributes, HasNewConflictAttributes) {
+    EXPECT_NO_THROW(edge_.conflict_type_);
+    EXPECT_NO_THROW(edge_.predecessor_id_);
+    EXPECT_NO_THROW(edge_.critical_resource_);
+    EXPECT_NO_THROW(edge_.estimate_offset_);
+}

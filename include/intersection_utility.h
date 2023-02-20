@@ -8,6 +8,20 @@ namespace intersection_management {
 class Edge;
 class CriticalResource;
 
+class ConflictType{
+    public:
+    ConflictType(){
+        diverging_ =false;
+        converging_ = false;
+        crossing_ = false;
+        competing_ = false;
+    }
+    bool diverging_;
+    bool converging_;
+    bool crossing_;
+    bool competing_;
+};
+
 class Node {
 public:
     Node(): Node(-1, 1.0, -1.0, -1.0, -1.0) {}
@@ -36,6 +50,15 @@ public:
     double edge_weighted_depth_;
     double edge_node_weighted_depth_;
     std::vector<std::shared_ptr<Edge>> edges_;
+
+    // new attributes
+    std::vector<double> time_window_;
+    double estimate_arrival_time_;
+    int in_bound_lane_id_;
+    int in_bound_direction_id_;
+    int out_bound_lane_id_;
+    int out_bound_direction_id_;
+    std::shared_ptr<CriticalResource> critican_resource_;
 };
 
 class Edge {
@@ -56,6 +79,12 @@ public:
     std::weak_ptr<Node> to_;
     double edge_weight_;
     bool bidirectional_;
+
+    // new attributes
+    int predecessor_id_;
+    double estimate_offset_;
+    std::shared_ptr<CriticalResource> critical_resource_;
+    ConflictType conflict_type_;
 };
 
 class CriticalResource {
