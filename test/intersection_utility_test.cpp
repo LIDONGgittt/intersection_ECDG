@@ -54,24 +54,37 @@ class TestIntersectinUtilytyOfNewAttributes: public Test {
 public:
     Node node_;
     Edge edge_;
+    std::shared_ptr<Node> p_node;
+    std::shared_ptr<Edge> p_edge;
+    ConflictType ct;
     void SetUp() override {
+        p_node = std::make_shared<Node>(1, 5, 2, 2, 0, 1, 2);
 
+        ct.setConverging();
+        ct.setCompeting();
+        p_edge = std::make_shared<Edge>(p_node, p_node, -1, ct, 5);
     }
 };
 
-TEST_F(TestIntersectinUtilytyOfNewAttributes, HasNewVehicleAttributes) {
-    EXPECT_NO_THROW(node_.time_window_);
-    EXPECT_NO_THROW(node_.estimate_arrival_time_);
-    EXPECT_NO_THROW(node_.in_bound_lane_id_);
-    EXPECT_NO_THROW(node_.out_bound_lane_id_);
-    EXPECT_NO_THROW(node_.in_bound_direction_id_);
-    EXPECT_NO_THROW(node_.out_bound_direction_id_);
-    EXPECT_NO_THROW(node_.critican_resource_);
+TEST_F(TestIntersectinUtilytyOfNewAttributes, CanInitializedCorrectly) {
+    EXPECT_THAT(p_node->id_, Eq(1));
+    EXPECT_THAT(p_node->estimate_travel_time_, Eq(5.0));
+    EXPECT_THAT(p_node->in_direction_id_, Eq(2));
+    EXPECT_THAT(p_node->in_lane_id_, Eq(2));
+    EXPECT_THAT(p_node->out_direction_id_, Eq(0));
+    EXPECT_THAT(p_node->out_lane_id_, Eq(1));
+    EXPECT_THAT(p_node->time_window_, Eq(std::vector<double>({-1, -1})));
+    EXPECT_THAT(p_node->critical_resource_, IsNull());
 }
-
 TEST_F(TestIntersectinUtilytyOfNewAttributes, HasNewConflictAttributes) {
-    EXPECT_NO_THROW(edge_.conflict_type_);
-    EXPECT_NO_THROW(edge_.predecessor_id_);
-    EXPECT_NO_THROW(edge_.critical_resource_);
-    EXPECT_NO_THROW(edge_.estimate_offset_);
+    EXPECT_THAT(p_edge->from_.lock(), Eq(p_node));
+    EXPECT_THAT(p_edge->to_.lock(), Eq(p_node));
+    EXPECT_THAT(p_edge->edge_weight_, Eq(1));
+    EXPECT_THAT(p_edge->estimate_offset_, Eq(-1));
+    EXPECT_THAT(p_edge->predecessor_id_, Eq(5));
+    EXPECT_THAT(p_edge->critical_resource_, IsNull());
+    EXPECT_THAT(p_edge->conflict_type_.competing_, IsTrue());
+    EXPECT_THAT(p_edge->conflict_type_.converging_, IsTrue());
+    EXPECT_THAT(p_edge->conflict_type_.crossing_, IsFalse());
+    EXPECT_THAT(p_edge->conflict_type_.diverging_, IsFalse());
 }
