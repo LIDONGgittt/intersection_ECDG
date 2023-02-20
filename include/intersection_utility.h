@@ -5,22 +5,8 @@
 #include <memory>
 
 namespace intersection_management {
-class Node;
 class Edge;
 class CriticalResource;
-
-class Intersection {
-public:
-    Intersection() {
-        initializeFromParam();
-    }
-
-    void initializeFromParam();
-
-    int num_directions_;
-    std::vector<int> num_lanes_in_;
-    std::vector<int> num_lanes_out_;
-}; // class Intersection
 
 class Node {
 public:

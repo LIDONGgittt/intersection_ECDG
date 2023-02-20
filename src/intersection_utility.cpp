@@ -1,17 +1,8 @@
 #include "intersection_utility.h"
 
 #include <iostream>
-#include "parameters.h"
 
 namespace intersection_management {
-
-extern Parameters param;
-
-void Intersection::initializeFromParam() {
-    num_directions_ = param.num_directions;
-    num_lanes_in_ = param.num_lanes_in;
-    num_lanes_out_ = param.num_lanes_out;
-}
 
 void Node::printDetail() {
     std::cout << "Node " << id_ << " has weight: " << node_weight_;
