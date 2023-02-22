@@ -153,7 +153,7 @@ void ConflictDirectedGraph::PrintGraph() {
     std::cout << "***********Begin of CDG details***********\n";
     std::cout << "Total nodes: " << num_nodes_ << std::endl;
     for (auto node : nodes_) {
-        node->printDetail();
+        node->printWeightAndEdge();
     }
     std::cout << "***********End of CDG details*************\n";
 }

@@ -93,7 +93,7 @@ void ConflictSpanningTree::PrintTree(bool verbose) {
     if (verbose) {
         std::cout << "Total nodes: " << num_nodes_ << std::endl;
         for (auto node : nodes_) {
-            node->printDetail();
+            node->printWeightAndEdge();
         }
     }
     std::cout << "@@Tree Depth: " << depth_;

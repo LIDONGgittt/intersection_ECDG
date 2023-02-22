@@ -4,6 +4,7 @@
 #include "intersection_utility.h"
 #include <vector>
 #include <memory>
+#include <random>
 
 namespace intersection_management {
 
@@ -22,6 +23,7 @@ public:
     int getNumEdges();
     void AddCriticalResourceFromGeometric();
     int getNumCriticalResource();
+    void AddRandomVehicleNodes(int count);
 
     int num_directions_;
     std::vector<int> num_lanes_in_;
@@ -29,6 +31,7 @@ public:
     std::vector<std::shared_ptr<Node>> nodes_;
     std::vector<std::shared_ptr<Edge>> edges_;
     std::vector<std::shared_ptr<CriticalResource>> critical_resources_;
+    std::mt19937 mt_;
 }; // class Intersection
 
 } // namespace intersection_management

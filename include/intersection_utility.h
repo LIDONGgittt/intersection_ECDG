@@ -69,6 +69,7 @@ public:
         estimate_arrival_time_ = eat;
     }
 
+    void printWeightAndEdge();
     void printDetail();
     bool isSameAs(int id);
     bool isSameAs(Node &n);

@@ -38,3 +38,7 @@ TEST_F(TestIntersection, CanAddCriticalResourceFromGeometric) {
     intersection.AddCriticalResourceFromGeometric();
     EXPECT_THAT(intersection.getNumCriticalResource(), Eq(1));
 }
+TEST_F(TestIntersection, CanAddRandomVehicleNode) {
+    intersection.AddRandomVehicleNodes(10);
+    EXPECT_THAT(intersection.getNumNodes(), Eq(10));
+}

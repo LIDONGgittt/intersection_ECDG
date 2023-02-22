@@ -4,13 +4,19 @@
 
 namespace intersection_management {
 
-void Node::printDetail() {
+void Node::printWeightAndEdge() {
     std::cout << "Node " << id_ << " has weight: " << estimate_travel_time_;
     std::cout << ". Connects to: ";
     for (auto p_edge : edges_) {
         std::cout << "--" << p_edge->edge_weight_ << "--> " << p_edge->to_.lock()->id_ << ",  ";
     }
     std::cout << std::endl;
+}
+
+void Node::printDetail() {
+    std::cout << "Node id: " << id_ << ", ett: " << estimate_travel_time_ << ", eat: " << estimate_arrival_time_;
+    std::cout << ", in-bound info: " << in_direction_id_ << "_" << in_lane_id_ << ", out_bound info: " << out_direction_id_ << "_" << out_lane_id_;
+    std::cout << ", time window: [" << time_window_[0] << "," << time_window_[1] << "].\n";
 }
 
 bool Node::isSameAs(int id) {
