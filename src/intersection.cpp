@@ -27,6 +27,9 @@ void Intersection::reset() {
     nodes_.clear();
     edges_.clear();
     critical_resources_.clear();
+    auto leading_node = std::make_shared<Node>(0); // virtual leading vehicle
+    leading_node->time_window_ = std::vector<double>({0, 0});
+    AddNode(leading_node);
 }
 
 void Intersection::AddNode(std::shared_ptr<Node> node) {
@@ -45,16 +48,7 @@ int Intersection::getNumEdges() {
     return edges_.size();
 }
 
-void Intersection::AddCriticalResourceFromGeometric() {
-    for (int i = 0; i < num_directions_; i++) {
-        if (num_lanes_out_[i] > 1) {
-            auto cr = std::make_shared<CriticalResource>(i, num_lanes_out_[i]);
-            critical_resources_.push_back(cr);
-        }
-    }
-}
-
-int Intersection::getNumCriticalResource() {
+int Intersection::getNumCriticalResources() {
     return critical_resources_.size();
 }
 
@@ -68,17 +62,33 @@ void Intersection::AddRandomVehicleNodes(int count) {
             last_arrival_time = n->estimate_arrival_time_;
     }
 
-    for (int id = 0; id < count; id++) {
+    for (int id = 1; id <= count; id++) { // id 0 reserved for virtual leading vehicle
         int in_dire = mt_() % num_directions_;
         int out_dire = mt_() % num_directions_;
-        if (getNumNodes() > 0) {
+        if (getNumNodes() > 1) {
             last_arrival_time += arrival_interval_dist(mt_);
         }
         auto node = std::make_shared<Node>(id, travel_time_dist(mt_), in_dire, mt_() % num_lanes_in_[in_dire],
                                            out_dire, mt_() % num_lanes_out_[out_dire], last_arrival_time);
         AddNode(node);
-        node->printDetail();
+        // node->printDetail();
     }
 }
 
+void Intersection::AddCriticalResourcesFromGeometric() {
+    critical_resources_.clear();
+    for (int i = 0; i < num_directions_; i++) {
+        if (num_lanes_out_[i] > 1) {
+            auto cr = std::make_shared<CriticalResource>(i, num_lanes_out_[i]);
+            critical_resources_.push_back(cr);
+        }
+    }
+}
+
+void Intersection::ConnectCriticalResourcesToNodes() {
+
+}
+void Intersection::ConnectEdgesToNodes() {
+
+}
 } // namespace intersection_management

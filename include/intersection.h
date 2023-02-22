@@ -21,9 +21,11 @@ public:
     int getNumNodes();
     void AddEdge(std::shared_ptr<Edge> edge);
     int getNumEdges();
-    void AddCriticalResourceFromGeometric();
-    int getNumCriticalResource();
+    void AddCriticalResourcesFromGeometric();
+    int getNumCriticalResources();
     void AddRandomVehicleNodes(int count);
+    void ConnectCriticalResourcesToNodes();
+    void ConnectEdgesToNodes();
 
     int num_directions_;
     std::vector<int> num_lanes_in_;
