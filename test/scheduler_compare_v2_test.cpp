@@ -3,7 +3,7 @@
 
 using namespace intersection_management;
 
-TEST(SchedulerTest, CompareMethods_v2) {
+TEST(BatchSchedulerTest, CompareMethods_v2) {
     ConflictDirectedGraph cdg = ConflictDirectedGraph();
 
     Scheduler scheduler_dfs = Scheduler();

@@ -3,7 +3,7 @@
 
 using namespace intersection_management;
 
-TEST(SchedulerTest, BruteForceBasic) {
+TEST(BatchSchedulerTest, BruteForceBasic) {
     ConflictDirectedGraph cdg = ConflictDirectedGraph();
 
     Scheduler scheduler_dfs = Scheduler();

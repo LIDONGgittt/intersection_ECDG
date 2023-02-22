@@ -2,6 +2,7 @@
 
 Requirements:
 
-- C++ 14
-- CMake 3.14
+- C++ >= 14
+- CMake >= 3.14
 - GoogleTest
+- yaml-cpp
