@@ -11,7 +11,7 @@ class TestIntersection: public Test {
 public:
     Intersection intersection;
     void SetUp() override {
-        intersection.num_directions_ = 4;
+        intersection.num_legs_ = 4;
         intersection.num_lanes_in_ = std::vector<int>({2, 1, 1, 1});
         intersection.num_lanes_out_ = std::vector<int>({1, 1, 2, 1});
     }
@@ -21,8 +21,8 @@ TEST_F(TestIntersection, CanInitializeIntersectionObject) {
     EXPECT_NO_THROW(Intersection intersection);
 }
 TEST_F(TestIntersection, AllDirectionsHaveInAndOutLanes) {
-    EXPECT_THAT(intersection.num_lanes_in_.size(), Eq(intersection.num_directions_));
-    EXPECT_THAT(intersection.num_lanes_out_.size(), Eq(intersection.num_directions_));
+    EXPECT_THAT(intersection.num_lanes_in_.size(), Eq(intersection.num_legs_));
+    EXPECT_THAT(intersection.num_lanes_out_.size(), Eq(intersection.num_legs_));
 }
 TEST_F(TestIntersection, CanAddNodes) {
     std::shared_ptr<Node> node = std::make_shared<Node>();
@@ -47,7 +47,7 @@ class TestIntersectionWithNodes: public Test {
 public:
     Intersection intersection;
     void SetUp() override {
-        intersection.num_directions_ = 4;
+        intersection.num_legs_ = 4;
         intersection.num_lanes_in_ = std::vector<int>({2, 1, 1, 1});
         intersection.num_lanes_out_ = std::vector<int>({1, 1, 2, 1});
         intersection.AddRandomVehicleNodes(5);

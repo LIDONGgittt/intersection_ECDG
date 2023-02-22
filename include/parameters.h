@@ -11,7 +11,7 @@ public:
     }
     void readParametersFromYaml();
 
-    int num_directions;
+    int num_legs;
     std::vector<int> num_lanes_in;
     std::vector<int> num_lanes_out;
     double arrival_interval_avg;

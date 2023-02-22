@@ -45,15 +45,15 @@ public:
         time_window_ = std::vector<double>({-1, -1});
         estimate_arrival_time_ = -1;
         in_lane_id_ = -1;
-        in_direction_id_ = -1;
+        in_leg_id_ = -1;
         out_lane_id_ = -1;
-        out_direction_id_ = -1;
+        out_leg_id_ = -1;
         critical_resource_ = nullptr;
     }
 
-    Node(int id, double ett, int in_dire_id, int in_lane_id, int out_dire_id, int out_lane_id)
-        : id_(id), estimate_travel_time_(ett), in_direction_id_(in_dire_id), in_lane_id_(in_lane_id),
-        out_direction_id_(out_dire_id), out_lane_id_(out_lane_id) {
+    Node(int id, double ett, int in_leg_id, int in_lane_id, int out_leg_id, int out_lane_id)
+        : id_(id), estimate_travel_time_(ett), in_leg_id_(in_leg_id), in_lane_id_(in_lane_id),
+        out_leg_id_(out_leg_id), out_lane_id_(out_lane_id) {
 
         time_window_ = std::vector<double>({-1, -1});
         estimate_arrival_time_ = -1;
@@ -64,8 +64,8 @@ public:
         edge_node_weighted_depth_ = -1;
     }
 
-    Node(int id, double ett, int in_dire_id, int in_lane_id, int out_dire_id, int out_lane_id, double eat)
-        : Node(id, ett, in_dire_id, in_lane_id, out_dire_id, out_lane_id) {
+    Node(int id, double ett, int in_leg_id, int in_lane_id, int out_leg_id, int out_lane_id, double eat)
+        : Node(id, ett, in_leg_id, in_lane_id, out_leg_id, out_lane_id) {
         estimate_arrival_time_ = eat;
     }
 
@@ -92,9 +92,9 @@ public:
     std::vector<double> time_window_;
     double estimate_arrival_time_;
     int in_lane_id_;
-    int in_direction_id_;
+    int in_leg_id_;
     int out_lane_id_;
-    int out_direction_id_;
+    int out_leg_id_;
     std::shared_ptr<CriticalResource> critical_resource_;
 };
 

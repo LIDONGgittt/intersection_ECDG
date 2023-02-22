@@ -1,4 +1,4 @@
-num_directions: 4
+num_legs: 4
 num_lanes_in: [2, 1, 1, 1]
 num_lanes_out: [1, 1, 2, 1]
 arrival_interval_avg: 3.0

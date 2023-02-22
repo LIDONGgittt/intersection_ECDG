@@ -27,7 +27,7 @@ public:
     void ConnectCriticalResourcesToNodes();
     void ConnectEdgesToNodes();
 
-    int num_directions_;
+    int num_legs_;
     std::vector<int> num_lanes_in_;
     std::vector<int> num_lanes_out_;
     std::vector<std::shared_ptr<Node>> nodes_;

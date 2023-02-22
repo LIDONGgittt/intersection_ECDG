@@ -9,7 +9,7 @@ namespace intersection_management {
 extern Parameters param;
 
 void Intersection::InitializeFromParam() {
-    num_directions_ = param.num_directions;
+    num_legs_ = param.num_legs;
     num_lanes_in_ = param.num_lanes_in;
     num_lanes_out_ = param.num_lanes_out;
 
@@ -63,13 +63,16 @@ void Intersection::AddRandomVehicleNodes(int count) {
     }
 
     for (int id = 1; id <= count; id++) { // id 0 reserved for virtual leading vehicle
-        int in_dire = mt_() % num_directions_;
-        int out_dire = mt_() % num_directions_;
+        int in_leg = mt_() % num_legs_;
+        int out_leg = mt_() % num_legs_;
+        while (out_leg == in_leg) { // in_leg and out_leg should be different
+            out_leg = mt_() % num_legs_;
+        }
         if (getNumNodes() > 1) {
             last_arrival_time += arrival_interval_dist(mt_);
         }
-        auto node = std::make_shared<Node>(id, travel_time_dist(mt_), in_dire, mt_() % num_lanes_in_[in_dire],
-                                           out_dire, mt_() % num_lanes_out_[out_dire], last_arrival_time);
+        auto node = std::make_shared<Node>(id, travel_time_dist(mt_), in_leg, mt_() % num_lanes_in_[in_leg],
+                                           out_leg, mt_() % num_lanes_out_[out_leg], last_arrival_time);
         AddNode(node);
         // node->printDetail();
     }
@@ -77,7 +80,7 @@ void Intersection::AddRandomVehicleNodes(int count) {
 
 void Intersection::AddCriticalResourcesFromGeometric() {
     critical_resources_.clear();
-    for (int i = 0; i < num_directions_; i++) {
+    for (int i = 0; i < num_legs_; i++) {
         if (num_lanes_out_[i] > 1) {
             auto cr = std::make_shared<CriticalResource>(i, num_lanes_out_[i]);
             critical_resources_.push_back(cr);

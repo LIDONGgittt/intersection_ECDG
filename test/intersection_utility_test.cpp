@@ -69,9 +69,9 @@ public:
 TEST_F(TestIntersectinUtilytyOfNewAttributes, CanInitializedCorrectly) {
     EXPECT_THAT(p_node->id_, Eq(1));
     EXPECT_THAT(p_node->estimate_travel_time_, Eq(5.0));
-    EXPECT_THAT(p_node->in_direction_id_, Eq(2));
+    EXPECT_THAT(p_node->in_leg_id_, Eq(2));
     EXPECT_THAT(p_node->in_lane_id_, Eq(2));
-    EXPECT_THAT(p_node->out_direction_id_, Eq(0));
+    EXPECT_THAT(p_node->out_leg_id_, Eq(0));
     EXPECT_THAT(p_node->out_lane_id_, Eq(1));
     EXPECT_THAT(p_node->time_window_, Eq(std::vector<double>({-1, -1})));
     EXPECT_THAT(p_node->critical_resource_, IsNull());
