@@ -26,30 +26,52 @@ void Intersection::InitializeFromParam() {
 void Intersection::reset() {
     nodes_.clear();
     edges_.clear();
-    critical_resources_map_.clear();
+    critical_resource_map_.clear();
+    leg_map_.clear();
+    lane_map_.clear();
     auto leading_node = std::make_shared<Node>(0); // virtual leading vehicle
     leading_node->time_window_ = std::vector<double>({0, 0});
     AddNode(leading_node);
+}
+
+void Intersection::AddIntersectionUtilitiesFromGeometric() {
+    AddCriticalResourcesFromGeometric();
+    AddLegsAndLanesFromGeometric();
+}
+
+void Intersection::AddCriticalResourcesFromGeometric() {
+    critical_resource_map_.clear();
+    for (int leg_id = 0; leg_id < num_legs_; leg_id++) {
+        if (num_lanes_out_vec_[leg_id] > 1) {
+            auto cr = std::make_shared<CriticalResource>(leg_id, num_lanes_out_vec_[leg_id]);
+            critical_resource_map_[leg_id] = cr;
+        }
+    }
+}
+
+void Intersection::AddLegsAndLanesFromGeometric() {
+    leg_map_.clear();
+    lane_map_.clear();
+    int lane_unique_id = 0;
+    for (int leg_id = 0; leg_id < num_legs_; leg_id++) {
+        leg_map_[leg_id] = std::make_shared<Leg>(leg_id);
+        for (int lane_in_id = 0; lane_in_id < num_lanes_in_vec_[leg_id]; lane_in_id++) {
+            auto lane_in = std::make_shared<Lane>(lane_in_id, 'i', lane_unique_id, leg_map_[leg_id]);
+            lane_map_[lane_unique_id++] = lane_in;
+        }
+        for (int lane_out_id = 0; lane_out_id < num_lanes_out_vec_[leg_id]; lane_out_id++) {
+            auto lane_out = std::make_shared<Lane>(lane_out_id, 'o', lane_unique_id, leg_map_[leg_id]);
+            lane_map_[lane_unique_id++] = lane_out;
+        }
+    }
 }
 
 void Intersection::AddNode(std::shared_ptr<Node> node) {
     nodes_.push_back(node);
 }
 
-int Intersection::getNumNodes() {
-    return nodes_.size();
-}
-
 void Intersection::AddEdge(std::shared_ptr<Edge> edge) {
     edges_.push_back(edge);
-}
-
-int Intersection::getNumEdges() {
-    return edges_.size();
-}
-
-int Intersection::getNumCriticalResources() {
-    return critical_resources_map_.size();
 }
 
 void Intersection::AddRandomVehicleNodes(int count) {
@@ -78,20 +100,10 @@ void Intersection::AddRandomVehicleNodes(int count) {
     }
 }
 
-void Intersection::AddCriticalResourcesFromGeometric() {
-    critical_resources_map_.clear();
-    for (int i = 0; i < num_legs_; i++) {
-        if (num_lanes_out_vec_[i] > 1) {
-            auto cr = std::make_shared<CriticalResource>(i, num_lanes_out_vec_[i]);
-            critical_resources_map_[i] = cr;
-        }
-    }
-}
-
 void Intersection::ConnectCriticalResourcesToNodes() {
     for (auto node : nodes_) {
-        auto iter_cr = critical_resources_map_.find(node->out_leg_id_);
-        if (iter_cr != critical_resources_map_.end()) {
+        auto iter_cr = critical_resource_map_.find(node->out_leg_id_);
+        if (iter_cr != critical_resource_map_.end()) {
             node->critical_resource_ = iter_cr->second;
             iter_cr->second->nodes_.push_back(node);
         }
@@ -101,7 +113,7 @@ void Intersection::ConnectCriticalResourcesToNodes() {
     }
 }
 void Intersection::ConnectEdgesToNodes() {
-    
+
 
 }
 } // namespace intersection_management

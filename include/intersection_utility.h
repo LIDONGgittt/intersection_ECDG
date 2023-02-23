@@ -183,13 +183,16 @@ public:
 
 class Lane {
 public:
-    Lane(int id, char sd, std::shared_ptr<Leg> leg = nullptr): id_(id), stream_direction_(sd), leg_(leg) {}
+    Lane(int id, char sd, int unique_id = -1, std::shared_ptr<Leg> leg = nullptr)
+        : id_(id), stream_direction_(sd), unique_id_(unique_id), leg_(leg) {}
     inline int getId() { return id_; }
+    inline int getUniqueId() { return unique_id_; }
     inline char getStreamDirection() { return stream_direction_; }
     inline bool isInBound() { return (stream_direction_ == 'i' || stream_direction_ == 'I'); }
     inline bool isOutBound() { return (stream_direction_ == 'o' || stream_direction_ == 'O'); }
 
     int id_;
+    int unique_id_;
     char stream_direction_;
     std::weak_ptr<Leg> leg_;
 };

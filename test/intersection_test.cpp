@@ -34,9 +34,11 @@ TEST_F(TestIntersection, CanAddEdges) {
     intersection.AddEdge(edge);
     EXPECT_THAT(intersection.getNumEdges(), Eq(1));
 }
-TEST_F(TestIntersection, CanAddCriticalResourceFromGeometric) {
-    intersection.AddCriticalResourcesFromGeometric();
+TEST_F(TestIntersection, CanAddIntersectionUtilitiesFromGeometric) {
+    intersection.AddIntersectionUtilitiesFromGeometric();
     EXPECT_THAT(intersection.getNumCriticalResources(), Eq(1));
+    EXPECT_THAT(intersection.getNumLegs(), Eq(4));
+    EXPECT_THAT(intersection.getNumLanes(), Eq(10));
 }
 TEST_F(TestIntersection, CanAddRandomVehicleNode) {
     intersection.AddRandomVehicleNodes(10);
@@ -51,12 +53,12 @@ public:
         intersection.num_lanes_in_vec_ = std::vector<int>({1, 1, 2, 1});
         intersection.num_lanes_out_vec_ = std::vector<int>({2, 1, 1, 1});
         intersection.AddRandomVehicleNodes(5);
-        intersection.AddCriticalResourcesFromGeometric();
+        intersection.AddIntersectionUtilitiesFromGeometric();
     }
 };
 TEST_F(TestIntersectionWithNodes, CanConnectCriticalResources) {
     EXPECT_NO_THROW(intersection.ConnectCriticalResourcesToNodes());
-    EXPECT_THAT(intersection.critical_resources_map_.at(0)->nodes_.size(), Eq(2));
+    EXPECT_THAT(intersection.critical_resource_map_.at(0)->nodes_.size(), Eq(2));
 }
 TEST_F(TestIntersectionWithNodes, CanConnectEdges) {
     EXPECT_NO_THROW(intersection.ConnectEdgesToNodes());

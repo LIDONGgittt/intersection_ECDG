@@ -16,24 +16,31 @@ public:
         InitializeFromParam();
     }
 
-    void InitializeFromParam();
     void reset();
-    void AddNode(std::shared_ptr<Node> node);
-    int getNumNodes();
-    void AddEdge(std::shared_ptr<Edge> edge);
-    int getNumEdges();
+    void InitializeFromParam();
+    void AddIntersectionUtilitiesFromGeometric();
     void AddCriticalResourcesFromGeometric();
-    int getNumCriticalResources();
+    void AddLegsAndLanesFromGeometric();
+    void AddNode(std::shared_ptr<Node> node);
+    void AddEdge(std::shared_ptr<Edge> edge);
     void AddRandomVehicleNodes(int count);
     void ConnectCriticalResourcesToNodes();
     void ConnectEdgesToNodes();
+
+    inline int getNumNodes() { return nodes_.size(); }
+    inline int getNumEdges() { return edges_.size(); }
+    inline int getNumCriticalResources() { return critical_resource_map_.size(); }
+    inline int getNumLegs() { return leg_map_.size(); }
+    inline int getNumLanes() { return lane_map_.size(); }
 
     int num_legs_;
     std::vector<int> num_lanes_in_vec_;
     std::vector<int> num_lanes_out_vec_;
     std::vector<std::shared_ptr<Node>> nodes_;
     std::vector<std::shared_ptr<Edge>> edges_;
-    std::unordered_map<int, std::shared_ptr<CriticalResource>> critical_resources_map_;
+    std::unordered_map<int, std::shared_ptr<CriticalResource>> critical_resource_map_;
+    std::unordered_map<int, std::shared_ptr<Leg>> leg_map_;
+    std::unordered_map<int, std::shared_ptr<Lane>> lane_map_;
     std::mt19937 mt_;
 }; // class Intersection
 

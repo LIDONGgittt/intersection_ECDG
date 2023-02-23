@@ -107,6 +107,7 @@ TEST_F(TestIntersectionUtility, HaveLaneAttributes) {
     EXPECT_THAT(lane2->isOutBound(), IsTrue());
     EXPECT_THAT(lane1->getId(), Eq(0));
     EXPECT_THAT(lane1->getStreamDirection(), AnyOf(Eq('I'), Eq('i')));
+    EXPECT_THAT(lane1->getUniqueId(), Eq(-1));
 }
 TEST_F(TestIntersectionUtility, HaveLegAttributes) {
     EXPECT_THAT(leg->getId(), Eq(0));
