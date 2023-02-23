@@ -5,6 +5,7 @@
 #include <vector>
 #include <memory>
 #include <random>
+#include <unordered_map>
 
 namespace intersection_management {
 
@@ -28,11 +29,11 @@ public:
     void ConnectEdgesToNodes();
 
     int num_legs_;
-    std::vector<int> num_lanes_in_;
-    std::vector<int> num_lanes_out_;
+    std::vector<int> num_lanes_in_vec_;
+    std::vector<int> num_lanes_out_vec_;
     std::vector<std::shared_ptr<Node>> nodes_;
     std::vector<std::shared_ptr<Edge>> edges_;
-    std::vector<std::shared_ptr<CriticalResource>> critical_resources_;
+    std::unordered_map<int, std::shared_ptr<CriticalResource>> critical_resources_map_;
     std::mt19937 mt_;
 }; // class Intersection
 

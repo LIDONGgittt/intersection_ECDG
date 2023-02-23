@@ -59,14 +59,13 @@ public:
     ConflictType ct;
     void SetUp() override {
         p_node = std::make_shared<Node>(1, 5, 2, 2, 0, 1, 2);
-
         ct.setConverging();
         ct.setCompeting();
         p_edge = std::make_shared<Edge>(p_node, p_node, -1, ct, 5);
     }
 };
 
-TEST_F(TestIntersectinUtilytyOfNewAttributes, CanInitializedCorrectly) {
+TEST_F(TestIntersectinUtilytyOfNewAttributes, CanInitializeNodeCorrectly) {
     EXPECT_THAT(p_node->id_, Eq(1));
     EXPECT_THAT(p_node->estimate_travel_time_, Eq(5.0));
     EXPECT_THAT(p_node->in_leg_id_, Eq(2));
@@ -76,7 +75,7 @@ TEST_F(TestIntersectinUtilytyOfNewAttributes, CanInitializedCorrectly) {
     EXPECT_THAT(p_node->time_window_, Eq(std::vector<double>({-1, -1})));
     EXPECT_THAT(p_node->critical_resource_, IsNull());
 }
-TEST_F(TestIntersectinUtilytyOfNewAttributes, HasNewConflictAttributes) {
+TEST_F(TestIntersectinUtilytyOfNewAttributes, HasConflictAttributesInEdges) {
     EXPECT_THAT(p_edge->from_.lock(), Eq(p_node));
     EXPECT_THAT(p_edge->to_.lock(), Eq(p_node));
     EXPECT_THAT(p_edge->edge_weight_, Eq(1));
@@ -87,4 +86,34 @@ TEST_F(TestIntersectinUtilytyOfNewAttributes, HasNewConflictAttributes) {
     EXPECT_THAT(p_edge->conflict_type_.converging_, IsTrue());
     EXPECT_THAT(p_edge->conflict_type_.crossing_, IsFalse());
     EXPECT_THAT(p_edge->conflict_type_.diverging_, IsFalse());
+}
+
+class TestIntersectionUtility: public Test {
+public:
+    std::shared_ptr<Route> route;
+    std::shared_ptr<Leg> leg;
+    std::shared_ptr<Lane> lane1, lane2;
+    void SetUp() override {
+        lane1 = std::make_shared<Lane>(0, 'i');
+        lane2 = std::make_shared<Lane>(1, 'o');
+        leg = std::make_shared<Leg>(0);
+        leg->lanes_in_.push_back(lane1);
+        leg->lanes_out_.push_back(lane2);
+        route = std::make_shared<Route>(lane1, lane2);
+    }
+};
+TEST_F(TestIntersectionUtility, HaveLaneAttributes) {
+    EXPECT_THAT(lane1->isInBound(), IsTrue());
+    EXPECT_THAT(lane2->isOutBound(), IsTrue());
+    EXPECT_THAT(lane1->getId(), Eq(0));
+    EXPECT_THAT(lane1->getStreamDirection(), AnyOf(Eq('I'), Eq('i')));
+}
+TEST_F(TestIntersectionUtility, HaveLegAttributes) {
+    EXPECT_THAT(leg->getId(), Eq(0));
+    EXPECT_THAT(leg->getNumLanesIn(), Eq(1));
+    EXPECT_THAT(leg->getNumLanesOut(), Eq(1));
+}
+TEST_F(TestIntersectionUtility, HaveRouteAttributes) {
+    EXPECT_THAT(route->getLaneIn().lock(), Eq(lane1));
+    EXPECT_THAT(route->getLaneOut().lock(), Eq(lane2));
 }

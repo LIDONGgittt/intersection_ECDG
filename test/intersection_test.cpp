@@ -12,8 +12,8 @@ public:
     Intersection intersection;
     void SetUp() override {
         intersection.num_legs_ = 4;
-        intersection.num_lanes_in_ = std::vector<int>({2, 1, 1, 1});
-        intersection.num_lanes_out_ = std::vector<int>({1, 1, 2, 1});
+        intersection.num_lanes_in_vec_ = std::vector<int>({1, 1, 2, 1});
+        intersection.num_lanes_out_vec_ = std::vector<int>({2, 1, 1, 1});
     }
 };
 
@@ -21,8 +21,8 @@ TEST_F(TestIntersection, CanInitializeIntersectionObject) {
     EXPECT_NO_THROW(Intersection intersection);
 }
 TEST_F(TestIntersection, AllDirectionsHaveInAndOutLanes) {
-    EXPECT_THAT(intersection.num_lanes_in_.size(), Eq(intersection.num_legs_));
-    EXPECT_THAT(intersection.num_lanes_out_.size(), Eq(intersection.num_legs_));
+    EXPECT_THAT(intersection.num_lanes_in_vec_.size(), Eq(intersection.num_legs_));
+    EXPECT_THAT(intersection.num_lanes_out_vec_.size(), Eq(intersection.num_legs_));
 }
 TEST_F(TestIntersection, CanAddNodes) {
     std::shared_ptr<Node> node = std::make_shared<Node>();
@@ -48,14 +48,15 @@ public:
     Intersection intersection;
     void SetUp() override {
         intersection.num_legs_ = 4;
-        intersection.num_lanes_in_ = std::vector<int>({2, 1, 1, 1});
-        intersection.num_lanes_out_ = std::vector<int>({1, 1, 2, 1});
+        intersection.num_lanes_in_vec_ = std::vector<int>({1, 1, 2, 1});
+        intersection.num_lanes_out_vec_ = std::vector<int>({2, 1, 1, 1});
         intersection.AddRandomVehicleNodes(5);
         intersection.AddCriticalResourcesFromGeometric();
     }
 };
 TEST_F(TestIntersectionWithNodes, CanConnectCriticalResources) {
     EXPECT_NO_THROW(intersection.ConnectCriticalResourcesToNodes());
+    EXPECT_THAT(intersection.critical_resources_map_.at(0)->nodes_.size(), Eq(2));
 }
 TEST_F(TestIntersectionWithNodes, CanConnectEdges) {
     EXPECT_NO_THROW(intersection.ConnectEdgesToNodes());

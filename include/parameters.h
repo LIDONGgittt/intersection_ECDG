@@ -12,8 +12,8 @@ public:
     void readParametersFromYaml();
 
     int num_legs;
-    std::vector<int> num_lanes_in;
-    std::vector<int> num_lanes_out;
+    std::vector<int> num_lanes_in_vec;
+    std::vector<int> num_lanes_out_vec;
     double arrival_interval_avg;
     std::vector<int> travel_time_range;
     int random_seed;

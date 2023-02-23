@@ -6,8 +6,13 @@
 #include <cmath>
 
 namespace intersection_management {
-class Edge;
+class Route;
+class Leg;
 class CriticalResource;
+class Lane;
+class Node;
+class Edge;
+class ConflictType;
 
 class ConflictType {
 public:
@@ -25,6 +30,10 @@ public:
     inline void unsetCrossing() { crossing_ = false; }
     inline void setCompeting() { competing_ = true; }
     inline void unsetCompeting() { competing_ = false; }
+    inline bool isDiverging() { return diverging_; }
+    inline bool isConverging() { return converging_; }
+    inline bool isCrossing() { return crossing_; }
+    inline bool isCompeting() { return competing_; }
 
     bool diverging_;
     bool converging_;
@@ -96,6 +105,7 @@ public:
     int out_lane_id_;
     int out_leg_id_;
     std::shared_ptr<CriticalResource> critical_resource_;
+    std::shared_ptr<Route> route_;
 };
 
 class Edge {
@@ -137,11 +147,53 @@ public:
 
 class CriticalResource {
 public:
-    CriticalResource(int direction_id, int num_resources): direction_id_(direction_id), num_resources_(num_resources) {}
-    int direction_id_;
-    int num_resources_;
-    int getDirectionID();
+    CriticalResource(int leg_id, int num_resources): leg_id_(leg_id), num_resources_(num_resources) {
+        nodes_.clear();
+    }
+    int getLegId();
     int getNumResources();
+    int leg_id_;
+    int num_resources_;
+    std::vector<std::weak_ptr<Node>> nodes_;
+    std::weak_ptr<Leg> leg_;
 };
+
+class Route {
+public:
+    Route(std::shared_ptr<Lane> lane_in = nullptr, std::shared_ptr<Lane> lane_out = nullptr) {
+        lane_in_ = lane_in;
+        lane_out_ = lane_out;
+    }
+    inline std::weak_ptr<Lane> getLaneIn() { return lane_in_; };
+    inline std::weak_ptr<Lane> getLaneOut() { return lane_out_; };
+    std::weak_ptr<Lane> lane_in_;
+    std::weak_ptr<Lane> lane_out_;
+};
+
+class Leg {
+public:
+    Leg(int id):id_(id) {}
+    inline int getId() { return id_; }
+    inline int getNumLanesIn() { return lanes_in_.size(); }
+    inline int getNumLanesOut() { return lanes_out_.size(); }
+    int id_;
+    std::vector<std::weak_ptr<Lane>> lanes_in_;
+    std::vector<std::weak_ptr<Lane>> lanes_out_;
+};
+
+class Lane {
+public:
+    Lane(int id, char sd, std::shared_ptr<Leg> leg = nullptr): id_(id), stream_direction_(sd), leg_(leg) {}
+    inline int getId() { return id_; }
+    inline char getStreamDirection() { return stream_direction_; }
+    inline bool isInBound() { return (stream_direction_ == 'i' || stream_direction_ == 'I'); }
+    inline bool isOutBound() { return (stream_direction_ == 'o' || stream_direction_ == 'O'); }
+
+    int id_;
+    char stream_direction_;
+    std::weak_ptr<Leg> leg_;
+};
+
+// class 
 } // namespace intersection_management
 #endif // INTERSECTION_MANAGEMENT_INTERSECTION_UTILITY_H_
