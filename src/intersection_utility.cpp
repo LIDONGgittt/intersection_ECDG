@@ -8,7 +8,7 @@ void Node::printWeightAndEdge() {
     std::cout << "Node " << id_ << " has weight: " << estimate_travel_time_;
     std::cout << ". Connects to: ";
     for (auto p_edge : edges_) {
-        std::cout << "--" << p_edge->edge_weight_ << "--> " << p_edge->to_.lock()->id_ << ",  ";
+        std::cout << "--" << p_edge->edge_weight_ << "--> " << p_edge->node2_.lock()->id_ << ",  ";
     }
     std::cout << std::endl;
 }
@@ -30,7 +30,7 @@ bool Node::isSameAs(std::shared_ptr<Node> &p_n) {
 }
 bool Node::isConnectedTo(int id) {
     for (auto p_edge : edges_) {
-        if (p_edge->to_.lock()->id_ == id) {
+        if (p_edge->node2_.lock()->id_ == id) {
             return true;
         }
     }
@@ -45,7 +45,7 @@ bool Node::isConnectedTo(std::shared_ptr<Node> &p_n) {
 
 std::shared_ptr<Edge> Node::getEdgeTo(int id) {
     for (auto p_edge : edges_) {
-        if (p_edge->to_.lock()->id_ == id) {
+        if (p_edge->node2_.lock()->id_ == id) {
             return p_edge;
         }
     }

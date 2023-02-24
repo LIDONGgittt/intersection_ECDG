@@ -35,6 +35,7 @@ public:
     inline bool isConverging() { return converging_; }
     inline bool isCrossing() { return crossing_; }
     inline bool isCompeting() { return competing_; }
+    inline bool isNotComflicting() { return !(diverging_ || converging_ || crossing_ || competing_); }
 
     bool diverging_;
     bool converging_;
@@ -108,20 +109,20 @@ public:
 class Edge {
 public:
     Edge() {
-        from_.reset();
-        to_.reset();
+        node1_.reset();
+        node2_.reset();
         edge_weight_ = 1.0;
         bidirectional_ = false;
     }
-    Edge(std::shared_ptr<Node> p_from, std::shared_ptr<Node> p_to, double weight = 1.0, bool bidirectional = false)
-        : from_(p_from), to_(p_to), edge_weight_(weight), bidirectional_(bidirectional) {
+    Edge(std::shared_ptr<Node> p_node1, std::shared_ptr<Node> p_node2, double weight = 1.0, bool bidirectional = false)
+        : node1_(p_node1), node2_(p_node2), edge_weight_(weight), bidirectional_(bidirectional) {
         estimate_offset_ = weight;
         predecessor_id_ = -1;
         critical_resource_.reset();
     }
 
-    Edge(std::shared_ptr<Node> p_from, std::shared_ptr<Node> p_to, double eo, ConflictType ct, int pred_id = -1)
-        : Edge(p_from, p_to, std::max(eo, 1.0), false) {
+    Edge(std::shared_ptr<Node> p_node1, std::shared_ptr<Node> p_node2, double eo, ConflictType ct, int pred_id = -1)
+        : Edge(p_node1, p_node2, std::max(eo, 1.0), false) {
         estimate_offset_ = eo;
         predecessor_id_ = pred_id;
         conflict_type_ = ct;
@@ -130,8 +131,8 @@ public:
     inline bool isBidirectional() {
         return bidirectional_;
     }
-    std::weak_ptr<Node> from_;
-    std::weak_ptr<Node> to_;
+    std::weak_ptr<Node> node1_;
+    std::weak_ptr<Node> node2_;
     double edge_weight_;
     bool bidirectional_;
 

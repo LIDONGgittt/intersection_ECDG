@@ -45,7 +45,7 @@ void ConflictSpanningTree::AddNode(double weight) {
 }
 
 void ConflictSpanningTree::AddEdge(std::shared_ptr<Edge> edge) {
-    AddEdge(edge->from_.lock()->id_, edge->to_.lock()->id_, edge->edge_weight_);
+    AddEdge(edge->node1_.lock()->id_, edge->node2_.lock()->id_, edge->edge_weight_);
 }
 
 void ConflictSpanningTree::AddEdge(int from, int to, double weight) {

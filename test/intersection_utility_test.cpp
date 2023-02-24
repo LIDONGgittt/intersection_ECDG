@@ -47,7 +47,7 @@ TEST_F(TestNodeOfIntersectionUtility, ReturnNullWhenGettingNonexistEdge) {
     EXPECT_THAT(p_node_a_->getEdgeTo(2), IsNull());
 }
 TEST_F(TestNodeOfIntersectionUtility, CanReturnCorrectEdgeOfNodes) {
-    EXPECT_THAT(p_node_a_->getEdgeTo(1)->to_.lock()->id_, Eq(p_node_b_->id_));
+    EXPECT_THAT(p_node_a_->getEdgeTo(1)->node2_.lock()->id_, Eq(p_node_b_->id_));
 }
 
 class TestIntersectinUtilytyOfNewAttributes: public Test {
@@ -76,8 +76,8 @@ TEST_F(TestIntersectinUtilytyOfNewAttributes, CanInitializeNodeCorrectly) {
     EXPECT_THAT(p_node->critical_resource_, IsNull());
 }
 TEST_F(TestIntersectinUtilytyOfNewAttributes, HasConflictAttributesInEdges) {
-    EXPECT_THAT(p_edge->from_.lock(), Eq(p_node));
-    EXPECT_THAT(p_edge->to_.lock(), Eq(p_node));
+    EXPECT_THAT(p_edge->node1_.lock(), Eq(p_node));
+    EXPECT_THAT(p_edge->node2_.lock(), Eq(p_node));
     EXPECT_THAT(p_edge->edge_weight_, Eq(1));
     EXPECT_THAT(p_edge->estimate_offset_, Eq(-1));
     EXPECT_THAT(p_edge->predecessor_id_, Eq(5));

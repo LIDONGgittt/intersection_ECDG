@@ -27,7 +27,7 @@ public:
     void AddRandomVehicleNodes(int count);
     void AssignRoutesToNodes();
     void AssignCriticalResourcesToNodes();
-    void AssignEdgesWithRandomOffsetToNodes();
+    void AssignEdgesWithSafetyOffsetToNodes();
 
     inline int getNumNodes() { return nodes_.size(); }
     inline int getNumEdges() { return edges_.size(); }

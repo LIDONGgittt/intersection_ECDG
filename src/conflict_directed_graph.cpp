@@ -134,7 +134,7 @@ bool ConflictDirectedGraph::isFullyConnected() {
         from = visit_queue.front();
         visit_queue.pop();
         for (auto p_edge : nodes_[from]->edges_) {
-            to = p_edge->to_.lock()->id_;
+            to = p_edge->node2_.lock()->id_;
             if (!is_visited[to]) {
                 visit_queue.push(to);
                 is_visited[to] = true;
