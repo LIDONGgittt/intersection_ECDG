@@ -21,11 +21,13 @@ public:
     void AddIntersectionUtilitiesFromGeometric();
     void AddCriticalResourcesFromGeometric();
     void AddLegsAndLanesFromGeometric();
+    void UpdateReferencesOfCriticalResoucesAndLegs();
     void AddNode(std::shared_ptr<Node> node);
     void AddEdge(std::shared_ptr<Edge> edge);
     void AddRandomVehicleNodes(int count);
-    void ConnectCriticalResourcesToNodes();
-    void ConnectEdgesToNodes();
+    void AssignRoutesToNodes();
+    void AssignCriticalResourcesToNodes();
+    void AssignEdgesWithRandomOffsetToNodes();
 
     inline int getNumNodes() { return nodes_.size(); }
     inline int getNumEdges() { return edges_.size(); }

@@ -97,8 +97,8 @@ public:
         lane1 = std::make_shared<Lane>(0, 'i');
         lane2 = std::make_shared<Lane>(1, 'o');
         leg = std::make_shared<Leg>(0);
-        leg->lanes_in_.push_back(lane1);
-        leg->lanes_out_.push_back(lane2);
+        leg->lanes_in_map_[0] = lane1;
+        leg->lanes_out_map_[0] = lane2;
         route = std::make_shared<Route>(lane1, lane2);
     }
 };
@@ -115,6 +115,6 @@ TEST_F(TestIntersectionUtility, HaveLegAttributes) {
     EXPECT_THAT(leg->getNumLanesOut(), Eq(1));
 }
 TEST_F(TestIntersectionUtility, HaveRouteAttributes) {
-    EXPECT_THAT(route->getLaneIn().lock(), Eq(lane1));
-    EXPECT_THAT(route->getLaneOut().lock(), Eq(lane2));
+    EXPECT_THAT(route->getLaneIn(), Eq(lane1));
+    EXPECT_THAT(route->getLaneOut(), Eq(lane2));
 }

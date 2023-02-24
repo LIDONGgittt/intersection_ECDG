@@ -56,10 +56,15 @@ public:
         intersection.AddIntersectionUtilitiesFromGeometric();
     }
 };
-TEST_F(TestIntersectionWithNodes, CanConnectCriticalResources) {
-    EXPECT_NO_THROW(intersection.ConnectCriticalResourcesToNodes());
+TEST_F(TestIntersectionWithNodes, CanAssignCriticalResources) {
+    EXPECT_NO_THROW(intersection.AssignCriticalResourcesToNodes());
     EXPECT_THAT(intersection.critical_resource_map_.at(0)->nodes_.size(), Eq(2));
 }
-TEST_F(TestIntersectionWithNodes, CanConnectEdges) {
-    EXPECT_NO_THROW(intersection.ConnectEdgesToNodes());
+TEST_F(TestIntersectionWithNodes, CanAssignRouteToNodes) {
+    EXPECT_NO_THROW(intersection.AssignRoutesToNodes());
+    EXPECT_THAT(intersection.nodes_[1]->route_->getLaneIn(), NotNull());
+    EXPECT_THAT(intersection.nodes_[1]->route_->getLaneOut(), NotNull());
+}
+TEST_F(TestIntersectionWithNodes, CanAssignEdgesToNodes) {
+    EXPECT_NO_THROW(intersection.AssignEdgesWithRandomOffsetToNodes());
 }

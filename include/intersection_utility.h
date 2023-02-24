@@ -4,6 +4,7 @@
 #include <vector>
 #include <memory>
 #include <cmath>
+#include <unordered_map>
 
 namespace intersection_management {
 class Route;
@@ -58,19 +59,15 @@ public:
         out_lane_id_ = -1;
         out_leg_id_ = -1;
         critical_resource_ = nullptr;
+        route_ = nullptr;
     }
 
     Node(int id, double ett, int in_leg_id, int in_lane_id, int out_leg_id, int out_lane_id)
-        : id_(id), estimate_travel_time_(ett), in_leg_id_(in_leg_id), in_lane_id_(in_lane_id),
-        out_leg_id_(out_leg_id), out_lane_id_(out_lane_id) {
-
-        time_window_ = std::vector<double>({-1, -1});
-        estimate_arrival_time_ = -1;
-        critical_resource_ = nullptr;
-        edges_.clear();
-        depth_ = -1;
-        edge_weighted_depth_ = -1;
-        edge_node_weighted_depth_ = -1;
+        : Node(id, ett, -1, -1, -1) {
+        in_leg_id_ = in_leg_id;
+        in_lane_id_ = in_lane_id;
+        out_leg_id_ = out_leg_id;
+        out_lane_id_ = out_lane_id;
     }
 
     Node(int id, double ett, int in_leg_id, int in_lane_id, int out_leg_id, int out_lane_id, double eat)
@@ -164,21 +161,27 @@ public:
         lane_in_ = lane_in;
         lane_out_ = lane_out;
     }
-    inline std::weak_ptr<Lane> getLaneIn() { return lane_in_; };
-    inline std::weak_ptr<Lane> getLaneOut() { return lane_out_; };
-    std::weak_ptr<Lane> lane_in_;
-    std::weak_ptr<Lane> lane_out_;
+    inline std::shared_ptr<Lane> getLaneIn() { return lane_in_; };
+    inline std::shared_ptr<Lane> getLaneOut() { return lane_out_; };
+    std::shared_ptr<Lane> lane_in_;
+    std::shared_ptr<Lane> lane_out_;
 };
 
 class Leg {
 public:
-    Leg(int id):id_(id) {}
+    Leg(int id):id_(id) {
+        lanes_in_map_.clear();
+        lanes_out_map_.clear();
+        critical_resource_.reset();
+    }
     inline int getId() { return id_; }
-    inline int getNumLanesIn() { return lanes_in_.size(); }
-    inline int getNumLanesOut() { return lanes_out_.size(); }
+    inline int getNumLanesIn() { return lanes_in_map_.size(); }
+    inline int getNumLanesOut() { return lanes_out_map_.size(); }
+    inline std::shared_ptr<CriticalResource> getCriticalResource() { return critical_resource_; }
     int id_;
-    std::vector<std::weak_ptr<Lane>> lanes_in_;
-    std::vector<std::weak_ptr<Lane>> lanes_out_;
+    std::unordered_map<int, std::shared_ptr<Lane>> lanes_in_map_;
+    std::unordered_map<int, std::shared_ptr<Lane>> lanes_out_map_;
+    std::shared_ptr<CriticalResource> critical_resource_;
 };
 
 class Lane {

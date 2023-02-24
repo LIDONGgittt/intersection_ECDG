@@ -37,6 +37,7 @@ void Intersection::reset() {
 void Intersection::AddIntersectionUtilitiesFromGeometric() {
     AddCriticalResourcesFromGeometric();
     AddLegsAndLanesFromGeometric();
+    UpdateReferencesOfCriticalResoucesAndLegs();
 }
 
 void Intersection::AddCriticalResourcesFromGeometric() {
@@ -58,10 +59,23 @@ void Intersection::AddLegsAndLanesFromGeometric() {
         for (int lane_in_id = 0; lane_in_id < num_lanes_in_vec_[leg_id]; lane_in_id++) {
             auto lane_in = std::make_shared<Lane>(lane_in_id, 'i', lane_unique_id, leg_map_[leg_id]);
             lane_map_[lane_unique_id++] = lane_in;
+            leg_map_[leg_id]->lanes_in_map_[lane_in_id] = lane_in;
         }
         for (int lane_out_id = 0; lane_out_id < num_lanes_out_vec_[leg_id]; lane_out_id++) {
             auto lane_out = std::make_shared<Lane>(lane_out_id, 'o', lane_unique_id, leg_map_[leg_id]);
             lane_map_[lane_unique_id++] = lane_out;
+            leg_map_[leg_id]->lanes_out_map_[lane_out_id] = lane_out;
+        }
+    }
+}
+
+void Intersection::UpdateReferencesOfCriticalResoucesAndLegs() {
+    for (auto cr_pair : critical_resource_map_) {
+        cr_pair.second->leg_ = leg_map_[cr_pair.second->leg_id_];
+    }
+    for (auto leg_pair : leg_map_) {
+        if (critical_resource_map_.find(leg_pair.first) != critical_resource_map_.end()) {
+            leg_pair.second->critical_resource_ = critical_resource_map_[leg_pair.first];
         }
     }
 }
@@ -100,7 +114,16 @@ void Intersection::AddRandomVehicleNodes(int count) {
     }
 }
 
-void Intersection::ConnectCriticalResourcesToNodes() {
+void Intersection::AssignRoutesToNodes() {
+    for (int id = 1; id < nodes_.size(); id++) {
+        auto &node = nodes_[id];
+        std::shared_ptr<Lane> lane_in = leg_map_[node->in_leg_id_]->lanes_in_map_[node->in_lane_id_];
+        std::shared_ptr<Lane> lane_out = leg_map_[node->in_leg_id_]->lanes_in_map_[node->in_lane_id_];
+        node->route_ = std::make_shared<Route>(lane_in, lane_out);
+    }
+}
+
+void Intersection::AssignCriticalResourcesToNodes() {
     for (auto node : nodes_) {
         auto iter_cr = critical_resource_map_.find(node->out_leg_id_);
         if (iter_cr != critical_resource_map_.end()) {
@@ -112,8 +135,13 @@ void Intersection::ConnectCriticalResourcesToNodes() {
         }
     }
 }
-void Intersection::ConnectEdgesToNodes() {
 
+void Intersection::AssignEdgesWithRandomOffsetToNodes() {
+    for (int i = 1; i < nodes_.size(); i++) {
 
+        for (int j = i + 1; j < nodes_.size(); j++) {
+
+        }
+    }
 }
 } // namespace intersection_management
