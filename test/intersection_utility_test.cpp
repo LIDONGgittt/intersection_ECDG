@@ -19,6 +19,7 @@ public:
         p_node_b_ = std::make_shared<Node>(Node(1, 1, 0, 0, 0));
         p_edge_a_to_b_ = std::make_shared<Edge>(Edge(p_node_a_, p_node_b_, 2, false));
         p_node_a_->edges_.push_back(p_edge_a_to_b_);
+        p_node_b_->edges_.push_back(p_edge_a_to_b_);
     }
 };
 
@@ -48,6 +49,22 @@ TEST_F(TestNodeOfIntersectionUtility, ReturnNullWhenGettingNonexistEdge) {
 }
 TEST_F(TestNodeOfIntersectionUtility, CanReturnCorrectEdgeOfNodes) {
     EXPECT_THAT(p_node_a_->getEdgeTo(1)->node2_.lock()->id_, Eq(p_node_b_->id_));
+}
+TEST_F(TestNodeOfIntersectionUtility, CanCheckUndirectionalConnectionWithId) {
+    EXPECT_THAT(p_node_a_->isConnectedWith(p_node_b_->id_), IsTrue());
+    EXPECT_THAT(p_node_b_->isConnectedWith(p_node_a_->id_), IsTrue());
+}
+TEST_F(TestNodeOfIntersectionUtility, CanCheckUndirectionalConnectionWithRef) {
+    EXPECT_THAT(p_node_a_->isConnectedWith(*p_node_b_), IsTrue());
+    EXPECT_THAT(p_node_b_->isConnectedWith(*p_node_a_), IsTrue());
+}
+TEST_F(TestNodeOfIntersectionUtility, CanCheckUndirectionalConnectionWithSharedPtr) {
+    EXPECT_THAT(p_node_a_->isConnectedWith(p_node_b_), IsTrue());
+    EXPECT_THAT(p_node_b_->isConnectedWith(p_node_a_), IsTrue());
+}
+TEST_F(TestNodeOfIntersectionUtility, CanReturnCorrectUndirectionalEdgeOfNodes) {
+    EXPECT_THAT(p_node_a_->getEdgeWith(1)->node2_.lock()->id_, Eq(p_node_b_->id_));
+    EXPECT_THAT(p_node_b_->getEdgeWith(0)->node1_.lock()->id_, Eq(p_node_a_->id_));
 }
 
 class TestIntersectinUtilytyOfNewAttributes: public Test {

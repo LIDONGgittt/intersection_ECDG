@@ -81,12 +81,18 @@ public:
     bool isSameAs(int id);
     bool isSameAs(Node &n);
     bool isSameAs(std::shared_ptr<Node> &p_n);
-    bool isConnectedTo(int id);
+    bool isConnectedTo(int id); // directional, node with id should be as the node2 in the edge
     bool isConnectedTo(Node &n);
     bool isConnectedTo(std::shared_ptr<Node> &p_n);
-    std::shared_ptr<Edge> getEdgeTo(int id);
+    std::shared_ptr<Edge> getEdgeTo(int id); // directional, node with id should be as the node2 in the edge
     std::shared_ptr<Edge> getEdgeTo(Node &n);
     std::shared_ptr<Edge> getEdgeTo(std::shared_ptr<Node> &p_n);
+    bool isConnectedWith(int id, bool undirectional = true); // undirectional, any edge connect with node with id
+    bool isConnectedWith(Node &n);
+    bool isConnectedWith(std::shared_ptr<Node> &p_n);
+    std::shared_ptr<Edge> getEdgeWith(int id, bool undirectional = true); // undirectional, any edge connect with node with id
+    std::shared_ptr<Edge> getEdgeWith(Node &n);
+    std::shared_ptr<Edge> getEdgeWith(std::shared_ptr<Node> &p_n);
 
     int id_;
     double estimate_travel_time_;
