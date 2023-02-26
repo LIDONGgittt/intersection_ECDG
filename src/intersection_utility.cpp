@@ -6,6 +6,31 @@
 
 namespace intersection_management {
 
+Node::Node(int id, double ett, double d, double ewd, double enwd)
+    : id_(id), estimate_travel_time_(ett), depth_(d), edge_weighted_depth_(ewd), edge_node_weighted_depth_(enwd) {
+    edges_.clear();
+
+    time_window_ = std::vector<double>({-1, -1});
+    estimate_arrival_time_ = -1;
+    in_lane_id_ = -1;
+    in_leg_id_ = -1;
+    out_lane_id_ = -1;
+    out_leg_id_ = -1;
+    critical_resource_ = nullptr;
+    route_ = nullptr;
+}
+Node::Node(int id, double ett, int in_leg_id, int in_lane_id, int out_leg_id, int out_lane_id)
+    : Node(id, ett, -1, -1, -1) {
+    in_leg_id_ = in_leg_id;
+    in_lane_id_ = in_lane_id;
+    out_leg_id_ = out_leg_id;
+    out_lane_id_ = out_lane_id;
+}
+Node::Node(int id, double ett, int in_leg_id, int in_lane_id, int out_leg_id, int out_lane_id, double eat)
+    : Node(id, ett, in_leg_id, in_lane_id, out_leg_id, out_lane_id) {
+    estimate_arrival_time_ = eat;
+}
+
 void Node::printWeightAndEdge() {
     std::cout << "Node " << id_ << " has weight: " << estimate_travel_time_;
     std::cout << ". Connects to: ";
