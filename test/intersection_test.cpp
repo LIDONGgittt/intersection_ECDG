@@ -52,19 +52,31 @@ public:
         intersection.num_legs_ = 4;
         intersection.num_lanes_in_vec_ = std::vector<int>({1, 1, 2, 1});
         intersection.num_lanes_out_vec_ = std::vector<int>({2, 1, 1, 1});
+        intersection.mt_.seed(0);
         intersection.AddRandomVehicleNodes(5);
         intersection.AddIntersectionUtilitiesFromGeometric();
+
+        intersection.AssignCriticalResourcesToNodes();
+        intersection.AssignRoutesToNodes();
+        intersection.AssignEdgesWithSafetyOffsetToNodes();
     }
 };
 TEST_F(TestIntersectionWithNodes, CanAssignCriticalResources) {
-    EXPECT_NO_THROW(intersection.AssignCriticalResourcesToNodes());
     EXPECT_THAT(intersection.critical_resource_map_.at(0)->nodes_.size(), Eq(2));
 }
 TEST_F(TestIntersectionWithNodes, CanAssignRouteToNodes) {
-    EXPECT_NO_THROW(intersection.AssignRoutesToNodes());
     EXPECT_THAT(intersection.nodes_[1]->route_->getLaneIn(), NotNull());
     EXPECT_THAT(intersection.nodes_[1]->route_->getLaneOut(), NotNull());
 }
 TEST_F(TestIntersectionWithNodes, CanAssignEdgesToNodes) {
-    EXPECT_NO_THROW(intersection.AssignEdgesWithRandomOffsetToNodes());
+    EXPECT_THAT(intersection.nodes_[1]->getEdgeWith(0)->node1_.lock()->id_, Eq(0));
+}
+TEST_F(TestIntersectionWithNodes, CanAssignCorrectEdgesToNodes) {
+    EXPECT_THAT(intersection.nodes_[1]->getEdgeWith(5)->conflict_type_.isConverging(), IsTrue());
+    EXPECT_THAT(intersection.nodes_[2]->getEdgeWith(4)->conflict_type_.isDiverging(), IsTrue());
+    EXPECT_THAT(intersection.nodes_[2]->getEdgeWith(4)->predecessor_id_, Eq(2));
+    EXPECT_THAT(intersection.nodes_[3]->getEdgeWith(5)->conflict_type_.isDiverging(), IsTrue());
+    EXPECT_THAT(intersection.nodes_[3]->getEdgeWith(5)->predecessor_id_, Eq(3));
+    EXPECT_THAT(intersection.nodes_[3]->getEdgeWith(4)->conflict_type_.isCompeting(), IsTrue());
+    EXPECT_THAT(intersection.nodes_[4]->getEdgeWith(5)->conflict_type_.isCrossing(), IsTrue());
 }

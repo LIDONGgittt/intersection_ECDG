@@ -117,8 +117,8 @@ void Intersection::AddRandomVehicleNodes(int count) {
 void Intersection::AssignRoutesToNodes() {
     for (int id = 1; id < nodes_.size(); id++) {
         auto &node = nodes_[id];
-        std::shared_ptr<Lane> lane_in = leg_map_[node->in_leg_id_]->lanes_in_map_[node->in_lane_id_];
-        std::shared_ptr<Lane> lane_out = leg_map_[node->in_leg_id_]->lanes_in_map_[node->in_lane_id_];
+        std::shared_ptr<Lane> &lane_in = leg_map_[node->in_leg_id_]->lanes_in_map_[node->in_lane_id_];
+        std::shared_ptr<Lane> &lane_out = leg_map_[node->out_leg_id_]->lanes_out_map_[node->out_lane_id_];
         node->route_ = std::make_shared<Route>(lane_in, lane_out);
     }
 }
@@ -136,11 +136,36 @@ void Intersection::AssignCriticalResourcesToNodes() {
     }
 }
 
-void Intersection::AssignEdgesWithRandomOffsetToNodes() {
+void Intersection::AssignEdgesWithSafetyOffsetToNodes() {
+    // offset: 1 if crossing or converging; -1 if diverging (precede); 0 if non-conlict
+
+    ConflictType ct_precedence;
+    ct_precedence.setDiverging();
     for (int i = 1; i < nodes_.size(); i++) {
+        auto edge_to_virtual_leading = std::make_shared<Edge>(nodes_[0], nodes_[i], 0, ct_precedence, 0);
+        nodes_[0]->edges_.push_back(edge_to_virtual_leading);
+        nodes_[i]->edges_.push_back(edge_to_virtual_leading);
+        AddEdge(edge_to_virtual_leading);
+    }
 
+    for (int i = 1; i < nodes_.size(); i++) {
         for (int j = i + 1; j < nodes_.size(); j++) {
-
+            ConflictType ct = nodes_[i]->route_->FindConflictTypeWithRoute(nodes_[j]->route_);
+            int predecessor_id = -1;
+            double offset = 0;
+            if (ct.isDiverging()) {
+                predecessor_id = i;
+                offset = -1;
+            }
+            else if (!ct.isNotConflicting()) {
+                offset = 1;
+            } else {
+                continue; // non-conflict relation don't need edges
+            }
+            auto edge = std::make_shared<Edge>(nodes_[i], nodes_[j], offset, ct, predecessor_id);
+            nodes_[i]->edges_.push_back(edge);
+            nodes_[j]->edges_.push_back(edge);
+            AddEdge(edge);
         }
     }
 }

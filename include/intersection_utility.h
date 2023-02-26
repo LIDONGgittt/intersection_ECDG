@@ -35,7 +35,7 @@ public:
     inline bool isConverging() { return converging_; }
     inline bool isCrossing() { return crossing_; }
     inline bool isCompeting() { return competing_; }
-    inline bool isNotComflicting() { return !(diverging_ || converging_ || crossing_ || competing_); }
+    inline bool isNotConflicting() { return !(diverging_ || converging_ || crossing_ || competing_); }
 
     bool diverging_;
     bool converging_;

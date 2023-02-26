@@ -146,7 +146,7 @@ TEST_F(TestIntersectionUtility, HaveRouteAttributes) {
     EXPECT_THAT(route1->getLaneOut(), Eq(lane6));
 }
 TEST_F(TestIntersectionUtility, CanFindCorrectConflictType) {
-    EXPECT_THAT(route1->FindConflictTypeWithRoute(route2).isNotComflicting(), IsTrue());
+    EXPECT_THAT(route1->FindConflictTypeWithRoute(route2).isNotConflicting(), IsTrue());
     EXPECT_THAT(route1->FindConflictTypeWithRoute(route3).isConverging(), IsTrue());
     EXPECT_THAT(route1->FindConflictTypeWithRoute(route3).isCompeting(), IsTrue());
     EXPECT_THAT(route1->FindConflictTypeWithRoute(route3).isDiverging(), IsFalse());
