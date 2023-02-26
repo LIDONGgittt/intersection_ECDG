@@ -168,6 +168,8 @@ public:
         lane_in_ = lane_in;
         lane_out_ = lane_out;
     }
+    ConflictType FindConflictTypeWithRoute(std::shared_ptr<Route> other_route);
+
     inline std::shared_ptr<Lane> getLaneIn() { return lane_in_; };
     inline std::shared_ptr<Lane> getLaneOut() { return lane_out_; };
     std::shared_ptr<Lane> lane_in_;

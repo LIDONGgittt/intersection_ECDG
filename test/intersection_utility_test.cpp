@@ -107,16 +107,25 @@ TEST_F(TestIntersectinUtilytyOfNewAttributes, HasConflictAttributesInEdges) {
 
 class TestIntersectionUtility: public Test {
 public:
-    std::shared_ptr<Route> route;
+    std::shared_ptr<Route> route1, route2, route3, route4, route5;
     std::shared_ptr<Leg> leg;
-    std::shared_ptr<Lane> lane1, lane2;
+    std::shared_ptr<Lane> lane1, lane2, lane3, lane4, lane5, lane6, lane7;
     void SetUp() override {
-        lane1 = std::make_shared<Lane>(0, 'i');
-        lane2 = std::make_shared<Lane>(1, 'o');
+        lane1 = std::make_shared<Lane>(0, 'i', 0);
+        lane2 = std::make_shared<Lane>(0, 'o', 2);
+        lane3 = std::make_shared<Lane>(1, 'i', 5);
+        lane4 = std::make_shared<Lane>(1, 'o', 7);
+        lane5 = std::make_shared<Lane>(1, 'i', 9);
+        lane6 = std::make_shared<Lane>(0, 'o', 10);
+        lane7 = std::make_shared<Lane>(1, 'i', 13);
         leg = std::make_shared<Leg>(0);
         leg->lanes_in_map_[0] = lane1;
         leg->lanes_out_map_[0] = lane2;
-        route = std::make_shared<Route>(lane1, lane2);
+        route1 = std::make_shared<Route>(lane1, lane6);
+        route2 = std::make_shared<Route>(lane3, lane2);
+        route3 = std::make_shared<Route>(lane3, lane6);
+        route4 = std::make_shared<Route>(lane5, lane4);
+        route5 = std::make_shared<Route>(lane7, lane4);
     }
 };
 TEST_F(TestIntersectionUtility, HaveLaneAttributes) {
@@ -124,7 +133,8 @@ TEST_F(TestIntersectionUtility, HaveLaneAttributes) {
     EXPECT_THAT(lane2->isOutBound(), IsTrue());
     EXPECT_THAT(lane1->getId(), Eq(0));
     EXPECT_THAT(lane1->getStreamDirection(), AnyOf(Eq('I'), Eq('i')));
-    EXPECT_THAT(lane1->getUniqueId(), Eq(-1));
+    EXPECT_THAT(lane1->getUniqueId(), Eq(0));
+    EXPECT_THAT(lane2->getUniqueId(), Eq(2));
 }
 TEST_F(TestIntersectionUtility, HaveLegAttributes) {
     EXPECT_THAT(leg->getId(), Eq(0));
@@ -132,6 +142,18 @@ TEST_F(TestIntersectionUtility, HaveLegAttributes) {
     EXPECT_THAT(leg->getNumLanesOut(), Eq(1));
 }
 TEST_F(TestIntersectionUtility, HaveRouteAttributes) {
-    EXPECT_THAT(route->getLaneIn(), Eq(lane1));
-    EXPECT_THAT(route->getLaneOut(), Eq(lane2));
+    EXPECT_THAT(route1->getLaneIn(), Eq(lane1));
+    EXPECT_THAT(route1->getLaneOut(), Eq(lane6));
+}
+TEST_F(TestIntersectionUtility, CanFindCorrectConflictType) {
+    EXPECT_THAT(route1->FindConflictTypeWithRoute(route2).isNotComflicting(), IsTrue());
+    EXPECT_THAT(route1->FindConflictTypeWithRoute(route3).isConverging(), IsTrue());
+    EXPECT_THAT(route1->FindConflictTypeWithRoute(route3).isCompeting(), IsTrue());
+    EXPECT_THAT(route1->FindConflictTypeWithRoute(route3).isDiverging(), IsFalse());
+    EXPECT_THAT(route1->FindConflictTypeWithRoute(route3).isCrossing(), IsFalse());
+
+    EXPECT_THAT(route3->FindConflictTypeWithRoute(route5).isCrossing(), IsTrue());
+    EXPECT_THAT(route3->FindConflictTypeWithRoute(route2).isDiverging(), IsTrue());
+    
+    EXPECT_THAT(route4->FindConflictTypeWithRoute(route5).isConverging(), IsTrue());
 }
