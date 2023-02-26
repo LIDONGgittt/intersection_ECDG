@@ -27,6 +27,7 @@ file(GLOB HEADERS include/*.h)
 add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})
 target_link_libraries(${PROJECT_NAME} ${YAML_CPP_LIBRARIES})
 
+list(FILTER SOURCES EXCLUDE REGEX "src/cdg_main.cpp")
 list(FILTER SOURCES EXCLUDE REGEX "src/main.cpp")
 set(LIB_SOURCES ${SOURCES})
 set(PROJECT_LIB_NAME ${PROJECT_NAME}_lib)

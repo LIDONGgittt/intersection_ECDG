@@ -1,11 +1,11 @@
-#include "scheduler.h"
+#include "cdg_scheduler.h"
 
 #include <iostream>
 
 namespace intersection_management {
-Scheduler::Scheduler() {}
+CDGScheduler::CDGScheduler() {}
 
-ConflictSpanningTree Scheduler::ScheduleWithModifiedDfst(const ConflictDirectedGraph &cdg) {
+ConflictSpanningTree CDGScheduler::ScheduleWithModifiedDfst(const ConflictDirectedGraph &cdg) {
     PrepareForTreeSchedule(cdg);
 
     std::vector<bool> added_to_tree(cdg.num_nodes_, false);
@@ -84,16 +84,16 @@ ConflictSpanningTree Scheduler::ScheduleWithModifiedDfst(const ConflictDirectedG
     return result_tree_;
 }
 
-ConflictSpanningTree Scheduler::ScheduleWithBfstWeightedEdgeOnly(const ConflictDirectedGraph &cdg) {
+ConflictSpanningTree CDGScheduler::ScheduleWithBfstWeightedEdgeOnly(const ConflictDirectedGraph &cdg) {
     PrepareForTreeSchedule(cdg);
 
-    std::vector<Candidate> ready_list;
+    std::vector<CDGCandidate> ready_list;
     std::vector<bool> added_to_tree(cdg.num_nodes_, false);
-    Candidate initial_root(0, 0, -1, -1);
+    CDGCandidate initial_root(0, 0, -1, -1);
     ready_list.push_back(initial_root);
 
     while (!ready_list.empty()) {
-        Candidate chosen_candidate = ready_list[0];
+        CDGCandidate chosen_candidate = ready_list[0];
         added_to_tree[chosen_candidate.id_] = true;
         result_tree_.UpdateDepth(chosen_candidate.id_, chosen_candidate.possible_depth_, Type_EdgeWeightedDepth);
         if (chosen_candidate.id_ > 0) {
@@ -122,7 +122,7 @@ ConflictSpanningTree Scheduler::ScheduleWithBfstWeightedEdgeOnly(const ConflictD
             }
 
             double edge_weight = cdg.nodes_[chosen_candidate.id_]->getEdgeTo(to)->edge_weight_;
-            Candidate new_candidate(to, chosen_candidate.possible_depth_ + edge_weight, chosen_candidate.id_, edge_weight);
+            CDGCandidate new_candidate(to, chosen_candidate.possible_depth_ + edge_weight, chosen_candidate.id_, edge_weight);
 
             // update new_candidate and solve conflict with already scheduled nodes (both uni- and bi-directional)
             for (auto parent : unidirectional_parent_table_[to]) {
@@ -159,16 +159,16 @@ ConflictSpanningTree Scheduler::ScheduleWithBfstWeightedEdgeOnly(const ConflictD
     return result_tree_;
 }
 
-ConflictSpanningTree Scheduler::ScheduleWithBfstMultiWeight(const ConflictDirectedGraph &cdg) {
+ConflictSpanningTree CDGScheduler::ScheduleWithBfstMultiWeight(const ConflictDirectedGraph &cdg) {
     PrepareForTreeSchedule(cdg);
 
-    std::vector<Candidate> ready_list;
+    std::vector<CDGCandidate> ready_list;
     std::vector<bool> added_to_tree(cdg.num_nodes_, false);
-    Candidate initial_root(0, 0, -1, -1, -1);
+    CDGCandidate initial_root(0, 0, -1, -1, -1);
     ready_list.push_back(initial_root);
 
     while (!ready_list.empty()) {
-        Candidate chosen_candidate = ready_list[0];
+        CDGCandidate chosen_candidate = ready_list[0];
         added_to_tree[chosen_candidate.id_] = true;
         result_tree_.UpdateDepth(chosen_candidate.id_, chosen_candidate.possible_depth_, Type_EdgeNodeWeightedDepth);
         if (chosen_candidate.id_ > 0) {
@@ -205,7 +205,7 @@ ConflictSpanningTree Scheduler::ScheduleWithBfstMultiWeight(const ConflictDirect
                 edge_weight = 0.0;
             }
             double estimate_travel_time = cdg.nodes_[to]->estimate_travel_time_;
-            Candidate new_candidate(to, chosen_candidate.possible_depth_ + edge_weight + estimate_travel_time, chosen_candidate.id_, edge_weight, estimate_travel_time);
+            CDGCandidate new_candidate(to, chosen_candidate.possible_depth_ + edge_weight + estimate_travel_time, chosen_candidate.id_, edge_weight, estimate_travel_time);
 
             // update new_candidate and solve conflict with already scheduled nodes
             for (auto parent : unidirectional_parent_table_[to]) {
@@ -248,7 +248,7 @@ ConflictSpanningTree Scheduler::ScheduleWithBfstMultiWeight(const ConflictDirect
     return result_tree_;
 }
 
-std::vector<int> Scheduler::ScheduleBruteForceSearch(const ConflictDirectedGraph &cdg) {
+std::vector<int> CDGScheduler::ScheduleBruteForceSearch(const ConflictDirectedGraph &cdg) {
     int num_nodes = cdg.num_nodes_;
     double minimum_evacuation_time = -1.0;
     std::vector<int> vehicle_order;
@@ -263,14 +263,14 @@ std::vector<int> Scheduler::ScheduleBruteForceSearch(const ConflictDirectedGraph
     return best_order;
 }
 
-void Scheduler::PrepareForTreeSchedule(const ConflictDirectedGraph &cdg) {
+void CDGScheduler::PrepareForTreeSchedule(const ConflictDirectedGraph &cdg) {
     result_tree_.reset(false);
     result_tree_.AddNodesFromGraph(cdg);
     GenerateUniparentTable(cdg);
     GenerateBineighborTable(cdg);
 }
 
-void Scheduler::GenerateUniparentTable(const ConflictDirectedGraph &cdg) {
+void CDGScheduler::GenerateUniparentTable(const ConflictDirectedGraph &cdg) {
     unidirectional_parent_table_.clear();
     for (int id = 0; id < cdg.num_nodes_; id++) {
         std::vector<std::shared_ptr<Node>> uni_parent;
@@ -286,7 +286,7 @@ void Scheduler::GenerateUniparentTable(const ConflictDirectedGraph &cdg) {
     }
 }
 
-void Scheduler::GenerateBineighborTable(const ConflictDirectedGraph &cdg) {
+void CDGScheduler::GenerateBineighborTable(const ConflictDirectedGraph &cdg) {
     bidirectional_neighbor_table_.clear();
     for (int id = 0; id < cdg.num_nodes_; id++) {
         std::vector<std::shared_ptr<Node>> neighbors;
@@ -302,7 +302,7 @@ void Scheduler::GenerateBineighborTable(const ConflictDirectedGraph &cdg) {
     }
 }
 
-void Scheduler::SearchOrderPermutationRecursively(std::vector<int> &vehicle_order, int num_nodes,
+void CDGScheduler::SearchOrderPermutationRecursively(std::vector<int> &vehicle_order, int num_nodes,
                                                   std::vector<bool> &is_in_order_list,
                                                   double &minimum_evacuation_time, std::vector<int> &best_order,
                                                   const ConflictDirectedGraph &cdg) {
@@ -331,7 +331,7 @@ void Scheduler::SearchOrderPermutationRecursively(std::vector<int> &vehicle_orde
     }
 }
 
-double Scheduler::GetEvacuationTimeFromOrder(const std::vector<int> &vehicle_order,
+double CDGScheduler::GetEvacuationTimeFromOrder(const std::vector<int> &vehicle_order,
                                              const ConflictDirectedGraph &cdg) {
     std::vector<double> depth_of_the_order = GetDepthVectorFromOrder(vehicle_order, cdg);
     if (depth_of_the_order.empty()) {
@@ -347,7 +347,7 @@ double Scheduler::GetEvacuationTimeFromOrder(const std::vector<int> &vehicle_ord
     return evacuation_time;
 }
 
-std::vector<double> Scheduler::GetDepthVectorFromOrder(const std::vector<int> &vehicle_order,
+std::vector<double> CDGScheduler::GetDepthVectorFromOrder(const std::vector<int> &vehicle_order,
                                                        const ConflictDirectedGraph &cdg) {
     std::vector<bool> vehicle_scheduled(vehicle_order.size(), false);
     std::vector<double> depth_of_the_order(vehicle_order.size(), -1.0);

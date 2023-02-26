@@ -8,9 +8,9 @@
 
 namespace intersection_management {
 
-class Candidate {
+class CDGCandidate {
 public:
-    Candidate(int id, double depth, int parent, double edge_weight, double estimate_travel_time = -1.0) :
+    CDGCandidate(int id, double depth, int parent, double edge_weight, double estimate_travel_time = -1.0) :
         id_(id), possible_depth_(depth), id_possible_parent_(parent), edge_weight_(edge_weight), estimate_travel_time_(estimate_travel_time) {}
 
     int id_;
@@ -20,9 +20,9 @@ public:
     double estimate_travel_time_;
 };
 
-class Scheduler {
+class CDGScheduler {
 public:
-    Scheduler();
+    CDGScheduler();
     ConflictSpanningTree ScheduleWithModifiedDfst(const ConflictDirectedGraph &cdg);
     ConflictSpanningTree ScheduleWithBfstWeightedEdgeOnly(const ConflictDirectedGraph &cdg);
     ConflictSpanningTree ScheduleWithBfstMultiWeight(const ConflictDirectedGraph &cdg);
@@ -41,16 +41,16 @@ public:
     std::vector<double> GetDepthVectorFromOrder(const std::vector<int> &vehicle_order,
                                                 const ConflictDirectedGraph &cdg);
     
-    static inline void SortReadyListAscendingly(std::vector<Candidate> &ready_list) {
+    static inline void SortReadyListAscendingly(std::vector<CDGCandidate> &ready_list) {
         std::sort(ready_list.begin(), ready_list.end(),
-                  [](const Candidate &a, const Candidate &b) {
+                  [](const CDGCandidate &a, const CDGCandidate &b) {
                       if (a.possible_depth_ == b.possible_depth_) {
                           return a.id_ < b.id_;
                       }
                       return a.possible_depth_ < b.possible_depth_;
                   });
     }
-    static inline bool isInList(int id, std::vector<Candidate> &ready_list) {
+    static inline bool isInList(int id, std::vector<CDGCandidate> &ready_list) {
         for (auto &item : ready_list) {
             if (id == item.id_) {
                 return true;

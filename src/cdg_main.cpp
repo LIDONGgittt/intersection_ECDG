@@ -5,16 +5,16 @@
 #include <string>
 #include <chrono>
 
-#include "scheduler.h"
+#include "cdg_scheduler.h"
 
 using namespace intersection_management;
 
 void test1() {
     ConflictDirectedGraph cdg = ConflictDirectedGraph();
 
-    Scheduler scheduler_dfs = Scheduler();
-    Scheduler scheduler_bfs = Scheduler();
-    Scheduler scheduler_mdbfs = Scheduler();
+    CDGScheduler scheduler_dfs = CDGScheduler();
+    CDGScheduler scheduler_bfs = CDGScheduler();
+    CDGScheduler scheduler_mdbfs = CDGScheduler();
 
     // cdg.reset();
     unsigned int seed = 0;
@@ -140,8 +140,8 @@ void test1() {
 void test2() {
     ConflictDirectedGraph cdg = ConflictDirectedGraph();
 
-    Scheduler scheduler_dfs = Scheduler();
-    Scheduler scheduler_bfs = Scheduler();
+    CDGScheduler scheduler_dfs = CDGScheduler();
+    CDGScheduler scheduler_bfs = CDGScheduler();
     // cdg.reset();
     unsigned int seed = 0;
     int max_node = 100;

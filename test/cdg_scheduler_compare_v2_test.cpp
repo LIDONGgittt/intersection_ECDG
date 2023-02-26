@@ -1,19 +1,19 @@
 #include <gtest/gtest.h>
-#include "scheduler.h"
+#include "cdg_scheduler.h"
 
 using namespace intersection_management;
 
-TEST(BatchSchedulerTest, CompareMethods_v1) {
+TEST(BatchSchedulerTest, CompareMethods_v2) {
     ConflictDirectedGraph cdg = ConflictDirectedGraph();
 
-    Scheduler scheduler_dfs = Scheduler();
-    Scheduler scheduler_bfs = Scheduler();
-    Scheduler scheduler_mdbfs = Scheduler();
-    Scheduler scheduler_bruteforce = Scheduler();
+    CDGScheduler scheduler_dfs = CDGScheduler();
+    CDGScheduler scheduler_bfs = CDGScheduler();
+    CDGScheduler scheduler_mdbfs = CDGScheduler();
+    CDGScheduler scheduler_bruteforce = CDGScheduler();
 
     // cdg generater parameters
     unsigned int seed = 0;
-    int max_node = 1;
+    int max_node = 96;
     double max_estimate_travel_time = 5.0;
     double min_estimate_travel_time = 2.0;
     // verbose flag
@@ -77,18 +77,34 @@ TEST(BatchSchedulerTest, CompareMethods_v1) {
         auto modified_dfst = scheduler_dfs.ScheduleWithModifiedDfst(cdg);
         auto bfst = scheduler_bfs.ScheduleWithBfstWeightedEdgeOnly(cdg);
         auto mdbfst = scheduler_mdbfs.ScheduleWithBfstMultiWeight(cdg);
-        auto best_order = scheduler_bruteforce.ScheduleBruteForceSearch(cdg);
-        auto depth_vector = scheduler_bruteforce.GetDepthVectorFromOrder(best_order, cdg);
-        double global_optimal = scheduler_bruteforce.GetEvacuationTimeFromOrder(best_order, cdg);
+        std::vector<int> best_order;
+        std::vector<double> depth_vector;
+        double global_optimal;
+        if (max_node <= 6) {
+            best_order = scheduler_bruteforce.ScheduleBruteForceSearch(cdg);
+            depth_vector = scheduler_bruteforce.GetDepthVectorFromOrder(best_order, cdg);
+            global_optimal = scheduler_bruteforce.GetEvacuationTimeFromOrder(best_order, cdg);
+        }
+        else {
+            global_optimal = 0;
+        }
 
         // add fairness conflicts
         cdg.AddFairnessConflicts();
         auto modified_dfst_fairness = scheduler_dfs.ScheduleWithModifiedDfst(cdg);
         auto bfst_fairness = scheduler_bfs.ScheduleWithBfstWeightedEdgeOnly(cdg);
         auto mdbfst_fairness = scheduler_mdbfs.ScheduleWithBfstMultiWeight(cdg);
-        auto best_order_fairness = scheduler_bruteforce.ScheduleBruteForceSearch(cdg);
-        auto depth_vector_fairness = scheduler_bruteforce.GetDepthVectorFromOrder(best_order_fairness, cdg);
-        double global_optimal_fairness = scheduler_bruteforce.GetEvacuationTimeFromOrder(best_order_fairness, cdg);
+        std::vector<int> best_order_fairness;
+        std::vector<double> depth_vector_fairness;
+        double global_optimal_fairness;
+        if (max_node <= 6) {
+            best_order_fairness = scheduler_bruteforce.ScheduleBruteForceSearch(cdg);
+            depth_vector_fairness = scheduler_bruteforce.GetDepthVectorFromOrder(best_order, cdg);
+            global_optimal_fairness = scheduler_bruteforce.GetEvacuationTimeFromOrder(best_order, cdg);
+        }
+        else {
+            global_optimal_fairness = 0;
+        }
 
         depth_sum_dfst += modified_dfst.edge_weighted_depth_;
         depth_sum_bfst += bfst.edge_weighted_depth_;
@@ -166,9 +182,9 @@ TEST(BatchSchedulerTest, CompareMethods_v1) {
                 mdbfst.PrintTree(true);
                 std::cout << "Global optimal evacuation time is: " << global_optimal << "\n";
                 std::cout << "The optimal order is : \n";
-                Scheduler::printOrder(best_order);
+                CDGScheduler::printOrder(best_order);
                 std::cout << "The optimal schedule is : \n";
-                Scheduler::printDepthVector(depth_vector);
+                CDGScheduler::printDepthVector(depth_vector);
                 break;
             }
             else if (mdbfst.edge_node_weighted_depth_ == global_optimal) {
@@ -185,9 +201,9 @@ TEST(BatchSchedulerTest, CompareMethods_v1) {
                 mdbfst.PrintTree(true);
                 std::cout << "Global optimal evacuation time is: " << global_optimal << "\n";
                 std::cout << "The optimal order is : \n";
-                Scheduler::printOrder(best_order);
+                CDGScheduler::printOrder(best_order);
                 std::cout << "The optimal schedule is : \n";
-                Scheduler::printDepthVector(depth_vector);
+                CDGScheduler::printDepthVector(depth_vector);
             }
             if (either_better_flag) {
                 either_better_count++;
@@ -247,9 +263,9 @@ TEST(BatchSchedulerTest, CompareMethods_v1) {
                 mdbfst_fairness.PrintTree(true);
                 std::cout << "Global optimal evacuation time is: " << global_optimal_fairness << "\n";
                 std::cout << "The optimal order is : \n";
-                Scheduler::printOrder(best_order_fairness);
+                CDGScheduler::printOrder(best_order_fairness);
                 std::cout << "The optimal schedule is : \n";
-                Scheduler::printDepthVector(depth_vector_fairness);
+                CDGScheduler::printDepthVector(depth_vector_fairness);
                 break;
             }
             else if (mdbfst_fairness.edge_node_weighted_depth_ == global_optimal_fairness) {
@@ -266,16 +282,16 @@ TEST(BatchSchedulerTest, CompareMethods_v1) {
                 mdbfst_fairness.PrintTree(true);
                 std::cout << "Global optimal evacuation time is: " << global_optimal_fairness << "\n";
                 std::cout << "The optimal order is : \n";
-                Scheduler::printOrder(best_order);
+                CDGScheduler::printOrder(best_order);
                 std::cout << "The optimal schedule is : \n";
-                Scheduler::printDepthVector(depth_vector);
+                CDGScheduler::printDepthVector(depth_vector);
             }
             if (either_better_flag_fairness) {
                 either_better_count_fairness++;
             }
         } // end of statistic for fairness cdg
 
-        if (total_test % 50000 == 0) {
+        if (total_test % 100 == 0) {
             std::cout << "\n\n##################### Updated result: ##################### \n";
             std::cout << "Total tests: " << total_test << ", Max node nums: " << max_node + 5 - 1;
             std::cout << ", Max estimate travel time: " << max_estimate_travel_time << ", Min estimate travel time: " << min_estimate_travel_time << "\n";

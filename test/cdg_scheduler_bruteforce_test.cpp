@@ -1,15 +1,15 @@
 #include <gtest/gtest.h>
-#include "scheduler.h"
+#include "cdg_scheduler.h"
 
 using namespace intersection_management;
 
 TEST(BatchSchedulerTest, BruteForceBasic) {
     ConflictDirectedGraph cdg = ConflictDirectedGraph();
 
-    Scheduler scheduler_dfs = Scheduler();
-    Scheduler scheduler_bfs = Scheduler();
-    Scheduler scheduler_mdbfs = Scheduler();
-    Scheduler scheduler_bruteforce = Scheduler();
+    CDGScheduler scheduler_dfs = CDGScheduler();
+    CDGScheduler scheduler_bfs = CDGScheduler();
+    CDGScheduler scheduler_mdbfs = CDGScheduler();
+    CDGScheduler scheduler_bruteforce = CDGScheduler();
 
     // cdg generater parameters
     unsigned int seed = 0;
