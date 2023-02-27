@@ -39,6 +39,7 @@ public:
     int num_legs_;
     std::vector<int> num_lanes_in_vec_;
     std::vector<int> num_lanes_out_vec_;
+    int num_nodes_;
     std::vector<std::shared_ptr<Node>> nodes_;
     std::vector<std::shared_ptr<Edge>> edges_;
     std::unordered_map<int, std::shared_ptr<CriticalResource>> critical_resource_map_;

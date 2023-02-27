@@ -37,7 +37,7 @@ Node::Node(const Node &node) {
     depth_ = node.depth_;
     edge_weighted_depth_ = node.edge_weighted_depth_;
     edge_node_weighted_depth_ = node.edge_node_weighted_depth_;
-    edges_ = node.edges_;
+    // edges_ = node.edges_; // do not copy edges
     time_window_ = node.time_window_;
     estimate_arrival_time_ = node.estimate_arrival_time_;
     in_lane_id_ = node.in_lane_id_;

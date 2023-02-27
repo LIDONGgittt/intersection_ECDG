@@ -9,7 +9,7 @@
 
 using namespace intersection_management;
 
-void test1() {
+void cdg_main_test1() {
     ConflictDirectedGraph cdg = ConflictDirectedGraph();
 
     CDGScheduler scheduler_dfs = CDGScheduler();
@@ -137,7 +137,7 @@ void test1() {
 }
 
 
-void test2() {
+void cdg_main_test2() {
     ConflictDirectedGraph cdg = ConflictDirectedGraph();
 
     CDGScheduler scheduler_dfs = CDGScheduler();
@@ -188,8 +188,4 @@ void test2() {
             std::cout << ". DFST average depth is: " << depth_sum_dfst / total_test << "\n";
         }
     }
-}
-
-int main() {
-    test1();
 }

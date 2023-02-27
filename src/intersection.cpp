@@ -29,6 +29,7 @@ void Intersection::reset() {
     critical_resource_map_.clear();
     leg_map_.clear();
     lane_map_.clear();
+    num_nodes_ = 0;
     auto leading_node = std::make_shared<Node>(0); // virtual leading vehicle
     leading_node->time_window_ = std::vector<double>({0, 0});
     AddNode(leading_node);
@@ -82,6 +83,7 @@ void Intersection::UpdateReferencesOfCriticalResoucesAndLegs() {
 
 void Intersection::AddNode(std::shared_ptr<Node> node) {
     nodes_.push_back(node);
+    num_nodes_++;
 }
 
 void Intersection::AddEdge(std::shared_ptr<Edge> edge) {
