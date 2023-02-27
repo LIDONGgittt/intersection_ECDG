@@ -5,7 +5,7 @@
 namespace intersection_management {
 CDGScheduler::CDGScheduler() {}
 
-ConflictSpanningTree CDGScheduler::ScheduleWithModifiedDfst(const ConflictDirectedGraph &cdg) {
+CDGConflictSpanningTree CDGScheduler::ScheduleWithModifiedDfst(const ConflictDirectedGraph &cdg) {
     PrepareForTreeSchedule(cdg);
 
     std::vector<bool> added_to_tree(cdg.num_nodes_, false);
@@ -84,7 +84,7 @@ ConflictSpanningTree CDGScheduler::ScheduleWithModifiedDfst(const ConflictDirect
     return result_tree_;
 }
 
-ConflictSpanningTree CDGScheduler::ScheduleWithBfstWeightedEdgeOnly(const ConflictDirectedGraph &cdg) {
+CDGConflictSpanningTree CDGScheduler::ScheduleWithBfstWeightedEdgeOnly(const ConflictDirectedGraph &cdg) {
     PrepareForTreeSchedule(cdg);
 
     std::vector<CDGCandidate> ready_list;
@@ -159,7 +159,7 @@ ConflictSpanningTree CDGScheduler::ScheduleWithBfstWeightedEdgeOnly(const Confli
     return result_tree_;
 }
 
-ConflictSpanningTree CDGScheduler::ScheduleWithBfstMultiWeight(const ConflictDirectedGraph &cdg) {
+CDGConflictSpanningTree CDGScheduler::ScheduleWithBfstMultiWeight(const ConflictDirectedGraph &cdg) {
     PrepareForTreeSchedule(cdg);
 
     std::vector<CDGCandidate> ready_list;

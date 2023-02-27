@@ -1,13 +1,13 @@
 #include <gtest/gtest.h>
 #include <gmock/gmock.h>
-#include "conflict_spanning_tree.h"
+#include "cdg_conflict_spanning_tree.h"
 
 using namespace intersection_management;
 using namespace ::testing;
 
 class TestConflictSpanningTree : public Test {
 public:
-    ConflictSpanningTree cst_;
+    CDGConflictSpanningTree cst_;
     void SetUp() override {
         cst_.AddNode(2);
         cst_.AddNode(3);

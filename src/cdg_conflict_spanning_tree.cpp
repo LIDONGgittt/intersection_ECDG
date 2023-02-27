@@ -1,4 +1,4 @@
-#include "conflict_spanning_tree.h"
+#include "cdg_conflict_spanning_tree.h"
 
 #include <cstdlib>
 #include <time.h>
@@ -8,11 +8,11 @@
 #include <algorithm>
 
 namespace intersection_management {
-ConflictSpanningTree::ConflictSpanningTree() {
+CDGConflictSpanningTree::CDGConflictSpanningTree() {
     reset(false);
 }
 
-void ConflictSpanningTree::reset(bool verbose) {
+void CDGConflictSpanningTree::reset(bool verbose) {
     p_root_ = nullptr;
     nodes_.clear();
     edges_.clear();
@@ -25,7 +25,7 @@ void ConflictSpanningTree::reset(bool verbose) {
     }
 }
 
-void ConflictSpanningTree::AddNodesFromGraph(const ConflictDirectedGraph &graph) {
+void CDGConflictSpanningTree::AddNodesFromGraph(const ConflictDirectedGraph &graph) {
     for (auto pn : graph.nodes_) {
         AddNode(pn);
     }
@@ -35,20 +35,20 @@ void ConflictSpanningTree::AddNodesFromGraph(const ConflictDirectedGraph &graph)
     p_root_->edge_node_weighted_depth_ = 0;
 }
 
-void ConflictSpanningTree::AddNode(std::shared_ptr<Node> node) {
+void CDGConflictSpanningTree::AddNode(std::shared_ptr<Node> node) {
     AddNode(node->estimate_travel_time_);
 }
 
-void ConflictSpanningTree::AddNode(double weight) {
+void CDGConflictSpanningTree::AddNode(double weight) {
     auto node = std::shared_ptr<Node>(new Node(num_nodes_++, weight, -1, -1, -1));
     nodes_.push_back(node);
 }
 
-void ConflictSpanningTree::AddEdge(std::shared_ptr<Edge> edge) {
+void CDGConflictSpanningTree::AddEdge(std::shared_ptr<Edge> edge) {
     AddEdge(edge->node1_.lock()->id_, edge->node2_.lock()->id_, edge->edge_weight_);
 }
 
-void ConflictSpanningTree::AddEdge(int from, int to, double weight) {
+void CDGConflictSpanningTree::AddEdge(int from, int to, double weight) {
     if (from < 0 || from >= num_nodes_ || to < 0 || to >= num_nodes_)
     {
         return;
@@ -64,7 +64,7 @@ void ConflictSpanningTree::AddEdge(int from, int to, double weight) {
     }
 }
 
-void ConflictSpanningTree::UpdateDepth(int id, double depth, DepthType depth_type) {
+void CDGConflictSpanningTree::UpdateDepth(int id, double depth, CDGDepthType depth_type) {
     switch (depth_type)
     {
     case Type_RegularDepth:
@@ -88,7 +88,7 @@ void ConflictSpanningTree::UpdateDepth(int id, double depth, DepthType depth_typ
     }
 }
 
-void ConflictSpanningTree::PrintTree(bool verbose) {
+void CDGConflictSpanningTree::PrintTree(bool verbose) {
     std::cout << "***********Begin of Tree details***********\n";
     if (verbose) {
         std::cout << "Total nodes: " << num_nodes_ << std::endl;
@@ -102,7 +102,7 @@ void ConflictSpanningTree::PrintTree(bool verbose) {
     std::cout << "\n***********End of Tree details*************\n";
 }
 
-double ConflictSpanningTree::CalculateFairnessIndex(DepthType depth_type, FairnessType fairness_type) {
+double CDGConflictSpanningTree::CalculateFairnessIndex(CDGDepthType depth_type, CDGFairnessType fairness_type) {
     std::vector<std::pair<int, double>> id_order_vec;
     for (auto i = 1u; i < nodes_.size(); i++) {
         auto &node = nodes_[i];

@@ -1,8 +1,8 @@
-#ifndef INTERSECTION_MANAGEMENT_SCHEDULER_H_
-#define INTERSECTION_MANAGEMENT_SCHEDULER_H_
+#ifndef INTERSECTION_MANAGEMENT_CDG_SCHEDULER_H_
+#define INTERSECTION_MANAGEMENT_CDG_SCHEDULER_H_
 
 #include "conflict_directed_graph.h"
-#include "conflict_spanning_tree.h"
+#include "cdg_conflict_spanning_tree.h"
 #include <iostream>
 #include <algorithm>
 
@@ -23,9 +23,9 @@ public:
 class CDGScheduler {
 public:
     CDGScheduler();
-    ConflictSpanningTree ScheduleWithModifiedDfst(const ConflictDirectedGraph &cdg);
-    ConflictSpanningTree ScheduleWithBfstWeightedEdgeOnly(const ConflictDirectedGraph &cdg);
-    ConflictSpanningTree ScheduleWithBfstMultiWeight(const ConflictDirectedGraph &cdg);
+    CDGConflictSpanningTree ScheduleWithModifiedDfst(const ConflictDirectedGraph &cdg);
+    CDGConflictSpanningTree ScheduleWithBfstWeightedEdgeOnly(const ConflictDirectedGraph &cdg);
+    CDGConflictSpanningTree ScheduleWithBfstMultiWeight(const ConflictDirectedGraph &cdg);
     std::vector<int> ScheduleBruteForceSearch(const ConflictDirectedGraph &cdg);
 
     void PrepareForTreeSchedule(const ConflictDirectedGraph &cdg);
@@ -85,11 +85,11 @@ public:
         std::cout << std::endl;
     }
 
-    ConflictSpanningTree result_tree_;
+    CDGConflictSpanningTree result_tree_;
     std::vector<std::vector<std::shared_ptr<Node>>> unidirectional_parent_table_;
     std::vector<std::vector<std::shared_ptr<Node>>> bidirectional_neighbor_table_;
 };
 
 } // namespace intersection_management
 
-#endif // INTERSECTION_MANAGEMENT_SCHEDULER_H_
+#endif // INTERSECTION_MANAGEMENT_CDG_SCHEDULER_H_
