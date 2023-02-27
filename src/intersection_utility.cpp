@@ -16,6 +16,7 @@ Node::Node(int id, double ett, double d, double ewd, double enwd)
     in_leg_id_ = -1;
     out_lane_id_ = -1;
     out_leg_id_ = -1;
+    assigned_lane_id_ = -1;
     critical_resource_ = nullptr;
     route_ = nullptr;
 }
@@ -29,6 +30,23 @@ Node::Node(int id, double ett, int in_leg_id, int in_lane_id, int out_leg_id, in
 Node::Node(int id, double ett, int in_leg_id, int in_lane_id, int out_leg_id, int out_lane_id, double eat)
     : Node(id, ett, in_leg_id, in_lane_id, out_leg_id, out_lane_id) {
     estimate_arrival_time_ = eat;
+}
+Node::Node(const Node &node) {
+    id_ = node.id_; 
+    estimate_travel_time_ = node.estimate_travel_time_;
+    depth_ = node.depth_;
+    edge_weighted_depth_ = node.edge_weighted_depth_;
+    edge_node_weighted_depth_ = node.edge_node_weighted_depth_;
+    edges_ = node.edges_;
+    time_window_ = node.time_window_;
+    estimate_arrival_time_ = node.estimate_arrival_time_;
+    in_lane_id_ = node.in_lane_id_;
+    in_leg_id_ = node.in_leg_id_;
+    out_lane_id_ = node.out_lane_id_;
+    out_leg_id_ = node.out_leg_id_;
+    assigned_lane_id_ = node.assigned_lane_id_;
+    critical_resource_ = node.critical_resource_; 
+    route_ = node.route_;
 }
 
 void Node::printWeightAndEdge() {
@@ -77,10 +95,10 @@ std::shared_ptr<Edge> Node::getEdgeTo(std::shared_ptr<Node> &p_n) {
     return getEdgeTo(p_n->id_);
 }
 
-// undirectional, any edge connect with node with id
-bool Node::isConnectedWith(int id, bool undirectional) {
+// bidirectional, any edge connect with node with id
+bool Node::isConnectedWith(int id, bool bidirectional) {
     for (auto p_edge : edges_) {
-        if ((p_edge->node2_.lock()->id_ == id) || (undirectional && p_edge->node1_.lock()->id_ == id)) {
+        if ((p_edge->node2_.lock()->id_ == id) || (bidirectional && p_edge->node1_.lock()->id_ == id)) {
             return true;
         }
     }
@@ -93,10 +111,10 @@ bool Node::isConnectedWith(std::shared_ptr<Node> &p_n) {
     return isConnectedWith(p_n->id_);
 }
 
-// undirectional, any edge connect with node with id
-std::shared_ptr<Edge> Node::getEdgeWith(int id, bool undirectional) {
+// bidirectional, any edge connect with node with id
+std::shared_ptr<Edge> Node::getEdgeWith(int id, bool bidirectional) {
     for (auto p_edge : edges_) {
-        if ((p_edge->node2_.lock()->id_ == id) || (undirectional && p_edge->node1_.lock()->id_ == id)) {
+        if ((p_edge->node2_.lock()->id_ == id) || (bidirectional && p_edge->node1_.lock()->id_ == id)) {
             return p_edge;
         }
     }

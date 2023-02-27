@@ -50,22 +50,24 @@ public:
     Node(int id, double ett, double d, double ewd, double enwd);
     Node(int id, double ett, int in_leg_id, int in_lane_id, int out_leg_id, int out_lane_id);
     Node(int id, double ett, int in_leg_id, int in_lane_id, int out_leg_id, int out_lane_id, double eat);
+    Node(std::shared_ptr<Node> &p_node): Node(*p_node) {}
+    Node(const Node &node);
 
     void printWeightAndEdge();
     void printDetail();
     bool isSameAs(int id);
     bool isSameAs(Node &n);
     bool isSameAs(std::shared_ptr<Node> &p_n);
-    bool isConnectedTo(int id); // directional, node with id should be as the node2 in the edge
+    bool isConnectedTo(int id); // unidirectional, node with id should be as the node2 in the edge
     bool isConnectedTo(Node &n);
     bool isConnectedTo(std::shared_ptr<Node> &p_n);
-    std::shared_ptr<Edge> getEdgeTo(int id); // directional, node with id should be as the node2 in the edge
+    std::shared_ptr<Edge> getEdgeTo(int id); // unidirectional, node with id should be as the node2 in the edge
     std::shared_ptr<Edge> getEdgeTo(Node &n);
     std::shared_ptr<Edge> getEdgeTo(std::shared_ptr<Node> &p_n);
-    bool isConnectedWith(int id, bool undirectional = true); // undirectional, any edge connect with node with id
+    bool isConnectedWith(int id, bool bidirectional = true); // bidirectional, any edge connect with node with id
     bool isConnectedWith(Node &n);
     bool isConnectedWith(std::shared_ptr<Node> &p_n);
-    std::shared_ptr<Edge> getEdgeWith(int id, bool undirectional = true); // undirectional, any edge connect with node with id
+    std::shared_ptr<Edge> getEdgeWith(int id, bool bidirectional = true); // bidirectional, any edge connect with node with id
     std::shared_ptr<Edge> getEdgeWith(Node &n);
     std::shared_ptr<Edge> getEdgeWith(std::shared_ptr<Node> &p_n);
 
@@ -83,6 +85,7 @@ public:
     int in_leg_id_;
     int out_lane_id_;
     int out_leg_id_;
+    int assigned_lane_id_;
     std::shared_ptr<CriticalResource> critical_resource_;
     std::shared_ptr<Route> route_;
 };
