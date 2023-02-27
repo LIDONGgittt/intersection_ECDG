@@ -34,6 +34,7 @@ public:
     inline int getNumCriticalResources() { return critical_resource_map_.size(); }
     inline int getNumLegs() { return leg_map_.size(); }
     inline int getNumLanes() { return lane_map_.size(); }
+    inline void setSeed(int seed) { mt_.seed(seed); }
 
     int num_legs_;
     std::vector<int> num_lanes_in_vec_;

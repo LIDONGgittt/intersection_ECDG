@@ -32,7 +32,7 @@ Node::Node(int id, double ett, int in_leg_id, int in_lane_id, int out_leg_id, in
     estimate_arrival_time_ = eat;
 }
 Node::Node(const Node &node) {
-    id_ = node.id_; 
+    id_ = node.id_;
     estimate_travel_time_ = node.estimate_travel_time_;
     depth_ = node.depth_;
     edge_weighted_depth_ = node.edge_weighted_depth_;
@@ -45,15 +45,15 @@ Node::Node(const Node &node) {
     out_lane_id_ = node.out_lane_id_;
     out_leg_id_ = node.out_leg_id_;
     assigned_lane_id_ = node.assigned_lane_id_;
-    critical_resource_ = node.critical_resource_; 
+    critical_resource_ = node.critical_resource_;
     route_ = node.route_;
 }
 
 void Node::printWeightAndEdge() {
     std::cout << "Node " << id_ << " has weight: " << estimate_travel_time_;
-    std::cout << ". Connects to: ";
+    std::cout << ". Connects with: ";
     for (auto p_edge : edges_) {
-        std::cout << "--" << p_edge->edge_weight_ << "--> " << p_edge->node2_.lock()->id_ << ",  ";
+        std::cout << p_edge->node1_.lock()->id_ << " --" << p_edge->edge_weight_ << "--> " << p_edge->node2_.lock()->id_ << ",  ";
     }
     std::cout << std::endl;
 }
