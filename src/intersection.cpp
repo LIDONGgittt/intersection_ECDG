@@ -139,10 +139,10 @@ void Intersection::AssignCriticalResourcesToNodes() {
 }
 
 void Intersection::AssignEdgesWithSafetyOffsetToNodes() {
-    // offset: 1 if crossing or converging; -1 if diverging (precede); 0 if non-conlict
+    // offset: -1 if diverging; 0 otherwise
 
     ConflictType ct_precedence;
-    ct_precedence.setDiverging();
+    ct_precedence.setPrecedence();
     for (int i = 1; i < nodes_.size(); i++) {
         auto edge_to_virtual_leading = std::make_shared<Edge>(nodes_[0], nodes_[i], 0, ct_precedence, 0);
         nodes_[0]->edges_.push_back(edge_to_virtual_leading);

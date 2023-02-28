@@ -22,6 +22,7 @@ public:
         converging_ = false;
         crossing_ = false;
         competing_ = false;
+        precedence_ = false;
     }
     inline void setDiverging() { diverging_ = true; }
     inline void unsetDiverging() { diverging_ = false; }
@@ -31,16 +32,20 @@ public:
     inline void unsetCrossing() { crossing_ = false; }
     inline void setCompeting() { competing_ = true; }
     inline void unsetCompeting() { competing_ = false; }
+    inline void setPrecedence() { precedence_ = true; }
+    inline void unsetPrecedence() { precedence_ = false; }
     inline bool isDiverging() { return diverging_; }
     inline bool isConverging() { return converging_; }
     inline bool isCrossing() { return crossing_; }
     inline bool isCompeting() { return competing_; }
-    inline bool isNotConflicting() { return !(diverging_ || converging_ || crossing_ || competing_); }
+    inline bool isPrecedence() { return precedence_; }
+    inline bool isNotConflicting() { return !(diverging_ || converging_ || crossing_ || competing_ || precedence_); }
 
     bool diverging_;
     bool converging_;
     bool crossing_;
     bool competing_;
+    bool precedence_;
 };
 
 class Node {
@@ -166,6 +171,7 @@ public:
     inline int getNumLanesIn() { return lanes_in_map_.size(); }
     inline int getNumLanesOut() { return lanes_out_map_.size(); }
     inline std::shared_ptr<CriticalResource> getCriticalResource() { return critical_resource_; }
+    
     int id_;
     std::unordered_map<int, std::shared_ptr<Lane>> lanes_in_map_;
     std::unordered_map<int, std::shared_ptr<Lane>> lanes_out_map_;

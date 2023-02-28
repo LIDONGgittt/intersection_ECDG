@@ -31,6 +31,9 @@ public:
 
     void UpdateDepth(int id, double depth, DepthType depth_type = DepthType::Type_RegularDepth);
 
+    void UpdateTimeWindow(int id, double depth, double offset);
+    void UpdateTimeWindow(int id, double depth, double offset, double estimate_travel_time);
+
     void PrintTree(bool verbose = false);
     double CalculateFairnessIndex(DepthType depth_type = DepthType::Type_RegularDepth,
                                   FairnessType fairness_type = FairnessType::Type_OrderStandardDeviation);

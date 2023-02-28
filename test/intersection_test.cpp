@@ -77,6 +77,6 @@ TEST_F(TestIntersectionWithNodes, CanAssignCorrectEdgesToNodes) {
     EXPECT_THAT(intersection.nodes_[2]->getEdgeWith(4)->predecessor_id_, Eq(2));
     EXPECT_THAT(intersection.nodes_[3]->getEdgeWith(5)->conflict_type_.isDiverging(), IsTrue());
     EXPECT_THAT(intersection.nodes_[3]->getEdgeWith(5)->predecessor_id_, Eq(3));
-    EXPECT_THAT(intersection.nodes_[3]->getEdgeWith(4)->conflict_type_.isCompeting(), IsTrue());
+    EXPECT_THAT(intersection.nodes_[3]->getEdgeWith(4)->conflict_type_.isCompeting(), IsFalse());
     EXPECT_THAT(intersection.nodes_[4]->getEdgeWith(5)->conflict_type_.isCrossing(), IsTrue());
 }

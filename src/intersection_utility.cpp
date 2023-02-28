@@ -138,8 +138,10 @@ ConflictType Route::FindConflictTypeWithRoute(std::shared_ptr<Route> other_route
     ConflictType ct;
 
     // Diverging relationship
-    if (getLaneIn()->getUniqueId() == other_route->getLaneIn()->getUniqueId())
+    if (getLaneIn()->getUniqueId() == other_route->getLaneIn()->getUniqueId()) {
         ct.setDiverging();
+        ct.setPrecedence();
+    }
 
     // Converging relationship
     if (getLaneOut()->getUniqueId() == other_route->getLaneOut()->getUniqueId()) {
@@ -147,7 +149,7 @@ ConflictType Route::FindConflictTypeWithRoute(std::shared_ptr<Route> other_route
     }
 
     // Competing relationship
-    if (getLaneOut()->getLegId() == other_route->getLaneOut()->getLegId()) {
+    if (getLaneOut()->getLegId() == other_route->getLaneOut()->getLegId() && !getLaneOut()->leg_.lock()->critical_resource_) {
         ct.setCompeting();
     }
 

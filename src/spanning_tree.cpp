@@ -81,6 +81,18 @@ void SpanningTree::UpdateDepth(int id, double depth, DepthType depth_type) {
     }
 }
 
+void SpanningTree::UpdateTimeWindow(int id, double depth, double offset) {
+    UpdateTimeWindow(id, depth, offset, nodes_[id]->estimate_travel_time_);
+}
+void SpanningTree::UpdateTimeWindow(int id, double depth, double offset, double estimate_travel_time) {
+    nodes_[id]->depth_ = depth;
+    nodes_[id]->time_window_[1] = depth;
+    nodes_[id]->time_window_[0] = depth - estimate_travel_time - offset;
+    nodes_[id]->estimate_travel_time_ = estimate_travel_time;
+    if (depth > depth_)
+        depth_ = depth;
+}
+
 void SpanningTree::PrintTree(bool verbose) {
     std::cout << "***********Begin of Spanning Tree details***********\n";
     if (verbose) {
