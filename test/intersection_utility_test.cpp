@@ -110,14 +110,19 @@ public:
     std::shared_ptr<Route> route1, route2, route3, route4, route5;
     std::shared_ptr<Leg> leg;
     std::shared_ptr<Lane> lane1, lane2, lane3, lane4, lane5, lane6, lane7;
+    std::shared_ptr<Leg> leg0, leg1, leg2, leg3;
     void SetUp() override {
-        lane1 = std::make_shared<Lane>(0, 'i', 0);
-        lane2 = std::make_shared<Lane>(0, 'o', 2);
-        lane3 = std::make_shared<Lane>(1, 'i', 5);
-        lane4 = std::make_shared<Lane>(1, 'o', 7);
-        lane5 = std::make_shared<Lane>(1, 'i', 9);
-        lane6 = std::make_shared<Lane>(0, 'o', 10);
-        lane7 = std::make_shared<Lane>(1, 'i', 13);
+        leg0 = std::make_shared<Leg>(0);
+        leg1 = std::make_shared<Leg>(1);
+        leg2 = std::make_shared<Leg>(2);
+        leg3 = std::make_shared<Leg>(3);
+        lane1 = std::make_shared<Lane>(0, 'i', 0, leg0);
+        lane2 = std::make_shared<Lane>(0, 'o', 2, leg0);
+        lane3 = std::make_shared<Lane>(1, 'i', 5, leg1);
+        lane4 = std::make_shared<Lane>(1, 'o', 7, leg1);
+        lane5 = std::make_shared<Lane>(1, 'i', 9, leg2);
+        lane6 = std::make_shared<Lane>(0, 'o', 10, leg2);
+        lane7 = std::make_shared<Lane>(1, 'i', 13, leg3);
         leg = std::make_shared<Leg>(0);
         leg->lanes_in_map_[0] = lane1;
         leg->lanes_out_map_[0] = lane2;

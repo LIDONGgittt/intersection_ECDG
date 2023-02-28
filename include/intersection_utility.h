@@ -86,6 +86,7 @@ public:
     int out_lane_id_;
     int out_leg_id_;
     int assigned_lane_id_;
+    std::vector<int> possible_lane_id_;
     std::shared_ptr<CriticalResource> critical_resource_;
     std::shared_ptr<Route> route_;
 };
@@ -177,6 +178,7 @@ public:
         : id_(id), stream_direction_(sd), unique_id_(unique_id), leg_(leg) {}
     inline int getId() { return id_; }
     inline int getUniqueId() { return unique_id_; }
+    inline int getLegId() { return leg_.lock()->getId(); }
     inline char getStreamDirection() { return stream_direction_; }
     inline bool isInBound() { return (stream_direction_ == 'i' || stream_direction_ == 'I'); }
     inline bool isOutBound() { return (stream_direction_ == 'o' || stream_direction_ == 'O'); }

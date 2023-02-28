@@ -144,11 +144,15 @@ ConflictType Route::FindConflictTypeWithRoute(std::shared_ptr<Route> other_route
     // Converging relationship
     if (getLaneOut()->getUniqueId() == other_route->getLaneOut()->getUniqueId()) {
         ct.setConverging();
+    }
+
+    // Competing relationship
+    if (getLaneOut()->getLegId() == other_route->getLaneOut()->getLegId()) {
         ct.setCompeting();
     }
 
     // Crossing relationship only when not diverging nor converging
-    if (!(ct.diverging_ || ct.converging_)) {
+    if (!(ct.isDiverging() || ct.isConverging())) {
         std::vector<std::pair<int, char>> lane_id_route_pair; // 's' for self, 'o' for other
         lane_id_route_pair.push_back(std::make_pair(getLaneIn()->getUniqueId(), 's'));
         lane_id_route_pair.push_back(std::make_pair(getLaneOut()->getUniqueId(), 's'));
