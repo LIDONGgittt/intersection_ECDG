@@ -57,7 +57,15 @@ public:
         std::sort(ready_list.begin(), ready_list.end(),
                   [](const Candidate &a, const Candidate &b) {
                       if (a.possible_depth_ == b.possible_depth_) {
+                          if (a.split_flexible_critical_resource_ && !b.split_flexible_critical_resource_)
+                              return false;
+                          if (!a.split_flexible_critical_resource_ && b.split_flexible_critical_resource_)
+                              return true;
+                          if (a.split_flexible_critical_resource_ && b.split_flexible_critical_resource_ &&
+                              (a.num_critical_resource_splitted_ != b.num_critical_resource_splitted_))
+                              return a.num_critical_resource_splitted_ < b.num_critical_resource_splitted_;
                           return a.id_ < b.id_;
+
                       }
                       return a.possible_depth_ < b.possible_depth_;
                   });

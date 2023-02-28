@@ -110,6 +110,32 @@ void ConflictDirectedGraph::GenerateRandomGraph(
     }
 }
 
+
+void ConflictDirectedGraph::GenerateGraphFromIntersection(Intersection &intersection) {
+    for (int i = 1; i < intersection.nodes_.size(); i++) {
+        AddNode(intersection.nodes_[i]->estimate_travel_time_);
+    }
+    for (auto edge : intersection.edges_) {
+        if (edge->conflict_type_.isPrecedence()) {
+            if (edge->predecessor_id_ == edge->node1_.lock()->id_) {
+
+                AddEdge(edge->node1_.lock()->id_, edge->node2_.lock()->id_, edge->edge_weight_, false);
+            }
+            else {
+                AddEdge(edge->node2_.lock()->id_, edge->node1_.lock()->id_, edge->edge_weight_, false);
+
+            }
+        }
+        else {
+            AddEdge(edge->node1_.lock()->id_, edge->node2_.lock()->id_, edge->edge_weight_, true);
+        }
+    }
+    p_root_->edges_.clear();
+    for (int to = 1; to < intersection.nodes_.size(); to++) {
+        AddEdge(0, to, 1.0, false);
+    }
+}
+
 void ConflictDirectedGraph::AddFairnessConflicts() {
     int fairness_order_diff_threshold = 50;
     double fairness_order_diff_rate = 0.5;

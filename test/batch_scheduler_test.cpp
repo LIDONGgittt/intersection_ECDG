@@ -1,3 +1,9 @@
+#include <gtest/gtest.h>
+
+#include "scheduler.h"
+#include "conflict_directed_graph.h"
+#include "cdg_scheduler.h"
+
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
@@ -5,12 +11,8 @@
 #include <string>
 #include <chrono>
 
-#include "scheduler.h"
-#include "conflict_directed_graph.h"
-#include "cdg_scheduler.h"
-
 using namespace intersection_management;
-void test1() {
+std::vector<double> BatchTest(int num_nodes, int seed = 0) {
     Intersection intersection;
     ConflictDirectedGraph cdg;
     Scheduler scheduler;
@@ -20,7 +22,7 @@ void test1() {
     CDGScheduler scheduler_bruteforce;
 
 
-    intersection.setSeed(0);
+    intersection.setSeed(seed);
     intersection.AddRandomVehicleNodes(5);
     intersection.AddIntersectionUtilitiesFromGeometric();
     intersection.AssignCriticalResourcesToNodes();
@@ -43,6 +45,6 @@ void test1() {
     std::cout << "global_optimal: " << global_optimal << "\n";
 }
 
-int main() {
-    test1();
+TEST(BatchSchedulerTest, CompareDynamicLaneAssignments) {
+    
 }

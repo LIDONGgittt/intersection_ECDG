@@ -2,6 +2,7 @@
 #define INTERSECTION_MANAGEMENT_CONFLICT_DIRECTED_GRAPH_H_
 
 #include "intersection_utility.h"
+#include "intersection.h"
 
 namespace intersection_management {
 class ConflictDirectedGraph {
@@ -20,6 +21,8 @@ public:
                              double estimate_travel_time_offset = 1.0,
                              double edge_weight_offset = 1.0,
                              bool int_weight_only = true);
+    
+    void GenerateGraphFromIntersection(Intersection &intersection);
     
     void AddFairnessConflicts();
 

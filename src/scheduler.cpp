@@ -6,7 +6,9 @@
 #include <unordered_set>
 
 namespace intersection_management {
-Scheduler::Scheduler() {}
+Scheduler::Scheduler() {
+    result_tree_.reset();
+}
 
 
 SpanningTree Scheduler::ScheduleWithDynamicLaneAssignment(Intersection &intersection) {
@@ -174,13 +176,13 @@ SpanningTree Scheduler::ScheduleWithDynamicLaneAssignment(Intersection &intersec
                 bool flag_still_conflict_with_bidire_scheduled_neighbor;
                 do {
                     flag_still_conflict_with_bidire_scheduled_neighbor = false;
-                    for (auto neighbor : bidirectional_neighbor_table_[new_node_id]) {
-                        if (!added_to_tree[neighbor->id_]) {
+                    for (auto neighbor_in_intersection : bidirectional_neighbor_table_[new_node_id]) {
+                        if (!added_to_tree[neighbor_in_intersection->id_]) {
                             continue;
                         }
+                        auto &neighbor = result_tree_.nodes_[neighbor_in_intersection->id_];
                         if (!new_node->getEdgeWith(neighbor->id_)->conflict_type_.isCompeting()) { // not competing, then must crossing
-                            if (best_depth > result_tree_.nodes_[neighbor->id_]->time_window_[0] &&
-                                best_start_time < result_tree_.nodes_[neighbor->id_]->time_window_[1]) {
+                            if (best_depth > neighbor->time_window_[0] && best_start_time < neighbor->time_window_[1]) {
                                 flag_still_conflict_with_bidire_scheduled_neighbor = true;
                                 best_parent_id = neighbor->id_;
                                 best_start_time = neighbor->time_window_[1];
@@ -196,8 +198,7 @@ SpanningTree Scheduler::ScheduleWithDynamicLaneAssignment(Intersection &intersec
                                     intersection.leg_map_[neighbor->out_leg_id_]->lanes_out_map_[neighbor->possible_lane_id_[0]]);
                                 auto ct = route_new_candidate->FindConflictTypeWithRoute(route_neighbor);
                                 if (ct.isConverging() || ct.isCrossing()) { // only resolve conflict when converging or crossing
-                                    if (best_depth > result_tree_.nodes_[neighbor->id_]->time_window_[0] &&
-                                        best_start_time < result_tree_.nodes_[neighbor->id_]->time_window_[1]) {
+                                    if (best_depth > neighbor->time_window_[0] && best_start_time < neighbor->time_window_[1]) {
                                         flag_still_conflict_with_bidire_scheduled_neighbor = true;
                                         best_parent_id = neighbor->id_;
                                         best_start_time = neighbor->time_window_[1];
@@ -220,16 +221,14 @@ SpanningTree Scheduler::ScheduleWithDynamicLaneAssignment(Intersection &intersec
                                 }
                                 if (non_conflict_count < neighbor->possible_lane_id_.size()) { // otherwise will complete non-conflict
                                     if (non_conflict_count > 0) { // may split critical resources
-                                        if (best_depth > result_tree_.nodes_[neighbor->id_]->time_window_[0] &&
-                                            best_start_time < result_tree_.nodes_[neighbor->id_]->time_window_[1]) {
+                                        if (best_depth > neighbor->time_window_[0] && best_start_time < neighbor->time_window_[1]) {
                                             split_flexible_critical_resource = true;
                                             num_critical_resource_splitted = neighbor->possible_lane_id_.size() - non_conflict_count;
                                             competing_node_id = neighbor->id_;
                                         }
                                     }
                                     else { // conflict with all possible lanes, thus will not split critical resources
-                                        if (best_depth > result_tree_.nodes_[neighbor->id_]->time_window_[0] &&
-                                            best_start_time < result_tree_.nodes_[neighbor->id_]->time_window_[1]) {
+                                        if (best_depth > neighbor->time_window_[0] && best_start_time < neighbor->time_window_[1]) {
                                             flag_still_conflict_with_bidire_scheduled_neighbor = true;
                                             best_parent_id = neighbor->id_;
                                             best_start_time = neighbor->time_window_[1];
@@ -252,7 +251,7 @@ SpanningTree Scheduler::ScheduleWithDynamicLaneAssignment(Intersection &intersec
         }
         SortReadyListAscendingly(ready_list);
     }
-
+    return result_tree_;
 }
 
 SpanningTree Scheduler::ScheduleWithModifiedDfst(const Intersection &intersection) {

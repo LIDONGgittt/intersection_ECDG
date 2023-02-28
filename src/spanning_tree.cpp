@@ -25,7 +25,7 @@ void SpanningTree::AddNodesFromIntersection(const Intersection &intersection) {
     for (auto node : intersection.nodes_) {
         AddNode(node);
     }
-
+    num_nodes_ = intersection.num_nodes_;
     p_root_ = nodes_[0];
     p_root_->depth_ = 0;
     p_root_->edge_weighted_depth_ = 0;
