@@ -8,6 +8,7 @@
 namespace intersection_management {
 Scheduler::Scheduler() {
     result_tree_.reset();
+    enable_optimized_precedence_offset_ = true;
 }
 
 
@@ -151,7 +152,7 @@ SpanningTree Scheduler::ScheduleWithDynamicLaneAssignment(Intersection &intersec
                 }
             }
             double precedence_offset = 0;
-            if (new_node->getEdgeWith(possible_precedent_parent_id)->conflict_type_.isDiverging())
+            if (enable_optimized_precedence_offset_ && new_node->getEdgeWith(possible_precedent_parent_id)->conflict_type_.isDiverging())
                 precedence_offset = -1;
 
             // update new_candidate for each possible lane and solve conflicts with already scheduled nodes

@@ -108,6 +108,7 @@ public:
     SpanningTree result_tree_;
     std::vector<std::vector<std::shared_ptr<Node>>> unidirectional_parent_table_;
     std::vector<std::vector<std::shared_ptr<Node>>> bidirectional_neighbor_table_;
+    bool enable_optimized_precedence_offset_;
 };
 
 } // namespace intersection_management
