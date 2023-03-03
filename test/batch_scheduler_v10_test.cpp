@@ -17,7 +17,7 @@ TEST(BatchSchedulerTest, CompareDynamicLaneAssignments10NodesMultipleCase) {
         }
         total_test++;
 
-        if (total_test % 10 == 0) {
+        if (total_test % 1 == 0) {
             std::cout << "\n\n##################### Updated result: ##################### \n";
             std::cout << "Total tests: " << total_test << ", Total node num: 10. \n";
             std::cout << "Average depths: dynamic_lanes, dfs, bfs, mwbfs, global_optimal.\n";
