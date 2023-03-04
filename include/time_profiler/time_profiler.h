@@ -187,6 +187,9 @@ namespace time_profiler
         /// Sum of the durations of all measurements collected by this object.
         std::chrono::microseconds overall_duration_;
 
+        /// Percentage of consumed time, need to be populated before print
+        double percent_;
+
     public:
         /// Default constructor.
         /// Initializes the member variables to 0.
@@ -195,7 +198,8 @@ namespace time_profiler
               start_line_(0),
               end_line_(0),
               count_(0),
-              overall_duration_(0)
+              overall_duration_(0),
+              percent_(0.0)
         {
         }
 
@@ -302,6 +306,16 @@ namespace time_profiler
         {
             return end_line_;
         }
+
+        double get_percent() const
+        {
+            return percent_;
+        }
+
+        void set_percent(double p)
+        {
+            percent_ = p;
+        }
     };
 
     /// Prints the statistics of the given measurements to the console.
@@ -312,7 +326,7 @@ namespace time_profiler
         std::vector<MultiMeasurement> measurements_;
 
         /// Width of the output lines.
-        static const int line_width = 120;
+        static const int line_width = 131;
 
         /// Width of the column indicating the file of a checkpoint.
         static const int file_col_width = 30;
@@ -331,6 +345,9 @@ namespace time_profiler
 
         /// Width of the column indicating the overall duration of a measurement.
         static const int ovr_duration_col_width = 15;
+
+        /// Width of the column indicating the overall duration of a measurement.
+        static const int ovr_percentage_col_width = 10;
 
     public:
         /// Adds a measurement whose statistics will be printed when print()
@@ -371,7 +388,7 @@ namespace time_profiler
             for (int i = 0; i < (int)measurements_.size(); i++)
             {
                 stream << create_entry(measurements_[i]);
-                stream << create_hline((i < (int)measurements_.size() - 1) ? '-' : '#');
+                stream << create_hline((i < (int)measurements_.size() - 1) ? '-' : '=');
             }
 
             return stream.str();
@@ -445,23 +462,13 @@ namespace time_profiler
             std::stringstream stream;
             stream << create_hline('=')
                    << std::setfill(' ')
-                   << std::setw(file_col_width) << std::left
-                   << "File"
-                   << "|"
-                   << std::setw(function_col_width) << std::left
-                   << "Function"
-                   << "|"
-                   << std::setw(line_col_width) << std::right
-                   << "Line "
-                   << "|"
-                   << std::setw(count_col_width) << std::right
-                   << "Count "
-                   << "|"
-                   << std::setw(avg_duration_col_width) << std::right
-                   << "Average [us] "
-                   << "|"
-                   << std::setw(ovr_duration_col_width) << std::right
-                   << "Overall [us]"
+                   << std::setw(file_col_width) << std::left << "File"
+                   << "|" << std::setw(function_col_width) << std::left << "Function"
+                   << "|" << std::setw(line_col_width) << std::right << "Line "
+                   << "|" << std::setw(count_col_width) << std::right << "Count "
+                   << "|" << std::setw(avg_duration_col_width) << std::right << "Average [us] "
+                   << "|" << std::setw(ovr_duration_col_width) << std::right << "Overall [us]"
+                   << "|" << std::setw(ovr_percentage_col_width) << std::right << "Percent %"
                    << std::endl
                    << create_hline('=');
 
@@ -475,19 +482,12 @@ namespace time_profiler
             const std::string file_start(crop_path(measurement.get_start_file()));
             std::stringstream stream;
             stream << std::setfill(' ')
-                   << std::setw(file_col_width) << std::left
-                   << file_start << "|"
-                   << std::setw(function_col_width) << std::left
-                   << measurement.get_start_function() << "|"
-                   << std::setw(line_col_width) << std::right
-                   << measurement.get_start_line() << "|"
-                   << std::setw(count_col_width) << std::right
-                   << " "
-                   << "|"
-                   << std::setw(avg_duration_col_width) << std::right
-                   << " "
-                   << "|"
-                   << std::endl;
+                   << std::setw(file_col_width) << std::left << file_start
+                   << "|" << std::setw(function_col_width) << std::left << measurement.get_start_function()
+                   << "|" << std::setw(line_col_width) << std::right << measurement.get_start_line()
+                   << "|" << std::setw(count_col_width) << std::right << " "
+                   << "|" << std::setw(avg_duration_col_width) << std::right << " "
+                   << "|" << std::endl;
 
             // Show the file name in the second line only if it
             // is a different file.
@@ -507,10 +507,11 @@ namespace time_profiler
                    << std::setw(count_col_width) << std::right
                    << insert_separators(measurement.count()) << "|"
                    << std::setw(avg_duration_col_width) << std::right
-                   << insert_separators(measurement.get_average_duration().count())
-                   << "|"
+                   << insert_separators(measurement.get_average_duration().count()) << "|"
                    << std::setw(ovr_duration_col_width) << std::right
-                   << insert_separators(measurement.get_overall_duration().count())
+                   << insert_separators(measurement.get_overall_duration().count()) << "|"
+                   << std::setw(ovr_percentage_col_width) << std::right
+                   << std::setprecision(5) << ((measurement.get_percent() > 0.000001) ? (measurement.get_percent() * 100) : 0.0)
                    << std::endl;
 
             return stream.str();
@@ -634,11 +635,20 @@ namespace time_profiler
             std::list<MultiMeasurement> measurement_list;
             std::map<std::size_t, MultiMeasurement> &measurement_map = get_instance().measurement_map_;
             std::map<std::size_t, MultiMeasurement>::const_iterator mit;
+            std::chrono::microseconds total_duration(0);
             for (mit = measurement_map.begin();
                  mit != measurement_map.end();
                  mit++)
             {
                 measurement_list.push_back(mit->second);
+                total_duration += +mit->second.get_overall_duration();
+            }
+
+            // Update execution time percentage
+            double total_microseconds = total_duration.count();
+            for (auto &measurement : measurement_list)
+            {
+                measurement.set_percent(measurement.get_overall_duration().count() / total_microseconds);
             }
 
             // Sort the measurements based on their overall execution times,

@@ -47,6 +47,8 @@ std::vector<double> BatchTest(int num_nodes, bool enable_precedence_offset, bool
 
     PROFILER_HOOK();
     if (verbose) {
+        std::cout << "=========================================\n";
+        std::cout << "seed: " << seed << "\n";
         std::cout << "dynamin lane assignment: " << result_tree.depth_ << "\n";
         std::cout << "modified dfs: " << modified_dfst.edge_weighted_depth_ << "\n";
         std::cout << "edge_weighted bfs: " << bfst.edge_weighted_depth_ << "\n";
