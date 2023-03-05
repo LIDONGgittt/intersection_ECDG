@@ -57,7 +57,7 @@ SpanningTree Scheduler::ScheduleWithDynamicLaneAssignment(Intersection &intersec
                 }
             }
             else { // chosen_candidate split critical resource, then needs to update lane assignments in the tree
-                std::unordered_set<int> conflict_lanes;
+                std::unordered_set<int> conflict_competing_lanes;
                 auto &competing_node = result_tree_.nodes_[chosen_candidate.competing_node_id_];
                 std::shared_ptr<Route> route_chosen_candidate = std::make_shared<Route>(
                     intersection.leg_map_[chosen_node->in_leg_id_]->lanes_in_map_[chosen_node->in_lane_id_],
@@ -67,25 +67,33 @@ SpanningTree Scheduler::ScheduleWithDynamicLaneAssignment(Intersection &intersec
                         intersection.leg_map_[competing_node->in_leg_id_]->lanes_in_map_[competing_node->in_lane_id_],
                         intersection.leg_map_[competing_node->out_leg_id_]->lanes_out_map_[lane_id]);
                     auto ct = route_chosen_candidate->FindConflictTypeWithRoute(route_competing);
-                    if (!ct.isConverging() && !ct.isCrossing()) {
-                        conflict_lanes.insert(lane_id);
+                    if (ct.isConverging() || ct.isCrossing()) {
+                        conflict_competing_lanes.insert(lane_id);
                     }
                 }
                 auto iter = competing_node->possible_lane_id_.begin();
                 while (iter != competing_node->possible_lane_id_.end()) {
-                    if (conflict_lanes.find(*iter) != conflict_lanes.end()) {
+                    if (conflict_competing_lanes.find(*iter) != conflict_competing_lanes.end()) {
                         iter = competing_node->possible_lane_id_.erase(iter);
                         continue;
                     }
                     iter++;
                 }
+
+                if (competing_node->possible_lane_id_.size() == 1) {
+                    lane_fixed[competing_node->id_] = true;
+                    leg_lane_last_occupation[competing_node->out_leg_id_][competing_node->possible_lane_id_[0]] = competing_node->depth_;
+                    leg_lane_last_node_id[competing_node->out_leg_id_][competing_node->possible_lane_id_[0]] = competing_node->id_;
+                }
             }
-            for (auto out_lane_id : chosen_node->possible_lane_id_) {
-                leg_lane_last_occupation[chosen_candidate.out_leg_id_][out_lane_id] = chosen_candidate.possible_depth_;
-                leg_lane_last_node_id[chosen_candidate.out_leg_id_][out_lane_id] = chosen_candidate.id_;
-            }
+            // for (auto out_lane_id : chosen_node->possible_lane_id_) {
+            //     leg_lane_last_occupation[chosen_candidate.out_leg_id_][out_lane_id] = chosen_candidate.possible_depth_;
+            //     leg_lane_last_node_id[chosen_candidate.out_leg_id_][out_lane_id] = chosen_candidate.id_;
+            // }
             if (chosen_node->possible_lane_id_.size() == 1) {
-                lane_fixed[chosen_candidate.id_] = true;
+                lane_fixed[chosen_node->id_] = true;
+                leg_lane_last_occupation[chosen_node->out_leg_id_][chosen_node->possible_lane_id_[0]] = chosen_node->depth_;
+                leg_lane_last_node_id[chosen_node->out_leg_id_][chosen_node->possible_lane_id_[0]] = chosen_node->id_;
             }
         }
 

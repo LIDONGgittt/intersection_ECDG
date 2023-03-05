@@ -90,7 +90,7 @@ void Intersection::AddEdge(std::shared_ptr<Edge> edge) {
     edges_.push_back(edge);
 }
 
-void Intersection::AddRandomVehicleNodes(int count) {
+void Intersection::AddRandomVehicleNodes(int count, bool verbose) {
     std::uniform_int_distribution<int> travel_time_dist(param.travel_time_range[0], param.travel_time_range[1]);
     std::poisson_distribution<int> arrival_interval_dist(param.arrival_interval_avg);
 
@@ -112,7 +112,8 @@ void Intersection::AddRandomVehicleNodes(int count) {
         auto node = std::make_shared<Node>(id, travel_time_dist(mt_), in_leg, mt_() % num_lanes_in_vec_[in_leg],
                                            out_leg, mt_() % num_lanes_out_vec_[out_leg], last_arrival_time);
         AddNode(node);
-        // node->printDetail();
+        if (verbose)
+            node->printDetail();
     }
 }
 
@@ -161,7 +162,8 @@ void Intersection::AssignEdgesWithSafetyOffsetToNodes() {
             }
             else if (!ct.isNotConflicting()) {
                 offset = 1;
-            } else {
+            }
+            else {
                 continue; // non-conflict relation don't need edges
             }
             auto edge = std::make_shared<Edge>(nodes_[i], nodes_[j], offset, ct, predecessor_id);

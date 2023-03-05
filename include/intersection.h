@@ -24,7 +24,7 @@ public:
     void UpdateReferencesOfCriticalResoucesAndLegs();
     void AddNode(std::shared_ptr<Node> node);
     void AddEdge(std::shared_ptr<Edge> edge);
-    void AddRandomVehicleNodes(int count);
+    void AddRandomVehicleNodes(int count, bool verbose = false);
     void AssignRoutesToNodes();
     void AssignCriticalResourcesToNodes();
     void AssignEdgesWithSafetyOffsetToNodes();

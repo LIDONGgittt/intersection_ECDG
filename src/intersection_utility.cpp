@@ -149,7 +149,7 @@ ConflictType Route::FindConflictTypeWithRoute(std::shared_ptr<Route> other_route
     }
 
     // Competing relationship
-    if (getLaneOut()->getLegId() == other_route->getLaneOut()->getLegId() && !getLaneOut()->leg_.lock()->critical_resource_) {
+    if (getLaneOut()->getLegId() == other_route->getLaneOut()->getLegId() && getLaneOut()->leg_.lock()->critical_resource_) {
         ct.setCompeting();
     }
 
