@@ -5,7 +5,12 @@
 #include <unordered_map>
 #include <unordered_set>
 
+#include <parameters.h>
+
 namespace intersection_management {
+
+extern Parameters param;
+
 Scheduler::Scheduler() {
     result_tree_.reset();
     enable_optimized_precedence_offset_ = true;
@@ -115,7 +120,7 @@ SpanningTree Scheduler::ScheduleWithDynamicLaneAssignment(Intersection &intersec
                     continue;
                 }
                 // crossing nodes with conflicting candidate window will be removed, 
-                // all candidates for the node will be removed
+                // all candidates for the crossing node will be removed
                 if (edge->conflict_type_.isCrossing()) {
                     double edge_weight = edge->edge_weight_;
                     if (chosen_candidate.possible_depth_ + edge_weight + intersection.nodes_[iter_ready_candidate->id_]->estimate_travel_time_ > iter_ready_candidate->possible_depth_) {
@@ -160,8 +165,10 @@ SpanningTree Scheduler::ScheduleWithDynamicLaneAssignment(Intersection &intersec
                 }
             }
             double precedence_offset = 0;
-            if (enable_optimized_precedence_offset_ && new_node->getEdgeWith(possible_precedent_parent_id)->conflict_type_.isDiverging())
-                precedence_offset = -1;
+            if (param.activate_precedent_offset) {
+                if (enable_optimized_precedence_offset_ && new_node->getEdgeWith(possible_precedent_parent_id)->conflict_type_.isDiverging())
+                    precedence_offset = -1;
+            }
 
             // update new_candidate for each possible lane and solve conflicts with already scheduled nodes
             for (int out_lane_id = 0; out_lane_id < leg_lane_last_occupation[out_leg_id].size(); out_lane_id++) {

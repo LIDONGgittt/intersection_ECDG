@@ -15,7 +15,7 @@ std::vector<double> BatchTest(int num_nodes, bool enable_precedence_offset, bool
 
     PROFILER_HOOK();
     intersection.setSeed(seed);
-    intersection.AddRandomVehicleNodes(num_nodes);
+    intersection.AddRandomVehicleNodes(num_nodes, verbose);
     intersection.AddIntersectionUtilitiesFromGeometric();
     intersection.AssignCriticalResourcesToNodes();
     intersection.AssignRoutesToNodes();

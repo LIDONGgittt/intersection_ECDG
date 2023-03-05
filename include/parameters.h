@@ -17,6 +17,7 @@ public:
     double arrival_interval_avg;
     std::vector<int> travel_time_range;
     int random_seed;
+    bool activate_precedent_offset;
 }; // class Parameters
 
 } // namespace intersection_management

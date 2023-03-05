@@ -17,6 +17,7 @@ void Parameters::readParametersFromYaml() {
     arrival_interval_avg = config["arrival_interval_avg"].as<double>();
     travel_time_range = config["travel_time_range"].as<std::vector<int>>();
     random_seed = config["random_seed"].as<int>();
+    activate_precedent_offset = config["activate_precedent_offset"].as<bool>();
 }
 
 Parameters param;
