@@ -15,8 +15,6 @@
 #define PROFILER_HOOK()
 #endif
 
-#if USE_PROFILER
-
 #include <deque>
 #include <map>
 #include <list>
@@ -664,6 +662,8 @@ namespace time_profiler
         static void tick(
             const std::string &file, int line, const std::string &function)
         {
+
+#if USE_PROFILER
             // Add the measurement point.
             std::deque<Checkpoint> &checkpoints = get_instance().checkpoints_;
             checkpoints.push_back(Checkpoint(file, line, function));
@@ -675,28 +675,32 @@ namespace time_profiler
                     measurement);
                 checkpoints.pop_front();
             }
+#endif
         }
 
         /// Prints the statistics.
         static void print_statistics()
         {
+#if USE_PROFILER
             // Print the sorted list of all measurements.
             Printer printer;
             printer.add(sort_measurements());
 
             printer.print();
+#endif
         }
 
         /// Saves a log file with the statistics under \c $HOME/.TimeProfiler/log.
         static void save_log()
         {
+#if USE_PROFILER
             Printer printer;
             printer.add(sort_measurements());
 
             printer.save_log();
+#endif
         }
     };
 
 } // namespace time_profiler
-#endif // #if USE_PROFILER > 0
 #endif // #define TIME_PROFILER_H_

@@ -1,8 +1,18 @@
 #include "batch_test_utility.h"
+
+#include <csignal>
+
+#include "scheduler.h"
+#include "conflict_directed_graph.h"
+#include "cdg_scheduler.h"
 #include "time_profiler/time_profiler.h"
+#include "parameters.h"
 
 namespace intersection_management {
-std::vector<double> BatchTest(int num_nodes, bool enable_precedence_offset, bool verbose, int seed) {
+
+extern Parameters param;
+
+std::vector<double> BatchTestOneCase(int num_nodes, bool enable_precedence_offset, bool verbose, int seed) {
     PROFILER_HOOK();
     std::vector<double> depth;
     Intersection intersection;
@@ -59,4 +69,46 @@ std::vector<double> BatchTest(int num_nodes, bool enable_precedence_offset, bool
     return depth;
 }
 
+void BatchTest(int num_nodes, int test_count, int print_interval) {
+    std::signal(SIGINT, SIGINT_signal_handler);
+    std::vector<double> sum(5, 0);
+    std::vector<long> better_count(5, 0);
+    std::vector<long> better_dfs(5, 0);
+    long total_test = 0;
+    if (test_count < 0) test_count = INT32_MAX;
+    while (total_test < test_count) {
+        auto depths = BatchTestOneCase(num_nodes);
+        for (int i = 0; i < 5; i++) {
+            sum[i] += depths[i];
+            if (depths[i] <= depths[4])
+                better_count[i]++;
+            if (depths[i] <= depths[1] * param.travel_time_range[1])
+                better_dfs[i]++;
+        }
+        total_test++;
+
+        if (total_test % print_interval == 0) {
+            std::cout << "\n\n##################### Updated result: ##################### \n";
+            std::cout << "Total tests: " << total_test << ", Total node num: " << num_nodes << ". \n";
+            std::cout << "Average depths: dynamic_lanes, dfs, bfs, mwbfs, global_optimal.\n";
+            for (int i = 0; i < 5; i++) {
+                std::cout << sum[i] / total_test << ", ";
+            }
+            std::cout << "\n Better than Global Optimal ratio: \n";
+            for (int i = 0; i < 5; i++) {
+                std::cout << (double)better_count[i] / total_test << ", ";
+            }
+            std::cout << "\n Better than DFS ratio: \n";
+            for (int i = 0; i < 5; i++) {
+                std::cout << (double)better_dfs[i] / total_test << ", ";
+            }
+            std::cout << "\n";
+        }
+    }
+}
+
+void SIGINT_signal_handler(int signal) {
+    // ::time_profiler::TimeProfiler::print_statistics();
+    exit(signal);
+}
 } // namespace intersection_management
