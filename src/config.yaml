@@ -1,9 +1,15 @@
+# intersection gemotry and configurations
 num_legs: 4
 num_lanes_in_vec: [1, 1, 2, 1]
 num_lanes_out_vec: [3, 1, 1, 1]
 arrival_interval_avg: 2.0
 travel_time_range: [3, 6]
-random_seed: 0 # negative means system seed
 
-# scheduler config
+# scheduler configurations
 activate_precedent_offset: true
+
+# testing configurations
+# negative means system seed
+random_seed: 13
+test_one_instance: false
+test_vehicle_number: 10

@@ -47,13 +47,13 @@ std::vector<double> BatchTest(int num_nodes, bool enable_precedence_offset, bool
 
     PROFILER_HOOK();
     if (verbose) {
-        std::cout << "=========================================\n";
         std::cout << "seed: " << seed << "\n";
         std::cout << "dynamin lane assignment: " << result_tree.depth_ << "\n";
         std::cout << "modified dfs: " << modified_dfst.edge_weighted_depth_ << "\n";
         std::cout << "edge_weighted bfs: " << bfst.edge_weighted_depth_ << "\n";
         std::cout << "multi_weighted bfs: " << mdbfst.edge_node_weighted_depth_ << "\n";
         std::cout << "global_optimal: " << global_optimal << "\n";
+        std::cout << "=========================================\n";
     }
     depth = std::vector<double>{result_tree.depth_, modified_dfst.edge_weighted_depth_, bfst.edge_weighted_depth_,
         mdbfst.edge_node_weighted_depth_, global_optimal};

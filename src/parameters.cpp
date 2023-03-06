@@ -11,13 +11,18 @@ static const std::string CONFIG_FILE = "/src/config.yaml";
 
 void Parameters::readParametersFromYaml() {
     YAML::Node config = YAML::LoadFile(PROJECT_DIR + CONFIG_FILE);
+
     num_legs = config["num_legs"].as<int>();
     num_lanes_in_vec = config["num_lanes_in_vec"].as<std::vector<int>>();
     num_lanes_out_vec = config["num_lanes_out_vec"].as<std::vector<int>>();
     arrival_interval_avg = config["arrival_interval_avg"].as<double>();
     travel_time_range = config["travel_time_range"].as<std::vector<int>>();
-    random_seed = config["random_seed"].as<int>();
+
     activate_precedent_offset = config["activate_precedent_offset"].as<bool>();
+    
+    random_seed = config["random_seed"].as<int>();
+    test_one_instance = config["test_one_instance"].as<bool>();
+    test_vehicle_number = config["test_vehicle_number"].as<int>();
 }
 
 Parameters param;

@@ -23,7 +23,8 @@ TEST(BatchSchedulerTest, CompareDynamicLaneAssignments5NodesMultipleCase) {
     std::vector<long> better_count(5, 0);
     std::vector<long> better_dfs(5, 0);
     long total_test = 0;
-    while (total_test < 20001) {
+    // while (total_test < 20001) {
+    while (true) {
         auto depths = BatchTest(5);
         for (int i = 0; i < 5; i++) {
             sum[i] += depths[i];

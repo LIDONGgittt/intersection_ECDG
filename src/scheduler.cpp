@@ -119,9 +119,9 @@ SpanningTree Scheduler::ScheduleWithDynamicLaneAssignment(Intersection &intersec
                     iter_ready_candidate = ready_list.erase(iter_ready_candidate);
                     continue;
                 }
-                // crossing nodes with conflicting candidate window will be removed, 
+                // crossing and converging but not competing nodes with conflicting candidate window will be removed, 
                 // all candidates for the crossing node will be removed
-                if (edge->conflict_type_.isCrossing()) {
+                if (edge->conflict_type_.isCrossing() || edge->conflict_type_.isConverging()) {
                     double edge_weight = edge->edge_weight_;
                     if (chosen_candidate.possible_depth_ + edge_weight + intersection.nodes_[iter_ready_candidate->id_]->estimate_travel_time_ > iter_ready_candidate->possible_depth_) {
                         crossing_conflict_node_set.insert(iter_ready_candidate->id_);

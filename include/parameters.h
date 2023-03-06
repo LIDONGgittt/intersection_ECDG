@@ -11,13 +11,20 @@ public:
     }
     void readParametersFromYaml();
 
+    // # intersection gemotry and configurations
     int num_legs;
     std::vector<int> num_lanes_in_vec;
     std::vector<int> num_lanes_out_vec;
     double arrival_interval_avg;
     std::vector<int> travel_time_range;
-    int random_seed;
+
+    // # scheduler configurations
     bool activate_precedent_offset;
+
+    // # testing configurations
+    int random_seed;
+    bool test_one_instance;
+    int test_vehicle_number;
 }; // class Parameters
 
 } // namespace intersection_management
