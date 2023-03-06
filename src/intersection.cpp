@@ -12,6 +12,9 @@ void Intersection::InitializeFromParam() {
     num_legs_ = param.num_legs;
     num_lanes_in_vec_ = param.num_lanes_in_vec;
     num_lanes_out_vec_ = param.num_lanes_out_vec;
+    arrival_interval_avg_ = param.arrival_interval_avg;
+    travel_time_range_ = param.travel_time_range;
+
 
     // initialize random seed
     if (param.random_seed < 0) {
@@ -36,8 +39,8 @@ void Intersection::reset() {
 }
 
 void Intersection::AddIntersectionUtilitiesFromGeometric() {
-    AddCriticalResourcesFromGeometric();
     AddLegsAndLanesFromGeometric();
+    AddCriticalResourcesFromGeometric();
     UpdateReferencesOfCriticalResoucesAndLegs();
 }
 
@@ -91,8 +94,11 @@ void Intersection::AddEdge(std::shared_ptr<Edge> edge) {
 }
 
 void Intersection::AddRandomVehicleNodes(int count, bool verbose) {
-    std::uniform_int_distribution<int> travel_time_dist(param.travel_time_range[0], param.travel_time_range[1]);
-    std::poisson_distribution<int> arrival_interval_dist(param.arrival_interval_avg);
+    std::uniform_int_distribution<int> travel_time_dist(travel_time_range_[0], travel_time_range_[1]);
+    std::poisson_distribution<int> arrival_interval_dist(arrival_interval_avg_);
+    int num_total_lanes = lane_map_.size();
+    // for (auto num_in : num_lanes_in_vec_) num_total_lanes += num_in;
+    // for (auto num_out : num_lanes_out_vec_) num_total_lanes += num_out;
 
     int last_arrival_time = 0;
     for (auto n : nodes_) {
@@ -100,17 +106,18 @@ void Intersection::AddRandomVehicleNodes(int count, bool verbose) {
             last_arrival_time = n->estimate_arrival_time_;
     }
 
-    for (int id = 1; id <= count; id++) { // id 0 reserved for virtual leading vehicle
-        int in_leg = mt_() % num_legs_;
-        int out_leg = mt_() % num_legs_;
-        while (out_leg == in_leg) { // in_leg and out_leg should be different
-            out_leg = mt_() % num_legs_;
+    for (int id = 1; id <= count; id++) { // id 0 is automatically created for the virtual leading vehicle on initialization or reset
+        auto in_lane = lane_map_[mt_() % num_total_lanes];
+        while (in_lane->isOutBound()) in_lane = lane_map_[mt_() % num_total_lanes];
+        auto out_lane = lane_map_[mt_() % num_total_lanes];
+        while (out_lane->isInBound() || out_lane->getLegId() == in_lane->getLegId()) { // in_leg and out_leg should be different
+            out_lane = lane_map_[mt_() % num_total_lanes];
         }
         if (getNumNodes() > 1) {
             last_arrival_time += arrival_interval_dist(mt_);
         }
-        auto node = std::make_shared<Node>(id, travel_time_dist(mt_), in_leg, mt_() % num_lanes_in_vec_[in_leg],
-                                           out_leg, mt_() % num_lanes_out_vec_[out_leg], last_arrival_time);
+        auto node = std::make_shared<Node>(id, travel_time_dist(mt_), in_lane->getLegId(), in_lane->getId(),
+                                           out_lane->getLegId(), out_lane->getId(), last_arrival_time);
         AddNode(node);
         if (verbose)
             node->printDetail();
@@ -173,4 +180,5 @@ void Intersection::AssignEdgesWithSafetyOffsetToNodes() {
         }
     }
 }
+
 } // namespace intersection_management

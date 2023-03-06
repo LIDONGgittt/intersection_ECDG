@@ -14,6 +14,7 @@ public:
     Intersection() {
         reset();
         InitializeFromParam();
+        AddIntersectionUtilitiesFromGeometric();
     }
 
     void reset();
@@ -24,6 +25,7 @@ public:
     void UpdateReferencesOfCriticalResoucesAndLegs();
     void AddNode(std::shared_ptr<Node> node);
     void AddEdge(std::shared_ptr<Edge> edge);
+
     void AddRandomVehicleNodes(int count, bool verbose = false);
     void AssignRoutesToNodes();
     void AssignCriticalResourcesToNodes();
@@ -35,18 +37,15 @@ public:
     inline int getNumLegs() { return leg_map_.size(); }
     inline int getNumLanes() { return lane_map_.size(); }
     inline void setSeed(int seed) {
-        if (seed < 0) {
-            std::random_device rd;
-            mt_.seed(rd());
-        }
-        else {
-            mt_.seed(seed);
-        }
+        if (seed < 0) { std::random_device rd; mt_.seed(rd()); }
+        else { mt_.seed(seed); }
     }
 
     int num_legs_;
     std::vector<int> num_lanes_in_vec_;
     std::vector<int> num_lanes_out_vec_;
+    double arrival_interval_avg_;
+    std::vector<int> travel_time_range_;
     int num_nodes_;
     std::vector<std::shared_ptr<Node>> nodes_;
     std::vector<std::shared_ptr<Edge>> edges_;

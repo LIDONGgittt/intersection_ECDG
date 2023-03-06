@@ -10,6 +10,6 @@ activate_precedent_offset: true
 
 # testing configurations
 # negative means system seed
-random_seed: 13
-test_one_instance: false
-test_vehicle_number: 10
+random_seed: 19
+test_one_instance: true
+test_vehicle_number: 8

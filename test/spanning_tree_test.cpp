@@ -17,8 +17,8 @@ public:
         intersection.num_lanes_in_vec_ = std::vector<int>({1, 1, 2, 1});
         intersection.num_lanes_out_vec_ = std::vector<int>({2, 1, 1, 1});
         intersection.setSeed(0);
-        intersection.AddRandomVehicleNodes(5);
         intersection.AddIntersectionUtilitiesFromGeometric();
+        intersection.AddRandomVehicleNodes(5);
 
         intersection.AssignCriticalResourcesToNodes();
         intersection.AssignRoutesToNodes();

@@ -14,9 +14,9 @@ int main() {
     // num_lanes_out_vec: [3, 1, 1, 1]
     // arrival_interval_avg: 2.0
     // travel_time_range: [3, 6]
-    // seed = 16/26/31, vehicle = 5
-    // seed = 18/19/28/31/42, vehicle = 8
-    // seed = 5/8/12/15, vehicle = 10
+    // vehicle = 5,  seed = 16/26  TODO:31
+    // vehicle = 8,  seed = 18/19     TODO:19/28/31/42
+    // vehicle = 10, seed =     TODO:5/8/12/15, 
 
     // int seed = 26;
     int seed = param.random_seed;

@@ -111,6 +111,7 @@ public:
     std::shared_ptr<Leg> leg;
     std::shared_ptr<Lane> lane1, lane2, lane3, lane4, lane5, lane6, lane7;
     std::shared_ptr<Leg> leg0, leg1, leg2, leg3;
+    std::shared_ptr<CriticalResource> dummy_cr;
     void SetUp() override {
         leg0 = std::make_shared<Leg>(0);
         leg1 = std::make_shared<Leg>(1);
@@ -123,6 +124,12 @@ public:
         lane5 = std::make_shared<Lane>(1, 'i', 9, leg2);
         lane6 = std::make_shared<Lane>(0, 'o', 10, leg2);
         lane7 = std::make_shared<Lane>(1, 'i', 13, leg3);
+        dummy_cr = std::make_shared<CriticalResource>(-1, 2);
+        leg0->critical_resource_ = dummy_cr;
+        leg1->critical_resource_ = dummy_cr;
+        leg2->critical_resource_ = dummy_cr;
+        leg3->critical_resource_ = dummy_cr;
+        
         leg = std::make_shared<Leg>(0);
         leg->lanes_in_map_[0] = lane1;
         leg->lanes_out_map_[0] = lane2;

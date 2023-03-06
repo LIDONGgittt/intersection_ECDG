@@ -52,7 +52,10 @@ public:
         intersection.num_legs_ = 4;
         intersection.num_lanes_in_vec_ = std::vector<int>({1, 1, 2, 1});
         intersection.num_lanes_out_vec_ = std::vector<int>({2, 1, 1, 1});
-        intersection.mt_.seed(0);
+        intersection.arrival_interval_avg_ = 3.0;
+        intersection.travel_time_range_ = std::vector<int>({3, 6});
+
+        intersection.setSeed(0);
         intersection.AddIntersectionUtilitiesFromGeometric();
 
         intersection.AddRandomVehicleNodes(5);
@@ -62,7 +65,7 @@ public:
     }
 };
 TEST_F(TestIntersectionWithNodes, CanAssignCriticalResources) {
-    EXPECT_THAT(intersection.critical_resource_map_.at(0)->nodes_.size(), Eq(2));
+    EXPECT_THAT(intersection.critical_resource_map_.at(0)->nodes_.size(), Eq(1));
 }
 TEST_F(TestIntersectionWithNodes, CanAssignRouteToNodes) {
     EXPECT_THAT(intersection.nodes_[1]->route_->getLaneIn(), NotNull());
@@ -72,11 +75,11 @@ TEST_F(TestIntersectionWithNodes, CanAssignEdgesToNodes) {
     EXPECT_THAT(intersection.nodes_[1]->getEdgeWith(0)->node1_.lock()->id_, Eq(0));
 }
 TEST_F(TestIntersectionWithNodes, CanAssignCorrectEdgesToNodes) {
-    EXPECT_THAT(intersection.nodes_[1]->getEdgeWith(5)->conflict_type_.isConverging(), IsTrue());
-    EXPECT_THAT(intersection.nodes_[2]->getEdgeWith(4)->conflict_type_.isDiverging(), IsTrue());
-    EXPECT_THAT(intersection.nodes_[2]->getEdgeWith(4)->predecessor_id_, Eq(2));
-    EXPECT_THAT(intersection.nodes_[3]->getEdgeWith(5)->conflict_type_.isDiverging(), IsTrue());
-    EXPECT_THAT(intersection.nodes_[3]->getEdgeWith(5)->predecessor_id_, Eq(3));
-    EXPECT_THAT(intersection.nodes_[3]->getEdgeWith(4)->conflict_type_.isCompeting(), IsFalse());
+    EXPECT_THAT(intersection.nodes_[1]->getEdgeWith(5)->conflict_type_.isCrossing(), IsTrue());
+    EXPECT_THAT(intersection.nodes_[2]->getEdgeWith(4)->conflict_type_.isConverging(), IsTrue());
+    EXPECT_THAT(intersection.nodes_[2]->getEdgeWith(1)->predecessor_id_, Eq(1));
+    EXPECT_THAT(intersection.nodes_[3]->getEdgeWith(5), IsNull());
+    EXPECT_THAT(intersection.nodes_[3]->getEdgeWith(4)->predecessor_id_, Eq(3));
+    EXPECT_THAT(intersection.nodes_[3]->getEdgeWith(4)->conflict_type_.isPrecedence(), IsTrue());
     EXPECT_THAT(intersection.nodes_[4]->getEdgeWith(5)->conflict_type_.isCrossing(), IsTrue());
 }
