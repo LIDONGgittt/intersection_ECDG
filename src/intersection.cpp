@@ -38,13 +38,13 @@ void Intersection::reset() {
     AddNode(leading_node);
 }
 
-void Intersection::AddIntersectionUtilitiesFromGeometric() {
-    AddLegsAndLanesFromGeometric();
-    AddCriticalResourcesFromGeometric();
+void Intersection::AddIntersectionUtilitiesFromGeometry() {
+    AddLegsAndLanesFromGeometry();
+    AddCriticalResourcesFromGeometry();
     UpdateReferencesOfCriticalResoucesAndLegs();
 }
 
-void Intersection::AddCriticalResourcesFromGeometric() {
+void Intersection::AddCriticalResourcesFromGeometry() {
     critical_resource_map_.clear();
     for (int leg_id = 0; leg_id < num_legs_; leg_id++) {
         if (num_lanes_out_vec_[leg_id] > 1) {
@@ -54,7 +54,7 @@ void Intersection::AddCriticalResourcesFromGeometric() {
     }
 }
 
-void Intersection::AddLegsAndLanesFromGeometric() {
+void Intersection::AddLegsAndLanesFromGeometry() {
     leg_map_.clear();
     lane_map_.clear();
     int lane_unique_id = 0;

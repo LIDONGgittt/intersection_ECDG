@@ -34,8 +34,8 @@ TEST_F(TestIntersection, CanAddEdges) {
     intersection.AddEdge(edge);
     EXPECT_THAT(intersection.getNumEdges(), Eq(1));
 }
-TEST_F(TestIntersection, CanAddIntersectionUtilitiesFromGeometric) {
-    intersection.AddIntersectionUtilitiesFromGeometric();
+TEST_F(TestIntersection, CanAddIntersectionUtilitiesFromGeometry) {
+    intersection.AddIntersectionUtilitiesFromGeometry();
     EXPECT_THAT(intersection.getNumCriticalResources(), Eq(1));
     EXPECT_THAT(intersection.getNumLegs(), Eq(4));
     EXPECT_THAT(intersection.getNumLanes(), Eq(10));
@@ -56,7 +56,7 @@ public:
         intersection.travel_time_range_ = std::vector<int>({3, 6});
 
         intersection.setSeed(0);
-        intersection.AddIntersectionUtilitiesFromGeometric();
+        intersection.AddIntersectionUtilitiesFromGeometry();
 
         intersection.AddRandomVehicleNodes(5);
         intersection.AssignCriticalResourcesToNodes();

@@ -14,14 +14,14 @@ public:
     Intersection() {
         reset();
         InitializeFromParam();
-        AddIntersectionUtilitiesFromGeometric();
+        AddIntersectionUtilitiesFromGeometry();
     }
 
     void reset();
     void InitializeFromParam();
-    void AddIntersectionUtilitiesFromGeometric();
-    void AddCriticalResourcesFromGeometric();
-    void AddLegsAndLanesFromGeometric();
+    void AddIntersectionUtilitiesFromGeometry();
+    void AddCriticalResourcesFromGeometry();
+    void AddLegsAndLanesFromGeometry();
     void UpdateReferencesOfCriticalResoucesAndLegs();
     void AddNode(std::shared_ptr<Node> node);
     void AddEdge(std::shared_ptr<Edge> edge);
