@@ -48,7 +48,7 @@ std::vector<double> BatchTestOneCase(int num_nodes, bool enable_precedence_offse
 
     PROFILER_HOOK();
     double global_optimal = 0;
-    if (cdg.num_nodes_ <= 15) { // only calculate global_optimal for small number of nodes
+    if (cdg.num_nodes_ <= 16) { // only calculate global_optimal for small number of nodes
         auto best_order = scheduler_bruteforce.ScheduleBruteForceSearch(cdg);
         auto depth_vector = scheduler_bruteforce.GetDepthVectorFromOrder(best_order, cdg);
         global_optimal = scheduler_bruteforce.GetEvacuationTimeFromOrder(best_order, cdg);

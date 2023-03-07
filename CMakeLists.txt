@@ -38,3 +38,4 @@ target_link_libraries(${PROJECT_LIB_NAME} ${YAML_CPP_LIBRARIES})
 ## setup tests
 enable_testing()
 add_subdirectory(test)
+add_subdirectory(batch_test)

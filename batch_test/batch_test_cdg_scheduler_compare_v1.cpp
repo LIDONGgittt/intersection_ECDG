@@ -1,9 +1,11 @@
-#include <gtest/gtest.h>
 #include "cdg_scheduler.h"
+
+#include <chrono>
 
 using namespace intersection_management;
 
-TEST(BatchSchedulerTest, CompareMethods_v1) {
+// cdg scheduler compare v1
+int main() {
     ConflictDirectedGraph cdg = ConflictDirectedGraph();
 
     CDGScheduler scheduler_dfs = CDGScheduler();
@@ -317,5 +319,6 @@ TEST(BatchSchedulerTest, CompareMethods_v1) {
         }
 
     }
+    return 0;
 }
 

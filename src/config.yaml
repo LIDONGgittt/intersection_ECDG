@@ -8,6 +8,10 @@ travel_time_range: [3, 6]
 # scheduler configurations
 activate_precedent_offset: true
 
+# tie-breaker strategy
+tie_minimize_resource_waste: true
+
+
 # testing configurations
 # negative means system seed
 random_seed: 4
