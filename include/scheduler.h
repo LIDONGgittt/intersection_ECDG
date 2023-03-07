@@ -35,41 +35,13 @@ class Scheduler {
 public:
     Scheduler();
     SpanningTree ScheduleWithDynamicLaneAssignment(Intersection &intersection);
-    SpanningTree ScheduleWithModifiedDfst(const Intersection &intersection);
-    SpanningTree ScheduleWithBfstWeightedEdgeOnly(const Intersection &intersection);
-    SpanningTree ScheduleWithBfstMultiWeight(const Intersection &intersection);
-    std::vector<int> ScheduleBruteForceSearch(const Intersection &intersection);
 
     void PrepareForTreeSchedule(const Intersection &intersection);
     void GenerateUniparentTable(const Intersection &intersection);
     void GenerateBineighborTable(const Intersection &intersection);
 
-    void SearchOrderPermutationRecursively(std::vector<int> &vehicle_order, int num_nodes,
-                                           std::vector<bool> &is_in_order_list,
-                                           double &minimum_evacuation_time, std::vector<int> &best_order,
-                                           const Intersection &intersection);
-    double GetEvacuationTimeFromOrder(const std::vector<int> &vehicle_order,
-                                      const Intersection &intersection);
-    std::vector<double> GetDepthVectorFromOrder(const std::vector<int> &vehicle_order,
-                                                const Intersection &intersection);
+    void SortReadyListAscendingly(std::vector<Candidate> &ready_list);
 
-    static inline void SortReadyListAscendingly(std::vector<Candidate> &ready_list) {
-        std::sort(ready_list.begin(), ready_list.end(),
-                  [](const Candidate &a, const Candidate &b) {
-                      if (a.possible_depth_ == b.possible_depth_) {
-                          if (a.split_flexible_critical_resource_ && !b.split_flexible_critical_resource_)
-                              return false;
-                          if (!a.split_flexible_critical_resource_ && b.split_flexible_critical_resource_)
-                              return true;
-                          if (a.split_flexible_critical_resource_ && b.split_flexible_critical_resource_ &&
-                              (a.num_critical_resource_splitted_ != b.num_critical_resource_splitted_))
-                              return a.num_critical_resource_splitted_ < b.num_critical_resource_splitted_;
-                          return a.id_ < b.id_;
-
-                      }
-                      return a.possible_depth_ < b.possible_depth_;
-                  });
-    }
     static inline bool isInList(int id, std::vector<Candidate> &ready_list) {
         for (auto &item : ready_list) {
             if (id == item.id_) {
@@ -108,7 +80,6 @@ public:
     SpanningTree result_tree_;
     std::vector<std::vector<std::shared_ptr<Node>>> unidirectional_parent_table_;
     std::vector<std::vector<std::shared_ptr<Node>>> bidirectional_neighbor_table_;
-    bool enable_optimized_precedence_offset_;
 };
 
 } // namespace intersection_management

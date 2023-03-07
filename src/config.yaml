@@ -8,8 +8,15 @@ travel_time_range: [3, 6]
 # scheduler configurations
 activate_precedent_offset: true
 
-# tie-breaker strategy
-tie_minimize_resource_waste: true
+# tiebreak strategy
+# right/left most turns first
+tie_minimum_resource_waste_first: true
+# high demand lanes first
+tie_high_demand_first: true
+# splitting resource first
+tie_consider_splitting_resource: true
+# splitting more resource first
+tie_more_splitted_resource_first: true
 
 
 # testing configurations

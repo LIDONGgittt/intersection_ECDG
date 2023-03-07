@@ -21,7 +21,7 @@ int main() {
     // int seed = 26;
     int seed = param.random_seed;
     while (true) {
-        auto result = BatchTestOneCase(param.test_vehicle_number, true, true, seed++);
+        auto result = BatchTestOneCase(param.test_vehicle_number, true, seed++);
         if (param.test_one_instance)
             break;
         if (result[0] > result[4])

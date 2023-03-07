@@ -12,7 +12,7 @@ namespace intersection_management {
 
 extern Parameters param;
 
-std::vector<double> BatchTestOneCase(int num_nodes, bool enable_precedence_offset, bool verbose, int seed) {
+std::vector<double> BatchTestOneCase(int num_nodes, bool verbose, int seed) {
     PROFILER_HOOK();
     std::vector<double> depth;
     Intersection intersection;
@@ -34,7 +34,6 @@ std::vector<double> BatchTestOneCase(int num_nodes, bool enable_precedence_offse
     cdg.GenerateGraphFromIntersection(intersection);
 
     PROFILER_HOOK();
-    scheduler.enable_optimized_precedence_offset_ = enable_precedence_offset;
     auto result_tree = scheduler.ScheduleWithDynamicLaneAssignment(intersection);
 
     PROFILER_HOOK();

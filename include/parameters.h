@@ -21,6 +21,16 @@ public:
     // # scheduler configurations
     bool activate_precedent_offset;
 
+    // # tiebreak strategy
+    // # right/left most turns first
+    bool tie_minimum_resource_waste_first;
+    // # high demand lanes first
+    bool tie_high_demand_first;
+    // # splitting resource first
+    bool tie_consider_splitting_resource;
+    // # splitting more resource first
+    bool tie_more_splitted_resource_first;
+
     // # testing configurations
     int random_seed;
     bool test_one_instance;

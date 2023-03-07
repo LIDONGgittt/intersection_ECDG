@@ -13,7 +13,6 @@ extern Parameters param;
 
 Scheduler::Scheduler() {
     result_tree_.reset();
-    enable_optimized_precedence_offset_ = true;
 }
 
 
@@ -38,7 +37,6 @@ SpanningTree Scheduler::ScheduleWithDynamicLaneAssignment(Intersection &intersec
 
     while (!ready_list.empty()) {
         // add the node from the first candidate to the tree
-        // TODO: update lanes last occupation based on the added candidate
         auto chosen_candidate = ready_list[0];
         auto &chosen_node = result_tree_.nodes_[chosen_candidate.id_];
         added_to_tree[chosen_candidate.id_] = true;
@@ -165,9 +163,8 @@ SpanningTree Scheduler::ScheduleWithDynamicLaneAssignment(Intersection &intersec
                 }
             }
             double precedence_offset = 0;
-            if (param.activate_precedent_offset) {
-                if (enable_optimized_precedence_offset_ && new_node->getEdgeWith(possible_precedent_parent_id)->conflict_type_.isDiverging())
-                    precedence_offset = -1;
+            if (param.activate_precedent_offset && new_node->getEdgeWith(possible_precedent_parent_id)->conflict_type_.isDiverging()) {
+                precedence_offset = -1;
             }
 
             // update new_candidate for each possible lane and solve conflicts with already scheduled nodes
@@ -308,6 +305,38 @@ void Scheduler::GenerateBineighborTable(const Intersection &intersection) {
         }
         bidirectional_neighbor_table_.push_back(neighbors);
     }
+}
+
+void Scheduler::SortReadyListAscendingly(std::vector<Candidate> &ready_list) {
+    std::sort(ready_list.begin(), ready_list.end(),
+              [](const Candidate &a, const Candidate &b) {
+                  if (a.possible_depth_ != b.possible_depth_) {
+                      return a.possible_depth_ < b.possible_depth_;
+                  }
+
+                  // Break the tie
+                  if (param.tie_minimum_resource_waste_first) {
+                      // TODO
+                  }
+                  if (param.tie_high_demand_first) {
+                      // TODO
+                  }
+                  if (param.tie_consider_splitting_resource) {
+                      if (a.split_flexible_critical_resource_ && !b.split_flexible_critical_resource_)
+                          return true;
+                      if (!a.split_flexible_critical_resource_ && b.split_flexible_critical_resource_)
+                          return false;
+                      if (a.split_flexible_critical_resource_ && b.split_flexible_critical_resource_ &&
+                          (a.num_critical_resource_splitted_ != b.num_critical_resource_splitted_))
+                          if (param.tie_more_splitted_resource_first) {
+                              return a.num_critical_resource_splitted_ > b.num_critical_resource_splitted_;
+                          }
+                          else {
+                              return a.num_critical_resource_splitted_ < b.num_critical_resource_splitted_;
+                          }
+                  }
+                  return a.id_ < b.id_;
+              });
 }
 
 } // namespace intersection_management

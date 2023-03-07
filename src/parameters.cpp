@@ -19,6 +19,11 @@ void Parameters::readParametersFromYaml() {
     travel_time_range = config["travel_time_range"].as<std::vector<int>>();
 
     activate_precedent_offset = config["activate_precedent_offset"].as<bool>();
+
+    tie_minimum_resource_waste_first = config["tie_minimum_resource_waste_first"].as<bool>();
+    tie_high_demand_first = config["tie_high_demand_first"].as<bool>();
+    tie_consider_splitting_resource = config["tie_consider_splitting_resource"].as<bool>();
+    tie_more_splitted_resource_first = config["tie_more_splitted_resource_first"].as<bool>();
     
     random_seed = config["random_seed"].as<int>();
     test_one_instance = config["test_one_instance"].as<bool>();
