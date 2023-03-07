@@ -40,7 +40,7 @@ public:
     void GenerateUniparentTable(const Intersection &intersection);
     void GenerateBineighborTable(const Intersection &intersection);
 
-    void SortReadyListAscendingly(std::vector<Candidate> &ready_list);
+    void SortReadyListAscendingly(std::vector<Candidate> &ready_list, const Intersection &intersection);
 
     static inline bool isInList(int id, std::vector<Candidate> &ready_list) {
         for (auto &item : ready_list) {
@@ -80,7 +80,9 @@ public:
     SpanningTree result_tree_;
     std::vector<std::vector<std::shared_ptr<Node>>> unidirectional_parent_table_;
     std::vector<std::vector<std::shared_ptr<Node>>> bidirectional_neighbor_table_;
+    std::vector<int> remaining_demand_per_lane_;
 };
+
 
 } // namespace intersection_management
 

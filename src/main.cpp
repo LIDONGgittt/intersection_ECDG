@@ -14,7 +14,7 @@ int main() {
     // num_lanes_out_vec: [3, 1, 1, 1]
     // arrival_interval_avg: 2.0
     // travel_time_range: [3, 6]
-    // vehicle = 5,  seed = 16/28  TODO:
+    // vehicle = 5,  seed = 16  TODO:70
     // vehicle = 8,  seed =      TODO:4/5/9
     // vehicle = 10, seed =     TODO:9/23
 

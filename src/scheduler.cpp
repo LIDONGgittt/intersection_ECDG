@@ -44,7 +44,9 @@ SpanningTree Scheduler::ScheduleWithDynamicLaneAssignment(Intersection &intersec
         if (chosen_candidate.id_ > 0) {
             // update edge in the tree
             result_tree_.AddEdge(chosen_candidate.id_possible_parent_, chosen_candidate.id_, chosen_candidate.estimate_offset_);
-            // add the node with all possible lanes to the tree
+            //update remaining demands
+            remaining_demand_per_lane_[intersection.nodes_[chosen_candidate.id_]->route_->getLaneIn()->getUniqueId()]--;
+            // add the node with all potentially available lanes to the tree
             chosen_node->possible_lane_id_.clear();
             chosen_node->possible_lane_id_.push_back(chosen_candidate.out_lane_id_);
             if (!chosen_candidate.split_flexible_critical_resource_) { // assign all possible lanes
@@ -262,7 +264,7 @@ SpanningTree Scheduler::ScheduleWithDynamicLaneAssignment(Intersection &intersec
                 ready_list.push_back(new_candidate);
             }
         }
-        SortReadyListAscendingly(ready_list);
+        SortReadyListAscendingly(ready_list, intersection);
     }
     return result_tree_;
 }
@@ -272,6 +274,12 @@ void Scheduler::PrepareForTreeSchedule(const Intersection &intersection) {
     result_tree_.AddNodesFromIntersection(intersection);
     GenerateUniparentTable(intersection);
     GenerateBineighborTable(intersection);
+
+    remaining_demand_per_lane_.clear();
+    remaining_demand_per_lane_.resize(intersection.lane_map_.size(), 0);
+    for (int id = 1; id < intersection.nodes_.size(); id++) {
+        remaining_demand_per_lane_[intersection.nodes_[id]->route_->getLaneIn()->getUniqueId()]++;
+    }
 }
 
 void Scheduler::GenerateUniparentTable(const Intersection &intersection) {
@@ -307,11 +315,11 @@ void Scheduler::GenerateBineighborTable(const Intersection &intersection) {
     }
 }
 
-void Scheduler::SortReadyListAscendingly(std::vector<Candidate> &ready_list) {
+void Scheduler::SortReadyListAscendingly(std::vector<Candidate> &ready_list, const Intersection &intersection) {
     std::sort(ready_list.begin(), ready_list.end(),
-              [](const Candidate &a, const Candidate &b) {
-                  if (a.possible_depth_ != b.possible_depth_) {
-                      return a.possible_depth_ < b.possible_depth_;
+              [&](const Candidate &candidate1, const Candidate &candidate2) {
+                  if (candidate1.possible_depth_ != candidate2.possible_depth_) {
+                      return candidate1.possible_depth_ < candidate2.possible_depth_;
                   }
 
                   // Break the tie
@@ -319,23 +327,29 @@ void Scheduler::SortReadyListAscendingly(std::vector<Candidate> &ready_list) {
                       // TODO
                   }
                   if (param.tie_high_demand_first) {
-                      // TODO
+                      if (candidate1.id_ != 0 && candidate2.id_ != 0) {
+                          int demand1 = remaining_demand_per_lane_[intersection.nodes_[candidate1.id_]->route_->getLaneIn()->getUniqueId()];
+                          int demand2 = remaining_demand_per_lane_[intersection.nodes_[candidate2.id_]->route_->getLaneIn()->getUniqueId()];
+                          if (demand1 != demand2) {
+                              return demand1 > demand2;
+                          }
+                      }
                   }
                   if (param.tie_consider_splitting_resource) {
-                      if (a.split_flexible_critical_resource_ && !b.split_flexible_critical_resource_)
+                      if (candidate1.split_flexible_critical_resource_ && !candidate2.split_flexible_critical_resource_)
                           return true;
-                      if (!a.split_flexible_critical_resource_ && b.split_flexible_critical_resource_)
+                      if (!candidate1.split_flexible_critical_resource_ && candidate2.split_flexible_critical_resource_)
                           return false;
-                      if (a.split_flexible_critical_resource_ && b.split_flexible_critical_resource_ &&
-                          (a.num_critical_resource_splitted_ != b.num_critical_resource_splitted_))
+                      if (candidate1.split_flexible_critical_resource_ && candidate2.split_flexible_critical_resource_ &&
+                          (candidate1.num_critical_resource_splitted_ != candidate2.num_critical_resource_splitted_))
                           if (param.tie_more_splitted_resource_first) {
-                              return a.num_critical_resource_splitted_ > b.num_critical_resource_splitted_;
+                              return candidate1.num_critical_resource_splitted_ > candidate2.num_critical_resource_splitted_;
                           }
                           else {
-                              return a.num_critical_resource_splitted_ < b.num_critical_resource_splitted_;
+                              return candidate1.num_critical_resource_splitted_ < candidate2.num_critical_resource_splitted_;
                           }
                   }
-                  return a.id_ < b.id_;
+                  return candidate1.id_ < candidate2.id_;
               });
 }
 
