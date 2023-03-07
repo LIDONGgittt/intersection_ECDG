@@ -22,6 +22,6 @@ tie_more_splitted_resource_first: true
 
 # testing configurations
 # negative means system seed
-random_seed: 70
+random_seed: 0
 test_one_instance: true
 test_vehicle_number: 5

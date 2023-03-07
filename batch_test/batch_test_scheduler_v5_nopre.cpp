@@ -8,5 +8,5 @@ using namespace intersection_management;
 
 int main() {
     param.activate_precedent_offset = false;
-    BatchTest(5, -1, 1000);
+    BatchTest(5, 1000000, 1000);
 }

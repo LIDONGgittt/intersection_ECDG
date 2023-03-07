@@ -77,11 +77,15 @@ void BatchTest(int num_nodes, int test_count, int print_interval) {
     if (test_count < 0) test_count = INT32_MAX;
     while (total_test < test_count) {
         auto depths = BatchTestOneCase(num_nodes);
+        double coefficient;
         for (int i = 0; i < 5; i++) {
-            sum[i] += depths[i];
-            if (depths[i] <= depths[4])
+            coefficient = 1;
+            if (i == 1 || i == 2)
+                coefficient = param.travel_time_range[1];
+            sum[i] += depths[i] * coefficient;
+            if (depths[i] * coefficient <= depths[4])
                 better_count[i]++;
-            if (depths[i] <= depths[1] * param.travel_time_range[1])
+            if (depths[i] * coefficient <= depths[1] * param.travel_time_range[1])
                 better_dfs[i]++;
         }
         total_test++;
