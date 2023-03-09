@@ -26,14 +26,14 @@ file(GLOB SOURCES "src/*.cpp")
 file(GLOB HEADERS include/*.h)
 
 add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})
-target_link_libraries(${PROJECT_NAME} ${YAML_CPP_LIBRARIES})
+target_link_libraries(${PROJECT_NAME} yaml-cpp)
 
 list(FILTER SOURCES EXCLUDE REGEX "src/cdg_main.cpp")
 list(FILTER SOURCES EXCLUDE REGEX "src/main.cpp")
 set(LIB_SOURCES ${SOURCES})
 set(PROJECT_LIB_NAME ${PROJECT_NAME}_lib)
 add_library(${PROJECT_LIB_NAME} STATIC ${LIB_SOURCES} ${HEADERS})
-target_link_libraries(${PROJECT_LIB_NAME} ${YAML_CPP_LIBRARIES})
+target_link_libraries(${PROJECT_LIB_NAME} yaml-cpp)
 
 ## setup tests
 enable_testing()

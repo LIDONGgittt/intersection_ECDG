@@ -6,6 +6,7 @@
 #include <cmath>
 #include <queue>
 #include <algorithm>
+#include <limits>
 
 namespace intersection_management {
 CDGConflictSpanningTree::CDGConflictSpanningTree() {
@@ -138,7 +139,7 @@ double CDGConflictSpanningTree::CalculateFairnessIndex(CDGDepthType depth_type, 
         fairness_index = fairness_index / order_diff_vec.size();
         break;
     case Type_JainIndex: {
-        double minimum_diff = MAXFLOAT;
+        double minimum_diff = std::numeric_limits<double>::max();
         for (auto &diff : order_diff_vec)
             if (minimum_diff > diff)
                 minimum_diff = diff;
