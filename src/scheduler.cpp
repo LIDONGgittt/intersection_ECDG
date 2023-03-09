@@ -269,7 +269,7 @@ SpanningTree Scheduler::ScheduleWithDynamicLaneAssignment(Intersection &intersec
     return result_tree_;
 }
 
-void Scheduler::PrepareForTreeSchedule(const Intersection &intersection) {
+void Scheduler::PrepareForTreeSchedule(Intersection &intersection) {
     result_tree_.reset(false);
     result_tree_.AddNodesFromIntersection(intersection);
     GenerateUniparentTable(intersection);
@@ -282,7 +282,7 @@ void Scheduler::PrepareForTreeSchedule(const Intersection &intersection) {
     }
 }
 
-void Scheduler::GenerateUniparentTable(const Intersection &intersection) {
+void Scheduler::GenerateUniparentTable(Intersection &intersection) {
     unidirectional_parent_table_.clear();
     for (int id = 0; id < intersection.num_nodes_; id++) {
         std::vector<std::shared_ptr<Node>> uni_parent;
@@ -299,7 +299,7 @@ void Scheduler::GenerateUniparentTable(const Intersection &intersection) {
     }
 }
 
-void Scheduler::GenerateBineighborTable(const Intersection &intersection) {
+void Scheduler::GenerateBineighborTable(Intersection &intersection) {
     bidirectional_neighbor_table_.clear();
     for (int id = 0; id < intersection.num_nodes_; id++) {
         std::vector<std::shared_ptr<Node>> neighbors;
@@ -315,7 +315,7 @@ void Scheduler::GenerateBineighborTable(const Intersection &intersection) {
     }
 }
 
-void Scheduler::SortReadyListAscendingly(std::vector<Candidate> &ready_list, const Intersection &intersection) {
+void Scheduler::SortReadyListAscendingly(std::vector<Candidate> &ready_list, Intersection &intersection) {
     std::sort(ready_list.begin(), ready_list.end(),
               [&](const Candidate &candidate1, const Candidate &candidate2) {
                   if (candidate1.possible_depth_ != candidate2.possible_depth_) {
@@ -323,9 +323,6 @@ void Scheduler::SortReadyListAscendingly(std::vector<Candidate> &ready_list, con
                   }
 
                   // Break the tie
-                  if (param.tie_minimum_resource_waste_first) {
-                      // TODO
-                  }
                   if (param.tie_high_demand_first) {
                       if (candidate1.id_ != 0 && candidate2.id_ != 0) {
                           int demand1 = remaining_demand_per_lane_[intersection.nodes_[candidate1.id_]->route_->getLaneIn()->getUniqueId()];
@@ -333,6 +330,21 @@ void Scheduler::SortReadyListAscendingly(std::vector<Candidate> &ready_list, con
                           if (demand1 != demand2) {
                               return demand1 > demand2;
                           }
+                      }
+                  }
+                  if (param.tie_minimum_resource_waste_first) {
+                      bool isCompetingRightmost1 = intersection.isRightmostTurningRoute(intersection.nodes_[candidate1.id_]->route_);
+                      bool isCompetingRightmost2 = intersection.isRightmostTurningRoute(intersection.nodes_[candidate2.id_]->route_);
+                      if (isCompetingRightmost1 && intersection.critical_resource_map_.find(candidate1.out_leg_id_) == intersection.critical_resource_map_.end())
+                          isCompetingRightmost1 = false;
+                      if (isCompetingRightmost2 && intersection.critical_resource_map_.find(candidate2.out_leg_id_) == intersection.critical_resource_map_.end())
+                          isCompetingRightmost2 = false;
+
+                      if (isCompetingRightmost1 && !isCompetingRightmost2) {
+                          return true;
+                      }
+                      if (!isCompetingRightmost1 && isCompetingRightmost2) {
+                          return false;
                       }
                   }
                   if (param.tie_consider_splitting_resource) {

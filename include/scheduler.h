@@ -36,11 +36,11 @@ public:
     Scheduler();
     SpanningTree ScheduleWithDynamicLaneAssignment(Intersection &intersection);
 
-    void PrepareForTreeSchedule(const Intersection &intersection);
-    void GenerateUniparentTable(const Intersection &intersection);
-    void GenerateBineighborTable(const Intersection &intersection);
+    void PrepareForTreeSchedule(Intersection &intersection);
+    void GenerateUniparentTable(Intersection &intersection);
+    void GenerateBineighborTable(Intersection &intersection);
 
-    void SortReadyListAscendingly(std::vector<Candidate> &ready_list, const Intersection &intersection);
+    void SortReadyListAscendingly(std::vector<Candidate> &ready_list, Intersection &intersection);
 
     static inline bool isInList(int id, std::vector<Candidate> &ready_list) {
         for (auto &item : ready_list) {

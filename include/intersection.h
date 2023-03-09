@@ -41,7 +41,12 @@ public:
         else { mt_.seed(seed); }
     }
 
+    bool isRightmostTurningRoute(std::shared_ptr<Route> route);
+    bool isLeftmostTurningRoute(std::shared_ptr<Route> route);
+    bool isOutermostTurningRoute(std::shared_ptr<Route> route);
+
     int num_legs_;
+    int num_lanes_;
     std::vector<int> num_lanes_in_vec_;
     std::vector<int> num_lanes_out_vec_;
     double arrival_interval_avg_;

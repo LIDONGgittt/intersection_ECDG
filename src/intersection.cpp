@@ -12,6 +12,9 @@ void Intersection::InitializeFromParam() {
     num_legs_ = param.num_legs;
     num_lanes_in_vec_ = param.num_lanes_in_vec;
     num_lanes_out_vec_ = param.num_lanes_out_vec;
+    num_lanes_ = 0;
+    for (auto num_in : num_lanes_in_vec_) num_lanes_ += num_in;
+    for (auto num_out : num_lanes_in_vec_) num_lanes_ += num_out;
     arrival_interval_avg_ = param.arrival_interval_avg;
     travel_time_range_ = param.travel_time_range;
 
@@ -179,6 +182,32 @@ void Intersection::AssignEdgesWithSafetyOffsetToNodes() {
             AddEdge(edge);
         }
     }
+}
+
+bool Intersection::isRightmostTurningRoute(std::shared_ptr<Route> route) {
+    auto lane_in = route->getLaneIn();
+    auto lane_out = route->getLaneOut();
+
+    if (lane_in->getUniqueId() == lane_out->getUniqueId() + 1 || lane_in->getUniqueId() == 0 && lane_out->getUniqueId() == num_lanes_ - 1)
+        // rightmost turning
+        return true;
+    return false;
+}
+bool Intersection::isLeftmostTurningRoute(std::shared_ptr<Route> route) {
+    auto lane_in = route->getLaneIn();
+    auto lane_out = route->getLaneOut();
+
+    if (lane_in->getLegId() == lane_out->getLegId() - 1 || lane_in->getLegId() == lane_out->getLegId() - 1 + num_legs_) {
+        // left hand turning
+        if (lane_in->getId() == num_lanes_in_vec_[lane_in->getLegId()] - 1 && lane_out->getId() == 0) {
+            // leftmost turning
+            return true;
+        }
+    }
+    return false;
+}
+bool Intersection::isOutermostTurningRoute(std::shared_ptr<Route> route) {
+    return isRightmostTurningRoute(route) || isLeftmostTurningRoute(route);
 }
 
 } // namespace intersection_management
