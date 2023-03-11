@@ -3,6 +3,6 @@
 using namespace intersection_management;
 
 int main() {
-    BatchTest(10, 500, 10);
+    BatchTest(10, 500, 10, 0);
     return 0;
 }

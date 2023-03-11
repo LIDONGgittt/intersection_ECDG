@@ -68,15 +68,20 @@ std::vector<double> BatchTestOneCase(int num_nodes, bool verbose, int seed) {
     return depth;
 }
 
-void BatchTest(int num_nodes, int test_count, int print_interval) {
+void BatchTest(int num_nodes, int test_count, int print_interval, int starting_seed) {
     std::signal(SIGINT, SIGINT_signal_handler);
     std::vector<double> sum(5, 0);
     std::vector<long> better_count(5, 0);
     std::vector<long> better_dfs(5, 0);
     long total_test = 0;
     if (test_count < 0) test_count = INT32_MAX;
+    int seed_increment = 0;
+    if (starting_seed >= 0)
+        seed_increment = 1;
+
     while (total_test < test_count) {
-        auto depths = BatchTestOneCase(num_nodes);
+        auto depths = BatchTestOneCase(num_nodes, false, starting_seed);
+        starting_seed += seed_increment;
         double coefficient;
         for (int i = 0; i < 5; i++) {
             coefficient = 1;
