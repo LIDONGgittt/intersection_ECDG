@@ -32,6 +32,9 @@ public:
 };
 
 class Scheduler {
+// TODO: add FIFO scheduler
+// TODO: support to enable/disable earliest arrival time constraint
+
 public:
     Scheduler();
     SpanningTree ScheduleWithDynamicLaneAssignment(Intersection &intersection);
@@ -42,47 +45,16 @@ public:
 
     void SortReadyListAscendingly(std::vector<Candidate> &ready_list, Intersection &intersection);
 
-    static inline bool isInList(int id, std::vector<Candidate> &ready_list) {
-        for (auto &item : ready_list) {
-            if (id == item.id_) {
-                return true;
-            }
-        }
-        return false;
-    }
-    static inline bool StillHasUnscheduledPredecessor(std::vector<std::shared_ptr<Node>> &pre, std::vector<bool> &added_to_tree) {
-        for (auto node : pre) {
-            if (added_to_tree[node->id_] == false) {
-                return true;
-            }
-        }
-        return false;
-    }
-    static void printDepthVector(std::vector<double> &depth_vector) {
-        int tmp_cnt = 0;
-        for (int i = 0; i < depth_vector.size(); i++) {
-            std::cout << "Node " << i << ": " << depth_vector[i] << ", ";
-            if (++tmp_cnt % 6 == 0)
-                std::cout << std::endl;
-        }
-        std::cout << std::endl;
-    }
-    static void printOrder(std::vector<int> &order) {
-        int tmp_cnt = 0;
-        for (auto id : order) {
-            std::cout << "Node " << id << " -> ";
-            if (++tmp_cnt % 10 == 0)
-                std::cout << std::endl;
-        }
-        std::cout << std::endl;
-    }
+    static bool isInList(int id, std::vector<Candidate> &ready_list);
+    static bool StillHasUnscheduledPredecessor(std::vector<std::shared_ptr<Node>> &pre, std::vector<bool> &added_to_tree);
+    static void printDepthVector(std::vector<double> &depth_vector);
+    static void printOrder(std::vector<int> &order);
 
     SpanningTree result_tree_;
     std::vector<std::vector<std::shared_ptr<Node>>> unidirectional_parent_table_;
     std::vector<std::vector<std::shared_ptr<Node>>> bidirectional_neighbor_table_;
     std::vector<int> remaining_demand_per_lane_;
 };
-
 
 } // namespace intersection_management
 

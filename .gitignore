@@ -1,6 +1,5 @@
 # .gitignore
 # .editorconfig
 .vscode/
-.editorconfig
 build/
 release/
