@@ -26,6 +26,7 @@
 #include <chrono>
 #include <functional>
 #include <cmath>
+#include <iomanip>
 
 namespace time_profiler
 {
