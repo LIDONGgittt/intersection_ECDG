@@ -1,11 +1,24 @@
-#include "sumo_local_vehicle.h"
+#include "sumo_sim_utility.h"
 
 #include <iostream>
 #include <libsumo/libtraci.h>
 
+#include "parameters.h"
+
 using namespace libtraci;
 
 namespace intersection_management {
+
+extern Parameters param;
+
+int intersectionLaneIdToSumoLaneId(int leg_id, int lane_id, std::string type) {
+    if (type == "in")
+        return lane_id;
+    if (type == "out")
+        return param.num_lanes_out_vec[leg_id] - 1 - lane_id;
+    return -1;
+}
+
 LocalVehicle::LocalVehicle(std::string vehID, std::string routeID, std::string typeID, std::string depart,
                            std::string departLaneID, std::string departPos, std::string departSpeed,
                            std::string arrivalLaneID, std::string arrivalPos, std::string arrivalSpeed) {

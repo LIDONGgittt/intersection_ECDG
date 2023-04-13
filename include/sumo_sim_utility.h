@@ -8,6 +8,14 @@
 using namespace libtraci;
 
 namespace intersection_management {
+
+int intersectionLaneIdToSumoLaneId(int leg_id, int lane_id, std::string type = "in");
+
+static const std::vector<libsumo::TraCIColor> sumoColorVec = {
+    libsumo::TraCIColor(55, 255, 0), libsumo::TraCIColor(0, 255, 255),
+    libsumo::TraCIColor(255, 155, 0), libsumo::TraCIColor(200, 15, 15),
+    libsumo::TraCIColor(255, 0, 255), libsumo::TraCIColor(100, 100, 255)};
+
 class LocalVehicle {
 public:
     LocalVehicle():LocalVehicle("dummy_vehID", "dummy_routeID") {}

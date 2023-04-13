@@ -3,6 +3,8 @@
 #include "cdg_scheduler.h"
 #include "time_profiler/time_profiler.h"
 #include "parameters.h"
+#include "sumo_sim_utility.h"
+
 
 namespace intersection_management {
 extern Parameters param;
@@ -74,4 +76,25 @@ int main() {
     depth = std::vector<double>{result_tree.depth_, modified_dfst.edge_weighted_depth_, bfst.edge_weighted_depth_,
         mdbfst.edge_node_weighted_depth_, global_optimal};
     // return depth;
+
+    std::vector<std::string> SUMO_CMD({"sumo-gui", "-c", "../intersection/intersection_unregulated.sumocfg"});
+    std::vector<LocalVehicle> localVehicles;
+
+    // offset that vehicle depart at 0m
+    double kTimeWindowOffset = 10.610;
+    for (int i = 1; i < result_tree.nodes_.size(); i++) {
+        auto node = result_tree.nodes_[i];
+        std::string routeId = "r";
+        routeId.push_back('0' + node->in_leg_id_);
+        routeId.push_back('0' + node->out_leg_id_);
+        std::string departLaneID = std::to_string(intersectionLaneIdToSumoLaneId(node->in_leg_id_, node->in_lane_id_, "in"));
+        std::string arrivalLaneID = std::to_string(intersectionLaneIdToSumoLaneId(node->out_leg_id_, node->possible_lane_id_[0], "out"));
+        localVehicles.push_back(LocalVehicle(std::to_string(node->id_), routeId, "Vtype1", "now", departLaneID, "0", "0", arrivalLaneID));
+
+        localVehicles.back().color_ = sumoColorVec[i % sumoColorVec.size()];
+        localVehicles.back().timewindow_[0] = kTimeWindowOffset + node->time_window_[0];
+        localVehicles.back().timewindow_[1] = kTimeWindowOffset + node->time_window_[1];
+    }
+
+
 }
