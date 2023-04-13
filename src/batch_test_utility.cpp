@@ -117,6 +117,6 @@ void BatchTest(int num_nodes, int test_count, int print_interval, int starting_s
 
 void SIGINT_signal_handler(int signal) {
     // ::time_profiler::TimeProfiler::print_statistics();
-    exit(signal);
+    exit(signal); // deconstruct profiler when ctrl+C
 }
 } // namespace intersection_management
