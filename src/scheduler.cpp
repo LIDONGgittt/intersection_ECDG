@@ -184,7 +184,14 @@ SpanningTree Scheduler::ScheduleWithDynamicLaneAssignment(Intersection &intersec
             double estimate_travel_time = new_node->estimate_travel_time_;
             double estimate_arrival_time = new_node->estimate_arrival_time_;
 
-            double earliest_start_time = -1;
+            double earliest_start_time;
+            if (param.activate_arrival_time) {
+                earliest_start_time = new_node->estimate_arrival_time_;
+            }
+            else {
+                earliest_start_time = -1;
+            }
+
             int possible_precedent_parent_id = 0;
             for (auto parent : unidirectional_parent_table_[new_node_id])
             {

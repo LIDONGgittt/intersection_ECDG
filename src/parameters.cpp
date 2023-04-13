@@ -24,6 +24,7 @@ void Parameters::readParametersFromYaml() {
     travel_time_range = config["travel_time_range"].as<std::vector<int>>();
 
     activate_precedent_offset = config["activate_precedent_offset"].as<bool>();
+    activate_arrival_time = config["activate_arrival_time"].as<bool>();
 
     tie_minimum_resource_waste_first = config["tie_minimum_resource_waste_first"].as<bool>();
     tie_high_demand_first = config["tie_high_demand_first"].as<bool>();

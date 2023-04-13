@@ -4,11 +4,16 @@
 #include "time_profiler/time_profiler.h"
 #include "parameters.h"
 
+namespace intersection_management {
+extern Parameters param;
+}
+
 using namespace intersection_management;
 
-extern Parameters param;
-
 int main() {
+    param.num_lanes_in_vec = {3, 3, 3, 3};
+    param.num_lanes_out_vec = {3, 3, 3, 3};
+
     std::vector<double> depth;
     Intersection intersection;
     ConflictDirectedGraph cdg;
@@ -18,12 +23,13 @@ int main() {
     CDGScheduler scheduler_mdbfs;
     CDGScheduler scheduler_bruteforce;
 
+
     bool verbose = true;
-    int seed = 0;
+    int seed = 1;
 
     PROFILER_HOOK();
     intersection.setSeed(seed);
-    intersection.AddRandomVehicleNodes(5, verbose);
+    intersection.AddRandomVehicleNodesWithTravelTime(5, {6.0, 6.5, 7.0}, verbose);
     intersection.AssignCriticalResourcesToNodes();
     intersection.AssignRoutesToNodes();
     intersection.AssignEdgesWithSafetyOffsetToNodes();
@@ -59,6 +65,10 @@ int main() {
         std::cout << "edge_weighted bfs: " << bfst.edge_weighted_depth_ << "\n";
         std::cout << "multi_weighted bfs: " << mdbfst.edge_node_weighted_depth_ << "\n";
         std::cout << "global_optimal: " << global_optimal << "\n";
+        std::cout << "=========================================\n";
+        std::cout << "Dynamic lane schedule:\n";
+        for (auto &node : result_tree.nodes_)
+            node->printDetail();
         std::cout << "=========================================\n";
     }
     depth = std::vector<double>{result_tree.depth_, modified_dfst.edge_weighted_depth_, bfst.edge_weighted_depth_,

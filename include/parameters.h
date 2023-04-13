@@ -20,6 +20,7 @@ public:
 
     // # scheduler configurations
     bool activate_precedent_offset;
+    bool activate_arrival_time;
 
     // # tiebreak strategy
     // # right/left most turns first

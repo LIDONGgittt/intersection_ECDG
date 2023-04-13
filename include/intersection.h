@@ -27,6 +27,7 @@ public:
     void AddEdge(std::shared_ptr<Edge> edge);
 
     void AddRandomVehicleNodes(int count, bool verbose = false);
+    void AddRandomVehicleNodesWithTravelTime(int count, std::vector<double> travel_time_choice = {6.0, 6.5, 7.0}, bool verbose = false);
     void AssignRoutesToNodes();
     void AssignCriticalResourcesToNodes();
     void AssignEdgesWithSafetyOffsetToNodes();

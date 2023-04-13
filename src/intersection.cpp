@@ -127,6 +127,48 @@ void Intersection::AddRandomVehicleNodes(int count, bool verbose) {
     }
 }
 
+// add random vehicle according to travel_time_choice
+// travel_time_choice must have 3 items, representing estimated travel time for [right-turn, straight, left-turn]
+void Intersection::AddRandomVehicleNodesWithTravelTime(int count, std::vector<double> travel_time_choice, bool verbose) {
+    std::poisson_distribution<int> arrival_interval_dist(arrival_interval_avg_);
+    int num_total_lanes = lane_map_.size();
+    // for (auto num_in : num_lanes_in_vec_) num_total_lanes += num_in;
+    // for (auto num_out : num_lanes_out_vec_) num_total_lanes += num_out;
+
+    int last_arrival_time = 0;
+    for (auto n : nodes_) {
+        if (n->estimate_arrival_time_ > last_arrival_time)
+            last_arrival_time = n->estimate_arrival_time_;
+    }
+
+    for (int id = 1; id <= count; id++) { // id 0 is automatically created for the virtual leading vehicle on initialization or reset
+        auto in_lane = lane_map_[mt_() % num_total_lanes];
+        while (in_lane->isOutBound()) in_lane = lane_map_[mt_() % num_total_lanes];
+        auto out_lane = lane_map_[mt_() % num_total_lanes];
+        while (out_lane->isInBound() || out_lane->getLegId() == in_lane->getLegId()) { // in_leg and out_leg should be different
+            out_lane = lane_map_[mt_() % num_total_lanes];
+        }
+        if (getNumNodes() > 1) {
+            last_arrival_time += arrival_interval_dist(mt_);
+        }
+        double estimate_travel_time;
+        if ((in_lane->getLegId() - 1 + 4) % 4 == out_lane->getLegId()) { // right-turn
+            estimate_travel_time = travel_time_choice[0];
+        }
+        else if ((in_lane->getLegId() + 1) % 4 == out_lane->getLegId()) { // left-turn
+            estimate_travel_time = travel_time_choice[2];
+        }
+        else {
+            estimate_travel_time = travel_time_choice[1]; // straight
+        }
+        auto node = std::make_shared<Node>(id, estimate_travel_time, in_lane->getLegId(), in_lane->getId(),
+                                           out_lane->getLegId(), out_lane->getId(), last_arrival_time);
+        AddNode(node);
+        if (verbose)
+            node->printDetail();
+    }
+}
+
 void Intersection::AssignRoutesToNodes() {
     for (int id = 1; id < nodes_.size(); id++) {
         auto &node = nodes_[id];

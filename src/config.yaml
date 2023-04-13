@@ -9,6 +9,7 @@ travel_time_range: [3, 6]
 
 # scheduler configurations
 activate_precedent_offset: true
+activate_arrival_time: true # vehicles will be ready at time 0 if false
 
 # tiebreak strategy
 # right/left most turns first
