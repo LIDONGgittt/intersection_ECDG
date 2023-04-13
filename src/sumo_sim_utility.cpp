@@ -39,6 +39,9 @@ LocalVehicle::LocalVehicle(std::string vehID, std::string routeID, std::string t
     departLaneIDNum_ = std::stoi(departLaneID_);
     arrivalLaneIDNum_ = std::stoi(arrivalLaneID_);
     finished_ = false;
+    addedToSumo_ = false;
+
+    arrival_time_ = -1;
     timewindow_ = std::vector<double>{-1, -1};
 }
 

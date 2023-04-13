@@ -31,7 +31,7 @@ int main() {
 
     PROFILER_HOOK();
     intersection.setSeed(seed);
-    intersection.AddRandomVehicleNodesWithTravelTime(5, {6.0, 6.5, 7.0}, verbose);
+    intersection.AddRandomVehicleNodesWithTravelTime(20, {6.0, 6.5, 7.0}, verbose);
     intersection.AssignCriticalResourcesToNodes();
     intersection.AssignRoutesToNodes();
     intersection.AssignEdgesWithSafetyOffsetToNodes();
@@ -77,7 +77,7 @@ int main() {
         mdbfst.edge_node_weighted_depth_, global_optimal};
     // return depth;
 
-    std::vector<std::string> SUMO_CMD({"sumo-gui", "-c", "../intersection/intersection_unregulated.sumocfg"});
+    std::vector<std::string> SUMO_CMD({"sumo-gui", "-c", PROJECT_DIR + "/configs/sumo_intersection/intersection_unregulated.sumocfg"});
     std::vector<LocalVehicle> localVehicles;
 
     // offset that vehicle depart at 0m
@@ -92,9 +92,58 @@ int main() {
         localVehicles.push_back(LocalVehicle(std::to_string(node->id_), routeId, "Vtype1", "now", departLaneID, "0", "0", arrivalLaneID));
 
         localVehicles.back().color_ = sumoColorVec[i % sumoColorVec.size()];
+        localVehicles.back().arrival_time_ = node->estimate_arrival_time_;
         localVehicles.back().timewindow_[0] = kTimeWindowOffset + node->time_window_[0];
         localVehicles.back().timewindow_[1] = kTimeWindowOffset + node->time_window_[1];
     }
 
+    Simulation::start(SUMO_CMD);
+    // localVehicles.resize(1);
+
+
+    bool stopSimAfterClearanceFlag = true;
+    double currentTime = 0;
+    for (int i = 0; i < 400000; i++) {
+        currentTime = i * 0.001;
+        for (auto &veh : localVehicles) {
+            if (currentTime >= veh.arrival_time_ && !veh.addedToSumo_) {
+                Vehicle::add(veh.vehID_, veh.routeID_, veh.typeID_, veh.depart_, veh.departLaneID_, veh.departPos_,
+                             veh.departSpeed_, veh.arrivalLaneID_, veh.arrivalPos_, veh.arrivalSpeed_);
+                Vehicle::setColor(veh.vehID_, veh.color_);
+                Vehicle::setStop(veh.vehID_, veh.departEdgeID_, libtraci::Lane::getLength(veh.departEdgeID_ + "_" + veh.departLaneID_),
+                                 veh.departLaneIDNum_, 0, libsumo::STOP_DEFAULT,
+                                 libtraci::Lane::getLength(veh.departEdgeID_ + "_" + veh.departLaneID_) - 0.1, veh.timewindow_[0]);
+                veh.addedToSumo_ = true;
+            }
+        }
+
+        Simulation::step(currentTime);
+
+        for (auto &veh : localVehicles) {
+            if (veh.addedToSumo_ && !veh.hasFinished()) {
+                if (!veh.hasPassedIntersectionStopLine()) {
+                    Vehicle::changeLane(veh.vehID_, veh.departLaneIDNum_, 0.1);
+                }
+                else {
+                    Vehicle::changeLane(veh.vehID_, veh.arrivalLaneIDNum_, 0.1);
+                }
+            }
+        }
+
+        bool allPassed = true;
+        for (auto &veh : localVehicles) {
+            if (veh.addedToSumo_ && !veh.hasFinished()) {
+                if (!veh.hasLeftIntersectionAndEnterArrivalLane()) {
+                    allPassed = false;
+                }
+            }
+        }
+        if (allPassed && stopSimAfterClearanceFlag) {
+            std::cout << "The intersection is evacuated at time: " << i << " ms.\n";
+            getchar();
+            stopSimAfterClearanceFlag = false;
+        }
+    }
+    Simulation::close();
 
 }

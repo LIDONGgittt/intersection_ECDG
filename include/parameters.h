@@ -2,8 +2,11 @@
 #define INTERSECTION_MANAGEMENT_PARAMETERS_H_
 
 #include <vector>
+#include <string>
 
 namespace intersection_management {
+extern const std::string PROJECT_DIR;
+
 class Parameters {
 public:
     Parameters() {

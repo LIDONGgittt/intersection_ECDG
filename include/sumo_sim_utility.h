@@ -44,7 +44,9 @@ public:
     int arrivalLaneIDNum_;
     bool finished_;
     libsumo::TraCIColor color_;
+    bool addedToSumo_;
 
+    double arrival_time_;
     std::vector<double> timewindow_;
 };
 } // namespace intersection_management

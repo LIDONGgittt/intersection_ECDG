@@ -7,8 +7,8 @@
 namespace intersection_management {
 
 /* path for linux */
-static const std::string PROJECT_DIR = "/home/dong/workspace/intersection_CDG";
-static const std::string CONFIG_FILE = "/configs/config.yaml";
+ const std::string PROJECT_DIR = "/home/dong/workspace/intersection_CDG";
+ const std::string CONFIG_FILE = "/configs/config.yaml";
 
 /* path for windows */
 // static const std::string PROJECT_DIR = "d:\\program\\workspace\\intersection_CDG";
