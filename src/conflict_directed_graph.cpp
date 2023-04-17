@@ -112,8 +112,20 @@ void ConflictDirectedGraph::GenerateRandomGraph(
 
 
 void ConflictDirectedGraph::GenerateGraphFromIntersection(Intersection &intersection) {
+    // num_nodes_ = intersection.num_nodes_;
+    // for (int i = 1; i < intersection.nodes_.size(); i++) {
+    //     auto node = std::shared_ptr<Node>(intersection.nodes_[i]);
+    //     node->depth_ = -1;
+    //     node->edge_weighted_depth_ = -1;
+    //     node->edge_node_weighted_depth_ = -1;
+    //     nodes_.push_back(node);
+    // }
     for (int i = 1; i < intersection.nodes_.size(); i++) {
         AddNode(intersection.nodes_[i]->estimate_travel_time_);
+        nodes_.back()->in_lane_id_ = intersection.nodes_[i]->in_lane_id_;
+        nodes_.back()->in_leg_id_ = intersection.nodes_[i]->in_leg_id_;
+        nodes_.back()->out_lane_id_ = intersection.nodes_[i]->out_lane_id_;
+        nodes_.back()->out_leg_id_ = intersection.nodes_[i]->out_leg_id_;
     }
     p_root_->edges_.clear();
     for (auto edge : intersection.edges_) {

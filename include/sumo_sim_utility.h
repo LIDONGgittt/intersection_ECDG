@@ -47,6 +47,8 @@ public:
     bool finished_;
     libsumo::TraCIColor color_;
     bool addedToSumo_;
+    double fuelConsumed_;
+    // double
 
     double arrival_time_;
     std::vector<double> timewindow_;

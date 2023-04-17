@@ -130,6 +130,7 @@ void sumoSimulationOneCase(int num_nodes, std::string schedule_method, bool verb
     Simulation::start(SUMO_CMD);
 
     double currentTime = 0;
+    double nextPrintTime = 10.0;
     for (int i = 0; i < 400000; i++) {
         currentTime = i * 0.001;
         for (auto &veh : localVehicles) {
@@ -148,13 +149,32 @@ void sumoSimulationOneCase(int num_nodes, std::string schedule_method, bool verb
 
         for (auto &veh : localVehicles) {
             if (veh.addedToSumo_ && !veh.hasFinished()) {
+                // enforce lanes
                 if (!veh.hasPassedIntersectionStopLine()) {
                     Vehicle::changeLane(veh.vehID_, veh.departLaneIDNum_, 0.1);
                 }
                 else {
                     Vehicle::changeLane(veh.vehID_, veh.arrivalLaneIDNum_, 0.1);
                 }
+                // cumulate fuel consumption
+                // std::cout << Vehicle::getFuelConsumption(veh.vehID_) << std::endl;
+                veh.fuelConsumed_ += ((Vehicle::getFuelConsumption(veh.vehID_)>0)?Vehicle::getFuelConsumption(veh.vehID_):0) * 0.001;
             }
+        }
+
+        if (currentTime >= nextPrintTime) {
+            nextPrintTime += 10;
+            double averageFuelComsumed = 0;
+            for (auto &veh : localVehicles) {
+                // std::cout << veh.fuelConsumed_ << std::endl;
+                if (veh.fuelConsumed_ > 0) {
+                    averageFuelComsumed += veh.fuelConsumed_;
+                }
+            }
+            averageFuelComsumed /= localVehicles.size();
+            std::cout << "==========================";
+            std::cout << "Sumo status as time: " << currentTime << std::endl;
+            std::cout << "Average fuel consumed is : " << averageFuelComsumed << " mg\n";
         }
 
         bool allPassed = true;
@@ -167,6 +187,19 @@ void sumoSimulationOneCase(int num_nodes, std::string schedule_method, bool verb
         }
         if (allPassed && stopSimAfterClearanceFlag) {
             std::cout << "The intersection is evacuated at time: " << i << " ms.\n";
+
+            double averageFuelComsumed = 0;
+            for (auto &veh : localVehicles) {
+                // std::cout << veh.fuelConsumed_ << std::endl;
+                if (veh.fuelConsumed_ > 0) {
+                    averageFuelComsumed += veh.fuelConsumed_;
+                }
+            }
+            averageFuelComsumed /= localVehicles.size();
+            std::cout << "==========================";
+            std::cout << "Sumo status as time: " << currentTime << std::endl;
+            std::cout << "Average fuel consumed is : " << averageFuelComsumed << " mg\n";
+
             getchar();
             stopSimAfterClearanceFlag = false;
         }
@@ -195,6 +228,7 @@ LocalVehicle::LocalVehicle(std::string vehID, std::string routeID, std::string t
     arrivalLaneIDNum_ = std::stoi(arrivalLaneID_);
     finished_ = false;
     addedToSumo_ = false;
+    fuelConsumed_ = 0.0;
 
     arrival_time_ = -1;
     timewindow_ = std::vector<double>{-1, -1};
@@ -224,6 +258,7 @@ bool LocalVehicle::hasFinished() {
         if (hasPassedIntersectionStopLine() && Vehicle::getLanePosition(vehID_) > 80) {
             // std::cout<<"set " << vehID_ << " finished\n";
             finished_ = true;
+            
         }
     }
     return finished_;

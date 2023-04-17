@@ -29,6 +29,10 @@ void CDGConflictSpanningTree::reset(bool verbose) {
 void CDGConflictSpanningTree::AddNodesFromGraph(const ConflictDirectedGraph &graph) {
     for (auto pn : graph.nodes_) {
         AddNode(pn);
+        nodes_.back()->in_lane_id_ = pn->in_lane_id_;
+        nodes_.back()->in_leg_id_ = pn->in_leg_id_;
+        nodes_.back()->out_lane_id_ = pn->out_lane_id_;
+        nodes_.back()->out_leg_id_ = pn->out_leg_id_;
     }
     p_root_ = nodes_[0];
     p_root_->depth_ = 0;
