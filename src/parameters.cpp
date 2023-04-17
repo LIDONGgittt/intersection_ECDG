@@ -7,7 +7,7 @@
 namespace intersection_management {
 
 /* path for linux */
- const std::string PROJECT_DIR = "/home/dong/workspace/intersection_CDG";
+ const std::string PROJECT_DIR = "/home/dongli/workspace/intersection_CDG";
  const std::string CONFIG_FILE = "/configs/config.yaml";
 
 /* path for windows */
