@@ -24,6 +24,7 @@ public:
     bool hasPassedIntersectionStopLine();
     bool hasLeftIntersectionAndEnterArrivalLane();
     bool hasFinished();
+    void printSummary();
 
     std::string vehID_;
     std::string routeID_;
@@ -44,8 +45,12 @@ public:
     libsumo::TraCIColor color_;
     bool addedToSumo_;
     double fuelConsumed_;
-    // double
-
+    double waitingTime_;
+    double actualClearingTime_;
+    double timeDelay_;
+    double timeNeededForTheTrip_;
+    
+    // scheduled results, will be used to add constraints in the simulation
     double arrival_time_;
     std::vector<double> timewindow_;
 };

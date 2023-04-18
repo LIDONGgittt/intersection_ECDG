@@ -16,12 +16,22 @@ namespace intersection_management {
 class SumoSimulator {
 public:
     SumoSimulator(): SumoSimulator(0.001, 400) {}
-    SumoSimulator(double step_length, double total_time): step_length_(step_length), total_time_(total_time) {
+    SumoSimulator(double step_length, double total_time): step_length_(step_length), max_sim_time_(total_time) {
         sumo_cmd_ = {"sumo-gui", "-c", PROJECT_DIR + "/configs/sumo_intersection/intersection_unregulated.sumocfg"}; // {"--step-length", std::to_string(step_length_)};
-        // offset that vehicle depart at 0m
-        kTimeWindowOffset_ = 10.610;
+        // offset that vehicle depart at 0m with speed 0
+        // kTimeWindowOffset_ = 10.7;
+        // offset that vehicle depart at 0m with speed limit 13.9m/s
+        kTimeWindowOffset_ = 6.15;
         stopSimAfterClearanceFlag_ = true;
         travel_time_choice_ = {6.0, 6.5, 7.0};
+
+        evacuation_time_ = 0;
+        totalFuelComsumed_ = 0;
+        averageFuelComsumed_ = 0;
+        maxWaitingTime_ = 0;
+        averageWaitingTime_ = 0;
+        maxTimeDelay_ = 0;
+        averageTimeDelay_ = 0;
     }
 
     void addVehicles(std::string schedule_method = "dynamic_lane");
@@ -39,6 +49,10 @@ public:
     inline void setStopAtClearanceFlag(bool stopSimAfterClearanceFlag = true) { stopSimAfterClearanceFlag_ = stopSimAfterClearanceFlag; }
     inline void setStepLength(double step_length) { step_length_ = step_length; }
 
+    void updateStatistics();
+    void printSummary();
+    void printFuelConsumptionSummary();
+
     SpanningTree result_tree_;
     CDGConflictSpanningTree modified_dfst_;
     CDGConflictSpanningTree bfst_;
@@ -52,7 +66,16 @@ public:
     std::vector<double> travel_time_choice_ = {6.0, 6.5, 7.0};
     std::vector<LocalVehicle> localVehicles_;
     double step_length_;
-    double total_time_;
+    double max_sim_time_;
+
+    // statistics
+    double evacuation_time_;
+    double totalFuelComsumed_;
+    double averageFuelComsumed_;
+    double maxWaitingTime_;
+    double averageWaitingTime_;
+    double maxTimeDelay_;
+    double averageTimeDelay_;
 };
 } // namespace intersection_management
 #endif // INTERSECTION_MANAGEMENT_SUMO_SIMULATOR_H_

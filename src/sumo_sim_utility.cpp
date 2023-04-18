@@ -24,17 +24,27 @@ int intersectionLaneIdToSumoLaneId(int leg_id, int lane_id, std::string type) {
 }
 
 void printFuelConsumption(std::vector<LocalVehicle> &localVehicles, double currentTime) {
+    double totalFuelComsumed = 0;
     double averageFuelComsumed = 0;
     for (auto &veh : localVehicles) {
         // std::cout << veh.fuelConsumed_ << std::endl;
         if (veh.fuelConsumed_ > 0) {
-            averageFuelComsumed += veh.fuelConsumed_;
+            totalFuelComsumed += veh.fuelConsumed_ * 0.001;
         }
     }
-    averageFuelComsumed /= localVehicles.size();
-    std::cout << "==========================";
-    std::cout << "Sumo status as time: " << currentTime << std::endl;
-    std::cout << "Average fuel consumed is : " << averageFuelComsumed << " mg\n";
+    averageFuelComsumed = totalFuelComsumed / localVehicles.size();
+    std::cout << "==========================\n";
+    std::cout << "Sumo simulation at time: " << currentTime << std::endl;
+    std::cout << "Average fuel consumed is : " << averageFuelComsumed << " g\n";
+    std::cout << "Total fuel consumed is : " << totalFuelComsumed << " g\n";
+}
+
+void LocalVehicle::printSummary() {
+    std::cout << "Vehicle " << vehID_ << ": "
+        << "Fuel Consumed " << fuelConsumed_*0.001 << " g, "
+        << "Stop Time " << waitingTime_ << " s, "
+        << "Travel Time " << actualClearingTime_ - arrival_time_ << " s, "
+        << "Time Delay " << timeDelay_ << "s.\n";
 }
 
 LocalVehicle::LocalVehicle(std::string vehID, std::string routeID, std::string typeID, std::string depart,
@@ -59,7 +69,11 @@ LocalVehicle::LocalVehicle(std::string vehID, std::string routeID, std::string t
     finished_ = false;
     addedToSumo_ = false;
     fuelConsumed_ = 0.0;
+    waitingTime_ = 0.0;
+    actualClearingTime_ = 0.0;
+    timeDelay_ = 0.0;
 
+    // scheduled results, will be used to add constraints in the simulation
     arrival_time_ = -1;
     timewindow_ = std::vector<double>{-1, -1};
 }
@@ -88,7 +102,12 @@ bool LocalVehicle::hasFinished() {
         if (hasPassedIntersectionStopLine() && Vehicle::getLanePosition(vehID_) > 80) {
             // std::cout<<"set " << vehID_ << " finished\n";
             finished_ = true;
-
+            actualClearingTime_ = Simulation::getTime();
+            timeNeededForTheTrip_ = Vehicle::getDistance(vehID_) / libtraci::Lane::getMaxSpeed(departEdgeID_ + "_" + departLaneID_);
+            // std::cout << "Vehicle " << vehID_ << " has driven a distance of: " << Vehicle::getDistance(vehID_)
+            //     << ", with max speed of: " << libtraci::Lane::getMaxSpeed(departEdgeID_ + "_" + departLaneID_) << "\n";
+            timeDelay_ = actualClearingTime_ - arrival_time_ - timeNeededForTheTrip_;
+            printSummary();
         }
     }
     return finished_;
