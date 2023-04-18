@@ -133,7 +133,7 @@ void SumoSimulator::startSimulation() {
 
         if (currentTime >= nextPrintTime) {
             nextPrintTime += 10;
-            printFuelConsumption(localVehicles_, currentTime);
+            printFuelConsumptionSummary();
         }
 
         bool allPassed = true;
@@ -150,7 +150,7 @@ void SumoSimulator::startSimulation() {
         }
         if (allPassed && !foundEvacuationTime) {
             std::cout << "The intersection is evacuated at time: " << i << " ms.\n";
-            evacuation_time_ = currentTime * 0.001;
+            evacuation_time_ = currentTime;
             foundEvacuationTime = true;
         }
 
@@ -192,7 +192,7 @@ void SumoSimulator::updateStatistics() {
                 maxTimeDelay_ = veh.timeDelay_;
         }
         if (veh.fuelConsumed_ > 0) {
-            totalFuelComsumed_ += veh.fuelConsumed_ * 0.001;
+            totalFuelComsumed_ += veh.fuelConsumed_ * 0.001; // change unit to gram
         }
     }
 
@@ -201,8 +201,9 @@ void SumoSimulator::updateStatistics() {
     averageFuelComsumed_ = totalFuelComsumed_ / localVehicles_.size();
 }
 void SumoSimulator::printSummary() {
-    std::cout << Color::blue << "====statistics of simulation====\n" << Color::def
-        << "Intersection evacuation time: " << evacuation_time_ << "\n"
+    std::cout << Color::blue << "====statistics of simulation====\n"
+        << "Scheduling method: " << schedule_method_ << "\n" << Color::def
+        << "Intersection evacuation time: " << evacuation_time_ << " s\n"
         << "Waiting (stop) time: Max " << maxWaitingTime_ << " s, Ave " << averageWaitingTime_ << " s\n"
         << "Trip delay: Max " << maxTimeDelay_ << "s, Ave " << averageTimeDelay_ << " s\n";
     printFuelConsumptionSummary();
@@ -214,25 +215,29 @@ void SumoSimulator::printFuelConsumptionSummary() {
     for (auto &veh : localVehicles_) {
         // std::cout << veh.fuelConsumed_ << std::endl;
         if (veh.fuelConsumed_ > 0) {
-            totalFuelComsumed_ += veh.fuelConsumed_ * 0.001;
+            totalFuelComsumed_ += veh.fuelConsumed_ * 0.001; // change unit to gram
         }
     }
     averageFuelComsumed_ = totalFuelComsumed_ / localVehicles_.size();
     std::cout << "==========================\n";
-    std::cout << "Sumo simulation at time: " << Simulation::getTime() << std::endl;
+    std::cout << "Sumo simulation at time: " << Simulation::getTime() << " s\n";
     std::cout << "Average fuel consumed is : " << averageFuelComsumed_ << " g\n";
     std::cout << "Total fuel consumed is : " << totalFuelComsumed_ << " g\n";
 }
 
-void SumoSimulator::simulateOneRandomCase(int num_nodes, std::string schedule_method, bool verbose, int seed) {
-    generateSchedulingResults(num_nodes, schedule_method, verbose, seed);
-    addVehicles();
+void SumoSimulator::simulateOneRandomCase(int num_nodes, std::string schedule_method, bool verbose, double arrival_interval_avg, int seed) {
+    schedule_method_ = schedule_method;
+    arrival_interval_avg_ = arrival_interval_avg;
+    seed_ = seed;
+    generateSchedulingResults(num_nodes, schedule_method, verbose, arrival_interval_avg, seed);
+    addVehicles(schedule_method_);
     startSimulation();
 }
 
-void SumoSimulator::generateSchedulingResults(int num_nodes, std::string schedule_method, bool verbose, int seed) {
+void SumoSimulator::generateSchedulingResults(int num_nodes, std::string schedule_method, bool verbose, double arrival_interval_avg, int seed) {
     param.num_lanes_in_vec = {3, 3, 3, 3};
     param.num_lanes_out_vec = {3, 3, 3, 3};
+    param.arrival_interval_avg = arrival_interval_avg;
 
     Intersection intersection;
     ConflictDirectedGraph cdg;

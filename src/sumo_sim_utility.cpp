@@ -23,21 +23,21 @@ int intersectionLaneIdToSumoLaneId(int leg_id, int lane_id, std::string type) {
     return -1;
 }
 
-void printFuelConsumption(std::vector<LocalVehicle> &localVehicles, double currentTime) {
-    double totalFuelComsumed = 0;
-    double averageFuelComsumed = 0;
-    for (auto &veh : localVehicles) {
-        // std::cout << veh.fuelConsumed_ << std::endl;
-        if (veh.fuelConsumed_ > 0) {
-            totalFuelComsumed += veh.fuelConsumed_ * 0.001;
-        }
-    }
-    averageFuelComsumed = totalFuelComsumed / localVehicles.size();
-    std::cout << "==========================\n";
-    std::cout << "Sumo simulation at time: " << currentTime << std::endl;
-    std::cout << "Average fuel consumed is : " << averageFuelComsumed << " g\n";
-    std::cout << "Total fuel consumed is : " << totalFuelComsumed << " g\n";
-}
+// void printFuelConsumption(std::vector<LocalVehicle> &localVehicles, double currentTime) {
+//     double totalFuelComsumed = 0;
+//     double averageFuelComsumed = 0;
+//     for (auto &veh : localVehicles) {
+//         // std::cout << veh.fuelConsumed_ << std::endl;
+//         if (veh.fuelConsumed_ > 0) {
+//             totalFuelComsumed += veh.fuelConsumed_ * 0.001;
+//         }
+//     }
+//     averageFuelComsumed = totalFuelComsumed / localVehicles.size();
+//     std::cout << "==========================\n";
+//     std::cout << "Sumo simulation at time: " << currentTime << " s\n";
+//     std::cout << "Average fuel consumed is : " << averageFuelComsumed << " g\n";
+//     std::cout << "Total fuel consumed is : " << totalFuelComsumed << " g\n";
+// }
 
 void LocalVehicle::printSummary() {
     std::cout << "Vehicle " << vehID_ << ": "

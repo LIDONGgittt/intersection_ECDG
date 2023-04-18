@@ -17,7 +17,12 @@ class SumoSimulator {
 public:
     SumoSimulator(): SumoSimulator(0.001, 400) {}
     SumoSimulator(double step_length, double total_time): step_length_(step_length), max_sim_time_(total_time) {
-        sumo_cmd_ = {"sumo-gui", "-c", PROJECT_DIR + "/configs/sumo_intersection/intersection_unregulated.sumocfg"}; // {"--step-length", std::to_string(step_length_)};
+        schedule_method_ = "default";
+        arrival_interval_avg_ = 2.0;
+        seed_ = -1;
+
+        sumo_cmd_ = {"sumo-gui", "-c", PROJECT_DIR + "/configs/sumo_intersection/intersection_unregulated.sumocfg"};
+        // sumo_cmd_ = {"sumo", "-c", PROJECT_DIR + "/configs/sumo_intersection/intersection_unregulated.sumocfg"};
         // offset that vehicle depart at 0m with speed 0
         // kTimeWindowOffset_ = 10.7;
         // offset that vehicle depart at 0m with speed limit 13.9m/s
@@ -36,8 +41,8 @@ public:
 
     void addVehicles(std::string schedule_method = "dynamic_lane");
     void startSimulation();
-    void simulateOneRandomCase(int num_nodes, std::string schedule_method, bool verbose = false, int seed = -1);
-    void generateSchedulingResults(int num_nodes, std::string schedule_method, bool verbose = false, int seed = -1);
+    void simulateOneRandomCase(int num_nodes, std::string schedule_method, bool verbose = false, double arrival_interval_avg = 2.0, int seed = -1);
+    void generateSchedulingResults(int num_nodes, std::string schedule_method, bool verbose = false, double arrival_interval_avg = 2.0, int seed = -1);
     inline void setDynamicLaneResult(SpanningTree result_tree) { result_tree_ = result_tree; }
     inline void setDFSResult(CDGConflictSpanningTree modified_dfst) { modified_dfst_ = modified_dfst; }
     inline void setBFSResult(CDGConflictSpanningTree bfst) { bfst_ = bfst; }
@@ -58,6 +63,11 @@ public:
     CDGConflictSpanningTree bfst_;
     CDGConflictSpanningTree mdbfst_;
     double global_optimal_;
+
+    // simulation configs
+    std::string schedule_method_;
+    double arrival_interval_avg_;
+    int seed_;
 
     std::vector<std::string> sumo_cmd_;
     // offset that vehicle depart at 0m

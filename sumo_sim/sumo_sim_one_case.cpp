@@ -12,12 +12,18 @@ int main() {
     param.num_lanes_in_vec = {3, 3, 3, 3};
     param.num_lanes_out_vec = {3, 3, 3, 3};
 
-    // sumo_simulator.simulateOneRandomCase(10, "dynamic_lane", true, 0);
-    // sumo_simulator.simulateOneRandomCase(10, "dfs", true, 0);
-    // sumo_simulator.simulateOneRandomCase(60, "dynamic_lane", true, 2245);
-    // sumo_simulator.simulateOneRandomCase(60, "dynamic_lane", true, 0);
-    sumo_simulator.simulateOneRandomCase(5, "dynamic_lane", true, 0);
-    // sumo_simulator.simulateOneRandomCase(20, "dfs", true, 0);
-    // sumo_simulator.simulateOneRandomCase(20, "bfs", true, 0);
-    // sumo_simulator.simulateOneRandomCase(20, "mdbfs", true, 0);
+    // sumo_simulator.simulateOneRandomCase(10, "dynamic_lane", true, 2.0, 0);
+    // sumo_simulator.simulateOneRandomCase(10, "dfs", true, 2.0, 0);
+    // // low demand
+    // sumo_simulator.simulateOneRandomCase(100, "dynamic_lane", true, 2.0, 33);
+    // sumo_simulator.simulateOneRandomCase(100, "dfs", true, 2.0, 33);
+    // sumo_simulator.simulateOneRandomCase(100, "bfs", true, 2.0, 33);
+    // sumo_simulator.simulateOneRandomCase(100, "mdbfs", true, 2.0, 33);
+    // // high demand
+    sumo_simulator.simulateOneRandomCase(100, "dynamic_lane", true, 1.0, 33);
+    // sumo_simulator.simulateOneRandomCase(100, "dfs", true, 1.0, 33);
+    // sumo_simulator.simulateOneRandomCase(100, "bfs", true, 1.0, 33);
+    // sumo_simulator.simulateOneRandomCase(100, "mdbfs", true, 1.0, 33);
+
+    // sumo_simulator.simulateOneRandomCase(5, "dynamic_lane", true, 2.0, 0);
 }
