@@ -41,5 +41,6 @@ public:
     int test_vehicle_number;
 }; // class Parameters
 
+extern Parameters param;
 } // namespace intersection_management
 #endif // #define INTERSECTION_MANAGEMENT_PARAMETERS_H_

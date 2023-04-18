@@ -2,6 +2,9 @@
 #include "sumo_sim_utility.h"
 
 #include <iostream>
+#include <vector>
+#include <algorithm>
+#include <string>
 #include <libsumo/libtraci.h>
 
 #include "scheduler.h"
@@ -9,6 +12,7 @@
 #include "cdg_scheduler.h"
 #include "time_profiler/time_profiler.h"
 #include "parameters.h"
+#include "colormod.h"
 
 using namespace libtraci;
 
@@ -74,10 +78,15 @@ void SumoSimulator::addVehicles(std::string schedule_method) {
 void SumoSimulator::startSimulation() {
     Simulation::start(sumo_cmd_);
 
+    std::cout << Color::green << "#########################\n"
+        << "SUMO step length is: " << Simulation::getDeltaT() << std::endl
+        << "Simulator scheduler update length is: " << step_length_ << std::endl << Color::def;
+
     double currentTime = 0;
     double nextPrintTime = 10.0;
-    for (int i = 1; i < 400000; i++) {
-        currentTime = i * 0.001;
+    int total_step = (int)(total_time_ / step_length_);
+    for (int i = 1; i < total_step; i++) {
+        currentTime = i * step_length_;
         for (auto &veh : localVehicles_) {
             if (currentTime >= veh.arrival_time_ && !veh.addedToSumo_) {
                 Vehicle::add(veh.vehID_, veh.routeID_, veh.typeID_, veh.depart_, veh.departLaneID_, veh.departPos_,
@@ -91,9 +100,14 @@ void SumoSimulator::startSimulation() {
         }
 
         Simulation::step(currentTime);
+        
+        // if (localVehicles_[0].addedToSumo_ && !localVehicles_[0].hasFinished()) {
+        //     std::cout<<Vehicle::getStopDelay(localVehicles_[0].vehID_)<<std::endl;
+        // }
 
         for (auto &veh : localVehicles_) {
             if (veh.addedToSumo_ && !veh.hasFinished()) {
+                // if (veh.hasPassedIntersectionStopLine()) {getchar();}
                 // enforce lanes
                 if (!veh.hasPassedIntersectionStopLine()) {
                     Vehicle::changeLane(veh.vehID_, veh.departLaneIDNum_, 0.1);
@@ -103,7 +117,7 @@ void SumoSimulator::startSimulation() {
                 }
                 // cumulate fuel consumption
                 // std::cout << Vehicle::getFuelConsumption(veh.vehID_) << std::endl;
-                veh.fuelConsumed_ += ((Vehicle::getFuelConsumption(veh.vehID_) > 0) ? Vehicle::getFuelConsumption(veh.vehID_) : 0) * 0.001;
+                veh.fuelConsumed_ += ((Vehicle::getFuelConsumption(veh.vehID_) > 0) ? Vehicle::getFuelConsumption(veh.vehID_) : 0) * step_length_;
             }
         }
 
