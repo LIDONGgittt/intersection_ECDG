@@ -107,10 +107,6 @@ SpanningTree Scheduler::ScheduleWithDynamicLaneAssignment(Intersection &intersec
                     leg_lane_last_node_id[competing_node->out_leg_id_][competing_node->possible_lane_id_[0]] = competing_node->id_;
                 }
             }
-            // for (auto out_lane_id : chosen_node->possible_lane_id_) {
-            //     leg_lane_last_occupation[chosen_candidate.out_leg_id_][out_lane_id] = chosen_candidate.possible_depth_;
-            //     leg_lane_last_node_id[chosen_candidate.out_leg_id_][out_lane_id] = chosen_candidate.id_;
-            // }
             if (chosen_node->possible_lane_id_.size() == 1)
             {
                 lane_fixed[chosen_node->id_] = true;
@@ -140,12 +136,13 @@ SpanningTree Scheduler::ScheduleWithDynamicLaneAssignment(Intersection &intersec
                     iter_ready_candidate = ready_list.erase(iter_ready_candidate);
                     continue;
                 }
-                // crossing and converging but not competing nodes with conflicting candidate window will be removed,
+                // crossing and converging but not competing (only one out lane in the leg) nodes 
+                // with conflicting candidate window will be removed,
                 // all candidates for the crossing node will be removed
                 if (edge->conflict_type_.isCrossing() || edge->conflict_type_.isConverging())
                 {
                     double edge_weight = edge->edge_weight_;
-                    if (chosen_candidate.possible_depth_ + edge_weight + intersection.nodes_[iter_ready_candidate->id_]->estimate_travel_time_ > iter_ready_candidate->possible_depth_)
+                    if (chosen_candidate.possible_depth_ > iter_ready_candidate->possible_depth_ - edge_weight - intersection.nodes_[iter_ready_candidate->id_]->estimate_travel_time_)
                     {
                         crossing_conflict_node_set.insert(iter_ready_candidate->id_);
                         iter_ready_candidate = ready_list.erase(iter_ready_candidate);
@@ -287,7 +284,7 @@ SpanningTree Scheduler::ScheduleWithDynamicLaneAssignment(Intersection &intersec
                                     }
                                 }
                                 if (non_conflict_count < neighbor->possible_lane_id_.size())
-                                { // otherwise will complete non-conflict
+                                { // otherwise will complete non-conflict, which is safe
                                     if (non_conflict_count > 0)
                                     { // may split critical resources
                                         if (best_depth > neighbor->time_window_[0] && best_start_time < neighbor->time_window_[1])
@@ -298,7 +295,7 @@ SpanningTree Scheduler::ScheduleWithDynamicLaneAssignment(Intersection &intersec
                                         }
                                     }
                                     else
-                                    { // conflict with all possible lanes, thus will not split critical resources
+                                    { // conflict with all possible lanes, thus have to be scheduled later, and will not split critical resources
                                         if (best_depth > neighbor->time_window_[0] && best_start_time < neighbor->time_window_[1])
                                         {
                                             flag_still_conflict_with_bidire_scheduled_neighbor = true;
@@ -307,6 +304,8 @@ SpanningTree Scheduler::ScheduleWithDynamicLaneAssignment(Intersection &intersec
                                             best_estimate_offset = 0;
                                             best_depth = best_start_time + estimate_travel_time + best_estimate_offset;
                                             split_flexible_critical_resource = false;
+                                            num_critical_resource_splitted = 0;
+                                            competing_node_id = 0;
                                         }
                                     }
                                 }
@@ -318,6 +317,7 @@ SpanningTree Scheduler::ScheduleWithDynamicLaneAssignment(Intersection &intersec
                 Candidate new_candidate(new_node_id, best_depth, best_parent_id, best_estimate_offset, out_leg_id, out_lane_id, estimate_travel_time);
                 new_candidate.split_flexible_critical_resource_ = split_flexible_critical_resource;
                 new_candidate.num_critical_resource_splitted_ = num_critical_resource_splitted;
+                new_candidate.competing_node_id_ = competing_node_id;
                 ready_list.push_back(new_candidate);
             }
         }

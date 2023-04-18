@@ -61,7 +61,7 @@ void Node::printWeightAndEdge() {
 void Node::printDetail() {
     std::cout << "Node id: " << id_ << ", ett: " << estimate_travel_time_ << ", eat: " << estimate_arrival_time_;
     std::cout << ", in-bound info: " << in_leg_id_ << "_" << in_lane_id_ << ", out_bound info: " << out_leg_id_ << "_" << out_lane_id_;
-    std::cout << ", time window: [" << time_window_[0] << "," << time_window_[1] << "], scheduled out_bound lane: " << out_leg_id_;
+    std::cout << ", time window: [" << time_window_[0] << "," << time_window_[1] << "], scheduled out_bound leg_lane: " << out_leg_id_;
     for (auto l : possible_lane_id_) std::cout << "_" << l;
     std::cout << std::endl;
 }
@@ -97,7 +97,7 @@ std::shared_ptr<Edge> Node::getEdgeTo(std::shared_ptr<Node> &p_n) {
     return getEdgeTo(p_n->id_);
 }
 
-// bidirectional, any edge connect with node with id
+// bidirectional, any edge connect with node with id, bidirectional has a default value of true
 bool Node::isConnectedWith(int id, bool bidirectional) {
     for (auto p_edge : edges_) {
         if ((p_edge->node2_.lock()->id_ == id) || (bidirectional && p_edge->node1_.lock()->id_ == id)) {
