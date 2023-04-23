@@ -9,8 +9,6 @@
 
 namespace intersection_management {
 
-extern Parameters param;
-
 Scheduler::Scheduler()
 {
     result_tree_.reset();

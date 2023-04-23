@@ -6,8 +6,6 @@
 
 namespace intersection_management {
 
-extern Parameters param;
-
 void Intersection::InitializeFromParam() {
     num_legs_ = param.num_legs;
     num_lanes_in_vec_ = param.num_lanes_in_vec;
@@ -192,6 +190,7 @@ void Intersection::AssignCriticalResourcesToNodes() {
 }
 
 void Intersection::AssignEdgesWithSafetyOffsetToNodes() {
+    // TODO check this and make it based on configs
     // offset: -1 if diverging; 0 otherwise
 
     ConflictType ct_precedence;
@@ -210,10 +209,15 @@ void Intersection::AssignEdgesWithSafetyOffsetToNodes() {
             double offset = 0;
             if (ct.isDiverging()) {
                 predecessor_id = i;
-                offset = -1;
+                if (param.activate_precedent_offset) {
+                    offset = -1;
+                } else {
+                    offset = 0;
+                }
+                
             }
             else if (!ct.isNotConflicting()) {
-                offset = 1;
+                offset = 0;
             }
             else {
                 continue; // non-conflict relation don't need edges

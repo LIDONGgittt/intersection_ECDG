@@ -18,7 +18,60 @@ using namespace libtraci;
 
 namespace intersection_management {
 
-extern Parameters param;
+
+void SumoSimulator::simulateOneRandomCase(int num_nodes, std::string schedule_method, bool verbose, double arrival_interval_avg, int seed) {
+    schedule_method_ = schedule_method;
+    arrival_interval_avg_ = arrival_interval_avg;
+    seed_ = seed;
+    generateSchedulingResults(num_nodes, schedule_method, verbose, arrival_interval_avg, seed);
+    addVehicles(schedule_method_);
+    printTargetSimResults(schedule_method_);
+    startSimulation();
+}
+
+void SumoSimulator::generateSchedulingResults(int num_nodes, std::string schedule_method, bool verbose, double arrival_interval_avg, int seed) {
+    param.num_lanes_in_vec = {3, 3, 3, 3};
+    param.num_lanes_out_vec = {3, 3, 3, 3};
+    param.arrival_interval_avg = arrival_interval_avg;
+
+    Intersection intersection;
+    ConflictDirectedGraph cdg;
+    Scheduler scheduler;
+    CDGScheduler scheduler_dfs;
+    CDGScheduler scheduler_bfs;
+    CDGScheduler scheduler_mdbfs;
+    CDGScheduler scheduler_bruteforce;
+
+    intersection.setSeed(seed);
+    intersection.AddRandomVehicleNodesWithTravelTime(num_nodes, travel_time_choice_, verbose);
+    intersection.AssignCriticalResourcesToNodes();
+    intersection.AssignRoutesToNodes();
+    intersection.AssignEdgesWithSafetyOffsetToNodes();
+
+    cdg.GenerateGraphFromIntersection(intersection);
+
+    result_tree_ = scheduler.ScheduleWithDynamicLaneAssignment(intersection);
+    modified_dfst_ = scheduler_dfs.ScheduleWithModifiedDfst(cdg);
+    bfst_ = scheduler_bfs.ScheduleWithBfstWeightedEdgeOnly(cdg);
+    mdbfst_ = scheduler_mdbfs.ScheduleWithBfstMultiWeight(cdg);
+    global_optimal_ = 0;
+    if (cdg.num_nodes_ <= 16) { // only calculate global_optimal for small number of nodes
+        auto best_order = scheduler_bruteforce.ScheduleBruteForceSearch(cdg);
+        auto depth_vector = scheduler_bruteforce.GetDepthVectorFromOrder(best_order, cdg);
+        global_optimal_ = scheduler_bruteforce.GetEvacuationTimeFromOrder(best_order, cdg);
+    }
+
+    if (verbose) {
+        std::cout << "=========================================\n";
+        std::cout << "seed: " << seed << "\n";
+        std::cout << "dynamin lane assignment: " << result_tree_.depth_ << "\n";
+        std::cout << "modified dfs: " << modified_dfst_.edge_weighted_depth_ << "\n";
+        std::cout << "edge_weighted bfs: " << bfst_.edge_weighted_depth_ << "\n";
+        std::cout << "multi_weighted bfs: " << mdbfst_.edge_node_weighted_depth_ << "\n";
+        std::cout << "global_optimal: " << global_optimal_ << "\n";
+        std::cout << "=========================================\n";
+    }
+}
 
 void SumoSimulator::addVehicles(std::string schedule_method) {
     std::vector<std::shared_ptr<Node>> scheduled_vehicles;
@@ -172,6 +225,31 @@ void SumoSimulator::startSimulation() {
     Simulation::close();
 }
 
+void SumoSimulator::printTargetSimResults(std::string schedule_method) {
+    std::cout << "=========================================\n";
+    std::cout << schedule_method << " schedule:\n";
+    if (schedule_method == "mdbfs") {
+        auto &target_tree = mdbfst_;
+        for (auto &node : target_tree.nodes_)
+            node->printDetail();
+    }
+    else if (schedule_method == "dfs") {
+        auto &target_tree = modified_dfst_;
+        for (auto &node : target_tree.nodes_)
+            node->printDetail();
+    }
+    else if (schedule_method == "bfs") {
+        auto &target_tree = bfst_;
+        for (auto &node : target_tree.nodes_)
+            node->printDetail();
+    }
+    else { // default is dynamic lane assignment scheduler
+        auto &target_tree = result_tree_;
+        for (auto &node : target_tree.nodes_)
+            node->printDetail();
+    }
+    std::cout << "=========================================\n";
+}
 
 void SumoSimulator::updateStatistics() {
     averageWaitingTime_ = 0;
@@ -200,6 +278,7 @@ void SumoSimulator::updateStatistics() {
     averageTimeDelay_ = averageTimeDelay_ / localVehicles_.size();
     averageFuelComsumed_ = totalFuelComsumed_ / localVehicles_.size();
 }
+
 void SumoSimulator::printSummary() {
     std::cout << Color::blue << "====statistics of simulation====\n"
         << "Scheduling method: " << schedule_method_ << "\n" << Color::def
@@ -225,59 +304,4 @@ void SumoSimulator::printFuelConsumptionSummary() {
     std::cout << "Total fuel consumed is : " << totalFuelComsumed_ << " g\n";
 }
 
-void SumoSimulator::simulateOneRandomCase(int num_nodes, std::string schedule_method, bool verbose, double arrival_interval_avg, int seed) {
-    schedule_method_ = schedule_method;
-    arrival_interval_avg_ = arrival_interval_avg;
-    seed_ = seed;
-    generateSchedulingResults(num_nodes, schedule_method, verbose, arrival_interval_avg, seed);
-    addVehicles(schedule_method_);
-    startSimulation();
-}
-
-void SumoSimulator::generateSchedulingResults(int num_nodes, std::string schedule_method, bool verbose, double arrival_interval_avg, int seed) {
-    param.num_lanes_in_vec = {3, 3, 3, 3};
-    param.num_lanes_out_vec = {3, 3, 3, 3};
-    param.arrival_interval_avg = arrival_interval_avg;
-
-    Intersection intersection;
-    ConflictDirectedGraph cdg;
-    Scheduler scheduler;
-    CDGScheduler scheduler_dfs;
-    CDGScheduler scheduler_bfs;
-    CDGScheduler scheduler_mdbfs;
-    CDGScheduler scheduler_bruteforce;
-
-    intersection.setSeed(seed);
-    intersection.AddRandomVehicleNodesWithTravelTime(num_nodes, travel_time_choice_, verbose);
-    intersection.AssignCriticalResourcesToNodes();
-    intersection.AssignRoutesToNodes();
-    intersection.AssignEdgesWithSafetyOffsetToNodes();
-
-    cdg.GenerateGraphFromIntersection(intersection);
-
-    result_tree_ = scheduler.ScheduleWithDynamicLaneAssignment(intersection);
-    modified_dfst_ = scheduler_dfs.ScheduleWithModifiedDfst(cdg);
-    bfst_ = scheduler_bfs.ScheduleWithBfstWeightedEdgeOnly(cdg);
-    mdbfst_ = scheduler_mdbfs.ScheduleWithBfstMultiWeight(cdg);
-    global_optimal_ = 0;
-    if (cdg.num_nodes_ <= 16) { // only calculate global_optimal for small number of nodes
-        auto best_order = scheduler_bruteforce.ScheduleBruteForceSearch(cdg);
-        auto depth_vector = scheduler_bruteforce.GetDepthVectorFromOrder(best_order, cdg);
-        global_optimal_ = scheduler_bruteforce.GetEvacuationTimeFromOrder(best_order, cdg);
-    }
-
-    if (verbose) {
-        std::cout << "seed: " << seed << "\n";
-        std::cout << "dynamin lane assignment: " << result_tree_.depth_ << "\n";
-        std::cout << "modified dfs: " << modified_dfst_.edge_weighted_depth_ << "\n";
-        std::cout << "edge_weighted bfs: " << bfst_.edge_weighted_depth_ << "\n";
-        std::cout << "multi_weighted bfs: " << mdbfst_.edge_node_weighted_depth_ << "\n";
-        std::cout << "global_optimal: " << global_optimal_ << "\n";
-        std::cout << "=========================================\n";
-        std::cout << "Dynamic lane schedule:\n";
-        for (auto &node : result_tree_.nodes_)
-            node->printDetail();
-        std::cout << "=========================================\n";
-    }
-}
 } // namespace intersection_management 

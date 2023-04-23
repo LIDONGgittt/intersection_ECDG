@@ -10,8 +10,6 @@
 
 namespace intersection_management {
 
-extern Parameters param;
-
 std::vector<double> BatchTestOneCase(int num_nodes, bool verbose, int seed) {
     PROFILER_HOOK();
     std::vector<double> depth;

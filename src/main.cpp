@@ -1,10 +1,6 @@
 #include "batch_test_utility.h"
 #include "parameters.h"
 
-namespace intersection_management {
-extern Parameters param;
-} // namespace intersection_management
-
 using namespace intersection_management;
 
 int main() {

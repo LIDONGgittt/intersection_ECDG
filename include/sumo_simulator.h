@@ -39,10 +39,11 @@ public:
         averageTimeDelay_ = 0;
     }
 
-    void addVehicles(std::string schedule_method = "dynamic_lane");
-    void startSimulation();
     void simulateOneRandomCase(int num_nodes, std::string schedule_method, bool verbose = false, double arrival_interval_avg = 2.0, int seed = -1);
     void generateSchedulingResults(int num_nodes, std::string schedule_method, bool verbose = false, double arrival_interval_avg = 2.0, int seed = -1);
+    void addVehicles(std::string schedule_method = "dynamic_lane");
+    void startSimulation();
+    
     inline void setDynamicLaneResult(SpanningTree result_tree) { result_tree_ = result_tree; }
     inline void setDFSResult(CDGConflictSpanningTree modified_dfst) { modified_dfst_ = modified_dfst; }
     inline void setBFSResult(CDGConflictSpanningTree bfst) { bfst_ = bfst; }
@@ -54,6 +55,7 @@ public:
     inline void setStopAtClearanceFlag(bool stopSimAfterClearanceFlag = true) { stopSimAfterClearanceFlag_ = stopSimAfterClearanceFlag; }
     inline void setStepLength(double step_length) { step_length_ = step_length; }
 
+    void printTargetSimResults(std::string schedule_method = "dynamic_lane");
     void updateStatistics();
     void printSummary();
     void printFuelConsumptionSummary();

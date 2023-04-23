@@ -126,6 +126,7 @@ void ConflictDirectedGraph::GenerateGraphFromIntersection(Intersection &intersec
         nodes_.back()->in_leg_id_ = intersection.nodes_[i]->in_leg_id_;
         nodes_.back()->out_lane_id_ = intersection.nodes_[i]->out_lane_id_;
         nodes_.back()->out_leg_id_ = intersection.nodes_[i]->out_leg_id_;
+        nodes_.back()->estimate_arrival_time_ = intersection.nodes_[i]->estimate_arrival_time_;
     }
     p_root_->edges_.clear();
     for (auto edge : intersection.edges_) {

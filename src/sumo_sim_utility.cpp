@@ -13,8 +13,6 @@ using namespace libtraci;
 
 namespace intersection_management {
 
-extern Parameters param;
-
 int intersectionLaneIdToSumoLaneId(int leg_id, int lane_id, std::string type) {
     if (type == "in")
         return lane_id;
