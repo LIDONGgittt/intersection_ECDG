@@ -284,7 +284,7 @@ void SumoSimulator::printSummary() {
         << "Scheduling method: " << schedule_method_ << "\n" << Color::def
         << "Intersection evacuation time: " << evacuation_time_ << " s\n"
         << "Waiting (stop) time: Max " << maxWaitingTime_ << " s, Ave " << averageWaitingTime_ << " s\n"
-        << "Trip delay: Max " << maxTimeDelay_ << "s, Ave " << averageTimeDelay_ << " s\n";
+        << "Trip delay: Max " << maxTimeDelay_ << " s, Ave " << averageTimeDelay_ << " s\n";
     printFuelConsumptionSummary();
 }
 

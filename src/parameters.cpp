@@ -6,12 +6,16 @@
 
 namespace intersection_management {
 
+#ifdef PROJECT_ROOT_DIR
+const std::string PROJECT_DIR = PROJECT_ROOT_DIR;
+#else
 /* path for linux */
- const std::string PROJECT_DIR = "/home/dong/workspace/intersection_CDG";
- const std::string CONFIG_FILE = "/configs/config.yaml";
-
+const std::string PROJECT_DIR = "/home/dong/workspace/intersection_CDG";
 /* path for windows */
 // static const std::string PROJECT_DIR = "d:\\program\\workspace\\intersection_CDG";
+#endif
+
+const std::string CONFIG_FILE = "/configs/config.yaml";
 // static const std::string CONFIG_FILE = "\\src\\config.yaml";
 
 void Parameters::readParametersFromYaml() {
@@ -30,10 +34,12 @@ void Parameters::readParametersFromYaml() {
     tie_high_demand_first = config["tie_high_demand_first"].as<bool>();
     tie_consider_splitting_resource = config["tie_consider_splitting_resource"].as<bool>();
     tie_more_splitted_resource_first = config["tie_more_splitted_resource_first"].as<bool>();
-    
+
     random_seed = config["random_seed"].as<int>();
     test_one_instance = config["test_one_instance"].as<bool>();
     test_vehicle_number = config["test_vehicle_number"].as<int>();
+
+    sumo_config_file = config["sumo_config_file"].as<std::string>();
 }
 
 Parameters param;
