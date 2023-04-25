@@ -96,7 +96,7 @@ void BatchTest(int num_nodes, int test_count, int print_interval, int starting_s
         if (total_test % print_interval == 0) {
             std::cout << "\n\n##################### Updated result: ##################### \n";
             std::cout << "Total tests: " << total_test << ", Total node num: " << num_nodes << ". \n";
-            std::cout << "Average depths: dynamic_lanes, dfs, bfs, mwbfs, global_optimal.\n";
+            std::cout << "Average depths: dynamic_lane, dfs, bfs, mwbfs, global_optimal.\n";
             for (int i = 0; i < 5; i++) {
                 std::cout << sum[i] / total_test << ", ";
             }

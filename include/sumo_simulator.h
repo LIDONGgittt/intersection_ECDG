@@ -21,14 +21,17 @@ public:
         arrival_interval_avg_ = 2.0;
         seed_ = -1;
 
-        sumo_cmd_ = {"sumo-gui", "-c", PROJECT_DIR + param.sumo_config_file};
+        sumo_cmd_ = {"sumo-gui", "-c", PROJECT_DIR + param.sumo_config_file, "--collision.action", "warn", "--step-log.period", "10000"};
         // sumo_cmd_ = {"sumo", "-c", PROJECT_DIR + param.sumo_config_file};
         // offset that vehicle depart at 0m with speed 0
         // kTimeWindowOffset_ = 10.7;
         // offset that vehicle depart at 0m with speed limit 13.9m/s
         kTimeWindowOffset_ = 6.15;
         stopSimAfterClearanceFlag_ = true;
-        travel_time_choice_ = {6.0, 6.5, 7.0};
+        // travel_time_choice_ = {6.0, 6.5, 7.0};
+        travel_time_choice_ = {6, 7, 8};
+        scheduler_method_list_ = {"dynamic_lane", "dfs", "bfs", "mdbfs", "global_optimal"};
+        standard_depth_ = {0, 0, 0, 0, 0};
 
         evacuation_time_ = 0;
         totalFuelComsumed_ = 0;
@@ -39,10 +42,10 @@ public:
         averageTimeDelay_ = 0;
     }
 
-    void simulateOneRandomCase(int num_nodes, std::string schedule_method, bool verbose = false, double arrival_interval_avg = 2.0, int seed = -1);
+    void setSimulateOneRandomCase(int num_nodes, std::string schedule_method, bool verbose = false, double arrival_interval_avg = 2.0, int seed = -1);
     void generateSchedulingResults(int num_nodes, std::string schedule_method, bool verbose = false, double arrival_interval_avg = 2.0, int seed = -1);
     void addVehicles(std::string schedule_method = "dynamic_lane");
-    void startSimulation();
+    void startSimulation(bool verbose = true);
 
     inline void setSumoGUI(bool activate = true) { if (activate) sumo_cmd_[0] = "sumo-gui"; else sumo_cmd_[0] = "sumo"; }
     inline void setDynamicLaneResult(SpanningTree result_tree) { result_tree_ = result_tree; }
@@ -65,6 +68,8 @@ public:
     CDGConflictSpanningTree bfst_;
     CDGConflictSpanningTree mdbfst_;
     double global_optimal_;
+    std::vector<std::string> scheduler_method_list_;
+    std::vector<double> standard_depth_;
 
     // simulation configs
     std::string schedule_method_;

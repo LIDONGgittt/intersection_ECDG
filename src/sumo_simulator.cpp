@@ -19,14 +19,14 @@ using namespace libtraci;
 namespace intersection_management {
 
 
-void SumoSimulator::simulateOneRandomCase(int num_nodes, std::string schedule_method, bool verbose, double arrival_interval_avg, int seed) {
+void SumoSimulator::setSimulateOneRandomCase(int num_nodes, std::string schedule_method, bool verbose, double arrival_interval_avg, int seed) {
     schedule_method_ = schedule_method;
     arrival_interval_avg_ = arrival_interval_avg;
     seed_ = seed;
     generateSchedulingResults(num_nodes, schedule_method, verbose, arrival_interval_avg, seed);
     addVehicles(schedule_method_);
-    printTargetSimResults(schedule_method_);
-    startSimulation();
+    if (verbose)
+        printTargetSimResults(schedule_method_);
 }
 
 void SumoSimulator::generateSchedulingResults(int num_nodes, std::string schedule_method, bool verbose, double arrival_interval_avg, int seed) {
@@ -60,11 +60,16 @@ void SumoSimulator::generateSchedulingResults(int num_nodes, std::string schedul
         auto depth_vector = scheduler_bruteforce.GetDepthVectorFromOrder(best_order, cdg);
         global_optimal_ = scheduler_bruteforce.GetEvacuationTimeFromOrder(best_order, cdg);
     }
+    standard_depth_[0] = result_tree_.depth_;
+    standard_depth_[1] = modified_dfst_.edge_weighted_depth_ * travel_time_choice_[2];
+    standard_depth_[2] = bfst_.edge_weighted_depth_ * travel_time_choice_[2];
+    standard_depth_[3] = mdbfst_.edge_node_weighted_depth_;
+    standard_depth_[4] = global_optimal_;
 
     if (verbose) {
         std::cout << "=========================================\n";
         std::cout << "seed: " << seed << "\n";
-        std::cout << "dynamin lane assignment: " << result_tree_.depth_ << "\n";
+        std::cout << "dynamin_lane assignment: " << result_tree_.depth_ << "\n";
         std::cout << "modified dfs: " << modified_dfst_.edge_weighted_depth_ << "\n";
         std::cout << "edge_weighted bfs: " << bfst_.edge_weighted_depth_ << "\n";
         std::cout << "multi_weighted bfs: " << mdbfst_.edge_node_weighted_depth_ << "\n";
@@ -129,7 +134,7 @@ void SumoSimulator::addVehicles(std::string schedule_method) {
 
 }
 
-void SumoSimulator::startSimulation() {
+void SumoSimulator::startSimulation(bool verbose) {
     Simulation::start(sumo_cmd_);
 
     // std::cout << Color::green << "#########################\n"
@@ -186,7 +191,9 @@ void SumoSimulator::startSimulation() {
 
         if (currentTime >= nextPrintTime) {
             nextPrintTime += 10;
-            printFuelConsumptionSummary();
+            if (verbose) {
+                printFuelConsumptionSummary();
+            }
         }
 
         bool allPassed = true;
@@ -202,23 +209,27 @@ void SumoSimulator::startSimulation() {
             }
         }
         if (allPassed && !foundEvacuationTime) {
-            std::cout << "The intersection is evacuated at time: " << i << " ms.\n";
+            if (verbose) {
+                std::cout << "The intersection is evacuated at time: " << i << " ms.\n";
+            }
             evacuation_time_ = currentTime;
             foundEvacuationTime = true;
         }
 
         if (allPassed && allFinished) {
-            std::cout << Color::green << "\n\n########    Summary of simulation:    ########\n" << Color::def;
-            for (auto &veh : localVehicles_) {
-                veh.printSummary();
-                // std::cout << "Vehicle " << veh.vehID_ << ": "
-                //     << "Fuel Consumed " << veh.fuelConsumed_ << " mg, "
-                //     << "Stop Time " << veh.waitingTime_ << " s, "
-                //     << "Travel Time " << veh.actualClearingTime_ - veh.arrival_time_ << " s, "
-                //     << "Time Delay " << veh.timeDelay_ << "s.\n";
-            }
             updateStatistics();
-            printSummary();
+            if (verbose) {
+                std::cout << Color::green << "\n\n########    Summary of simulation:    ########\n" << Color::def;
+                for (auto &veh : localVehicles_) {
+                    veh.printSummary();
+                    // std::cout << "Vehicle " << veh.vehID_ << ": "
+                    //     << "Fuel Consumed " << veh.fuelConsumed_ << " mg, "
+                    //     << "Stop Time " << veh.waitingTime_ << " s, "
+                    //     << "Travel Time " << veh.actualClearingTime_ - veh.arrival_time_ << " s, "
+                    //     << "Time Delay " << veh.timeDelay_ << "s.\n";
+                }
+                printSummary();
+            }
             break;
         }
     }
