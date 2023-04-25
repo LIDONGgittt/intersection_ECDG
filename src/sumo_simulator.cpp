@@ -55,10 +55,12 @@ void SumoSimulator::generateSchedulingResults(int num_nodes, std::string schedul
     bfst_ = scheduler_bfs.ScheduleWithBfstWeightedEdgeOnly(cdg);
     mdbfst_ = scheduler_mdbfs.ScheduleWithBfstMultiWeight(cdg);
     global_optimal_ = 0;
-    if (cdg.num_nodes_ <= 16) { // only calculate global_optimal for small number of nodes
-        auto best_order = scheduler_bruteforce.ScheduleBruteForceSearch(cdg);
-        auto depth_vector = scheduler_bruteforce.GetDepthVectorFromOrder(best_order, cdg);
-        global_optimal_ = scheduler_bruteforce.GetEvacuationTimeFromOrder(best_order, cdg);
+    if (schedule_method == "global_optimal") {
+        if (cdg.num_nodes_ <= 16) { // only calculate global_optimal for small number of nodes
+            auto best_order = scheduler_bruteforce.ScheduleBruteForceSearch(cdg);
+            auto depth_vector = scheduler_bruteforce.GetDepthVectorFromOrder(best_order, cdg);
+            global_optimal_ = scheduler_bruteforce.GetEvacuationTimeFromOrder(best_order, cdg);
+        }
     }
     standard_depth_[0] = result_tree_.depth_;
     standard_depth_[1] = modified_dfst_.edge_weighted_depth_ * travel_time_choice_[2];

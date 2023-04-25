@@ -28,6 +28,7 @@ public:
         // offset that vehicle depart at 0m with speed limit 13.9m/s
         kTimeWindowOffset_ = 6.15;
         stopSimAfterClearanceFlag_ = true;
+        // TODO check the travel_time choice
         // travel_time_choice_ = {6.0, 6.5, 7.0};
         travel_time_choice_ = {6, 7, 8};
         scheduler_method_list_ = {"dynamic_lane", "dfs", "bfs", "mdbfs", "global_optimal"};
