@@ -9,6 +9,7 @@
 
 #include "parameters.h"
 #include "batch_test_utility.h"
+#include "time_utility.h"
 
 namespace intersection_management {
 
@@ -18,12 +19,14 @@ SumoResult sumoBatchTestOneCase(int num_nodes, std::vector<std::string> schedule
 
     for (int i = 0; i < schedule_methods.size(); i++) {
         // TODO refactor the hard code to configs
-        SumoSimulator sumo_simulator(0.01, 400);
+        SumoSimulator sumo_simulator(0.01, 10000);
         param.num_lanes_in_vec = {3, 3, 3, 3};
         param.num_lanes_out_vec = {3, 3, 3, 3};
 
         sumo_simulator.setSumoGUI(false);
-        sumo_simulator.setSimulateOneRandomCase(num_nodes, schedule_methods[i], verbose, arrival_interval_avg);
+        sumo_simulator.setSimulateOneRandomCase(num_nodes, schedule_methods[i], verbose, arrival_interval_avg, seed);
+        // sumo_simulator.sumo_cmd_.push_back("--log");
+        // sumo_simulator.sumo_cmd_.push_back(PROJECT_DIR + "/local_log/v" + std::to_string(num_nodes) + schedule_methods[i] +"_"+ return_current_time_and_date() +".log");
         sumo_simulator.startSimulation(verbose);
         for (int m = 0; m < sumo_simulator.scheduler_method_list_.size(); m++) {
             if (schedule_methods[i] == sumo_simulator.scheduler_method_list_[m]) {
@@ -50,9 +53,10 @@ void sumoBatchTest(int num_nodes, int test_count, std::vector<std::string> sched
 
     long total_test = 0;
     if (test_count < 0) test_count = INT32_MAX;
-    int seed_increment = 0;
-    if (starting_seed >= 0)
-        seed_increment = 1;
+    int seed_increment = 1;
+    if (starting_seed < 0) {
+        starting_seed = 0;
+    }
 
     while (total_test < test_count) {
         total_test++;
@@ -67,7 +71,7 @@ void sumoBatchTest(int num_nodes, int test_count, std::vector<std::string> sched
             std::cout << "Schedule method, Standard Depth,  Evacuation Time, Delay (Ave),     Delay (Max),     Stop Time (Ave), Stop Time (Ave), Fuel Consumption \n";
             for (int i = 0; i < schedule_methods.size(); i++) {
                 std::cout << std::setw(17) << std::left << schedule_methods[i]
-                    << std::setw(17) << std::left << summationResult.scheduledStandardDepths_[i]
+                    << std::setw(17) << std::left << summationResult.scheduledStandardDepths_[i] / (double)total_test
                     << std::setw(17) << std::left << summationResult.simEvacuationTime_[i] / (double)total_test
                     << std::setw(17) << std::left << summationResult.simAveDelay_[i] / (double)total_test
                     << std::setw(17) << std::left << summationResult.simMaxDelay_[i] / (double)total_test
