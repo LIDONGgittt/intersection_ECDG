@@ -189,3 +189,8 @@ void cdg_main_test2() {
         }
     }
 }
+
+int main() {
+    cdg_main_test1();
+    return 0;
+}

@@ -50,7 +50,8 @@ public:
     std::vector<double> simAveFuelConsumption_;
 };
 
-SumoResult sumoBatchTestOneCase(int num_nodes, std::vector<std::string> schedule_methods, bool verbose = false, int seed = -1);
+SumoResult sumoBatchTestOneCase(int num_nodes, std::vector<std::string> schedule_methods = {"dynamic_lane", "dfs", "bfs", "mdbfs"},
+                                double arrival_interval_avg = 2.0, bool verbose = false, int seed = -1);
 
 void sumoBatchTest(int num_nodes = 5, int test_count = -1,
                    std::vector<std::string> schedule_methods = {"dynamic_lane", "dfs", "bfs", "mdbfs"},
