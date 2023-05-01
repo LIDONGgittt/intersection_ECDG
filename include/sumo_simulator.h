@@ -20,14 +20,14 @@ public:
         schedule_method_ = "default";
         arrival_interval_avg_ = 2.0;
         seed_ = -1;
-        localParam = geometryParamVec[0];
+        localParam_ = geometryParamVec[0];
 
-        sumo_cmd_ = {"sumo-gui", "-c", PROJECT_DIR + localParam.sumo_config_file, "--collision.action", "warn", "--step-log.period", "100000"};
-        // sumo_cmd_ = {"sumo", "-c", PROJECT_DIR + localParam.sumo_config_file};
+        sumo_cmd_ = {"sumo-gui", "-c", PROJECT_DIR + localParam_.sumo_config_file, "--collision.action", "warn", "--step-log.period", "100000"};
+        // sumo_cmd_ = {"sumo", "-c", PROJECT_DIR + localParam_.sumo_config_file};
 
         stopSimAfterClearanceFlag_ = true;
-        kTimeWindowOffset_ = localParam.kTimeWindowOffset;
-        travel_time_choice_ = localParam.travel_time_choice;
+        kTimeWindowOffset_ = localParam_.kTimeWindowOffset;
+        travel_time_choice_ = localParam_.travel_time_choice;
         scheduler_method_list_ = {"dynamic_lane", "dfs", "bfs", "mdbfs", "global_optimal"};
         standard_depth_ = {0, 0, 0, 0, 0};
 
@@ -75,7 +75,7 @@ public:
     std::string schedule_method_;
     double arrival_interval_avg_;
     int seed_;
-    Parameters localParam;
+    Parameters localParam_;
 
     std::vector<std::string> sumo_cmd_;
     double kTimeWindowOffset_;

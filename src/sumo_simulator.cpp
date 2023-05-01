@@ -131,7 +131,6 @@ void SumoSimulator::addVehicles(std::string schedule_method) {
         routeId.push_back('0' + node->out_leg_id_);
         std::string departLaneID = std::to_string(intersectionLaneIdToSumoLaneId(node->in_leg_id_, node->in_lane_id_, localParam_, "in"));
         std::string arrivalLaneID = std::to_string(intersectionLaneIdToSumoLaneId(node->out_leg_id_, node->possible_lane_id_[0], localParam_, "out"));
-        // localVehicles_.push_back(LocalVehicle(std::to_string(node->id_), routeId, "Vtype1", "now", departLaneID, "0", "0", arrivalLaneID));
         localVehicles_.push_back(LocalVehicle(std::to_string(node->id_), routeId, "Vtype1", "now", departLaneID, "0", "speedLimit", arrivalLaneID));
 
         localVehicles_.back().color_ = sumoColorVec[i % sumoColorVec.size()];
@@ -145,12 +144,8 @@ void SumoSimulator::addVehicles(std::string schedule_method) {
 void SumoSimulator::startSimulation(bool verbose) {
     Simulation::start(sumo_cmd_);
 
-    // std::cout << Color::green << "#########################\n"
-    //     << "SUMO step length is: " << Simulation::getDeltaT() << std::endl
-    //     << "Simulator scheduler update length is: " << step_length_ << std::endl << Color::def;
-
     double currentTime = 0;
-    double nextPrintTime = 10.0;
+    double nextPrintTime = 20.0;
     long long total_step = (int)(max_sim_time_ / step_length_);
     bool foundEvacuationTime = false;
 
@@ -175,6 +170,15 @@ void SumoSimulator::startSimulation(bool verbose) {
         // if (localVehicles_[0].addedToSumo_ && !localVehicles_[0].hasFinished()) {
         //     std::cout<<Vehicle::getStopDelay(localVehicles_[0].vehID_)<<std::endl;
         // }
+        // if (!test && localVehicles_[0].hasPassedIntersectionStopLine()) {
+        //     std::cout << localVehicles_[0].departEdgeID_ + " to " + localVehicles_[0].arrivalEdgeID_ << " : "
+        //         << currentTime << "  -  ";
+        //     test = true;
+        // }
+        // if (localVehicles_[0].hasLeftIntersectionAndEnterArrivalLane()) {
+        //     std::cout << currentTime << std::endl;
+        //     break;
+        // }
 
         for (auto &veh : localVehicles_) {
             if (veh.addedToSumo_ && !veh.hasFinished()) {
@@ -197,7 +201,7 @@ void SumoSimulator::startSimulation(bool verbose) {
         }
 
         if (currentTime >= nextPrintTime) {
-            nextPrintTime += 10;
+            nextPrintTime += 20;
             if (verbose) {
                 printFuelConsumptionSummary();
             }
@@ -229,11 +233,6 @@ void SumoSimulator::startSimulation(bool verbose) {
                 std::cout << Color::green << "\n\n########    Summary of simulation:    ########\n" << Color::def;
                 for (auto &veh : localVehicles_) {
                     veh.printSummary();
-                    // std::cout << "Vehicle " << veh.vehID_ << ": "
-                    //     << "Fuel Consumed " << veh.fuelConsumed_ << " mg, "
-                    //     << "Stop Time " << veh.waitingTime_ << " s, "
-                    //     << "Travel Time " << veh.actualClearingTime_ - veh.arrival_time_ << " s, "
-                    //     << "Time Delay " << veh.timeDelay_ << "s.\n";
                 }
                 printSummary();
             }
@@ -310,7 +309,6 @@ void SumoSimulator::printFuelConsumptionSummary() {
     totalFuelComsumed_ = 0;
     averageFuelComsumed_ = 0;
     for (auto &veh : localVehicles_) {
-        // std::cout << veh.fuelConsumed_ << std::endl;
         if (veh.fuelConsumed_ > 0) {
             totalFuelComsumed_ += veh.fuelConsumed_ * 0.001; // change unit to gram
         }

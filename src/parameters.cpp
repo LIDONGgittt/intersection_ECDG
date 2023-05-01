@@ -47,6 +47,6 @@ void Parameters::readParametersFromYaml() {
 Parameters param;
 std::vector<Parameters> geometryParamVec = {
     param,
-    Parameters(4, {3, 3, 3, 3}, {3, 3, 3, 3}, "/configs/sumo_intersection1/intersection_unregulated.sumocfg", {6, 7, 8}, 6.15),
-    Parameters(4, {1, 2, 1, 2}, {1, 2, 1, 2}, "/configs/sumo_intersection2/intersection_unregulated.sumocfg", {6, 7, 8}, 6.15)};
+    Parameters(4, {3, 3, 3, 3}, {3, 3, 3, 3}, "/configs/sumo_intersection1/intersection_unregulated.sumocfg", {6, 7, 8}, 5.15),
+    Parameters(4, {1, 2, 1, 2}, {1, 2, 1, 2}, "/configs/sumo_intersection2/intersection_unregulated.sumocfg", {5, 6, 7}, 5.45)};
 } // namespace intersection_management

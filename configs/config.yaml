@@ -30,6 +30,6 @@ test_one_instance: true
 test_vehicle_number: 5
 
 ## sumo related configurations ##
-sumo_config_file: "/configs/sumo_intersection0/intersection_unregulated.sumocfg"
+sumo_config_file: "/configs/sumo_intersection1/intersection_unregulated.sumocfg"
 travel_time_choice: [6, 7, 8]
 kTimeWindowOffset: 6.15
