@@ -16,9 +16,15 @@ public:
         InitializeFromParam();
         AddIntersectionUtilitiesFromGeometry();
     }
+    Intersection(Parameters local_param) {
+        reset();
+        InitializeFromLocalParam(local_param);
+        AddIntersectionUtilitiesFromGeometry();
+    }
 
     void reset();
     void InitializeFromParam();
+    void InitializeFromLocalParam(Parameters local_param);
     void AddIntersectionUtilitiesFromGeometry();
     void AddCriticalResourcesFromGeometry();
     void AddLegsAndLanesFromGeometry();

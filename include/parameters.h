@@ -12,6 +12,16 @@ public:
     Parameters() {
         readParametersFromYaml();
     }
+    Parameters(int nl, std::vector<int> nliv, std::vector<int> nlov,
+               double aia = 2.0, std::vector<int> ttr = {6, 7}) {
+        readParametersFromYaml();
+        num_legs = nl;
+        num_lanes_in_vec = nliv;
+        num_lanes_out_vec = nlov;
+        arrival_interval_avg = aia;
+        travel_time_range = ttr;
+    }
+
     void readParametersFromYaml();
 
     // ## intersection gemotry and configurations ##

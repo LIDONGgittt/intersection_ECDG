@@ -18,15 +18,9 @@ SumoResult sumoBatchTestOneCase(int num_nodes, std::vector<std::string> schedule
     SumoResult localResult(schedule_methods);
 
     for (int i = 0; i < schedule_methods.size(); i++) {
-        // TODO refactor the hard code to configs
-        SumoSimulator sumo_simulator(0.01, 10000);
-        param.num_lanes_in_vec = {3, 3, 3, 3};
-        param.num_lanes_out_vec = {3, 3, 3, 3};
-
+        SumoSimulator sumo_simulator;
         sumo_simulator.setSumoGUI(false);
         sumo_simulator.setSimulateOneRandomCase(num_nodes, schedule_methods[i], verbose, arrival_interval_avg, seed);
-        // sumo_simulator.sumo_cmd_.push_back("--log");
-        // sumo_simulator.sumo_cmd_.push_back(PROJECT_DIR + "/local_log/v" + std::to_string(num_nodes) + schedule_methods[i] +"_"+ return_current_time_and_date() +".log");
         sumo_simulator.startSimulation(verbose);
         for (int m = 0; m < sumo_simulator.scheduler_method_list_.size(); m++) {
             if (schedule_methods[i] == sumo_simulator.scheduler_method_list_[m]) {

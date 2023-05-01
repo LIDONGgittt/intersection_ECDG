@@ -6,6 +6,18 @@
 
 namespace intersection_management {
 
+void Intersection::reset() {
+    nodes_.clear();
+    edges_.clear();
+    critical_resource_map_.clear();
+    leg_map_.clear();
+    lane_map_.clear();
+    num_nodes_ = 0;
+    auto leading_node = std::make_shared<Node>(0); // virtual leading vehicle
+    leading_node->time_window_ = std::vector<double>({0, 0});
+    AddNode(leading_node);
+}
+
 void Intersection::InitializeFromParam() {
     num_legs_ = param.num_legs;
     num_lanes_in_vec_ = param.num_lanes_in_vec;
@@ -27,16 +39,25 @@ void Intersection::InitializeFromParam() {
     }
 }
 
-void Intersection::reset() {
-    nodes_.clear();
-    edges_.clear();
-    critical_resource_map_.clear();
-    leg_map_.clear();
-    lane_map_.clear();
-    num_nodes_ = 0;
-    auto leading_node = std::make_shared<Node>(0); // virtual leading vehicle
-    leading_node->time_window_ = std::vector<double>({0, 0});
-    AddNode(leading_node);
+void Intersection::InitializeFromLocalParam(Parameters local_param) {
+    num_legs_ = local_param.num_legs;
+    num_lanes_in_vec_ = local_param.num_lanes_in_vec;
+    num_lanes_out_vec_ = local_param.num_lanes_out_vec;
+    num_lanes_ = 0;
+    for (auto num_in : num_lanes_in_vec_) num_lanes_ += num_in;
+    for (auto num_out : num_lanes_in_vec_) num_lanes_ += num_out;
+    arrival_interval_avg_ = local_param.arrival_interval_avg;
+    travel_time_range_ = local_param.travel_time_range;
+
+
+    // initialize random seed
+    if (local_param.random_seed < 0) {
+        std::random_device rd;
+        mt_.seed(rd());
+    }
+    else {
+        mt_.seed(local_param.random_seed);
+    }
 }
 
 void Intersection::AddIntersectionUtilitiesFromGeometry() {

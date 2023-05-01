@@ -4,10 +4,15 @@
 #include <string>
 #include <vector>
 #include <libsumo/libtraci.h>
+#include "parameters.h"
 
 using namespace libtraci;
 
 namespace intersection_management {
+
+static const std::vector<Parameters> geometryParamVec = {
+    Parameters(4, {3, 3, 3, 3}, {3, 3, 3, 3}),
+    Parameters(4, {1, 2, 1, 2}, {1, 2, 1, 2})};
 
 static const std::vector<libsumo::TraCIColor> sumoColorVec = {
     libsumo::TraCIColor(55, 255, 0), libsumo::TraCIColor(0, 255, 255),
@@ -49,7 +54,7 @@ public:
     double actualClearingTime_;
     double timeDelay_;
     double timeNeededForTheTrip_;
-    
+
     // scheduled results, will be used to add constraints in the simulation
     double arrival_time_;
     std::vector<double> timewindow_;

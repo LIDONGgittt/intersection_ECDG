@@ -15,14 +15,15 @@ using namespace libtraci;
 namespace intersection_management {
 class SumoSimulator {
 public:
-    SumoSimulator(): SumoSimulator(0.001, 400) {}
+    SumoSimulator(): SumoSimulator(0.001, 10000) {}
     SumoSimulator(double step_length, double total_time): step_length_(step_length), max_sim_time_(total_time) {
         schedule_method_ = "default";
         arrival_interval_avg_ = 2.0;
         seed_ = -1;
 
-        sumo_cmd_ = {"sumo-gui", "-c", PROJECT_DIR + param.sumo_config_file, "--collision.action", "warn", "--step-log.period", "10000"};
+        sumo_cmd_ = {"sumo-gui", "-c", PROJECT_DIR + param.sumo_config_file, "--collision.action", "warn", "--step-log.period", "100000"};
         // sumo_cmd_ = {"sumo", "-c", PROJECT_DIR + param.sumo_config_file};
+
         // offset that vehicle depart at 0m with speed 0
         // kTimeWindowOffset_ = 10.7;
         // offset that vehicle depart at 0m with speed limit 13.9m/s
@@ -78,10 +79,9 @@ public:
     int seed_;
 
     std::vector<std::string> sumo_cmd_;
-    // offset that vehicle depart at 0m
-    double kTimeWindowOffset_ = 10.610;
-    bool stopSimAfterClearanceFlag_ = true;
-    std::vector<double> travel_time_choice_ = {6.0, 6.5, 7.0};
+    double kTimeWindowOffset_;
+    bool stopSimAfterClearanceFlag_;
+    std::vector<double> travel_time_choice_;
     std::vector<LocalVehicle> localVehicles_;
     double step_length_;
     double max_sim_time_;

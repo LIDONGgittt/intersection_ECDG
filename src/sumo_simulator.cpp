@@ -23,17 +23,19 @@ void SumoSimulator::setSimulateOneRandomCase(int num_nodes, std::string schedule
     schedule_method_ = schedule_method;
     arrival_interval_avg_ = arrival_interval_avg;
     seed_ = seed;
-    generateSchedulingResults(num_nodes, schedule_method, verbose, arrival_interval_avg, seed);
+    generateSchedulingResults(num_nodes, schedule_method_, verbose, arrival_interval_avg_, seed_);
     addVehicles(schedule_method_);
     if (verbose)
         printTargetSimResults(schedule_method_);
 }
 
 void SumoSimulator::generateSchedulingResults(int num_nodes, std::string schedule_method, bool verbose, double arrival_interval_avg, int seed) {
+    // TODO refactor the hard code to configs
     param.num_lanes_in_vec = {3, 3, 3, 3};
     param.num_lanes_out_vec = {3, 3, 3, 3};
     param.arrival_interval_avg = arrival_interval_avg;
 
+    // intersection will be initialized based on param
     Intersection intersection;
     ConflictDirectedGraph cdg;
     Scheduler scheduler;
