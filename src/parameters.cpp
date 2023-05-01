@@ -40,10 +40,13 @@ void Parameters::readParametersFromYaml() {
     test_vehicle_number = config["test_vehicle_number"].as<int>();
 
     sumo_config_file = config["sumo_config_file"].as<std::string>();
+    travel_time_choice = config["travel_time_choice"].as<std::vector<double>>();
+    kTimeWindowOffset = config["kTimeWindowOffset"].as<double>();
 }
 
 Parameters param;
 std::vector<Parameters> geometryParamVec = {
-    Parameters(4, {3, 3, 3, 3}, {3, 3, 3, 3}, "/configs/sumo_intersection0/intersection_unregulated.sumocfg"),
-    Parameters(4, {1, 2, 1, 2}, {1, 2, 1, 2}, "/configs/sumo_intersection1/intersection_unregulated.sumocfg")};
+    param,
+    Parameters(4, {3, 3, 3, 3}, {3, 3, 3, 3}, "/configs/sumo_intersection1/intersection_unregulated.sumocfg", {6, 7, 8}, 6.15),
+    Parameters(4, {1, 2, 1, 2}, {1, 2, 1, 2}, "/configs/sumo_intersection2/intersection_unregulated.sumocfg", {6, 7, 8}, 6.15)};
 } // namespace intersection_management

@@ -14,13 +14,13 @@
 namespace intersection_management {
 
 SumoResult sumoBatchTestOneCase(int num_nodes, std::vector<std::string> schedule_methods,
-                                double arrival_interval_avg, bool verbose, int seed) {
+                                double arrival_interval_avg, int geometryID, bool verbose, int seed) {
     SumoResult localResult(schedule_methods);
 
     for (int i = 0; i < schedule_methods.size(); i++) {
         SumoSimulator sumo_simulator;
         sumo_simulator.setSumoGUI(false);
-        sumo_simulator.setSimulateOneRandomCase(num_nodes, schedule_methods[i], arrival_interval_avg, 0, verbose, seed);
+        sumo_simulator.setSimulateOneMethod(num_nodes, schedule_methods[i], arrival_interval_avg, geometryID, verbose, seed);
         sumo_simulator.startSimulation(verbose);
         for (int m = 0; m < sumo_simulator.scheduler_method_list_.size(); m++) {
             if (schedule_methods[i] == sumo_simulator.scheduler_method_list_[m]) {
@@ -40,7 +40,7 @@ SumoResult sumoBatchTestOneCase(int num_nodes, std::vector<std::string> schedule
 
 
 void sumoBatchTest(int num_nodes, int test_count, std::vector<std::string> schedule_methods,
-                   double arrival_interval_avg, int print_interval, int starting_seed) {
+                   double arrival_interval_avg, int geometryID, int print_interval, int starting_seed) {
     std::signal(SIGINT, SIGINT_signal_handler);
 
     SumoResult summationResult(schedule_methods);
@@ -54,7 +54,7 @@ void sumoBatchTest(int num_nodes, int test_count, std::vector<std::string> sched
 
     while (total_test < test_count) {
         total_test++;
-        auto sumoResult = sumoBatchTestOneCase(num_nodes, schedule_methods, arrival_interval_avg, false, starting_seed);
+        auto sumoResult = sumoBatchTestOneCase(num_nodes, schedule_methods, arrival_interval_avg, geometryID, false, starting_seed);
         starting_seed += seed_increment;
 
         summationResult += sumoResult;

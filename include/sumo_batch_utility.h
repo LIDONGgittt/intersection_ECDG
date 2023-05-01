@@ -51,11 +51,11 @@ public:
 };
 
 SumoResult sumoBatchTestOneCase(int num_nodes, std::vector<std::string> schedule_methods = {"dynamic_lane", "dfs", "bfs", "mdbfs"},
-                                double arrival_interval_avg = 2.0, bool verbose = false, int seed = -1);
+                                double arrival_interval_avg = 2.0, int geometryID = 0, bool verbose = false, int seed = -1);
 
 void sumoBatchTest(int num_nodes = 5, int test_count = -1,
                    std::vector<std::string> schedule_methods = {"dynamic_lane", "dfs", "bfs", "mdbfs"},
-                   double arrival_interval_avg = 2.0, int print_interval = 10, int starting_seed = -1);
+                   double arrival_interval_avg = 2.0, int geometryID = 0, int print_interval = 10, int starting_seed = -1);
 
 } // namespace intersection_management
 

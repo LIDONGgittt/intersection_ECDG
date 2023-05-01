@@ -2,9 +2,9 @@
 num_legs: 4
 # num_lanes_in_vec: [1, 1, 2, 1]
 # num_lanes_out_vec: [3, 1, 1, 1]
-# num_lanes_in_vec: [2, 2, 2, 2] 
+# num_lanes_in_vec: [2, 2, 2, 2]
 # num_lanes_out_vec: [2, 2, 2, 2]
-num_lanes_in_vec: [3, 3, 3, 3] 
+num_lanes_in_vec: [3, 3, 3, 3]
 num_lanes_out_vec: [3, 3, 3, 3]
 arrival_interval_avg: 2.0
 travel_time_range: [6, 7]
@@ -29,5 +29,7 @@ random_seed: 0
 test_one_instance: true
 test_vehicle_number: 5
 
-## sumo configurations ##
+## sumo related configurations ##
 sumo_config_file: "/configs/sumo_intersection0/intersection_unregulated.sumocfg"
+travel_time_choice: [6, 7, 8]
+kTimeWindowOffset: 6.15

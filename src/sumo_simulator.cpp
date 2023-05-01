@@ -19,15 +19,17 @@ using namespace libtraci;
 namespace intersection_management {
 
 
-void SumoSimulator::setSimulateOneRandomCase(int num_nodes, std::string schedule_method, double arrival_interval_avg, int geometryID, bool verbose, int seed) {
+void SumoSimulator::setSimulateOneMethod(int num_nodes, std::string schedule_method, double arrival_interval_avg, int geometryID, bool verbose, int seed) {
     schedule_method_ = schedule_method;
     arrival_interval_avg_ = arrival_interval_avg;
     seed_ = seed;
 
-    localParam = geometryParamVec[geometryID];
-    localParam.arrival_interval_avg = arrival_interval_avg;
-    localParam.random_seed = seed;
-    sumo_cmd_[2] = PROJECT_DIR + localParam.sumo_config_file;
+    localParam_ = geometryParamVec[geometryID];
+    localParam_.arrival_interval_avg = arrival_interval_avg;
+    localParam_.random_seed = seed;
+    sumo_cmd_[2] = PROJECT_DIR + localParam_.sumo_config_file;
+    travel_time_choice_ = localParam_.travel_time_choice;
+    kTimeWindowOffset_ = localParam_.kTimeWindowOffset;
 
     generateSchedulingResults(num_nodes, verbose, seed_);
     addVehicles(schedule_method_);
@@ -37,8 +39,8 @@ void SumoSimulator::setSimulateOneRandomCase(int num_nodes, std::string schedule
 
 void SumoSimulator::generateSchedulingResults(int num_nodes, bool verbose, int seed) {
 
-    // intersection will be initialized based on the geomtry of localParam
-    Intersection intersection(localParam);
+    // intersection will be initialized based on the geomtry of localParam_
+    Intersection intersection(localParam_);
     ConflictDirectedGraph cdg;
     Scheduler scheduler;
     CDGScheduler scheduler_dfs;
@@ -127,8 +129,8 @@ void SumoSimulator::addVehicles(std::string schedule_method) {
         std::string routeId = "r";
         routeId.push_back('0' + node->in_leg_id_);
         routeId.push_back('0' + node->out_leg_id_);
-        std::string departLaneID = std::to_string(intersectionLaneIdToSumoLaneId(node->in_leg_id_, node->in_lane_id_, localParam, "in"));
-        std::string arrivalLaneID = std::to_string(intersectionLaneIdToSumoLaneId(node->out_leg_id_, node->possible_lane_id_[0], localParam, "out"));
+        std::string departLaneID = std::to_string(intersectionLaneIdToSumoLaneId(node->in_leg_id_, node->in_lane_id_, localParam_, "in"));
+        std::string arrivalLaneID = std::to_string(intersectionLaneIdToSumoLaneId(node->out_leg_id_, node->possible_lane_id_[0], localParam_, "out"));
         // localVehicles_.push_back(LocalVehicle(std::to_string(node->id_), routeId, "Vtype1", "now", departLaneID, "0", "0", arrivalLaneID));
         localVehicles_.push_back(LocalVehicle(std::to_string(node->id_), routeId, "Vtype1", "now", departLaneID, "0", "speedLimit", arrivalLaneID));
 

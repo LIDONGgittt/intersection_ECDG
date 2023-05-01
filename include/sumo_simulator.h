@@ -22,17 +22,12 @@ public:
         seed_ = -1;
         localParam = geometryParamVec[0];
 
-        sumo_cmd_ = {"sumo-gui", "-c", PROJECT_DIR + param.sumo_config_file, "--collision.action", "warn", "--step-log.period", "100000"};
-        // sumo_cmd_ = {"sumo", "-c", PROJECT_DIR + param.sumo_config_file};
+        sumo_cmd_ = {"sumo-gui", "-c", PROJECT_DIR + localParam.sumo_config_file, "--collision.action", "warn", "--step-log.period", "100000"};
+        // sumo_cmd_ = {"sumo", "-c", PROJECT_DIR + localParam.sumo_config_file};
 
-        // offset that vehicle depart at 0m with speed 0
-        // kTimeWindowOffset_ = 10.7;
-        // offset that vehicle depart at 0m with speed limit 13.9m/s
-        kTimeWindowOffset_ = 6.15;
         stopSimAfterClearanceFlag_ = true;
-        // TODO check the travel_time choice
-        // travel_time_choice_ = {6.0, 6.5, 7.0};
-        travel_time_choice_ = {6, 7, 8};
+        kTimeWindowOffset_ = localParam.kTimeWindowOffset;
+        travel_time_choice_ = localParam.travel_time_choice;
         scheduler_method_list_ = {"dynamic_lane", "dfs", "bfs", "mdbfs", "global_optimal"};
         standard_depth_ = {0, 0, 0, 0, 0};
 
@@ -45,7 +40,8 @@ public:
         averageTimeDelay_ = 0;
     }
 
-    void setSimulateOneRandomCase(int num_nodes, std::string schedule_method, double arrival_interval_avg = 2.0, int geometryID = 0, bool verbose = false, int seed = -1);
+    void setSimulateOneMethod(int num_nodes, std::string schedule_method, double arrival_interval_avg = 2.0,
+                              int geometryID = 0, bool verbose = false, int seed = -1);
     void generateSchedulingResults(int num_nodes, bool verbose = false, int seed = -1);
     void addVehicles(std::string schedule_method = "dynamic_lane");
     void startSimulation(bool verbose = true);

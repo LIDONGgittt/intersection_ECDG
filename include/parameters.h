@@ -14,7 +14,9 @@ public:
         readParametersFromYaml();
     }
     Parameters(int nl, std::vector<int> nliv, std::vector<int> nlov,
-               std::string scf, double aia = 2.0, std::vector<int> ttr = {6, 7}) {
+               std::string scf, std::vector<double> ttc = {6, 7, 8},
+               double timeWindowOffset = 6.15, double aia = 2.0,
+               std::vector<int> ttr = {6, 7}) {
         readParametersFromYaml();
         num_legs = nl;
         num_lanes_in_vec = nliv;
@@ -22,6 +24,8 @@ public:
         sumo_config_file = scf;
         arrival_interval_avg = aia;
         travel_time_range = ttr;
+        travel_time_choice = ttc;
+        kTimeWindowOffset = timeWindowOffset;
     }
 
     void readParametersFromYaml();
@@ -52,8 +56,10 @@ public:
     bool test_one_instance;
     int test_vehicle_number;
 
-    // ## sumo configurations ##
+    // ## sumo related configurations ##
     std::string sumo_config_file;
+    std::vector<double> travel_time_choice;
+    double kTimeWindowOffset;
 
 }; // class Parameters
 
