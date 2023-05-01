@@ -1,0 +1,11 @@
+<nodes>
+    <!-- actual nodes -->
+    <node id="intersection" x="0.0" y="0.0" type="unregulated"/>
+    <!-- <node id="intersection" x="0.0" y="0.0" type="priority"/> -->
+
+    <!-- starting nodes -->
+    <node id="intersection0" x="0.0" y="100.0" type="dead_end"/>
+    <node id="intersection1" x="100.0" y="0.0" type="dead_end"/>
+    <node id="intersection2" x="0.0" y="-100.0" type="dead_end"/>
+    <node id="intersection3" x="-100.0" y="0.0" type="dead_end"/>
+</nodes>

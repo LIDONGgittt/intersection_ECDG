@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://sumo.dlr.de/xsd/routes_file.xsd">
+    <!-- Routes -->
+    <route id="r01" edges="0tc ct1"/>
+    <route id="r02" edges="0tc ct2"/>
+    <route id="r03" edges="0tc ct3"/>
+    <route id="r10" edges="1tc ct0"/>
+    <route id="r12" edges="1tc ct2"/>
+    <route id="r13" edges="1tc ct3"/>
+    <route id="r20" edges="2tc ct0"/>
+    <route id="r21" edges="2tc ct1"/>
+    <route id="r23" edges="2tc ct3"/>
+    <route id="r30" edges="3tc ct0"/>
+    <route id="r31" edges="3tc ct1"/>
+    <route id="r32" edges="3tc ct2"/>
+    <!-- Vehicle Types-->
+    <vType id="Vtype1" accel="2.0" decel="9.0" length="5.0" tau="0.001" guiShape="passenger"/>
+    <!-- Vehicles, persons and containers (sorted by depart) -->
+    <!-- <vehicle id="v0" type="Vtype1" depart="0.00" route="r01" color="1,0,0"/>
+    <vehicle id="v1" type="Vtype1" depart="0.00" route="r02" color="0,1,0"/>
+    <vehicle id="v2" type="Vtype1" depart="0.00" route="r03" color="0,0,1"/>
+    <vehicle id="v3" type="Vtype1" depart="0.00" route="r13" color="1,1,0"/>
+    <vehicle id="v4" type="Vtype1" depart="0.00" route="r20" color="0,1,1"/> -->
+</routes>

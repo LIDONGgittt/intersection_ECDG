@@ -20,6 +20,7 @@ public:
         schedule_method_ = "default";
         arrival_interval_avg_ = 2.0;
         seed_ = -1;
+        localParam = geometryParamVec[0];
 
         sumo_cmd_ = {"sumo-gui", "-c", PROJECT_DIR + param.sumo_config_file, "--collision.action", "warn", "--step-log.period", "100000"};
         // sumo_cmd_ = {"sumo", "-c", PROJECT_DIR + param.sumo_config_file};
@@ -44,8 +45,8 @@ public:
         averageTimeDelay_ = 0;
     }
 
-    void setSimulateOneRandomCase(int num_nodes, std::string schedule_method, bool verbose = false, double arrival_interval_avg = 2.0, int seed = -1);
-    void generateSchedulingResults(int num_nodes, std::string schedule_method, bool verbose = false, double arrival_interval_avg = 2.0, int seed = -1);
+    void setSimulateOneRandomCase(int num_nodes, std::string schedule_method, double arrival_interval_avg = 2.0, int geometryID = 0, bool verbose = false, int seed = -1);
+    void generateSchedulingResults(int num_nodes, bool verbose = false, int seed = -1);
     void addVehicles(std::string schedule_method = "dynamic_lane");
     void startSimulation(bool verbose = true);
 
@@ -65,6 +66,7 @@ public:
     void printSummary();
     void printFuelConsumptionSummary();
 
+    // schedule results
     SpanningTree result_tree_;
     CDGConflictSpanningTree modified_dfst_;
     CDGConflictSpanningTree bfst_;
@@ -77,6 +79,7 @@ public:
     std::string schedule_method_;
     double arrival_interval_avg_;
     int seed_;
+    Parameters localParam;
 
     std::vector<std::string> sumo_cmd_;
     double kTimeWindowOffset_;

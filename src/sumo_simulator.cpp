@@ -19,24 +19,23 @@ using namespace libtraci;
 namespace intersection_management {
 
 
-void SumoSimulator::setSimulateOneRandomCase(int num_nodes, std::string schedule_method, bool verbose, double arrival_interval_avg, int seed) {
+void SumoSimulator::setSimulateOneRandomCase(int num_nodes, std::string schedule_method, double arrival_interval_avg, int geometryID, bool verbose, int seed) {
     schedule_method_ = schedule_method;
     arrival_interval_avg_ = arrival_interval_avg;
     seed_ = seed;
-    generateSchedulingResults(num_nodes, schedule_method_, verbose, arrival_interval_avg_, seed_);
+    localParam = geometryParamVec[geometryID];
+    localParam.arrival_interval_avg = arrival_interval_avg;
+    localParam.random_seed = seed;
+    generateSchedulingResults(num_nodes, verbose, seed_);
     addVehicles(schedule_method_);
     if (verbose)
         printTargetSimResults(schedule_method_);
 }
 
-void SumoSimulator::generateSchedulingResults(int num_nodes, std::string schedule_method, bool verbose, double arrival_interval_avg, int seed) {
-    // TODO refactor the hard code to configs
-    param.num_lanes_in_vec = {3, 3, 3, 3};
-    param.num_lanes_out_vec = {3, 3, 3, 3};
-    param.arrival_interval_avg = arrival_interval_avg;
+void SumoSimulator::generateSchedulingResults(int num_nodes, bool verbose, int seed) {
 
-    // intersection will be initialized based on param
-    Intersection intersection;
+    // intersection will be initialized based on the geomtry of localParam
+    Intersection intersection(localParam);
     ConflictDirectedGraph cdg;
     Scheduler scheduler;
     CDGScheduler scheduler_dfs;
@@ -57,7 +56,7 @@ void SumoSimulator::generateSchedulingResults(int num_nodes, std::string schedul
     bfst_ = scheduler_bfs.ScheduleWithBfstWeightedEdgeOnly(cdg);
     mdbfst_ = scheduler_mdbfs.ScheduleWithBfstMultiWeight(cdg);
     global_optimal_ = 0;
-    if (schedule_method == "global_optimal") {
+    if (schedule_method_ == "global_optimal") {
         if (cdg.num_nodes_ <= 16) { // only calculate global_optimal for small number of nodes
             auto best_order = scheduler_bruteforce.ScheduleBruteForceSearch(cdg);
             auto depth_vector = scheduler_bruteforce.GetDepthVectorFromOrder(best_order, cdg);

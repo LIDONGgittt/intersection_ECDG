@@ -30,4 +30,4 @@ test_one_instance: true
 test_vehicle_number: 5
 
 ## sumo configurations ##
-sumo_config_file: "/configs/sumo_intersection/intersection_unregulated.sumocfg"
+sumo_config_file: "/configs/sumo_intersection0/intersection_unregulated.sumocfg"

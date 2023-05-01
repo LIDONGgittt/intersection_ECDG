@@ -13,11 +13,12 @@ public:
         readParametersFromYaml();
     }
     Parameters(int nl, std::vector<int> nliv, std::vector<int> nlov,
-               double aia = 2.0, std::vector<int> ttr = {6, 7}) {
+               std::string scf, double aia = 2.0, std::vector<int> ttr = {6, 7}) {
         readParametersFromYaml();
         num_legs = nl;
         num_lanes_in_vec = nliv;
         num_lanes_out_vec = nlov;
+        sumo_config_file = scf;
         arrival_interval_avg = aia;
         travel_time_range = ttr;
     }

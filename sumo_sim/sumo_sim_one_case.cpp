@@ -10,22 +10,22 @@ int main() {
     param.num_lanes_out_vec = {3, 3, 3, 3};
 
     sumo_simulator.setSumoGUI(true);
-    sumo_simulator.setSimulateOneRandomCase(100, "mdbfs", true, 1.0, 667);
-    // sumo_simulator.setSimulateOneRandomCase(10, "dynamic_lane", true, 1.0, 10);
-    // sumo_simulator.setSimulateOneRandomCase(40, "dfs", true, 2.0, 0);
-    // sumo_simulator.setSimulateOneRandomCase(40, "mdbfs", true, 2.0, 0);
+    sumo_simulator.setSimulateOneRandomCase(100, "mdbfs", 1.0, true, 667);
+    // sumo_simulator.setSimulateOneRandomCase(10, "dynamic_lane", 1.0, true, 10);
+    // sumo_simulator.setSimulateOneRandomCase(40, "dfs", 2.0, true, 0);
+    // sumo_simulator.setSimulateOneRandomCase(40, "mdbfs", 2.0, true, 0);
     // // low demand
-    // sumo_simulator.setSimulateOneRandomCase(100, "dynamic_lane", true, 2.0, 31);
-    // sumo_simulator.setSimulateOneRandomCase(100, "dfs", true, 2.0, 33);
-    // sumo_simulator.setSimulateOneRandomCase(100, "bfs", true, 2.0, 33);
-    // sumo_simulator.setSimulateOneRandomCase(100, "mdbfs", true, 2.0, 33);
+    // sumo_simulator.setSimulateOneRandomCase(100, "dynamic_lane", 2.0, true, 31);
+    // sumo_simulator.setSimulateOneRandomCase(100, "dfs", 2.0, true, 33);
+    // sumo_simulator.setSimulateOneRandomCase(100, "bfs", 2.0, true, 33);
+    // sumo_simulator.setSimulateOneRandomCase(100, "mdbfs", 2.0, true, 33);
     // // high demand
-    // sumo_simulator.setSimulateOneRandomCase(100, "dynamic_lane", true, 1.0, 33);
-    // sumo_simulator.setSimulateOneRandomCase(100, "dfs", true, 1.0, 33);
-    // sumo_simulator.setSimulateOneRandomCase(100, "bfs", true, 1.0, 33);
-    // sumo_simulator.setSimulateOneRandomCase(100, "mdbfs", true, 1.0, 33);
+    // sumo_simulator.setSimulateOneRandomCase(100, "dynamic_lane", 1.0, true, 33);
+    // sumo_simulator.setSimulateOneRandomCase(100, "dfs", 1.0, true, 33);
+    // sumo_simulator.setSimulateOneRandomCase(100, "bfs", 1.0, true, 33);
+    // sumo_simulator.setSimulateOneRandomCase(100, "mdbfs", 1.0, true, 33);
 
-    // sumo_simulator.setSimulateOneRandomCase(5, "dynamic_lane", true, 2.0, 0);
+    // sumo_simulator.setSimulateOneRandomCase(5, "dynamic_lane", 2.0, true, 0);
     
     sumo_simulator.startSimulation();
 }

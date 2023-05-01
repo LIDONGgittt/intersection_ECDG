@@ -11,8 +11,8 @@ using namespace libtraci;
 namespace intersection_management {
 
 static const std::vector<Parameters> geometryParamVec = {
-    Parameters(4, {3, 3, 3, 3}, {3, 3, 3, 3}),
-    Parameters(4, {1, 2, 1, 2}, {1, 2, 1, 2})};
+    Parameters(4, {3, 3, 3, 3}, {3, 3, 3, 3}, "/configs/sumo_intersection0/intersection_unregulated.sumocfg"),
+    Parameters(4, {1, 2, 1, 2}, {1, 2, 1, 2}, "/configs/sumo_intersection1/intersection_unregulated.sumocfg")};
 
 static const std::vector<libsumo::TraCIColor> sumoColorVec = {
     libsumo::TraCIColor(55, 255, 0), libsumo::TraCIColor(0, 255, 255),

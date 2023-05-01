@@ -20,7 +20,7 @@ SumoResult sumoBatchTestOneCase(int num_nodes, std::vector<std::string> schedule
     for (int i = 0; i < schedule_methods.size(); i++) {
         SumoSimulator sumo_simulator;
         sumo_simulator.setSumoGUI(false);
-        sumo_simulator.setSimulateOneRandomCase(num_nodes, schedule_methods[i], verbose, arrival_interval_avg, seed);
+        sumo_simulator.setSimulateOneRandomCase(num_nodes, schedule_methods[i], arrival_interval_avg, verbose, seed);
         sumo_simulator.startSimulation(verbose);
         for (int m = 0; m < sumo_simulator.scheduler_method_list_.size(); m++) {
             if (schedule_methods[i] == sumo_simulator.scheduler_method_list_[m]) {
