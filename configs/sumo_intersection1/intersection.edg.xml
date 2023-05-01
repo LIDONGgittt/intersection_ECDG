@@ -1,10 +1,10 @@
 <edges>
-    <edge id="0tc" from="intersection0" to="intersection" numLanes="3" speed="13.9"/>
-    <edge id="1tc" from="intersection1" to="intersection" numLanes="3" speed="13.9"/>
-    <edge id="2tc" from="intersection2" to="intersection" numLanes="3" speed="13.9"/>
-    <edge id="3tc" from="intersection3" to="intersection" numLanes="3" speed="13.9"/>
-    <edge id="ct0" from="intersection" to="intersection0" numLanes="3" speed="13.9"/>
-    <edge id="ct1" from="intersection" to="intersection1" numLanes="3" speed="13.9"/>
-    <edge id="ct2" from="intersection" to="intersection2" numLanes="3" speed="13.9"/>
-    <edge id="ct3" from="intersection" to="intersection3" numLanes="3" speed="13.9"/>
+    <edge id="0tc" from="intersection0" to="intersection" numLanes="1" speed="13.9"/>
+    <edge id="1tc" from="intersection1" to="intersection" numLanes="2" speed="13.9"/>
+    <edge id="2tc" from="intersection2" to="intersection" numLanes="1" speed="13.9"/>
+    <edge id="3tc" from="intersection3" to="intersection" numLanes="2" speed="13.9"/>
+    <edge id="ct0" from="intersection" to="intersection0" numLanes="1" speed="13.9"/>
+    <edge id="ct1" from="intersection" to="intersection1" numLanes="2" speed="13.9"/>
+    <edge id="ct2" from="intersection" to="intersection2" numLanes="1" speed="13.9"/>
+    <edge id="ct3" from="intersection" to="intersection3" numLanes="2" speed="13.9"/>
 </edges>

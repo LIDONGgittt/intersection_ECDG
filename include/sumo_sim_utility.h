@@ -11,8 +11,6 @@ using namespace libtraci;
 
 namespace intersection_management {
 
-extern const std::vector<Parameters> geometryParamVec;
-
 static const std::vector<libsumo::TraCIColor> sumoColorVec = {
     libsumo::TraCIColor(55, 255, 0), libsumo::TraCIColor(0, 255, 255),
     libsumo::TraCIColor(255, 155, 0), libsumo::TraCIColor(200, 15, 15),
@@ -46,6 +44,7 @@ public:
     int departLaneIDNum_;
     int arrivalLaneIDNum_;
     bool finished_;
+    int passStopLineCnt_;
     libsumo::TraCIColor color_;
     bool addedToSumo_;
     double fuelConsumed_;
@@ -59,7 +58,7 @@ public:
     std::vector<double> timewindow_;
 };
 
-int intersectionLaneIdToSumoLaneId(int leg_id, int lane_id, Parameters local_param, std::string type = "in");
+int intersectionLaneIdToSumoLaneId(int leg_id, int lane_id, Parameters &local_param, std::string type = "in");
 
 // void sumoSimulationOneCase(int num_nodes, std::string schedule_method, bool verbose = false, int seed = -1);
 

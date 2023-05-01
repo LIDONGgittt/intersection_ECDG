@@ -1,3 +1,4 @@
+#include "parameters.h"
 #include "sumo_sim_utility.h"
 
 #include <iostream>
@@ -7,17 +8,12 @@
 #include "conflict_directed_graph.h"
 #include "cdg_scheduler.h"
 #include "time_profiler/time_profiler.h"
-#include "parameters.h"
 
 using namespace libtraci;
 
 namespace intersection_management {
 
-const std::vector<Parameters> geometryParamVec = {
-    Parameters(4, {3, 3, 3, 3}, {3, 3, 3, 3}, "/configs/sumo_intersection0/intersection_unregulated.sumocfg"),
-    Parameters(4, {1, 2, 1, 2}, {1, 2, 1, 2}, "/configs/sumo_intersection1/intersection_unregulated.sumocfg")};
-
-int intersectionLaneIdToSumoLaneId(int leg_id, int lane_id, Parameters local_param, std::string type) {
+int intersectionLaneIdToSumoLaneId(int leg_id, int lane_id, Parameters &local_param, std::string type) {
     if (type == "in")
         return lane_id;
     if (type == "out")
@@ -69,6 +65,7 @@ LocalVehicle::LocalVehicle(std::string vehID, std::string routeID, std::string t
     departLaneIDNum_ = std::stoi(departLaneID_);
     arrivalLaneIDNum_ = std::stoi(arrivalLaneID_);
     finished_ = false;
+    passStopLineCnt_ = 0;
     addedToSumo_ = false;
     fuelConsumed_ = 0.0;
     waitingTime_ = 0.0;

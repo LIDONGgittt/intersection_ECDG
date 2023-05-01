@@ -2,126 +2,44 @@
     <!-- from 0toc to other lanes -->
     <connection from="0tc" to="ct1" fromLane="0" toLane="0"/>
     <connection from="0tc" to="ct1" fromLane="0" toLane="1"/>
-    <connection from="0tc" to="ct1" fromLane="0" toLane="2"/>
-    <connection from="0tc" to="ct1" fromLane="1" toLane="0"/>
-    <connection from="0tc" to="ct1" fromLane="1" toLane="1"/>
-    <connection from="0tc" to="ct1" fromLane="1" toLane="2"/>
-    <connection from="0tc" to="ct1" fromLane="2" toLane="0"/>
-    <connection from="0tc" to="ct1" fromLane="2" toLane="1"/>
-    <connection from="0tc" to="ct1" fromLane="2" toLane="2"/>
     
     <connection from="0tc" to="ct2" fromLane="0" toLane="0"/>
-    <connection from="0tc" to="ct2" fromLane="0" toLane="1"/>
-    <connection from="0tc" to="ct2" fromLane="0" toLane="2"/>
-    <connection from="0tc" to="ct2" fromLane="1" toLane="0"/>
-    <connection from="0tc" to="ct2" fromLane="1" toLane="1"/>
-    <connection from="0tc" to="ct2" fromLane="1" toLane="2"/>
-    <connection from="0tc" to="ct2" fromLane="2" toLane="0"/>
-    <connection from="0tc" to="ct2" fromLane="2" toLane="1"/>
-    <connection from="0tc" to="ct2" fromLane="2" toLane="2"/>
 
     <connection from="0tc" to="ct3" fromLane="0" toLane="0"/>
     <connection from="0tc" to="ct3" fromLane="0" toLane="1"/>
-    <connection from="0tc" to="ct3" fromLane="0" toLane="2"/>
-    <connection from="0tc" to="ct3" fromLane="1" toLane="0"/>
-    <connection from="0tc" to="ct3" fromLane="1" toLane="1"/>
-    <connection from="0tc" to="ct3" fromLane="1" toLane="2"/>
-    <connection from="0tc" to="ct3" fromLane="2" toLane="0"/>
-    <connection from="0tc" to="ct3" fromLane="2" toLane="1"/>
-    <connection from="0tc" to="ct3" fromLane="2" toLane="2"/>
 
     <!-- from 1toc to other lanes -->
     <connection from="1tc" to="ct0" fromLane="0" toLane="0"/>
-    <connection from="1tc" to="ct0" fromLane="0" toLane="1"/>
-    <connection from="1tc" to="ct0" fromLane="0" toLane="2"/>
     <connection from="1tc" to="ct0" fromLane="1" toLane="0"/>
-    <connection from="1tc" to="ct0" fromLane="1" toLane="1"/>
-    <connection from="1tc" to="ct0" fromLane="1" toLane="2"/>
-    <connection from="1tc" to="ct0" fromLane="2" toLane="0"/>
-    <connection from="1tc" to="ct0" fromLane="2" toLane="1"/>
-    <connection from="1tc" to="ct0" fromLane="2" toLane="2"/>
     
     <connection from="1tc" to="ct2" fromLane="0" toLane="0"/>
-    <connection from="1tc" to="ct2" fromLane="0" toLane="1"/>
-    <connection from="1tc" to="ct2" fromLane="0" toLane="2"/>
     <connection from="1tc" to="ct2" fromLane="1" toLane="0"/>
-    <connection from="1tc" to="ct2" fromLane="1" toLane="1"/>
-    <connection from="1tc" to="ct2" fromLane="1" toLane="2"/>
-    <connection from="1tc" to="ct2" fromLane="2" toLane="0"/>
-    <connection from="1tc" to="ct2" fromLane="2" toLane="1"/>
-    <connection from="1tc" to="ct2" fromLane="2" toLane="2"/>
 
     <connection from="1tc" to="ct3" fromLane="0" toLane="0"/>
     <connection from="1tc" to="ct3" fromLane="0" toLane="1"/>
-    <connection from="1tc" to="ct3" fromLane="0" toLane="2"/>
     <connection from="1tc" to="ct3" fromLane="1" toLane="0"/>
     <connection from="1tc" to="ct3" fromLane="1" toLane="1"/>
-    <connection from="1tc" to="ct3" fromLane="1" toLane="2"/>
-    <connection from="1tc" to="ct3" fromLane="2" toLane="0"/>
-    <connection from="1tc" to="ct3" fromLane="2" toLane="1"/>
-    <connection from="1tc" to="ct3" fromLane="2" toLane="2"/>
 
     <!-- from 2toc to other lanes -->
     <connection from="2tc" to="ct0" fromLane="0" toLane="0"/>
-    <connection from="2tc" to="ct0" fromLane="0" toLane="1"/>
-    <connection from="2tc" to="ct0" fromLane="0" toLane="2"/>
-    <connection from="2tc" to="ct0" fromLane="1" toLane="0"/>
-    <connection from="2tc" to="ct0" fromLane="1" toLane="1"/>
-    <connection from="2tc" to="ct0" fromLane="1" toLane="2"/>
-    <connection from="2tc" to="ct0" fromLane="2" toLane="0"/>
-    <connection from="2tc" to="ct0" fromLane="2" toLane="1"/>
-    <connection from="2tc" to="ct0" fromLane="2" toLane="2"/>
     
     <connection from="2tc" to="ct1" fromLane="0" toLane="0"/>
     <connection from="2tc" to="ct1" fromLane="0" toLane="1"/>
-    <connection from="2tc" to="ct1" fromLane="0" toLane="2"/>
-    <connection from="2tc" to="ct1" fromLane="1" toLane="0"/>
-    <connection from="2tc" to="ct1" fromLane="1" toLane="1"/>
-    <connection from="2tc" to="ct1" fromLane="1" toLane="2"/>
-    <connection from="2tc" to="ct1" fromLane="2" toLane="0"/>
-    <connection from="2tc" to="ct1" fromLane="2" toLane="1"/>
-    <connection from="2tc" to="ct1" fromLane="2" toLane="2"/>
 
     <connection from="2tc" to="ct3" fromLane="0" toLane="0"/>
     <connection from="2tc" to="ct3" fromLane="0" toLane="1"/>
-    <connection from="2tc" to="ct3" fromLane="0" toLane="2"/>
-    <connection from="2tc" to="ct3" fromLane="1" toLane="0"/>
-    <connection from="2tc" to="ct3" fromLane="1" toLane="1"/>
-    <connection from="2tc" to="ct3" fromLane="1" toLane="2"/>
-    <connection from="2tc" to="ct3" fromLane="2" toLane="0"/>
-    <connection from="2tc" to="ct3" fromLane="2" toLane="1"/>
-    <connection from="2tc" to="ct3" fromLane="2" toLane="2"/>
 
     <!-- from 3toc to other lanes -->
     <connection from="3tc" to="ct0" fromLane="0" toLane="0"/>
-    <connection from="3tc" to="ct0" fromLane="0" toLane="1"/>
-    <connection from="3tc" to="ct0" fromLane="0" toLane="2"/>
     <connection from="3tc" to="ct0" fromLane="1" toLane="0"/>
-    <connection from="3tc" to="ct0" fromLane="1" toLane="1"/>
-    <connection from="3tc" to="ct0" fromLane="1" toLane="2"/>
-    <connection from="3tc" to="ct0" fromLane="2" toLane="0"/>
-    <connection from="3tc" to="ct0" fromLane="2" toLane="1"/>
-    <connection from="3tc" to="ct0" fromLane="2" toLane="2"/>
     
     <connection from="3tc" to="ct1" fromLane="0" toLane="0"/>
     <connection from="3tc" to="ct1" fromLane="0" toLane="1"/>
-    <connection from="3tc" to="ct1" fromLane="0" toLane="2"/>
     <connection from="3tc" to="ct1" fromLane="1" toLane="0"/>
     <connection from="3tc" to="ct1" fromLane="1" toLane="1"/>
-    <connection from="3tc" to="ct1" fromLane="1" toLane="2"/>
-    <connection from="3tc" to="ct1" fromLane="2" toLane="0"/>
-    <connection from="3tc" to="ct1" fromLane="2" toLane="1"/>
-    <connection from="3tc" to="ct1" fromLane="2" toLane="2"/>
 
     <connection from="3tc" to="ct2" fromLane="0" toLane="0"/>
-    <connection from="3tc" to="ct2" fromLane="0" toLane="1"/>
-    <connection from="3tc" to="ct2" fromLane="0" toLane="2"/>
     <connection from="3tc" to="ct2" fromLane="1" toLane="0"/>
-    <connection from="3tc" to="ct2" fromLane="1" toLane="1"/>
-    <connection from="3tc" to="ct2" fromLane="1" toLane="2"/>
-    <connection from="3tc" to="ct2" fromLane="2" toLane="0"/>
-    <connection from="3tc" to="ct2" fromLane="2" toLane="1"/>
-    <connection from="3tc" to="ct2" fromLane="2" toLane="2"/>
 
     <!-- delete unused u-turn connections -->
     <delete from="ct0" to="0tc" />

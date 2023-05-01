@@ -1,3 +1,5 @@
+#include "sumo_simulator.h"
+#include "parameters.h"
 #include "sumo_batch_utility.h"
 
 #include <iostream>

@@ -6,6 +6,7 @@
 
 namespace intersection_management {
 extern const std::string PROJECT_DIR;
+extern const std::string CONFIG_FILE;
 
 class Parameters {
 public:
@@ -57,5 +58,6 @@ public:
 }; // class Parameters
 
 extern Parameters param;
+extern std::vector<Parameters> geometryParamVec;
 } // namespace intersection_management
 #endif // #define INTERSECTION_MANAGEMENT_PARAMETERS_H_

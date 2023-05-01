@@ -149,7 +149,7 @@ void SumoSimulator::startSimulation(bool verbose) {
 
     double currentTime = 0;
     double nextPrintTime = 10.0;
-    int total_step = (int)(max_sim_time_ / step_length_);
+    long long total_step = (int)(max_sim_time_ / step_length_);
     bool foundEvacuationTime = false;
 
     for (int i = 1; i < total_step; i++) {
@@ -180,14 +180,13 @@ void SumoSimulator::startSimulation(bool verbose) {
                 //     getchar();
                 // }
                 // enforce lanes
-                if (!veh.hasPassedIntersectionStopLine()) {
-                    Vehicle::changeLane(veh.vehID_, veh.departLaneIDNum_, 0.1);
-                }
-                else {
-                    Vehicle::changeLane(veh.vehID_, veh.arrivalLaneIDNum_, 0.1);
-                }
+                // if (!veh.hasPassedIntersectionStopLine()) {
+                //     Vehicle::changeLane(veh.vehID_, veh.departLaneIDNum_, 0.1);
+                // }
+                // else {
+                //     Vehicle::changeLane(veh.vehID_, veh.arrivalLaneIDNum_, 0.1);
+                // }
                 // cumulate fuel consumption
-                // std::cout << Vehicle::getFuelConsumption(veh.vehID_) << std::endl;
                 veh.fuelConsumed_ += ((Vehicle::getFuelConsumption(veh.vehID_) > 0) ? Vehicle::getFuelConsumption(veh.vehID_) : 0) * step_length_;
                 if (Vehicle::getSpeed(veh.vehID_) < 0.1)
                     veh.waitingTime_ += step_length_;
