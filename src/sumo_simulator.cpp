@@ -23,9 +23,12 @@ void SumoSimulator::setSimulateOneRandomCase(int num_nodes, std::string schedule
     schedule_method_ = schedule_method;
     arrival_interval_avg_ = arrival_interval_avg;
     seed_ = seed;
+
     localParam = geometryParamVec[geometryID];
     localParam.arrival_interval_avg = arrival_interval_avg;
     localParam.random_seed = seed;
+    sumo_cmd_[2] = PROJECT_DIR + localParam.sumo_config_file;
+
     generateSchedulingResults(num_nodes, verbose, seed_);
     addVehicles(schedule_method_);
     if (verbose)
@@ -124,8 +127,8 @@ void SumoSimulator::addVehicles(std::string schedule_method) {
         std::string routeId = "r";
         routeId.push_back('0' + node->in_leg_id_);
         routeId.push_back('0' + node->out_leg_id_);
-        std::string departLaneID = std::to_string(intersectionLaneIdToSumoLaneId(node->in_leg_id_, node->in_lane_id_, "in"));
-        std::string arrivalLaneID = std::to_string(intersectionLaneIdToSumoLaneId(node->out_leg_id_, node->possible_lane_id_[0], "out"));
+        std::string departLaneID = std::to_string(intersectionLaneIdToSumoLaneId(node->in_leg_id_, node->in_lane_id_, localParam, "in"));
+        std::string arrivalLaneID = std::to_string(intersectionLaneIdToSumoLaneId(node->out_leg_id_, node->possible_lane_id_[0], localParam, "out"));
         // localVehicles_.push_back(LocalVehicle(std::to_string(node->id_), routeId, "Vtype1", "now", departLaneID, "0", "0", arrivalLaneID));
         localVehicles_.push_back(LocalVehicle(std::to_string(node->id_), routeId, "Vtype1", "now", departLaneID, "0", "speedLimit", arrivalLaneID));
 

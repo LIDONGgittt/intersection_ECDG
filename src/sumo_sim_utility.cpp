@@ -13,11 +13,15 @@ using namespace libtraci;
 
 namespace intersection_management {
 
-int intersectionLaneIdToSumoLaneId(int leg_id, int lane_id, std::string type) {
+const std::vector<Parameters> geometryParamVec = {
+    Parameters(4, {3, 3, 3, 3}, {3, 3, 3, 3}, "/configs/sumo_intersection0/intersection_unregulated.sumocfg"),
+    Parameters(4, {1, 2, 1, 2}, {1, 2, 1, 2}, "/configs/sumo_intersection1/intersection_unregulated.sumocfg")};
+
+int intersectionLaneIdToSumoLaneId(int leg_id, int lane_id, Parameters local_param, std::string type) {
     if (type == "in")
         return lane_id;
     if (type == "out")
-        return param.num_lanes_out_vec[leg_id] - 1 - lane_id;
+        return local_param.num_lanes_out_vec[leg_id] - 1 - lane_id;
     return -1;
 }
 
@@ -39,7 +43,7 @@ int intersectionLaneIdToSumoLaneId(int leg_id, int lane_id, std::string type) {
 
 void LocalVehicle::printSummary() {
     std::cout << "Vehicle " << vehID_ << ": "
-        << "Fuel Consumed " << fuelConsumed_*0.001 << " g, "
+        << "Fuel Consumed " << fuelConsumed_ * 0.001 << " g, "
         << "Stop Time " << waitingTime_ << " s, "
         << "Travel Time " << actualClearingTime_ - arrival_time_ << " s, "
         << "Time Delay " << timeDelay_ << "s.\n";

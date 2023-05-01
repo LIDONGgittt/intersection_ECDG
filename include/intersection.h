@@ -7,6 +7,8 @@
 #include <random>
 #include <unordered_map>
 
+#include "parameters.h"
+
 namespace intersection_management {
 
 class Intersection {

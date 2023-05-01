@@ -5,8 +5,8 @@
 #include <vector>
 #include <libsumo/libtraci.h>
 
-#include "sumo_sim_utility.h"
 #include "parameters.h"
+#include "sumo_sim_utility.h"
 #include "spanning_tree.h"
 #include "cdg_conflict_spanning_tree.h"
 

@@ -1,18 +1,17 @@
 #ifndef INTERSECTION_MANAGEMENT_SUMO_SIM_UTILITY_
 #define INTERSECTION_MANAGEMENT_SUMO_SIM_UTILITY_
 
+#include "parameters.h"
+
 #include <string>
 #include <vector>
 #include <libsumo/libtraci.h>
-#include "parameters.h"
 
 using namespace libtraci;
 
 namespace intersection_management {
 
-static const std::vector<Parameters> geometryParamVec = {
-    Parameters(4, {3, 3, 3, 3}, {3, 3, 3, 3}, "/configs/sumo_intersection0/intersection_unregulated.sumocfg"),
-    Parameters(4, {1, 2, 1, 2}, {1, 2, 1, 2}, "/configs/sumo_intersection1/intersection_unregulated.sumocfg")};
+extern const std::vector<Parameters> geometryParamVec;
 
 static const std::vector<libsumo::TraCIColor> sumoColorVec = {
     libsumo::TraCIColor(55, 255, 0), libsumo::TraCIColor(0, 255, 255),
@@ -60,7 +59,7 @@ public:
     std::vector<double> timewindow_;
 };
 
-int intersectionLaneIdToSumoLaneId(int leg_id, int lane_id, std::string type = "in");
+int intersectionLaneIdToSumoLaneId(int leg_id, int lane_id, Parameters local_param, std::string type = "in");
 
 // void sumoSimulationOneCase(int num_nodes, std::string schedule_method, bool verbose = false, int seed = -1);
 
