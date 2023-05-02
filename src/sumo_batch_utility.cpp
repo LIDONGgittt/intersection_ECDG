@@ -3,6 +3,9 @@
 
 #include <csignal>
 #include <iostream>
+#include <fstream>
+#include <sstream>
+#include <iomanip>
 #include <string>
 #include <vector>
 #include <iomanip>
@@ -45,8 +48,10 @@ void sumoBatchTest(int num_nodes, int test_count, std::vector<std::string> sched
                    double arrival_interval_avg, int geometryID, int print_interval, int starting_seed,
                    std::string log_dir) {
     std::signal(SIGINT, SIGINT_signal_handler);
-    std::string outputfile = PROJECT_DIR + log_dir + "/N" + std::to_string(num_nodes)
-        + "/N" + std::to_string(num_nodes) + "_" + return_current_time_and_date() + ".log";
+    std::stringstream stream;
+    stream << PROJECT_DIR << log_dir << "/N" << num_nodes << "/N" << num_nodes << "." << geometryID << "."
+        << std::fixed << std::setprecision(2) << arrival_interval_avg << "_" << return_current_time_and_date() << ".log";
+    std::string outputfile = stream.str();
 
     SumoResult summationResult(schedule_methods);
 
