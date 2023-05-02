@@ -113,10 +113,10 @@ void writeSumoResultToFileAppend(SumoResult &summationResult, std::string file, 
                 << std::endl;
         }
         ofs << "\n";
+        ofs.close();
     }
     else {
         std::cout << "Couldn't open the output file.\n";
     }
-
 }
 } // namespace intersection_management
