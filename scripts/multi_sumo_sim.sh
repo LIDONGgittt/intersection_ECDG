@@ -1,3 +1,4 @@
+#!/bin/bash
 ## change directory and load modules ##
 ROOT_PATH=/home/dong/workspace/intersection_CDG
 cd $ROOT_PATH/release
