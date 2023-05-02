@@ -42,6 +42,9 @@ int main(int argc, char *argv[]) {
         .default_value(-1)
         .help("starting random seed for the batch test")
         .scan<'i', int>();
+    program.add_argument("--log_dir")
+        .default_value(std::string{"/log/sumosim"})
+        .help("log file directory");
 
     try {
         program.parse_args(argc, argv);
@@ -58,6 +61,7 @@ int main(int argc, char *argv[]) {
     int geometryID = program.get<int>("--geometryID");
     int print_interval = program.get<int>("--print_interval");
     int starting_seed = program.get<int>("--starting_seed");
+    std::string log_dir = program.get<std::string>("--log_dir");
 
     std::cout << Color::green;
     std::cout << "######### Batch sumo sim configs: #########\n"
@@ -70,10 +74,11 @@ int main(int argc, char *argv[]) {
         << "index of the intersection scenarios, --geometryID: " << geometryID << std::endl
         << "interval between two summary prints, --print_interval: " << print_interval << std::endl
         << "starting random seed for the batch test, --starting_seed: " << starting_seed << std::endl
+        << "log file directory, --log_dir: " << log_dir << std::endl
         << "############# End of configs: #############\n\n";
     std::cout << Color::def;
 
-    sumoBatchTest(num_nodes, test_count, schedule_methods, arrival_interval_avg, geometryID, print_interval, starting_seed);
+    sumoBatchTest(num_nodes, test_count, schedule_methods, arrival_interval_avg, geometryID, print_interval, starting_seed, log_dir);
     // sumoBatchTest(5, 10, {"dynamic_lane", "dfs", "bfs", "mdbfs"}, 2.0, 1, 1, -1);
     return 0;
 }

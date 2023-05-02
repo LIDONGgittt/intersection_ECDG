@@ -3,4 +3,4 @@
 .vscode/
 build/
 release/
-local_log/
+log/sumosim/

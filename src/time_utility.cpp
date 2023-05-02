@@ -6,6 +6,8 @@
 #include <iomanip> // put_time
 #include <string>  // string
 
+
+namespace intersection_management {
 std::string return_current_time_and_date()
 {
     auto now = std::chrono::system_clock::now();
@@ -15,3 +17,4 @@ std::string return_current_time_and_date()
     ss << std::put_time(std::localtime(&in_time_t), "%Y%m%d%H%M%S");
     return ss.str();
 }
+} // namespace intersection_management

@@ -3,6 +3,8 @@
 
 #include <vector>
 #include <string>
+#include <iostream>
+#include <fstream>
 
 namespace intersection_management {
 
@@ -55,7 +57,10 @@ SumoResult sumoBatchTestOneCase(int num_nodes, std::vector<std::string> schedule
 
 void sumoBatchTest(int num_nodes = 5, int test_count = -1,
                    std::vector<std::string> schedule_methods = {"dynamic_lane", "dfs", "bfs", "mdbfs"},
-                   double arrival_interval_avg = 2.0, int geometryID = 0, int print_interval = 10, int starting_seed = -1);
+                   double arrival_interval_avg = 2.0, int geometryID = 0, int print_interval = 10, int starting_seed = -1,
+                   std::string log_dir = "/log/sumosim");
+
+void writeSumoResultToFileAppend(SumoResult &summationResult, std::string file, double arrival_interval_avg, int geometryID, int total_test, int num_nodes);
 
 } // namespace intersection_management
 
