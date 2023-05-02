@@ -3,5 +3,5 @@
 .vscode/
 build/
 release/
-log/sumosim/
+**/sumosim/
 **/slurm*.out
