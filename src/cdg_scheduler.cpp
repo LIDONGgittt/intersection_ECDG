@@ -2,6 +2,8 @@
 
 #include <iostream>
 
+#include "parameters.h"
+
 namespace intersection_management {
 CDGScheduler::CDGScheduler() {}
 
@@ -179,10 +181,15 @@ CDGConflictSpanningTree CDGScheduler::ScheduleWithBfstMultiWeight(const Conflict
         auto iter_ready_candidate = ready_list.begin();
         while (iter_ready_candidate != ready_list.end()) {
             if (cdg.nodes_[chosen_candidate.id_]->isConnectedTo(iter_ready_candidate->id_)) {
-                double edge_weight = cdg.nodes_[chosen_candidate.id_]->getEdgeTo(iter_ready_candidate->id_)->edge_weight_;
+                auto the_edge = cdg.nodes_[chosen_candidate.id_]->getEdgeTo(iter_ready_candidate->id_);
+                double edge_weight = the_edge->edge_weight_;
+                double edge_offset = the_edge->estimate_offset_;
                 // non-conflict edges don't delay time windows
                 if (edge_weight <= 1.0) {
                     edge_weight = 0.0;
+                }
+                if (param.activate_precedent_offset && edge_offset < 0) {
+                    edge_weight = edge_offset;
                 }
                 if (chosen_candidate.possible_depth_ + edge_weight + cdg.nodes_[iter_ready_candidate->id_]->estimate_travel_time_ > iter_ready_candidate->possible_depth_) {
                     iter_ready_candidate = ready_list.erase(iter_ready_candidate);
@@ -199,10 +206,15 @@ CDGConflictSpanningTree CDGScheduler::ScheduleWithBfstMultiWeight(const Conflict
             if (StillHasUnscheduledPredecessor(unidirectional_parent_table_[to], added_to_tree)) {
                 continue;
             }
-            double edge_weight = cdg.nodes_[chosen_candidate.id_]->getEdgeTo(to)->edge_weight_;
+            auto the_edge = cdg.nodes_[chosen_candidate.id_]->getEdgeTo(to);
+            double edge_weight = the_edge->edge_weight_;
+            double edge_offset = the_edge->estimate_offset_;
             // non-conflict edges don't delay time windows
             if (edge_weight <= 1.0) {
                 edge_weight = 0.0;
+            }
+            if (param.activate_precedent_offset && edge_offset < 0) {
+                edge_weight = edge_offset;
             }
             double estimate_travel_time = cdg.nodes_[to]->estimate_travel_time_;
             CDGCandidate new_candidate(to, chosen_candidate.possible_depth_ + edge_weight + estimate_travel_time, chosen_candidate.id_, edge_weight, estimate_travel_time);
@@ -210,8 +222,12 @@ CDGConflictSpanningTree CDGScheduler::ScheduleWithBfstMultiWeight(const Conflict
             // update new_candidate and solve conflict with already scheduled nodes
             for (auto parent : unidirectional_parent_table_[to]) {
                 edge_weight = parent->getEdgeTo(to)->edge_weight_;
+                edge_offset = parent->getEdgeTo(to)->estimate_offset_;
                 if (edge_weight <= 1.0) {
                     edge_weight = 0.0;
+                }
+                if (param.activate_precedent_offset && edge_offset < 0) {
+                    edge_weight = edge_offset;
                 }
                 if (result_tree_.nodes_[parent->id_]->edge_node_weighted_depth_ + edge_weight + new_candidate.estimate_travel_time_ > new_candidate.possible_depth_) {
                     new_candidate.possible_depth_ = result_tree_.nodes_[parent->id_]->edge_node_weighted_depth_ + edge_weight + new_candidate.estimate_travel_time_;
@@ -227,8 +243,12 @@ CDGConflictSpanningTree CDGScheduler::ScheduleWithBfstMultiWeight(const Conflict
                         continue;
                     }
                     edge_weight = neighbor->getEdgeTo(to)->edge_weight_;
+                    edge_offset = neighbor->getEdgeTo(to)->estimate_offset_;
                     if (edge_weight <= 1.0) {
                         edge_weight = 0.0;
+                    }
+                    if (param.activate_precedent_offset && edge_offset < 0) {
+                        edge_weight = edge_offset;
                     }
                     if (new_candidate.possible_depth_ > result_tree_.nodes_[neighbor->id_]->edge_node_weighted_depth_ - neighbor->estimate_travel_time_ - edge_weight &&
                         new_candidate.possible_depth_ - new_candidate.estimate_travel_time_ < result_tree_.nodes_[neighbor->id_]->edge_node_weighted_depth_ + edge_weight) {
@@ -303,9 +323,9 @@ void CDGScheduler::GenerateBineighborTable(const ConflictDirectedGraph &cdg) {
 }
 
 void CDGScheduler::SearchOrderPermutationRecursively(std::vector<int> &vehicle_order, int num_nodes,
-                                                  std::vector<bool> &is_in_order_list,
-                                                  double &minimum_evacuation_time, std::vector<int> &best_order,
-                                                  const ConflictDirectedGraph &cdg) {
+                                                     std::vector<bool> &is_in_order_list,
+                                                     double &minimum_evacuation_time, std::vector<int> &best_order,
+                                                     const ConflictDirectedGraph &cdg) {
     if (vehicle_order.size() >= num_nodes) {
         double evacuation_time;
         evacuation_time = GetEvacuationTimeFromOrder(vehicle_order, cdg);
@@ -332,7 +352,7 @@ void CDGScheduler::SearchOrderPermutationRecursively(std::vector<int> &vehicle_o
 }
 
 double CDGScheduler::GetEvacuationTimeFromOrder(const std::vector<int> &vehicle_order,
-                                             const ConflictDirectedGraph &cdg) {
+                                                const ConflictDirectedGraph &cdg) {
     std::vector<double> depth_of_the_order = GetDepthVectorFromOrder(vehicle_order, cdg);
     if (depth_of_the_order.empty()) {
         return -1.0;
@@ -348,11 +368,12 @@ double CDGScheduler::GetEvacuationTimeFromOrder(const std::vector<int> &vehicle_
 }
 
 std::vector<double> CDGScheduler::GetDepthVectorFromOrder(const std::vector<int> &vehicle_order,
-                                                       const ConflictDirectedGraph &cdg) {
+                                                          const ConflictDirectedGraph &cdg) {
     std::vector<bool> vehicle_scheduled(vehicle_order.size(), false);
     std::vector<double> depth_of_the_order(vehicle_order.size(), -1.0);
     double cur_estimate_travel_time;
     double edge_weight;
+    double edge_offset;
     double possible_start_time;
     double possible_end_time;
 
@@ -365,8 +386,12 @@ std::vector<double> CDGScheduler::GetDepthVectorFromOrder(const std::vector<int>
                 return depth_of_the_order;
             }
             edge_weight = parent->getEdgeTo(cur_id)->edge_weight_;
+            edge_offset = parent->getEdgeTo(cur_id)->estimate_offset_;
             if (edge_weight <= 1.0) {
                 edge_weight = 0.0;
+            }
+            if (param.activate_precedent_offset && edge_offset < 0) {
+                edge_weight = edge_offset;
             }
             if (depth_of_the_order[parent->id_] + edge_weight > possible_start_time) {
                 possible_start_time = depth_of_the_order[parent->id_] + edge_weight;
@@ -381,8 +406,12 @@ std::vector<double> CDGScheduler::GetDepthVectorFromOrder(const std::vector<int>
                     continue;
                 }
                 edge_weight = neighbor->getEdgeTo(cur_id)->edge_weight_;
+                edge_offset = neighbor->getEdgeTo(cur_id)->estimate_offset_;
                 if (edge_weight <= 1.0) {
                     edge_weight = 0.0;
+                }
+                if (param.activate_precedent_offset && edge_offset < 0) {
+                    edge_weight = edge_offset;
                 }
                 if (possible_end_time > depth_of_the_order[neighbor->id_] - neighbor->estimate_travel_time_ - edge_weight &&
                     possible_start_time < depth_of_the_order[neighbor->id_] + edge_weight) {

@@ -134,14 +134,21 @@ void ConflictDirectedGraph::GenerateGraphFromIntersection(Intersection &intersec
             if (edge->predecessor_id_ == edge->node1_.lock()->id_) {
 
                 AddEdge(edge->node1_.lock()->id_, edge->node2_.lock()->id_, edge->edge_weight_, false);
+                edges_.back()->conflict_type_ = edge->conflict_type_;
+                edges_.back()->estimate_offset_ = edge->estimate_offset_;
             }
             else {
                 AddEdge(edge->node2_.lock()->id_, edge->node1_.lock()->id_, edge->edge_weight_, false);
-
+                edges_.back()->conflict_type_ = edge->conflict_type_;
+                edges_.back()->estimate_offset_ = edge->estimate_offset_;
             }
         }
         else {
             AddEdge(edge->node1_.lock()->id_, edge->node2_.lock()->id_, edge->edge_weight_, true);
+            edges_.back()->conflict_type_ = edge->conflict_type_;
+            edges_.back()->estimate_offset_ = edge->estimate_offset_;
+            edges_[edges_.size()-2]->conflict_type_ = edge->conflict_type_;
+            edges_[edges_.size()-2]->estimate_offset_ = edge->estimate_offset_;
         }
     }
 }
