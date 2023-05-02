@@ -2,7 +2,7 @@
 #SBATCH -J SUMO_SIM
 #SBATCH --account=ev_charging
 #SBATCH --partition=normal_q
-#SBATCH --nodes=1 --ntasks-per-node=24 --cpus-per-task=1
+#SBATCH --nodes=1 --ntasks-per-node=36 --cpus-per-task=1
 #SBATCH --time=0-08:00:00 # day-hour:minute:second
 
 #SBATCH --mail-user=dongli@vt.edu
