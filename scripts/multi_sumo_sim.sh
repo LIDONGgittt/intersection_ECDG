@@ -24,11 +24,11 @@ cd $ROOT_PATH/release
 
 for (( idx = 0 ; idx < ${#N[@]}; idx++ )); do
     numVehicle=${N[idx]}
-    sumoStepLength=${sumoStepLengthList[idx]}
+    sumo_step_length=${sumoStepLengthList[idx]}
     for geometryID in ${geometryIDList[@]}; do
         for arrival_interval_avg in ${arrivalIntervalList[@]}; do
-            echo "./sumo_sim/sumo_sim_batch --num_nodes $numVehicle --geometryID ${geometryID} --arrival_interval_avg ${arrival_interval_avg} --sumoStepLength ${sumoStepLength} --test_count 50 &"  # --test_count 1
-            ./sumo_sim/sumo_sim_batch --num_nodes $numVehicle --geometryID ${geometryID} --arrival_interval_avg ${arrival_interval_avg} --sumoStepLength ${sumoStepLength} --test_count 50 &  # --test_count 1
+            echo "./sumo_sim/sumo_sim_batch --num_nodes $numVehicle --geometryID ${geometryID} --arrival_interval_avg ${arrival_interval_avg} --sumo_step_length ${sumo_step_length} --test_count 50 &"  # --test_count 1
+            ./sumo_sim/sumo_sim_batch --num_nodes $numVehicle --geometryID ${geometryID} --arrival_interval_avg ${arrival_interval_avg} --sumo_step_length ${sumo_step_length} --test_count 50 &  # --test_count 1
             sleep 2
         done
     done

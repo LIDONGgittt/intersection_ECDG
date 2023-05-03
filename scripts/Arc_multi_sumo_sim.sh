@@ -2,8 +2,8 @@
 #SBATCH -J SUMO_SIM
 #SBATCH --account=ev_charging
 #SBATCH --partition=normal_q
-#SBATCH --nodes=1 --ntasks-per-node=36 --cpus-per-task=1
-#SBATCH --time=0-08:00:00 # day-hour:minute:second
+#SBATCH --nodes=1 --ntasks-per-node=30 --cpus-per-task=1
+#SBATCH --time=0-12:00:00 # day-hour:minute:second
 
 #SBATCH --mail-user=dongli@vt.edu
 #SBATCH --mail-type=BEGIN  # send email when job begins
@@ -27,8 +27,8 @@ make sumo_sim_batch
 
 geometryIDList=(1 2)
 arrivalIntervalList=(1 2 3)
-N=(5 10 30 100)
-sumoStepLengthList=(0.01 0.01 0.05 0.05)
+N=(5 10 25 50 100)
+sumoStepLengthList=(0.01 0.01 0.05 0.05 0.05)
 
 cd $ROOT_PATH/log
 mkdir sumosim
@@ -44,11 +44,11 @@ cd $ROOT_PATH/release
 
 for (( idx = 0 ; idx < ${#N[@]}; idx++ )); do
     numVehicle=${N[idx]}
-    sumoStepLength=${sumoStepLengthList[idx]}
+    sumo_step_length=${sumoStepLengthList[idx]}
     for geometryID in ${geometryIDList[@]}; do
         for arrival_interval_avg in ${arrivalIntervalList[@]}; do
-            echo "./sumo_sim/sumo_sim_batch --num_nodes $numVehicle --geometryID ${geometryID} --arrival_interval_avg ${arrival_interval_avg} --sumoStepLength ${sumoStepLength} &"  # --test_count 1
-            ./sumo_sim/sumo_sim_batch --num_nodes $numVehicle --geometryID ${geometryID} --arrival_interval_avg ${arrival_interval_avg} --sumoStepLength ${sumoStepLength} &  # --test_count 1
+            echo "./sumo_sim/sumo_sim_batch --num_nodes $numVehicle --geometryID ${geometryID} --arrival_interval_avg ${arrival_interval_avg} --sumo_step_length ${sumo_step_length} &"  # --test_count 1
+            ./sumo_sim/sumo_sim_batch --num_nodes $numVehicle --geometryID ${geometryID} --arrival_interval_avg ${arrival_interval_avg} --sumo_step_length ${sumo_step_length} &  # --test_count 1
             sleep 2
         done
     done
