@@ -25,9 +25,10 @@ module load CMake/3.21.1-GCCcore-11.2.0
 cmake -DCMAKE_BUILD_TYPE=RELEASE ..
 make sumo_sim_batch
 
-N=(5 10 30 100)
 geometryIDList=(1 2)
 arrivalIntervalList=(1 2 3)
+N=(5 10 30 100)
+sumoStepLengthList=(0.01 0.01 0.05 0.05)
 
 cd $ROOT_PATH/log
 mkdir sumosim
@@ -41,11 +42,13 @@ done
 
 cd $ROOT_PATH/release
 
-for numVehicle in ${N[@]}; do
+for (( idx = 0 ; idx < ${#N[@]}; idx++ )); do
+    numVehicle=${N[idx]}
+    sumoStepLength=${sumoStepLengthList[idx]}
     for geometryID in ${geometryIDList[@]}; do
         for arrival_interval_avg in ${arrivalIntervalList[@]}; do
-            echo "./sumo_sim/sumo_sim_batch --num_nodes $numVehicle --geometryID ${geometryID} --arrival_interval_avg ${arrival_interval_avg} &"  # --test_count 1
-            ./sumo_sim/sumo_sim_batch --num_nodes $numVehicle --geometryID ${geometryID} --arrival_interval_avg ${arrival_interval_avg} &  # --test_count 1
+            echo "./sumo_sim/sumo_sim_batch --num_nodes $numVehicle --geometryID ${geometryID} --arrival_interval_avg ${arrival_interval_avg} --sumoStepLength ${sumoStepLength} &"  # --test_count 1
+            ./sumo_sim/sumo_sim_batch --num_nodes $numVehicle --geometryID ${geometryID} --arrival_interval_avg ${arrival_interval_avg} --sumoStepLength ${sumoStepLength} &  # --test_count 1
             sleep 2
         done
     done

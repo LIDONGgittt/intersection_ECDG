@@ -22,11 +22,12 @@ int intersectionLaneIdToSumoLaneId(int leg_id, int lane_id, Parameters &local_pa
 }
 
 void LocalVehicle::printSummary() {
-    std::cout << "Vehicle " << vehID_ << ": "
-        << "Fuel Consumed " << fuelConsumed_ * 0.001 << " g, "
-        << "Stop Time " << waitingTime_ << " s, "
-        << "Travel Time " << actualClearingTime_ - arrival_time_ << " s, "
-        << "Time Delay " << timeDelay_ << "s.\n";
+    std::cout << "Vehicle " << std::setw(3) << vehID_ << " finished at time : "
+        << std::setw(7) << std::fixed << std::setprecision(3) << Simulation::getTime() << " s, "
+        << "Fuel Consumed " << std::setw(7) << fuelConsumed_ * 0.001 << " g, "
+        << "Stop Time " << std::setw(7) << waitingTime_ << " s, "
+        << "Travel Time " << std::setw(7) << actualClearingTime_ - arrival_time_ << " s, "
+        << "Time Delay " << std::setw(7) << timeDelay_ << "s.\n";
 }
 
 LocalVehicle::LocalVehicle(std::string vehID, std::string routeID, std::string typeID, std::string depart,

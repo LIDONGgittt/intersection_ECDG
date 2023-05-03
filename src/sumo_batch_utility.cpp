@@ -19,11 +19,12 @@
 namespace intersection_management {
 
 SumoResult sumoBatchTestOneCase(int num_nodes, std::vector<std::string> schedule_methods,
-                                double arrival_interval_avg, int geometryID, bool verbose, int seed) {
+                                double arrival_interval_avg, int geometryID, bool verbose,
+                                int seed, double sumo_step_length) {
     SumoResult localResult(schedule_methods);
 
     for (int i = 0; i < schedule_methods.size(); i++) {
-        SumoSimulator sumo_simulator;
+        SumoSimulator sumo_simulator(sumo_step_length);
         sumo_simulator.setSumoGUI(false);
         sumo_simulator.setSimulateOneMethod(num_nodes, schedule_methods[i], arrival_interval_avg, geometryID, verbose, seed);
         sumo_simulator.startSimulation(verbose);
@@ -46,7 +47,7 @@ SumoResult sumoBatchTestOneCase(int num_nodes, std::vector<std::string> schedule
 
 void sumoBatchTest(int num_nodes, int test_count, std::vector<std::string> schedule_methods,
                    double arrival_interval_avg, int geometryID, int print_interval, int starting_seed,
-                   std::string log_dir) {
+                   double sumo_step_length, std::string log_dir) {
     std::signal(SIGINT, SIGINT_signal_handler);
     std::stringstream stream;
     stream << PROJECT_DIR << log_dir << "/N" << num_nodes << "/N" << num_nodes << "." << geometryID << "."
@@ -65,7 +66,8 @@ void sumoBatchTest(int num_nodes, int test_count, std::vector<std::string> sched
 
     while (total_test < test_count) {
         total_test++;
-        auto sumoResult = sumoBatchTestOneCase(num_nodes, schedule_methods, arrival_interval_avg, geometryID, false, starting_seed);
+        auto sumoResult = sumoBatchTestOneCase(num_nodes, schedule_methods, arrival_interval_avg, geometryID,
+                                               false, starting_seed, sumo_step_length);
         starting_seed += seed_increment;
 
         summationResult += sumoResult;

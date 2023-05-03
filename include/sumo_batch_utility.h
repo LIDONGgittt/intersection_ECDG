@@ -10,7 +10,7 @@ namespace intersection_management {
 
 class SumoResult {
 public:
-    SumoResult(): SumoResult({"dynamic_lane", "dfs", "bfs", "mdbfs"}) {}
+    SumoResult() : SumoResult({"dynamic_lane", "dfs", "bfs", "mdbfs"}) {}
     SumoResult(std::vector<std::string> scheduler_methods)
         : numSchedulers_(scheduler_methods.size()), scheduler_methods_(scheduler_methods) {
         scheduledStandardDepths_.resize(numSchedulers_, 0);
@@ -53,12 +53,13 @@ public:
 };
 
 SumoResult sumoBatchTestOneCase(int num_nodes, std::vector<std::string> schedule_methods = {"dynamic_lane", "dfs", "bfs", "mdbfs"},
-                                double arrival_interval_avg = 2.0, int geometryID = 0, bool verbose = false, int seed = -1);
+                                double arrival_interval_avg = 2.0, int geometryID = 0, bool verbose = false, int seed = -1,
+                                double sumo_step_length = 0.01);
 
 void sumoBatchTest(int num_nodes = 5, int test_count = -1,
                    std::vector<std::string> schedule_methods = {"dynamic_lane", "dfs", "bfs", "mdbfs"},
                    double arrival_interval_avg = 2.0, int geometryID = 0, int print_interval = 10, int starting_seed = -1,
-                   std::string log_dir = "/log/sumosim");
+                   double sumo_step_length = 0.01, std::string log_dir = "/log/sumosim");
 
 void writeSumoResultToFileAppend(SumoResult &summationResult, std::string file, double arrival_interval_avg, int geometryID, int total_test, int num_nodes);
 

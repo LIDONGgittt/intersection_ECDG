@@ -1,6 +1,7 @@
 #include "intersection_utility.h"
 
 #include <iostream>
+#include <iomanip>
 #include <vector>
 #include <algorithm>
 
@@ -59,9 +60,9 @@ void Node::printWeightAndEdge() {
 }
 
 void Node::printDetail() {
-    std::cout << "Node id: " << id_ << ", ett: " << estimate_travel_time_ << ", eat: " << estimate_arrival_time_;
+    std::cout << "Node id: " << std::setw(3) << id_ << ", ett: " << estimate_travel_time_ << ", eat: " << estimate_arrival_time_;
     std::cout << ", in-bound info: " << in_leg_id_ << "_" << in_lane_id_ << ", out_bound info: " << out_leg_id_ << "_" << out_lane_id_;
-    std::cout << ", time window: [" << time_window_[0] << "," << time_window_[1] << "], scheduled out_bound leg_lane: " << out_leg_id_;
+    std::cout << ", time window: [" << std::setw(3) << time_window_[0] << "," << std::setw(3) << time_window_[1] << "], scheduled out_bound leg_lane: " << out_leg_id_;
     for (auto l : possible_lane_id_) std::cout << "_" << l;
     std::cout << std::endl;
 }

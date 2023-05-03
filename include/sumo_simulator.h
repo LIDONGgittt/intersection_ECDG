@@ -15,8 +15,8 @@ using namespace libtraci;
 namespace intersection_management {
 class SumoSimulator {
 public:
-    SumoSimulator(): SumoSimulator(0.001, 10000) {}
-    SumoSimulator(double step_length, double total_time): step_length_(step_length), max_sim_time_(total_time) {
+    SumoSimulator(): SumoSimulator(0.01, 10000) {}
+    SumoSimulator(double step_length, double total_time = 10000): step_length_(step_length), max_sim_time_(total_time) {
         schedule_method_ = "default";
         arrival_interval_avg_ = 2.0;
         seed_ = -1;
@@ -25,7 +25,6 @@ public:
         sumo_cmd_ = {"sumo-gui", "-c", PROJECT_DIR + localParam_.sumo_config_file, "--collision.action", "warn", "--step-log.period", "100000"};
         // sumo_cmd_ = {"sumo", "-c", PROJECT_DIR + localParam_.sumo_config_file};
 
-        stopSimAfterClearanceFlag_ = true;
         kTimeWindowOffset_ = localParam_.kTimeWindowOffset;
         travel_time_choice_ = localParam_.travel_time_choice;
         scheduler_method_list_ = {"dynamic_lane", "dfs", "bfs", "mdbfs", "global_optimal"};
@@ -54,7 +53,6 @@ public:
     inline void setMDBFSResult(double global_optimal) { global_optimal_ = global_optimal; }
     inline void setTravelTimeChoice(std::vector<double> travel_time_choice) { travel_time_choice_ = travel_time_choice; }
     inline void setTimeWindowOffset(double kTimeWindowOffset) { kTimeWindowOffset_ = kTimeWindowOffset; }
-    inline void setStopAtClearanceFlag(bool stopSimAfterClearanceFlag = true) { stopSimAfterClearanceFlag_ = stopSimAfterClearanceFlag; }
     inline void setStepLength(double step_length) { step_length_ = step_length; }
 
     void printTargetSimResults(std::string schedule_method = "dynamic_lane");
@@ -79,7 +77,6 @@ public:
 
     std::vector<std::string> sumo_cmd_;
     double kTimeWindowOffset_;
-    bool stopSimAfterClearanceFlag_;
     std::vector<double> travel_time_choice_;
     std::vector<LocalVehicle> localVehicles_;
     double step_length_;
