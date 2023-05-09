@@ -76,7 +76,7 @@ void sumoBatchTest(int num_nodes, int test_count, std::vector<std::string> sched
             std::cout << "\n\n##################### Updated result: ##################### \n";
             std::cout << "Intersection scenario ID: " << geometryID << ", Average arrival interval: " << arrival_interval_avg << ".\n"
                 << "Total tests: " << total_test << ", Total node num: " << num_nodes << ". \n\n"
-                << "Schedule method, Standard Depth,  Evacuation Time, Delay (Ave),     Delay (Max),     Stop Time (Ave), Stop Time (Ave), Fuel Consumption \n";
+                << "Schedule method, Standard Depth,  Evacuation Time, Delay (Ave),     Delay (Max),     Stop Time (Ave), Stop Time (Max), Fuel Consumption \n";
             for (int i = 0; i < schedule_methods.size(); i++) {
                 std::cout << std::setw(17) << std::left << schedule_methods[i]
                     << std::setw(17) << std::left << summationResult.scheduledStandardDepths_[i] / (double)total_test
@@ -102,7 +102,7 @@ void writeSumoResultToFileAppend(SumoResult &summationResult, std::string file, 
         ofs << "\n\n##################### Updated result: ##################### \n";
         ofs << "Intersection scenario ID: " << geometryID << ", Average arrival interval: " << arrival_interval_avg << ".\n"
             << "Total tests: " << total_test << ", Total node num: " << num_nodes << ". \n\n"
-            << "Schedule method, Standard Depth,  Evacuation Time, Delay (Ave),     Delay (Max),     Stop Time (Ave), Stop Time (Ave), Fuel Consumption \n";
+            << "Schedule method, Standard Depth,  Evacuation Time, Delay (Ave),     Delay (Max),     Stop Time (Ave), Stop Time (Max), Fuel Consumption \n";
         for (int i = 0; i < summationResult.numSchedulers_; i++) {
             ofs << std::setw(17) << std::left << summationResult.scheduler_methods_[i]
                 << std::setw(17) << std::left << summationResult.scheduledStandardDepths_[i] / (double)total_test
