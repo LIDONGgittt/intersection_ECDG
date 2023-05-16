@@ -15,8 +15,8 @@ using namespace libtraci;
 namespace intersection_management {
 class SumoSimulator {
 public:
-    SumoSimulator(): SumoSimulator(0.01, 10000) {}
-    SumoSimulator(double step_length, double total_time = 10000): step_length_(step_length), max_sim_time_(total_time) {
+    SumoSimulator() : SumoSimulator(0.01, 10000) {}
+    SumoSimulator(double step_length, double total_time = 10000) : step_length_(step_length), max_sim_time_(total_time) {
         schedule_method_ = "default";
         arrival_interval_avg_ = 2.0;
         seed_ = -1;
@@ -27,8 +27,8 @@ public:
 
         kTimeWindowOffset_ = localParam_.kTimeWindowOffset;
         travel_time_choice_ = localParam_.travel_time_choice;
-        scheduler_method_list_ = {"dynamic_lane", "dfs", "bfs", "mdbfs", "global_optimal"};
-        standard_depth_ = {0, 0, 0, 0, 0};
+        scheduler_method_list_ = {"dynamic_lane", "dfs", "bfs", "mdbfs", "global_optimal", "fifo"};
+        standard_depth_ = {0, 0, 0, 0, 0, 0};
 
         evacuation_time_ = 0;
         totalFuelComsumed_ = 0;
@@ -46,7 +46,8 @@ public:
     void startSimulation(bool verbose = true);
 
     inline void setSumoGUI(bool activate = true) { if (activate) sumo_cmd_[0] = "sumo-gui"; else sumo_cmd_[0] = "sumo"; }
-    inline void setDynamicLaneResult(SpanningTree result_tree) { result_tree_ = result_tree; }
+    inline void setDynamicLaneResult(SpanningTree dynamic_lane_tree) { dynamic_lane_tree_ = dynamic_lane_tree; }
+    inline void setFIFOResult(SpanningTree fifo_tree) { fifo_tree_ = fifo_tree; }
     inline void setDFSResult(CDGConflictSpanningTree modified_dfst) { modified_dfst_ = modified_dfst; }
     inline void setBFSResult(CDGConflictSpanningTree bfst) { bfst_ = bfst; }
     inline void setMDBFSResult(CDGConflictSpanningTree mdbfst) { mdbfst_ = mdbfst; }
@@ -61,7 +62,8 @@ public:
     void printFuelConsumptionSummary();
 
     // schedule results
-    SpanningTree result_tree_;
+    SpanningTree dynamic_lane_tree_;
+    SpanningTree fifo_tree_;
     CDGConflictSpanningTree modified_dfst_;
     CDGConflictSpanningTree bfst_;
     CDGConflictSpanningTree mdbfst_;

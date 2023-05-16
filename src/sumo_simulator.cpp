@@ -56,7 +56,7 @@ void SumoSimulator::generateSchedulingResults(int num_nodes, bool verbose, int s
 
     cdg.GenerateGraphFromIntersection(intersection);
 
-    result_tree_ = scheduler.ScheduleWithDynamicLaneAssignment(intersection);
+    dynamic_lane_tree_ = scheduler.ScheduleWithDynamicLaneAssignment(intersection);
     modified_dfst_ = scheduler_dfs.ScheduleWithModifiedDfst(cdg);
     bfst_ = scheduler_bfs.ScheduleWithBfstWeightedEdgeOnly(cdg);
     mdbfst_ = scheduler_mdbfs.ScheduleWithBfstMultiWeight(cdg);
@@ -68,20 +68,24 @@ void SumoSimulator::generateSchedulingResults(int num_nodes, bool verbose, int s
             global_optimal_ = scheduler_bruteforce.GetEvacuationTimeFromOrder(best_order, cdg);
         }
     }
-    standard_depth_[0] = result_tree_.depth_;
+    fifo_tree_ = scheduler.ScheduleWithFIFO(intersection);
+
+    standard_depth_[0] = dynamic_lane_tree_.depth_;
     standard_depth_[1] = modified_dfst_.edge_weighted_depth_ * travel_time_choice_[2];
     standard_depth_[2] = bfst_.edge_weighted_depth_ * travel_time_choice_[2];
     standard_depth_[3] = mdbfst_.edge_node_weighted_depth_;
     standard_depth_[4] = global_optimal_;
+    standard_depth_[5] = fifo_tree_.depth_;
 
     if (verbose) {
         std::cout << "=========================================\n";
         std::cout << "seed: " << seed << "\n";
-        std::cout << "dynamin_lane assignment: " << result_tree_.depth_ << "\n";
-        std::cout << "modified dfs: " << modified_dfst_.edge_weighted_depth_ << "\n";
-        std::cout << "edge_weighted bfs: " << bfst_.edge_weighted_depth_ << "\n";
-        std::cout << "multi_weighted bfs: " << mdbfst_.edge_node_weighted_depth_ << "\n";
-        std::cout << "global_optimal: " << global_optimal_ << "\n";
+        std::cout << "dynamin_lane assignment: " << standard_depth_[0] << "\n";
+        std::cout << "modified dfs: " << standard_depth_[1] << "\n";
+        std::cout << "edge_weighted bfs: " << standard_depth_[2] << "\n";
+        std::cout << "multi_weighted bfs: " << standard_depth_[3] << "\n";
+        std::cout << "global_optimal: " << standard_depth_[4] << "\n";
+        std::cout << "FIFO: " << standard_depth_[5] << "\n";
         std::cout << "=========================================\n";
     }
 }
@@ -118,8 +122,14 @@ void SumoSimulator::addVehicles(std::string schedule_method) {
             scheduled_vehicles.push_back(node);
         }
     }
+    else if (schedule_method == "fifo") {
+        auto &target_tree = fifo_tree_;
+        for (int i = 1; i < target_tree.nodes_.size(); i++) {
+            scheduled_vehicles.push_back(target_tree.nodes_[i]);
+        }
+    }
     else { // default is dynamic lane assignment scheduler
-        auto &target_tree = result_tree_;
+        auto &target_tree = dynamic_lane_tree_;
         for (int i = 1; i < target_tree.nodes_.size(); i++) {
             scheduled_vehicles.push_back(target_tree.nodes_[i]);
         }
@@ -261,7 +271,7 @@ void SumoSimulator::printTargetSimResults(std::string schedule_method) {
             node->printDetail();
     }
     else { // default is dynamic lane assignment scheduler
-        auto &target_tree = result_tree_;
+        auto &target_tree = dynamic_lane_tree_;
         for (auto &node : target_tree.nodes_)
             node->printDetail();
     }

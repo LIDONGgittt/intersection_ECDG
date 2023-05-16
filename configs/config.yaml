@@ -7,7 +7,7 @@ num_legs: 4
 num_lanes_in_vec: [3, 3, 3, 3]
 num_lanes_out_vec: [3, 3, 3, 3]
 arrival_interval_avg: 2.0
-travel_time_range: [6, 7]
+travel_time_range: [6, 8]
 
 ## scheduler configurations ##
 activate_precedent_offset: true
@@ -25,7 +25,7 @@ tie_more_splitted_resource_first: true
 
 ## testing configurations ##
 # negative means system seed
-random_seed: 0
+random_seed: 13
 test_one_instance: true
 test_vehicle_number: 5
 
