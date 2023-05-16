@@ -211,9 +211,6 @@ void Intersection::AssignCriticalResourcesToNodes() {
 }
 
 void Intersection::AssignEdgesWithSafetyOffsetToNodes() {
-    // TODO check this and make it based on configs
-    // offset: -1 if diverging; 0 otherwise
-
     ConflictType ct_precedence;
     ct_precedence.setPrecedence();
     for (int i = 1; i < nodes_.size(); i++) {

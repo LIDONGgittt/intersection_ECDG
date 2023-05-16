@@ -6,6 +6,7 @@
 #include <unordered_set>
 
 #include <parameters.h>
+#include "colormod.h"
 
 namespace intersection_management {
 
@@ -320,6 +321,53 @@ SpanningTree Scheduler::ScheduleWithDynamicLaneAssignment(Intersection &intersec
             }
         }
         SortReadyListAscendingly(ready_list, intersection);
+    }
+    return result_tree_;
+}
+
+SpanningTree Scheduler::ScheduleWithFIFO(Intersection &intersection) {
+    PrepareForTreeSchedule(intersection);
+    std::vector<bool> added_to_tree(intersection.num_nodes_, false);
+
+    result_tree_.UpdateTimeWindow(0, 0, 0, 0);
+    added_to_tree[0] = true;
+
+    for (int id = 1; id < intersection.num_nodes_; id++)
+    {
+        auto &chosen_node = result_tree_.nodes_[id];
+        if (StillHasUnscheduledPredecessor(unidirectional_parent_table_[id], added_to_tree)) {
+            std::cerr << Color::red << "Error in FIFO, precendence vehicle arrives later than following vehicle.\n" << Color::def;
+            throw;
+        }
+
+        double estimate_travel_time = chosen_node->estimate_travel_time_;
+        double estimate_arrival_time = chosen_node->estimate_arrival_time_;
+        double earliest_start_time;
+        if (param.activate_arrival_time) {
+            earliest_start_time = chosen_node->estimate_arrival_time_;
+        }
+        else {
+            earliest_start_time = -1;
+        }
+        if (earliest_start_time < result_tree_.nodes_[id - 1]->time_window_[0]) {
+            earliest_start_time = result_tree_.nodes_[id - 1]->time_window_[0];
+        }
+
+        for (int pre_id = id - 1; pre_id > 0; pre_id--) {
+            if (intersection.nodes_[id]->isConnectedWith(pre_id)) {
+                auto edge = intersection.nodes_[id]->getEdgeWith(pre_id);
+                if (edge->conflict_type_.isConverging() || edge->conflict_type_.isCrossing() || edge->conflict_type_.isDiverging() || edge->conflict_type_.isPrecedence()) {
+                    if (earliest_start_time < result_tree_.nodes_[pre_id]->time_window_[1]) {
+                        earliest_start_time = result_tree_.nodes_[pre_id]->time_window_[1];
+                    }
+                }
+            }
+        }
+
+        added_to_tree[id] = true;
+        result_tree_.nodes_[id]->possible_lane_id_.clear();
+        result_tree_.nodes_[id]->possible_lane_id_.push_back(intersection.nodes_[id]->out_lane_id_);
+        result_tree_.UpdateTimeWindow(id, earliest_start_time + estimate_travel_time, 0, estimate_travel_time);
     }
     return result_tree_;
 }

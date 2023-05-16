@@ -52,6 +52,9 @@ std::vector<double> BatchTestOneCase(int num_nodes, bool verbose, int seed) {
     }
 
     PROFILER_HOOK();
+    auto fifo_tree = scheduler.ScheduleWithFIFO(intersection);
+
+    PROFILER_HOOK();
     if (verbose) {
         std::cout << "seed: " << seed << "\n";
         std::cout << "dynamin lane assignment: " << result_tree.depth_ << "\n";
@@ -59,10 +62,11 @@ std::vector<double> BatchTestOneCase(int num_nodes, bool verbose, int seed) {
         std::cout << "edge_weighted bfs: " << bfst.edge_weighted_depth_ << "\n";
         std::cout << "multi_weighted bfs: " << mdbfst.edge_node_weighted_depth_ << "\n";
         std::cout << "global_optimal: " << global_optimal << "\n";
+        std::cout << "FIFO schedule: " << fifo_tree.depth_ << "\n";
         std::cout << "=========================================\n";
     }
     depth = std::vector<double>{result_tree.depth_, modified_dfst.edge_weighted_depth_, bfst.edge_weighted_depth_,
-        mdbfst.edge_node_weighted_depth_, global_optimal};
+        mdbfst.edge_node_weighted_depth_, global_optimal, fifo_tree.depth_};
     return depth;
 }
 

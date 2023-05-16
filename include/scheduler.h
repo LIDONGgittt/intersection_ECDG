@@ -38,6 +38,7 @@ class Scheduler {
 public:
     Scheduler();
     SpanningTree ScheduleWithDynamicLaneAssignment(Intersection &intersection);
+    SpanningTree ScheduleWithFIFO(Intersection &intersection);
 
     void PrepareForTreeSchedule(Intersection &intersection);
     void GenerateUniparentTable(Intersection &intersection);
