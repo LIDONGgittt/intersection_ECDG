@@ -32,8 +32,6 @@ public:
 };
 
 class Scheduler {
-// TODO: add FIFO scheduler
-// TODO: support to enable/disable earliest arrival time constraint
 
 public:
     Scheduler();
