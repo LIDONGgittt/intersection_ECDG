@@ -2,7 +2,7 @@
 #SBATCH -J SUMO_sim
 #SBATCH --account=ev_charging
 #SBATCH --partition=normal_q
-#SBATCH --nodes=1 --ntasks-per-node=24 --cpus-per-task=1
+#SBATCH --nodes=1 --ntasks-per-node=36 --cpus-per-task=1
 #SBATCH --time=0-10:00:00 # day-hour:minute:second
 
 #SBATCH --mail-user=dongli@vt.edu
@@ -26,7 +26,7 @@ cmake -DCMAKE_BUILD_TYPE=RELEASE ..
 make sumo_sim_batch
 
 geometryIDList=(1 2)
-arrivalIntervalList=(1 2 3)
+arrivalIntervalList=(1 1.5 2 2.5 3)
 N=(5 10 25 50 100)
 sumoStepLengthList=(0.01 0.01 0.05 0.05 0.05)
 
