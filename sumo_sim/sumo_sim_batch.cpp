@@ -23,7 +23,7 @@ int main(int argc, char *argv[]) {
         .help("total test to do in the batch test")
         .scan<'i', int>();
     program.add_argument("--schedule_methods")
-        .default_value<std::vector<std::string>>({"dynamic_lane", "dfs", "bfs", "mdbfs", "fifo"})
+        .default_value<std::vector<std::string>>({"dynamic_lane", "dfs", "bfs", "mdbfs", "fifo", "mddfs"})
         .help("schedule methods list that will be in the batch test")
         .append();
     program.add_argument("--arrival_interval_avg")

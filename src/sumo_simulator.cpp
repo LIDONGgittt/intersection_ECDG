@@ -47,6 +47,7 @@ void SumoSimulator::generateSchedulingResults(int num_nodes, bool verbose, int s
     CDGScheduler scheduler_bfs;
     CDGScheduler scheduler_mdbfs;
     CDGScheduler scheduler_bruteforce;
+    CDGScheduler scheduler_mddfs;
 
     intersection.setSeed(seed);
     intersection.AddRandomVehicleNodesWithTravelTime(num_nodes, travel_time_choice_, verbose);
@@ -60,6 +61,7 @@ void SumoSimulator::generateSchedulingResults(int num_nodes, bool verbose, int s
     modified_dfst_ = scheduler_dfs.ScheduleWithModifiedDfst(cdg);
     bfst_ = scheduler_bfs.ScheduleWithBfstWeightedEdgeOnly(cdg);
     mdbfst_ = scheduler_mdbfs.ScheduleWithBfstMultiWeight(cdg);
+    mddfst_ = scheduler_mddfs.ScheduleWithDfstMultiWeight(cdg);
     global_optimal_ = 0;
     if (schedule_method_ == "global_optimal") {
         if (cdg.num_nodes_ <= 16) { // only calculate global_optimal for small number of nodes
@@ -76,6 +78,7 @@ void SumoSimulator::generateSchedulingResults(int num_nodes, bool verbose, int s
     standard_depth_[3] = mdbfst_.edge_node_weighted_depth_;
     standard_depth_[4] = global_optimal_;
     standard_depth_[5] = fifo_tree_.depth_;
+    standard_depth_[6] = mddfst_.edge_node_weighted_depth_;
 
     if (verbose) {
         std::cout << "=========================================\n";
@@ -84,6 +87,7 @@ void SumoSimulator::generateSchedulingResults(int num_nodes, bool verbose, int s
         std::cout << "modified dfs: " << standard_depth_[1] << "\n";
         std::cout << "edge_weighted bfs: " << standard_depth_[2] << "\n";
         std::cout << "multi_weighted bfs: " << standard_depth_[3] << "\n";
+        std::cout << "multi_weighted dfs: " << standard_depth_[6] << "\n";
         std::cout << "global_optimal: " << standard_depth_[4] << "\n";
         std::cout << "FIFO: " << standard_depth_[5] << "\n";
         std::cout << "=========================================\n";
@@ -94,6 +98,16 @@ void SumoSimulator::addVehicles(std::string schedule_method) {
     std::vector<std::shared_ptr<Node>> scheduled_vehicles;
     if (schedule_method == "mdbfs") {
         auto &target_tree = mdbfst_;
+        for (int i = 1; i < target_tree.nodes_.size(); i++) {
+            auto &node = target_tree.nodes_[i];
+            node->time_window_[1] = node->edge_node_weighted_depth_;
+            node->time_window_[0] = node->edge_node_weighted_depth_ - node->estimate_travel_time_;
+            node->possible_lane_id_ = std::vector<int>({node->out_lane_id_});
+            scheduled_vehicles.push_back(node);
+        }
+    }
+    else if (schedule_method == "mddfs") {
+        auto &target_tree = mddfst_;
         for (int i = 1; i < target_tree.nodes_.size(); i++) {
             auto &node = target_tree.nodes_[i];
             node->time_window_[1] = node->edge_node_weighted_depth_;
@@ -257,6 +271,11 @@ void SumoSimulator::printTargetSimResults(std::string schedule_method) {
     std::cout << schedule_method << " schedule:\n";
     if (schedule_method == "mdbfs") {
         auto &target_tree = mdbfst_;
+        for (auto &node : target_tree.nodes_)
+            node->printDetail();
+    }
+    else if (schedule_method == "mddfs") {
+        auto &target_tree = mddfst_;
         for (auto &node : target_tree.nodes_)
             node->printDetail();
     }

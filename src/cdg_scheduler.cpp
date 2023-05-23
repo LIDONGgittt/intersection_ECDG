@@ -268,6 +268,118 @@ CDGConflictSpanningTree CDGScheduler::ScheduleWithBfstMultiWeight(const Conflict
     return result_tree_;
 }
 
+CDGConflictSpanningTree CDGScheduler::ScheduleWithDfstMultiWeight(const ConflictDirectedGraph &cdg) {
+    PrepareForTreeSchedule(cdg);
+
+    std::vector<bool> added_to_tree(cdg.num_nodes_, false);
+    added_to_tree[0] = true;
+
+    std::vector<std::shared_ptr<Node>> unidirectional_scheduled_parent;
+    std::vector<std::shared_ptr<Node>> bidirectional_scheduled_parent;
+    int id_possible_parent;
+    int possible_depth;
+    std::shared_ptr<Edge> edge_from_possible_parent;
+
+    for (int id = 1; id < result_tree_.num_nodes_; id++) {
+        unidirectional_scheduled_parent.clear();
+        bidirectional_scheduled_parent.clear();
+        id_possible_parent = -1;
+        possible_depth = -1;
+        edge_from_possible_parent = nullptr;
+        auto current_estimate_travel_time = result_tree_.nodes_[id]->estimate_travel_time_;
+        for (int from = 0; from < result_tree_.num_nodes_; from++) {
+            if (!added_to_tree[from]) {
+                continue;
+            }
+            if (cdg.nodes_[from]->isConnectedTo(id)) {
+                auto edge = cdg.nodes_[from]->getEdgeTo(id);
+                auto edge_weight = edge->edge_weight_;
+                auto edge_offset = edge->estimate_offset_;
+                if (edge_weight <= 1.0) {
+                    edge_weight = 0.0;
+                }
+                if (param.activate_precedent_offset && edge_offset < 0) {
+                    edge_weight = edge_offset;
+                }
+                if (edge->bidirectional_) {
+                    bidirectional_scheduled_parent.push_back(result_tree_.nodes_[from]);
+                }
+                else {
+                    unidirectional_scheduled_parent.push_back(result_tree_.nodes_[from]);
+                    if (result_tree_.nodes_[from]->edge_node_weighted_depth_ + edge_weight + current_estimate_travel_time > possible_depth) {
+                        possible_depth = result_tree_.nodes_[from]->edge_node_weighted_depth_ + edge_weight + current_estimate_travel_time;
+                        id_possible_parent = from;
+                        edge_from_possible_parent = edge;
+                    }
+                }
+            }
+        }
+
+        // if only connected by bidirectional edges, initiate possible depth with the smallest one
+        if (id_possible_parent == -1) {
+            int min_depth_parent_id;
+            int min_depth;
+            id_possible_parent = bidirectional_scheduled_parent.front()->id_;
+            edge_from_possible_parent = cdg.nodes_[id_possible_parent]->getEdgeTo(id);
+            auto edge_weight = edge_from_possible_parent->edge_weight_;
+            auto edge_offset = edge_from_possible_parent->estimate_offset_;
+            if (edge_weight <= 1.0) {
+                edge_weight = 0.0;
+            }
+            if (param.activate_precedent_offset && edge_offset < 0) {
+                edge_weight = edge_offset;
+            }
+            possible_depth = bidirectional_scheduled_parent.front()->edge_node_weighted_depth_ + edge_weight + current_estimate_travel_time;
+            for (auto parent : bidirectional_scheduled_parent) {
+                auto edge = cdg.nodes_[parent->id_]->getEdgeTo(id);
+                auto edge_weight = edge->edge_weight_;
+                auto edge_offset = edge->estimate_offset_;
+                if (edge_weight <= 1.0) {
+                    edge_weight = 0.0;
+                }
+                if (param.activate_precedent_offset && edge_offset < 0) {
+                    edge_weight = edge_offset;
+                }
+                if (parent->edge_node_weighted_depth_ + edge_weight + current_estimate_travel_time < possible_depth) {
+                    id_possible_parent = parent->id_;
+                    possible_depth = parent->edge_node_weighted_depth_ + edge_weight + current_estimate_travel_time;
+                    edge_from_possible_parent = edge;
+                }
+            }
+        }
+
+        // update conflicts with other bidirectional edges
+        bool flag_still_conflict_with_bidire_scheduled_neighbor;
+        do {
+            flag_still_conflict_with_bidire_scheduled_neighbor = false;
+            for (auto parent : bidirectional_scheduled_parent) {
+                auto edge = cdg.nodes_[parent->id_]->getEdgeTo(id);
+                auto edge_weight = edge->edge_weight_;
+                auto edge_offset = edge->estimate_offset_;
+                if (edge_weight <= 1.0) {
+                    edge_weight = 0.0;
+                }
+                if (param.activate_precedent_offset && edge_offset < 0) {
+                    edge_weight = edge_offset;
+                }
+                if (parent->edge_node_weighted_depth_ - edge_weight - parent->estimate_travel_time_ < possible_depth && \
+                    possible_depth < parent->edge_node_weighted_depth_ + edge_weight + current_estimate_travel_time) {
+                    id_possible_parent = parent->id_;
+                    possible_depth = parent->edge_node_weighted_depth_ + edge_weight + current_estimate_travel_time;
+                    edge_from_possible_parent = edge;
+                    flag_still_conflict_with_bidire_scheduled_neighbor = true;
+                }
+            }
+        } while (flag_still_conflict_with_bidire_scheduled_neighbor);
+
+        added_to_tree[id] = true;
+        result_tree_.AddEdge(id_possible_parent, id, edge_from_possible_parent->edge_weight_);
+        result_tree_.UpdateDepth(id, possible_depth, Type_EdgeNodeWeightedDepth);
+    }
+
+    return result_tree_;
+}
+
 std::vector<int> CDGScheduler::ScheduleBruteForceSearch(const ConflictDirectedGraph &cdg) {
     int num_nodes = cdg.num_nodes_;
     double minimum_evacuation_time = -1.0;

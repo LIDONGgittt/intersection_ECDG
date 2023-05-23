@@ -27,8 +27,8 @@ public:
 
         kTimeWindowOffset_ = localParam_.kTimeWindowOffset;
         travel_time_choice_ = localParam_.travel_time_choice;
-        scheduler_method_list_ = {"dynamic_lane", "dfs", "bfs", "mdbfs", "global_optimal", "fifo"};
-        standard_depth_ = {0, 0, 0, 0, 0, 0};
+        scheduler_method_list_ = {"dynamic_lane", "dfs", "bfs", "mdbfs", "global_optimal", "fifo", "mddfs"};
+        standard_depth_ = {0, 0, 0, 0, 0, 0, 0};
 
         evacuation_time_ = 0;
         totalFuelComsumed_ = 0;
@@ -51,7 +51,8 @@ public:
     inline void setDFSResult(CDGConflictSpanningTree modified_dfst) { modified_dfst_ = modified_dfst; }
     inline void setBFSResult(CDGConflictSpanningTree bfst) { bfst_ = bfst; }
     inline void setMDBFSResult(CDGConflictSpanningTree mdbfst) { mdbfst_ = mdbfst; }
-    inline void setMDBFSResult(double global_optimal) { global_optimal_ = global_optimal; }
+    inline void setMDDFSResult(CDGConflictSpanningTree mddfst) { mddfst_ = mddfst; }
+    inline void setGlobalOptimalResult(double global_optimal) { global_optimal_ = global_optimal; }
     inline void setTravelTimeChoice(std::vector<double> travel_time_choice) { travel_time_choice_ = travel_time_choice; }
     inline void setTimeWindowOffset(double kTimeWindowOffset) { kTimeWindowOffset_ = kTimeWindowOffset; }
     inline void setStepLength(double step_length) { step_length_ = step_length; }
@@ -67,6 +68,7 @@ public:
     CDGConflictSpanningTree modified_dfst_;
     CDGConflictSpanningTree bfst_;
     CDGConflictSpanningTree mdbfst_;
+    CDGConflictSpanningTree mddfst_;
     double global_optimal_;
     std::vector<std::string> scheduler_method_list_;
     std::vector<double> standard_depth_;

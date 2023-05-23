@@ -26,6 +26,7 @@ public:
     CDGConflictSpanningTree ScheduleWithModifiedDfst(const ConflictDirectedGraph &cdg);
     CDGConflictSpanningTree ScheduleWithBfstWeightedEdgeOnly(const ConflictDirectedGraph &cdg);
     CDGConflictSpanningTree ScheduleWithBfstMultiWeight(const ConflictDirectedGraph &cdg);
+    CDGConflictSpanningTree ScheduleWithDfstMultiWeight(const ConflictDirectedGraph &cdg);
     std::vector<int> ScheduleBruteForceSearch(const ConflictDirectedGraph &cdg);
 
     void PrepareForTreeSchedule(const ConflictDirectedGraph &cdg);
