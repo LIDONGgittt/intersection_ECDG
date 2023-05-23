@@ -23,7 +23,7 @@ module load SUMO/1.14.1-foss-2021b
 ## No more needed after success compilation ##
 module load CMake/3.21.1-GCCcore-11.2.0
 cmake -DCMAKE_BUILD_TYPE=RELEASE ..
-make sumo_sim_batch
+make sumo_sim_batch -j20
 
 geometryIDList=(1 2)
 arrivalIntervalList=(1 1.5 2 2.5 3)
