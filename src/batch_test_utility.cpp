@@ -49,7 +49,7 @@ std::vector<double> BatchTestOneCase(int num_nodes, bool verbose, int seed) {
 
     PROFILER_HOOK();
     double global_optimal = 0;
-    if (cdg.num_nodes_ <= 16) { // only calculate global_optimal for small number of nodes
+    if (cdg.num_nodes_ <= 5) { // only calculate global_optimal for small number of nodes
         auto best_order = scheduler_bruteforce.ScheduleBruteForceSearch(cdg);
         auto depth_vector = scheduler_bruteforce.GetDepthVectorFromOrder(best_order, cdg);
         global_optimal = scheduler_bruteforce.GetEvacuationTimeFromOrder(best_order, cdg);
@@ -69,9 +69,12 @@ std::vector<double> BatchTestOneCase(int num_nodes, bool verbose, int seed) {
         std::cout << "global_optimal: " << global_optimal << "\n";
         std::cout << "FIFO schedule: " << fifo_tree.depth_ << "\n";
         std::cout << "=========================================\n";
+
     }
     depth = std::vector<double>{result_tree.depth_, modified_dfst.edge_weighted_depth_, bfst.edge_weighted_depth_,
         mdbfst.edge_node_weighted_depth_, global_optimal, fifo_tree.depth_, mddfst.edge_node_weighted_depth_};
+        for (auto &node : result_tree.nodes_)
+            node->printDetail();
     return depth;
 }
 

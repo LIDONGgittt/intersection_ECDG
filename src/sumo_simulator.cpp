@@ -148,6 +148,7 @@ void SumoSimulator::addVehicles(std::string schedule_method) {
             scheduled_vehicles.push_back(target_tree.nodes_[i]);
         }
     }
+    
     for (int i = 0; i < scheduled_vehicles.size(); i++) {
         auto &node = scheduled_vehicles[i];
         std::string routeId = "r";

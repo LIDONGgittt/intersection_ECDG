@@ -17,13 +17,13 @@ activate_arrival_time: true # vehicles will be ready at time 0 if false
 
 # tiebreak strategy
 # right/left most turns first
-tie_minimum_resource_waste_first: true
+tie_minimum_resource_waste_first: false
 # high demand lanes first
 tie_high_demand_first: true
 # splitting resource first
-tie_consider_splitting_resource: true
+tie_consider_splitting_resource: false
 # splitting more resource first
-tie_more_splitted_resource_first: true
+tie_more_splitted_resource_first: false
 
 ## testing configurations ##
 # negative means system seed
