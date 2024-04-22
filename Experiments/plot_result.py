@@ -1,8 +1,12 @@
+import matplotlib
 import matplotlib.pyplot as plt
 import numpy as np
 
+matplotlib.rcParams['pdf.fonttype'] = 42
+matplotlib.rcParams['ps.fonttype'] = 42
+
 ROOT_PATH = '/home/dong/workspace/intersection_CDG'
-data_index = 2
+data_index = 1
 
 if data_index == 1:
     # Data 1
