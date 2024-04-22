@@ -1,0 +1,59 @@
+20240422
+
+intersection geospatial characteristic
+num_legs: 4
+num_lanes_in_vec: [1, 2, 1, 2]
+num_lanes_out_vec: [1, 2, 1, 2]
+arrival_interval_avg: 2.0
+travel_time_range: [5, 7]
+
+
+
+##################### Updated result: ##################### 
+Total tests: 10000, Total node num: 5. 
+Average depths: dynamic_lane, dfs, bfs, mdbfs, global_optimal, fifo, mddfs.
+20.0191, 23.8497, 23.8497, 20.0635, 0, 22.861, 20.5756, 
+ Better than Global Optimal ratio: 
+0, 0, 0, 0, 1, 0, 0, 
+ Better than DFS ratio: 
+0.8408, 1, 1, 0.9419, 1, 0.6727, 0.9257, 
+
+
+##################### Updated result: ##################### 
+Total tests: 10000, Total node num: 10. 
+Average depths: dynamic_lane, dfs, bfs, mdbfs, global_optimal, fifo, mddfs.
+35.5668, 42.7616, 42.7616, 36.0043, 0, 43.6323, 37.4014, 
+ Better than Global Optimal ratio: 
+0, 0, 0, 0, 1, 0, 0, 
+ Better than DFS ratio: 
+0.8883, 1, 1, 0.9279, 1, 0.4914, 0.9104, 
+
+
+##################### Updated result: ##################### 
+Total tests: 10000, Total node num: 50. 
+Average depths: dynamic_lane, dfs, bfs, mdbfs, global_optimal, fifo, mddfs.
+145.853, 180.053, 180.053, 153.637, 0, 209.035, 162.288, 
+ Better than Global Optimal ratio: 
+0, 0, 0, 0, 1, 0, 0, 
+ Better than DFS ratio: 
+0.9864, 1, 1, 0.9724, 1, 0.0427, 0.9581, 
+
+
+##################### Updated result: ##################### 
+Total tests: 10000, Total node num: 100. 
+Average depths: dynamic_lane, dfs, bfs, mdbfs, global_optimal, fifo, mddfs.
+275.698, 347.014, 347.014, 295.618, 0, 416.039, 315.829, 
+ Better than Global Optimal ratio: 
+0, 0, 0, 0, 1, 0, 0, 
+ Better than DFS ratio: 
+0.9987, 1, 1, 0.9929, 1, 0.0014, 0.9773, 
+
+
+##################### Updated result: ##################### 
+Total tests: 10000, Total node num: 200. 
+Average depths: dynamic_lane, dfs, bfs, mdbfs, global_optimal, fifo, mddfs.
+528.281, 678.973, 678.973, 573.806, 0, 829.554, 621.944, 
+ Better than Global Optimal ratio: 
+0, 0, 0, 0, 1, 0, 0, 
+ Better than DFS ratio: 
+1, 1, 1, 0.9996, 1, 0, 0.9962, 

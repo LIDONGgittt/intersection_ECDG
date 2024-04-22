@@ -4,10 +4,10 @@ num_legs: 4
 # num_lanes_out_vec: [3, 1, 1, 1]
 # num_lanes_in_vec: [2, 2, 2, 2]
 # num_lanes_out_vec: [2, 2, 2, 2]
-# num_lanes_in_vec: [3, 3, 3, 3]
-# num_lanes_out_vec: [3, 3, 3, 3]
-num_lanes_in_vec: [1, 2, 1, 2]
-num_lanes_out_vec: [1, 2, 1, 2]
+num_lanes_in_vec: [3, 3, 3, 3]
+num_lanes_out_vec: [3, 3, 3, 3]
+# num_lanes_in_vec: [1, 2, 1, 2]
+# num_lanes_out_vec: [1, 2, 1, 2]
 arrival_interval_avg: 2.0
 travel_time_range: [5, 7]
 
@@ -19,7 +19,7 @@ activate_arrival_time: true # vehicles will be ready at time 0 if false
 # right/left most turns first
 tie_minimum_resource_waste_first: false
 # high demand lanes first
-tie_high_demand_first: true
+tie_high_demand_first: false
 # splitting resource first
 tie_consider_splitting_resource: false
 # splitting more resource first

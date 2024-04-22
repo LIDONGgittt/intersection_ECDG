@@ -73,8 +73,8 @@ std::vector<double> BatchTestOneCase(int num_nodes, bool verbose, int seed) {
     }
     depth = std::vector<double>{result_tree.depth_, modified_dfst.edge_weighted_depth_, bfst.edge_weighted_depth_,
         mdbfst.edge_node_weighted_depth_, global_optimal, fifo_tree.depth_, mddfst.edge_node_weighted_depth_};
-        for (auto &node : result_tree.nodes_)
-            node->printDetail();
+    // for (auto &node : result_tree.nodes_)
+    //     node->printDetail();
     return depth;
 }
 
