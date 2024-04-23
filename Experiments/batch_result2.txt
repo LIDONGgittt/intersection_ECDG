@@ -46,10 +46,10 @@ Average depths: dynamic_lane, dfs, bfs, mdbfs, global_optimal, fifo, mddfs.
 
 
 ##################### Updated result: ##################### 
-Total tests: 4100, Total node num: 200. 
+Total tests: 10000, Total node num: 200. 
 Average depths: dynamic_lane, dfs, bfs, mdbfs, global_optimal, fifo, mddfs.
-425.322, 588.765, 588.765, 515.13, 0, 770.302, 550.147, 
+425.121, 588.337, 588.337, 514.957, 0, 769.571, 549.674, 
  Better than Global Optimal ratio: 
 0, 0, 0, 0, 1, 0, 0, 
  Better than DFS ratio: 
-1, 1, 1, 0.998049, 1, 0, 0.983659, 
+1, 1, 1, 0.9976, 1, 0, 0.9833, 

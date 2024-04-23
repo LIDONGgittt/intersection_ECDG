@@ -6,7 +6,7 @@ matplotlib.rcParams['pdf.fonttype'] = 42
 matplotlib.rcParams['ps.fonttype'] = 42
 
 ROOT_PATH = '/home/dong/workspace/intersection_CDG'
-data_index = 1
+data_index = 2
 
 if data_index == 1:
     # Data 1
@@ -16,10 +16,10 @@ if data_index == 1:
     method4_evacuation_times = [35.5668, 145.853, 275.698, 528.281]   # Evacuation times for method 4
 elif data_index == 2:
     # Data 2
-    method1_evacuation_times = [41.1972, 194.535, 386.602, 771.264]  # Evacuation times for method 1
-    method2_evacuation_times = [40.2591, 160.914, 304.604, 589.652]  # Evacuation times for method 2
-    method3_evacuation_times = [34.487, 140.935, 267.908, 516.89]  # Evacuation times for method 3
-    method4_evacuation_times = [31.9797, 121.024, 223.946, 425.388]   # Evacuation times for method 4
+    method1_evacuation_times = [41.1972, 194.535, 386.207, 769.571]  # Evacuation times for method 1
+    method2_evacuation_times = [40.2591, 160.914, 304.321, 588.337]  # Evacuation times for method 2
+    method3_evacuation_times = [34.487, 140.935, 267.777, 514.957]  # Evacuation times for method 3
+    method4_evacuation_times = [31.9797, 121.024, 223.917, 425.121]   # Evacuation times for method 4
     
     
 def percentSavings(method, baseline):
