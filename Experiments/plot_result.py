@@ -5,7 +5,7 @@ import numpy as np
 matplotlib.rcParams['pdf.fonttype'] = 42
 matplotlib.rcParams['ps.fonttype'] = 42
 
-ROOT_PATH = '/home/dong/workspace/intersection_CDG'
+ROOT_PATH = '/home/dong/workspace/intersection_ECDG'
 data_index = 2
 
 if data_index == 1:
@@ -31,7 +31,7 @@ for i in range(4):
 
 num_vehicles = [10, 50, 100, 200]  # Number of vehicles
 methods = ['FIFO', 'iDFST', 'BFST', 'BFST-DynaLane']
-colors = ['#ff1f5b', '#ffc61e', '#009ade', '#00cd6c']
+colors = ['#ff1f5b', '#ffc61e', '#00cd6c', '#009ade', '#00cd6c']
 axis_label_font_size = 16
 axis_tick_font_size = axis_label_font_size - 2
 index = np.arange(len(num_vehicles))
@@ -42,7 +42,7 @@ plt.figure(figsize=(9, 5))
 bars1 = plt.bar(index, method1_evacuation_times, bar_width, label=methods[0], color=colors[0])
 bars2 = plt.bar(index + bar_width, method2_evacuation_times, bar_width, label=methods[1], color=colors[1])
 bars3 = plt.bar(index + 2*bar_width, method3_evacuation_times, bar_width, label=methods[2], color=colors[2])
-bars4 = plt.bar(index + 3*bar_width, method4_evacuation_times, bar_width, label=methods[3], color=colors[3])
+# bars4 = plt.bar(index + 3*bar_width, method4_evacuation_times, bar_width, label=methods[3], color=colors[3])
 
 plt.xlabel('Number of Vehicles', fontsize=axis_label_font_size)
 plt.ylabel('Evacuation Time (seconds)', fontsize=axis_label_font_size)
