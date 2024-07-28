@@ -1,0 +1,7 @@
+# .gitignore
+# .editorconfig
+.vscode/
+build/
+release/
+**/sumosim/
+**/slurm*.out

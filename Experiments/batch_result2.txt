@@ -1,0 +1,55 @@
+20240422
+
+intersection geospatial characteristic
+num_legs: 4
+num_lanes_in_vec: [3,3,3,3]
+num_lanes_out_vec: [3,3,3,3]
+arrival_interval_avg: 2.0
+travel_time_range: [5, 7]
+
+##################### Updated result: ##################### 
+Total tests: 10000, Total node num: 5. 
+Average depths: dynamic_lane, dfs, bfs, mdbfs, global_optimal, fifo, mddfs.
+18.5327, 22.9208, 22.9208, 19.61, 0, 21.8388, 20.1559, 
+ Better than Global Optimal ratio: 
+0, 0, 0, 0, 1, 0, 0, 
+ Better than DFS ratio: 
+0.854, 1, 1, 0.9517, 1, 0.6611, 0.918, 
+
+##################### Updated result: ##################### 
+Total tests: 10000, Total node num: 10. 
+Average depths: dynamic_lane, dfs, bfs, mdbfs, global_optimal, fifo, mddfs.
+31.9797, 40.2591, 40.2591, 34.4873, 0, 41.1972, 35.999, 
+ Better than Global Optimal ratio: 
+0, 0, 0, 0, 1, 0, 0, 
+ Better than DFS ratio: 
+0.903, 1, 1, 0.9178, 1, 0.4772, 0.8774, 
+
+##################### Updated result: ##################### 
+Total tests: 10000, Total node num: 50. 
+Average depths: dynamic_lane, dfs, bfs, mdbfs, global_optimal, fifo, mddfs.
+121.024, 160.914, 160.914, 140.935, 0, 194.535, 148.221, 
+ Better than Global Optimal ratio: 
+0, 0, 0, 0, 1, 0, 0, 
+ Better than DFS ratio: 
+0.9983, 1, 1, 0.9568, 1, 0.0226, 0.9261, 
+
+
+##################### Updated result: ##################### 
+Total tests: 10000, Total node num: 100. 
+Average depths: dynamic_lane, dfs, bfs, mdbfs, global_optimal, fifo, mddfs.
+223.917, 304.321, 304.321, 267.777, 0, 386.207, 282.636, 
+ Better than Global Optimal ratio: 
+0, 0, 0, 0, 1, 0, 0, 
+ Better than DFS ratio: 
+1, 1, 1, 0.9826, 1, 0.0001, 0.9578, 
+
+
+##################### Updated result: ##################### 
+Total tests: 10000, Total node num: 200. 
+Average depths: dynamic_lane, dfs, bfs, mdbfs, global_optimal, fifo, mddfs.
+425.121, 588.337, 588.337, 514.957, 0, 769.571, 549.674, 
+ Better than Global Optimal ratio: 
+0, 0, 0, 0, 1, 0, 0, 
+ Better than DFS ratio: 
+1, 1, 1, 0.9976, 1, 0, 0.9833, 

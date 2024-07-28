@@ -1,0 +1,32 @@
+## intersection gemotry and configurations ##
+num_legs: 4
+# num_lanes_in_vec: [1, 1, 2, 1]
+# num_lanes_out_vec: [3, 1, 1, 1]
+# num_lanes_in_vec: [2, 2, 2, 2]
+# num_lanes_out_vec: [2, 2, 2, 2]
+# num_lanes_in_vec: [3, 3, 3, 3]
+# num_lanes_out_vec: [3, 3, 3, 3]
+num_lanes_in_vec: [1, 2, 1, 2]
+num_lanes_out_vec: [1, 2, 1, 2]
+arrival_interval_avg: 2.0
+travel_time_range: [5, 7]
+
+## scheduler configurations ##
+activate_precedent_offset: true
+activate_arrival_time: true # vehicles will be ready at time 0 if false
+
+# tiebreak strategy
+# right/left most turns first
+tie_minimum_resource_waste_first: false
+# high demand lanes first
+tie_high_demand_first: false
+# splitting resource first
+tie_consider_splitting_resource: false
+# splitting more resource first
+tie_more_splitted_resource_first: false
+
+## testing configurations ##
+# negative means system seed
+random_seed: 13
+test_one_instance: true
+test_vehicle_number: 5
